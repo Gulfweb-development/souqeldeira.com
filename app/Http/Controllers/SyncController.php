@@ -36,6 +36,10 @@ class SyncController extends Controller
         curl_exec($ch);
         curl_close($ch);
         fclose($fp);
+        
+        $newPath = '/home/bgnsrfbn/aldeiramarket.com/uploads/'.$fileName;
+        $oldpath = '/home/bgnsrfbn/aldeiramarket_private/public/uploads/'.$fileName;
+        copy($oldpath , $newPath);
 
         $image = new Image;
         $image->imageable_type = 'App\Models\Ad';
