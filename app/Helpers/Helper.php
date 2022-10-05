@@ -1,0 +1,205 @@
+<?php
+
+use Illuminate\Support\Facades\App;
+
+// ADMIN DASHBOARD LAYOUT
+define('ADMIN_LAYOUT', 'layouts.app-admin');
+// USER PROFILE LAYOUT
+define('PROFILE_LAYOUT', 'layouts.app-profile');
+// DEFAULT ADMIN PAGINATION
+define('APG', 10);
+// DEFAULT FRONTEND PAGINATION
+define('PG', 12);
+// ADMIN AUTH USER DATA
+if (!function_exists('user')) {
+    function user()
+    {
+        return Auth::guard('web')->user();
+    }
+}
+// AUTH AND APPROVED USER
+if (!function_exists('authApprovedUser')) {
+    function authApprovedUser()
+    {
+        return Auth::guard('web')->check() && Auth::guard('web')->user()->is_approved == 1;
+    }
+}
+// CHECK PERMATION IN PHP FILES
+function permation($permationName)
+{
+    if (Auth::guard('admin')->user()->cannot($permationName)) {
+        return abort(403, 'غير مسموح بالدخول');
+    }
+    return true;
+}
+
+// CHECK PERMATION IN BLADE FILES
+function permationTo($permationName)
+{
+    if (Auth::guard('admin')->user()->cannot($permationName)) {
+        return false;
+    }
+    return true;
+}
+// AUTH AND APPROVED USER
+if (!function_exists('authApprovedUserCompany')) {
+    function authApprovedUserCompany()
+    {
+        return Auth::guard('web')->check() && Auth::guard('web')->user()->type == 'COMPANY' && Auth::guard('web')->user()->is_approved == 1;
+    }
+}
+// ADMIN AUTH USER DATA
+if (!function_exists('admin')) {
+    function admin()
+    {
+        return Auth::guard('admin')->user();
+    }
+}
+// FAKER LOCAZATION (AR)
+if (!function_exists('far')) {
+    function far()
+    {
+        $fakerAr = \Faker\Factory::create('ar_SA');
+        return $fakerAr;
+    }
+}
+// NO DATA ALERT MESSAGES
+if (!function_exists('noData')) {
+    function noData()
+    {
+        return '<div class="alert alert-info">
+                    <h3 class="text-center">' . __('app.no_data') . '</h3>
+                </div>';
+    }
+}
+// TABLE SHOW COUNT OPTIONS
+if (!function_exists('showOptions')) {
+    function showOptions()
+    {
+        return '  <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>';
+    }
+}
+if (!function_exists('showApprovedFilter')) {
+    function showApprovedFilter()
+    {
+        return '<option value="">' . __('app.all') . '</option><option value="1">' . __('app.approved') . '</option><option value="0">' . __('app.dis_approved') . '</option>';
+    }
+}
+
+if (!function_exists('showFeaturedFilter')) {
+    function showFeaturedFilter()
+    {
+        return '<option value="">' . __('app.all') . '</option><option value="1">' . __('app.featured') . '</option><option value="0">' . __('app.not_featured') . '</option>';
+    }
+}
+
+// TO TOGGLE SET FEATURED BUTTONS ACTION IN TABLES
+if (!function_exists('toggleFeaturedActions')) {
+    function toggleFeaturedActions($isFeatured, $id)
+    {
+        if ($isFeatured) {
+            return '<span title="' . __('app.featured') . '"
+            class="btn btn-sm bg-gradient-success btn-sm"  wire:loading.attr="disabled" wire:click.prevent="toggleFeatured(' . $id . ',0)">
+            <i class="fas fa-check-circle"></i>
+        </span>';
+        } else {
+            return '<span title="' . __('app.not_featured') . '"
+               class="btn btn-sm bg-gradient-secondary btn-sm"  wire:loading.attr="disabled" wire:click.prevent="toggleFeatured(' . $id . ',1)"><i class="far fa-check-circle"></i></span>';
+        }
+    }
+}
+// VALUE OR DB NAME TO TO LOCALE
+if (!function_exists('toLocale')) {
+    function toLocale($value)
+    {
+        if ($value !== null) {
+            return $value . '_' . app()->getLocale() ?? '';
+        }
+        return '';
+    }
+}
+
+// SLUGIFIY THE TEXT
+if (!function_exists('toSlug')) {
+    function toSlug($string, $separator = '-')
+    {
+        $string1 = trim($string);
+        $string2 = mb_strtolower($string1, 'UTF-8');
+        $string3 = Str_replace(' ', '-', $string2);
+        $string4 = Str_replace('  ', '-', $string3);
+        return $string4;
+    }
+}
+
+// CHECK KEY EXISTS IN STATE BEFORE UPLOAD IMAGE
+if (!function_exists('toExists')) {
+    function toExists($key,$stateArray)
+    {
+        if (array_key_exists($key, $stateArray)) {
+            return true;
+        }
+        return false;
+    }
+}
+
+
+if(!function_exists('sendSms')) {
+    function sendSms($number,$message) 
+    {
+        // dd($number);
+        $number = str_replace('+965','',$number);
+        $fields = [
+            "msg"       =>  urlencode($message),
+            "number"    =>  trim($number),
+            "key"       =>  "f5c5e4f617fd39e577cb3382194e2e74",
+            "dezsmsid"  =>  "60006411",
+            "senderid"  =>  "SALAAM"
+        ];
+        $fields     =   http_build_query($fields);
+        // dd("http://www.dezsms.com/dezsmsnewapi.php?".$fields);
+        return file_get_contents("http://www.dezsms.com/dezsmsnewapi.php?".$fields);
+    }
+}
+
+
+// NUMBER FORMAT VALIDATION
+if (!function_exists('phoneNumberFormatKwit')) {
+    function phoneNumberFormatKwit()
+    {
+        return 'regex:/^(\[569]\d{8})$/';
+    }
+}
+
+
+// NUMBER FORMAT VALIDATION
+if (!function_exists('phoneNumberFormat')) {
+    function phoneNumberFormat()
+    {
+        return '/^([0-9]){8}$/';
+    }
+}
+// DEFAULT IMAGE FOR ADS
+if (!function_exists('toAdDefaultImage')) {
+    function toAdDefaultImage($imageFile)
+    {
+        return $imageFile != null ? $imageFile : asset('images/ad_default.jpg');
+    }
+}
+// DEFAULT IMAGE FOR PROFILES AND AGENCIES PAGE
+if (!function_exists('toProfileDefaultImage')) {
+    function toProfileDefaultImage($imageFile)
+    {
+        return $imageFile != null ? $imageFile : asset('images/profile_default.jpg');
+    }
+}
+
+// CHECK APP LOCALE TO CAN ADD CLASSES TO HTML
+if (!function_exists('chkLocale')) {
+    function chkLocale($rtlClass, $ltrClass)
+    {
+        return App::isLocale('ar') ? $rtlClass : $ltrClass;
+    }
+}

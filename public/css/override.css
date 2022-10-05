@@ -1,0 +1,224 @@
+form#main-register-fosssrm2 {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.new-select option {
+    font-size: 18px !important;
+}
+
+.pagination-container .page-item.active span {
+    background-color: #274abb !important;
+    color: #fff !important;
+}
+
+.notification-number {
+    background-color: #274abb;
+    color: #fff;
+    padding: 6px;
+    border-radius: 20px;
+}
+
+.inner-pages .detail-list-rating i {
+    color: #002255;
+}
+
+.favorite-btn {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.favorite-btn:hover {
+    background-color: #002255 !important;
+    color: #fff !important;
+}
+
+.color-main {
+    color: #002255 !important;
+}
+
+.bg-main {
+    background-color: #002255 !important;
+}
+
+.my-properties table tbody tr td {
+    border: none;
+}
+
+.my-properties table tbody tr {
+    border-bottom: #f3f3f3 solid 1px;
+}
+
+.author-box .the-icon {
+    font-size: 3em;
+    float: left;
+    width: 50px;
+    height: 50px;
+    margin-right: 5px;
+    color: #274abb;
+}
+
+.drag-and-drop-area {
+    background-color: #f1f1f1;
+    border: 4px dashed #ccc;
+    padding: 12px;
+    font-size: 24px;
+    text-align: center;
+    line-height: 250px;
+    transition: 0.5s all ease-in;
+}
+
+.drop-enter
+{
+    background-color: lightgreen !important;
+    border-color: green !important;
+    border-style: solid !important;
+}
+
+.drop-none
+{
+    background-color: #f1f1f1 !important;
+    border-color: #ccc !important;
+    border-style: dashed !important;
+
+}
+
+
+
+/***********
+E D I T 25 / 10 / 2021
+***********/
+.portfolio .homes-content h3 a{
+text-overflow: ellipsis;
+overflow: hidden;
+white-space: nowrap;
+}
+.rld-single-select.single-select{
+    padding: 0 10px 0 10px!important;
+    width: 100% !important;
+}
+.hp-6 .btn.btn-yellow{
+    width: 100%;
+    line-height: normal;
+    padding: 15px;
+    height: 48px;
+}
+.pl-0{padding: 0 5px 0 5px!important; }
+
+.rld-single-select.ml-22{
+    width: 100%;
+    float: left;
+}
+.hp-6 .rld-single-select .single-select {
+    width: 100%;
+}
+/*.dropdown-menu {
+    left: 0;
+}*/
+#header {
+    padding: 22px 0 52px 0;
+    height: 44px;
+}
+#navbarDropdownMenuLink-333{
+    /*padding-left: 2vw;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 200px;
+    line-height: 25px;
+    display: inline-flex;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;*/
+}
+#navigation.style-2.cloned.unsticky, #header.cloned.unsticky{
+    transition: 0s!important;
+    transform: initial;
+}
+.rld-single-select.ml-22{
+    margin-left: 0 !important;
+}
+.col-xl-2.col-lg-2.col-md-4{
+    padding: 0 5px;
+}
+.nav-link.dropdown-toggle span:after {
+    height: 8px;
+    width: 8px;
+    bottom: 5px;
+    right: 20px;
+    border: 1px solid #fff;
+    -webkit-box-shadow: 0 2px 1px rgb(0 0 0 / 20%);
+    box-shadow: 0 2px 1px rgb(0 0 0 / 20%);
+}
+.nav-link.dropdown-toggle img {
+    border: 1px solid #fff;
+    webkit-box-shadow: 0px 0px 0px 1px rgb(255 255 255 / 20%);
+    box-shadow: 0px 0px 0px 1px rgb(255 255 255 / 20%);
+    width: 20px;
+    height: 20px;
+}
+#navbarSupportedContent-333{
+    padding-top: .3125rem;
+}
+.sticky .nav-link{
+    color: #333!important;
+}
+.sticky .navbar-collapse.collapse.show .nav-link{
+    color: #fff!important;
+}
+.navbar-collapse.collapse.show .border-div{
+    display: none;
+}
+
+
+.compact .listing-img-content .listing-compact-title,
+.listing-img-content span
+{
+    /*color:#000 !important;*/
+    color:white !important;
+}
+
+.agents .portfolio .project-head img,
+a.listing-img-container img
+{
+    height:235px !important;
+}
+
+p {
+    line-height: 28px !important;
+}
+
+.listing-item.compact li span
+{
+    color:#fff !important;
+}
+
+@media (min-width: 992px){
+.navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: 0.3rem;
+    padding-left: 0.3rem;
+    }
+}
+@media only screen and (max-width: 1024px){
+.hp-6 .rld-main-search .rld-single-input, .hp-6 .rld-main-search .rld-single-select .single-select {
+    width: 100%;
+    }
+}
+@media only screen and (max-width: 450px){
+.hp-6 .rld-main-search {
+    max-height: 414px;
+    height: 100%;
+    }
+}
+@media only screen and (max-width: 1024px){
+    .nav-link.dropdown-toggle span{
+        display:none;
+    }
+}
+
+
+
+
+
+
+
+

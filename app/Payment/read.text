@@ -1,0 +1,24 @@
+<?php 
+include __DIR__."/Payment.php";
+
+$payment = new Payment;
+$payment = $payment->setCustomer([
+    'name' => "eslamSaloka",
+    'code' => '020',
+    'mobile' => '01025261808',
+    'email' => 'eslammohsenhandousa@gmail.com',
+])->setAddress([
+    'block' => 'defult',
+    'street' => 'defult',
+    'building' => 'defult',
+    'address' => 'Egypt,mansoura',
+    'instructions' => 'defult',
+])->setItems([
+    [
+        "ItemName"   => "Milk ;)",
+        "Quantity"   => 10,
+        "UnitPrice"  => 10,
+    ]
+])->setTotal(100)
+    ->setCallBackUrl("http://localhost:8000/payment-redirect/success")
+    ->setErrorUrl("http://localhost:8000/payment-redirect/error");
