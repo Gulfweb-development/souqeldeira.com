@@ -217,7 +217,7 @@
                                 <div class="row d-flex justify-content-center">
                                     <div class="col-xl-2 col-lg-2 col-md-4">
                                         <div class="rld-single-select">
-                                            <select class="select single-select mr-0" style="display: none;">
+                                            <select class="select single-select mr-0 d-none">
                                                 <option value="1">Country</option>
                                                 <option value="2">Kuwait City</option>
                                                 <option value="3">salwa</option>
@@ -242,7 +242,7 @@
                                     </div>
                                     <div class="col-xl-2 col-lg-2 col-md-4">
                                         <div class="rld-single-select">
-                                            <select class="select single-select mr-0" style="display: none;">
+                                            <select class="select single-select mr-0 d-none">
                                                 <option value="1">City</option>
                                                 <option value="2">Kuwait City</option>
                                                 <option value="3">salwa</option>
@@ -270,7 +270,7 @@
                                     </div>
                                     <div class="col-xl-3 col-lg-3 col-md-4">
                                         <div class="rld-single-select">
-                                            <select class="select single-select" style="display: none;">
+                                            <select class="select single-select d-none">
                                                 <option value="1">Property Type</option>
                                                 <option value="2">Family House</option>
                                                 <option value="3">Apartment</option>
@@ -365,12 +365,11 @@
                                                             <input type="text" class="first-slider-value"
                                                                 disabled=""><input type="text"
                                                                 class="second-slider-value" disabled="">
-                                                            <div class="ui-slider-range ui-widget-header ui-corner-all"
-                                                                style="left: 0%; width: 100%;"></div><a
-                                                                class="ui-slider-handle ui-state-default ui-corner-all"
-                                                                href="#" style="left: 0%;"></a><a
-                                                                class="ui-slider-handle ui-state-default ui-corner-all"
-                                                                href="#" style="left: 100%;"></a>
+                                                            <div class="ui-slider-range ui-widget-header ui-corner-all left-0 w-100"></div><a
+                                                                class="ui-slider-handle ui-state-default ui-corner-all left-0"
+                                                                href="#"></a><a
+                                                                class="ui-slider-handle ui-state-default ui-corner-all left-100-percent"
+                                                                href="#"></a>
                                                         </div>
                                                         <div class="clearfix"></div>
                                                     </div>
@@ -384,12 +383,10 @@
                                                             <input type="text" class="first-slider-value"
                                                                 disabled=""><input type="text"
                                                                 class="second-slider-value" disabled="">
-                                                            <div class="ui-slider-range ui-widget-header ui-corner-all"
-                                                                style="left: 0%; width: 100%;"></div><a
-                                                                class="ui-slider-handle ui-state-default ui-corner-all"
-                                                                href="#" style="left: 0%;"></a><a
-                                                                class="ui-slider-handle ui-state-default ui-corner-all"
-                                                                href="#" style="left: 100%;"></a>
+                                                            <div class="ui-slider-range ui-widget-header ui-corner-all left-0 w-100"></div><a
+                                                                class="ui-slider-handle ui-state-default ui-corner-all left-0"></a><a
+                                                                class="ui-slider-handle ui-state-default ui-corner-all left-100-percent"
+                                                                href="#"></a>
                                                         </div>
                                                         <div class="clearfix"></div>
                                                     </div>
@@ -507,9 +504,9 @@
                                         href="{{ route('ad.search', [toSlug($ad->title), $ad->id]) }}">{{ $ad->title }}</a>
                                 </h3>
                                 <p class="homes-address mb-3">
-                                    
+
                                         <span>{!! Str::limit($ad->text, 100) !!}</span>
-                                    
+
                                 </p>
                                 <!-- homes List -->
                                 <ul class="homes-list clearfix">

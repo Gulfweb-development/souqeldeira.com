@@ -406,9 +406,20 @@ section.portfolio {
 	content:"";
 	width:initial;
     }
-    
+
 #header,
 #header.cloned{
     padding: 22px 0 35px 0!important;
     }
+}
+
+.footer-custom-css {
+    font-weight:bold; color:white;
+}
+
+.left-0 {
+    left: 0!important;
+}
+.left-100-percent {
+    left: 100%!important;
 }
