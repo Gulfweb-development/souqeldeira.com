@@ -1,2 +1,7 @@
 User-agent: *
-Disallow:
+Disallow: /cgi-bin/
+Disallow: /tmp/
+Disallow: /api/
+Disallow: /profile/
+Disallow: /admin/
+Disallow: /auth/
