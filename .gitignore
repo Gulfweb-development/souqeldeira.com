@@ -14,3 +14,5 @@ yarn-error.log
 /.vscode
 /public/livewire-tmp
 .htaccess.cpmh3129
+/.env
+/composer.lock
