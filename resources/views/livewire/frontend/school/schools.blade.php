@@ -396,7 +396,7 @@
                                            </div>
                                         <div class="homes-tag button alt sale">
                                            </div> --}}
-                                        <img src="{{ $school->getFile() }}" alt="@lang('app.alt_img')"
+                                        <img src="{{ $school->getFile() }}"
                                             class="img-responsive">
                                     </a>
                                 </div>

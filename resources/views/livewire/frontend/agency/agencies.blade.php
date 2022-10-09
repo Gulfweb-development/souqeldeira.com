@@ -90,7 +90,7 @@
                                         {{-- <div class="homes-tag button alt sale">
                                             {{ $user->type == 'RENT' ? __('app.rent') : __('app.sale') }}</div> --}}
                                         {{-- <div class="homes-price">@lang('app.currency') {{ $user->price }}</div> --}}
-                                        <img src="{{ toProfileDefaultImage($user->getFile()) }}" alt="@lang('app.alt_img')"
+                                        <img src="{{ toProfileDefaultImage($user->getFile()) }}"
                                             class="img-responsive">
                                     </a>
                                 </div>

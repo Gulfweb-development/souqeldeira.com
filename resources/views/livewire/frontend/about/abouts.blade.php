@@ -53,7 +53,7 @@
                     <article class="col-lg-4 col-md-6 col-xs-12 serv">
                         <div class="serv-flex">
                             <div class="art-1 img-13">
-                                <img src="{{ $why->getFile() }}" alt="@lang('app.alt_img')">
+                                <img src="{{ $why->getFile() }}" >
                                 <h3>{{ $why->translate('name') }}</h3>
                             </div>
                             <div class="service-text-p">

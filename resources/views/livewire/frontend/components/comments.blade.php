@@ -8,7 +8,7 @@
                     <li class="comm-inf">
                         <div class="col-md-2">
                             <img src="{{ $comment->user->getFile() }}" class="img-fluid"
-                                alt="@lang('app.alt_img')">
+                                >
                         </div>
                         <div class="col-md-10 comments-info">
                             <div class="conra">

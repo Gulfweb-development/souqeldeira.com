@@ -90,7 +90,7 @@
                                         {{-- <div class="homes-tag button alt sale">
                                             {{ $blog->type == 'RENT' ? __('app.rent') : __('app.sale') }}</div> --}}
                                         {{-- <div class="homes-price">@lang('app.currency') {{ $blog->price }}</div> --}}
-                                        <img src="{{ $blog->getFile() }}" alt="@lang('app.alt_img')"
+                                        <img src="{{ $blog->getFile() }}"
                                             class="img-responsive">
                                     </a>
                                 </div>

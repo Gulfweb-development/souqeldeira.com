@@ -181,7 +181,7 @@
                                             data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">{{ user()->name }}
                                             <span><img src="{{ toProfileDefaultImage(user()->getFile()) }}"
-                                                    alt="@lang('app.alt_img')"></span>
+                                                    ></span>
                                         </a>
                                         <div class="dropdown-menu dropdown-default"
                                             aria-labelledby="navbarDropdownMenuLink-333">

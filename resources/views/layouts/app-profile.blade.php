@@ -63,7 +63,7 @@
                         <div class="left-side">
                             <!-- Logo -->
                             <div id="logo">
-                                <a href="{{ url('/') }}"><img src="{{ asset('images/logo-red22.svg') }}" alt="@lang('app.alt_img')"></a>
+                                <a href="{{ url('/') }}"><img src="{{ asset('images/logo-red22.svg') }}" ></a>
                             </div>
                             <!-- Mobile Navigation -->
                             <div class="mmenu-trigger">
@@ -98,7 +98,7 @@
                             <div class="header-user-menu user-menu">
                                 <div class="header-user-name">
                                     <span><img src="{{ toProfileDefaultImage(user()->getFile()) }}"
-                                            alt="@lang('app.alt_img')"></span>{{ user()->name }}
+                                            ></span>{{ user()->name }}
                                 </div>
                                 <ul>
                                     <li><a href="{{ route('profile.profile') }}">@lang('app.edit_profile')</a></li>
@@ -179,7 +179,7 @@
                             <div class="sidebar-header"><img src="{{ asset('images/logo-red.svg') }}"
                                     alt="header-logo2.png"> </div>
                             <div class="header clearfix">
-                                <img src="{{ toProfileDefaultImage(user()->getFile()) }}" alt="@lang('app.alt_img')"
+                                <img src="{{ toProfileDefaultImage(user()->getFile()) }}"
                                     class="img-fluid profile-img">
                             </div>
                             <div class="active-user">

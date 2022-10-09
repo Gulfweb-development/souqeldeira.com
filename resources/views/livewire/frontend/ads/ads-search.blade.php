@@ -475,7 +475,7 @@
                                         <div class="homes-tag button alt sale">
                                             {{ $ad->type == 'RENT' ? __('app.rent') : __('app.sale') }}</div>
                                         <div class="homes-price">@lang('app.currency') {{ $ad->price }}</div>
-                                        <img src="{{ toAdDefaultImage($ad->getFile()) }}" alt="@lang('app.alt_img')"
+                                        <img src="{{ toAdDefaultImage($ad->getFile()) }}"
                                             class="img-responsive">
                                     </a>
                                 </div>

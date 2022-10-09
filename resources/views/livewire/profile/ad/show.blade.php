@@ -21,7 +21,7 @@
                 <tr>
                     <td>{{ $num++ }}</td>
                     <td>@lang('app.image')</td>
-                    <td><img src="{{ $ad->getFile() }}" alt="@lang('app.alt_img')" width="70" height="70" /></td>
+                    <td><img src="{{ $ad->getFile() }}"  width="70" height="70" /></td>
                 </tr>
 
                 <tr>
