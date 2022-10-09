@@ -216,7 +216,7 @@ return [
     'bathrooms' => 'الحمامت',
     'from_the_same_city' => 'من نفس المدينة',
     'whatsapp' => 'واتس',
-    'agencies' => 'الوكالات',
+    'agencies' => 'مكاتب العقارية',
     'featured_companies' => 'الشركات المميزة',
     'recent_companies' => 'احدث الشركات',
     'recent_blogs' => 'احدث التدوينات',

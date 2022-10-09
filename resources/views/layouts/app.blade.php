@@ -140,9 +140,9 @@
                                     <a class="nav-link"
                                         href="{{ route('ads.search') }}">@lang('app.real_estates')</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('schools') }}">@lang('app.schools')</a>
-                                </li>
+{{--                                <li class="nav-item">--}}
+{{--                                    <a class="nav-link" href="{{ route('schools') }}">@lang('app.schools')</a>--}}
+{{--                                </li>--}}
                                 <li class="nav-item">
                                     <a class="nav-link"
                                         href="{{ route('contacts') }}">@lang('app.contacts')</a>
