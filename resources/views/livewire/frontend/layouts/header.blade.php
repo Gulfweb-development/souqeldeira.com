@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <meta name="description" content="{{ $meta_descrption ?? $setting->translate('description') }}">
+        <meta name="keywords" content="{{ $keyWords  }}">
         <meta name="author" content="aldeira_market">
         {{-- FACEBOOK METAS START --}}
         <meta property="og:url" content="{{ $og_url ?? 'default og url'}}" />
@@ -112,7 +113,7 @@
                     <nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color fixed-top">
                         <a class="navbar-brand" href="{{ url('/') }}"><img
                                 src="{{ asset('images/logo-red.svg') }}"
-                                data-sticky-logo="{{ asset('images/logo-red.svg') }}" alt=""
+                                data-sticky-logo="{{ asset('images/logo-red.svg') }}" alt="@lang('app.app_name')"
                                 class="img-responsive"></a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent-333" aria-controls="navbarSupportedContent-333"

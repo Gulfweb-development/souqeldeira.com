@@ -111,7 +111,7 @@
                                     <h5>@lang('app.image')</h5>
 
                                 </div>
-                                <img alt="image" src="{{ $school->getFile() }}">
+                                <img src="{{ $school->getFile() }}" alt="{{$school->translate('title')}}">
                             </div>
                             <div class="blog-info details mb-30">
                                 <h5 class="mb-4">@lang('app.description')</h5>

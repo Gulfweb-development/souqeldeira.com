@@ -116,7 +116,7 @@
                                 </div> --}}
                             <div class="floor-plan property wprt-image-video w50 pro">
                                 <h5>@lang('app.image')</h5>
-                                <img alt="image" src="{{ toProfileDefaultImage($user->getFile()) }}">
+                                <img alt="{{ $user->name }}" src="{{ toProfileDefaultImage($user->getFile()) }}">
                             </div>
                             <div class="blog-info details mb-30">
                                 <h5 class="mb-4">@lang('app.description')</h5>
@@ -356,7 +356,7 @@
                                                     <div class="recent-img">
                                                         <a
                                                             href="{{ route('agency', [toSlug($recentUser->name), $recentUser->id]) }}"><img
-                                                                src="{{{ toProfileDefaultImage($recentUser->getFile()) }}}" alt="" width="90"
+                                                                src="{{{ toProfileDefaultImage($recentUser->getFile()) }}}"  alt="{{ $recentUser->name }}" width="90"
                                                                 height="70"></a>
                                                     </div>
                                                     <div class="info-img">

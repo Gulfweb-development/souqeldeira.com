@@ -119,7 +119,7 @@
                     <nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color fixed-top">
                         <a class="navbar-brand" href="{{ url('/') }}"><img
                                 src="{{ asset('images/logo-red.svg') }}"
-                                data-sticky-logo="{{ asset('images/logo-red.svg') }}" alt=""
+                                data-sticky-logo="{{ asset('images/logo-red.svg') }}" alt="@lang('app.app_name')"
                                 class="img-responsive"></a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent-333" aria-controls="navbarSupportedContent-333"
@@ -181,7 +181,7 @@
                                         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333"
                                             data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">{{ user()->name }}
-                                            <span><img src="{{ toProfileDefaultImage(user()->getFile()) }}"
+                                            <span><img src="{{ toProfileDefaultImage(user()->getFile()) }}" alt="{{user()->name }}"
                                                     ></span>
                                         </a>
                                         <div class="dropdown-menu dropdown-default"

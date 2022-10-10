@@ -33,7 +33,7 @@
                 </div>
                 <div class="col-lg-6 col-md-12 col-xs-12">
                     <div class="wprt-image-video">
-                        <img alt="image" src="images/bg/bg-video.jpg">
+                        <img alt="about us" src="images/bg/bg-video.jpg">
                     </div>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                     <article class="col-lg-4 col-md-6 col-xs-12 serv">
                         <div class="serv-flex">
                             <div class="art-1 img-13">
-                                <img src="{{ $why->getFile() }}" >
+                                <img alt="{{ $why->translate('name') }}" src="{{ $why->getFile() }}" >
                                 <h3>{{ $why->translate('name') }}</h3>
                             </div>
                             <div class="service-text-p">

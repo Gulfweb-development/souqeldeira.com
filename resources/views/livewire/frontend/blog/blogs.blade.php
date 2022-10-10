@@ -91,7 +91,7 @@
                                             {{ $blog->type == 'RENT' ? __('app.rent') : __('app.sale') }}</div> --}}
                                         {{-- <div class="homes-price">@lang('app.currency') {{ $blog->price }}</div> --}}
                                         <img src="{{ $blog->getFile() }}"
-                                            class="img-responsive">
+                                            class="img-responsive" alt="{{ $blog->translate('title') }}">
                                     </a>
                                 </div>
                                 <div class="button-effect">

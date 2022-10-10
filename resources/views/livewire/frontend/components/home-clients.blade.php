@@ -8,7 +8,7 @@
                 </div>
                 <div class="owl-carousel style2">
                   @forelse ($clients as $client)
-                        <div class="owl-item" data-aos="fade-up"><img src="{{ $client->getFile() }}" ></div>
+                        <div class="owl-item" data-aos="fade-up"><img src="{{ $client->getFile() }}" alt="{{ $client['name_'.app()->getLocale()] }}" ></div>
                   @empty
                   {!! noData() !!}
                   @endforelse

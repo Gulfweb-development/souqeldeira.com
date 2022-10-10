@@ -73,7 +73,7 @@
                                         @endif
                                     </h5>
                                 </div>
-                                <img alt="image" src="{{ toAdDefaultImage($ad->getFile()) }}">
+                                <img alt="{{ $ad->title }}" src="{{ toAdDefaultImage($ad->getFile()) }}">
                             </div>
                             <div class="blog-info details mb-30">
                                 <h5 class="mb-4">@lang('app.description')</h5>
@@ -205,7 +205,7 @@
                                                     <div class="recent-img">
                                                         <a
                                                             href="{{ route('ad.search', [toSlug($recentAd->title), $recentAd->id]) }}"><img
-                                                                src="{{ toAdDefaultImage($recentAd->getFile()) }}" alt="" width="90"
+                                                                src="{{ toAdDefaultImage($recentAd->getFile()) }}" alt="{{ $recentAd->title }}" width="90"
                                                                 height="70"></a>
                                                     </div>
                                                     <div class="info-img">

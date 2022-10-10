@@ -91,7 +91,7 @@
                                             {{ $user->type == 'RENT' ? __('app.rent') : __('app.sale') }}</div> --}}
                                         {{-- <div class="homes-price">@lang('app.currency') {{ $user->price }}</div> --}}
                                         <img src="{{ toProfileDefaultImage($user->getFile()) }}"
-                                            class="img-responsive">
+                                            class="img-responsive" alt="{{ $user->name }}">
                                     </a>
                                 </div>
                                 <div class="button-effect">

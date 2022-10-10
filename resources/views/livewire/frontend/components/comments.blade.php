@@ -7,7 +7,7 @@
                 <ul class="col-12 commented pl-0">
                     <li class="comm-inf">
                         <div class="col-md-2">
-                            <img src="{{ $comment->user->getFile() }}" class="img-fluid"
+                            <img src="{{ $comment->user->getFile() }}" class="img-fluid" alt="{{ $comment->user->name }}"
                                 >
                         </div>
                         <div class="col-md-10 comments-info">

@@ -397,7 +397,7 @@
                                         <div class="homes-tag button alt sale">
                                            </div> --}}
                                         <img src="{{ $school->getFile() }}"
-                                            class="img-responsive">
+                                            class="img-responsive" alt="{{$school->translate('title')}}">
                                     </a>
                                 </div>
                                 <div class="button-effect">
