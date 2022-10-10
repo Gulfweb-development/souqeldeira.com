@@ -1,12 +1,12 @@
 <div>
  <x-slot name="meta_title">{{ $ad->title }}</x-slot>
-    <x-slot name="meta_descrption">{{ $ad->title }}</x-slot>
+    <x-slot name="meta_descrption">{{ Str::limit(strip_tags($ad->text), 155)  }}</x-slot>
     <x-slot name="og_title">{{ $ad->title }}</x-slot>
-    <x-slot name="og_description">{{ $ad->title }}</x-slot>
+    <x-slot name="og_description">{{ Str::limit(strip_tags($ad->text), 155)  }}</x-slot>
     <x-slot name="og_url">{{ Request::url() }}</x-slot>
     <x-slot name="og_image">{{ asset('images/logo-red.svg') }}</x-slot>
     <x-slot name="twitter_title">{{ $ad->title }}</x-slot>
-    <x-slot name="twitter_description">{{ $ad->title }}</x-slot>
+    <x-slot name="twitter_description">{{ Str::limit(strip_tags($ad->text), 155)  }}</x-slot>
     <x-slot name="twitter_image">{{ asset('images/logo-red.svg') }}</x-slot>
     <x-slot name="twitter_card">{{ $ad->title }}</x-slot>
     <!-- Header Container / End -->
@@ -328,7 +328,7 @@
                                         <h3><a href="{{ route('ad.search', [toSlug($similarAd->title), $similarAd->id]) }}">{{ $similarAd->title }}</a></h3>
                                         <p class="homes-address mb-3">
                                             {!! Str::substr($similarAd->text, 0, 100) !!}</span>
-                                            
+
                                         </p>
                                         <!-- homes List -->
                                         <ul class="homes-list clearfix">

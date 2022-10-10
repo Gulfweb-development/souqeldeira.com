@@ -1,12 +1,12 @@
 <div>
      <x-slot name="meta_title">@lang('app.policy')</x-slot>
-    <x-slot name="meta_descrption">@lang('app.policy')</x-slot>
+    <x-slot name="meta_descrption">{{ Str::limit(strip_tags(isset($policies[0]) ? $policies[0]->translate('name') : __('app.policy') ), 155)  }}</x-slot>
     <x-slot name="og_title">@lang('app.policy')</x-slot>
-    <x-slot name="og_description">@lang('app.policy')</x-slot>
+    <x-slot name="og_description">{{ Str::limit(strip_tags(isset($policies[0]) ? $policies[0]->translate('name') : __('app.policy') ), 155)  }}</x-slot>
     <x-slot name="og_url">{{ Request::url() }}</x-slot>
     <x-slot name="og_image">{{ asset('images/logo-red.svg') }}</x-slot>
     <x-slot name="twitter_title">@lang('app.policy')</x-slot>
-    <x-slot name="twitter_description">@lang('app.policy')</x-slot>
+    <x-slot name="twitter_description">{{ Str::limit(strip_tags(isset($policies[0]) ? $policies[0]->translate('name') : __('app.policy') ), 155)  }}</x-slot>
     <x-slot name="twitter_image">{{ asset('images/logo-red.svg') }}</x-slot>
     <x-slot name="twitter_card">@lang('app.policy')</x-slot>
     <!-- Header Container / End -->

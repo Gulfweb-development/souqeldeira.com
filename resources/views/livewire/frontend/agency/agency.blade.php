@@ -1,14 +1,14 @@
 <div>
-     <x-slot name="meta_title">@lang('app.agency')</x-slot>
-    <x-slot name="meta_descrption">@lang('app.agency')</x-slot>
-    <x-slot name="og_title">@lang('app.agency')</x-slot>
-    <x-slot name="og_description">@lang('app.agency')</x-slot>
+     <x-slot name="meta_title">@lang('app.agency') - {{ $user->name }}</x-slot>
+    <x-slot name="meta_descrption">{{ Str::limit(strip_tags($user->translate('description')), 155)  }}</x-slot>
+    <x-slot name="og_title">@lang('app.agency') - {{ $user->name }}</x-slot>
+    <x-slot name="og_description">{{ Str::limit(strip_tags($user->translate('description')), 155)  }}</x-slot>
     <x-slot name="og_url">{{ Request::url() }}</x-slot>
     <x-slot name="og_image">{{ asset('images/logo-red.svg') }}</x-slot>
-    <x-slot name="twitter_title">@lang('app.agency')</x-slot>
-    <x-slot name="twitter_description">@lang('app.agency')</x-slot>
+    <x-slot name="twitter_title">@lang('app.agency') - {{ $user->name }}</x-slot>
+    <x-slot name="twitter_description">{{ Str::limit(strip_tags($user->translate('description')), 155)  }}</x-slot>
     <x-slot name="twitter_image">{{ asset('images/logo-red.svg') }}</x-slot>
-    <x-slot name="twitter_card">@lang('app.agency')</x-slot>
+    <x-slot name="twitter_card">@lang('app.agency') - {{ $user->name }}</x-slot>
     <!-- Header Container / End -->
     <section class="headings">
         <div class="text-heading text-center">
@@ -445,9 +445,9 @@
                     </button>
                     <!-- 16:9 aspect ratio -->
                     <div class="embed-responsive embed-responsive-16by9" wire:ignore>
-                        <iframe class="embed-responsive-item"
-                            src="https://www.youtube.com/embed/{{ $ad->video_link }}" id="video" frameborder="0"
-                            allowfullscreen></iframe>
+{{--                        <iframe class="embed-responsive-item"--}}
+{{--                            src="https://www.youtube.com/embed/{{ $ad->video_link }}" id="video" frameborder="0"--}}
+{{--                            allowfullscreen></iframe>--}}
                     </div>
                 </div>
 

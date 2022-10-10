@@ -1,12 +1,12 @@
 <div>
  <x-slot name="meta_title">@lang('app.about_us')</x-slot>
-    <x-slot name="meta_descrption">@lang('app.about_us')</x-slot>
+    <x-slot name="meta_descrption">{{ Str::limit(strip_tags($about->translate('text')), 155)  }}</x-slot>
     <x-slot name="og_title">@lang('app.about_us')</x-slot>
-    <x-slot name="og_description">@lang('app.about_us')</x-slot>
+    <x-slot name="og_description">{{ Str::limit(strip_tags($about->translate('text')), 155)  }}</x-slot>
     <x-slot name="og_url">{{ Request::url() }}</x-slot>
     <x-slot name="og_image">{{ asset('images/logo-red.svg') }}</x-slot>
     <x-slot name="twitter_title">@lang('app.about_us')</x-slot>
-    <x-slot name="twitter_description">@lang('app.about_us')</x-slot>
+    <x-slot name="twitter_description">{{ Str::limit(strip_tags($about->translate('text')), 155)  }}</x-slot>
     <x-slot name="twitter_image">{{ asset('images/logo-red.svg') }}</x-slot>
     <x-slot name="twitter_card">@lang('app.about_us')</x-slot>
     <section class="headings">

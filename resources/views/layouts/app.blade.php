@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <meta name="description" content="{{ $meta_descrption ?? 'default meta description' }}">
+        <meta name="keywords" content="{{ $meta_keywords ?? \App\Http\Controllers\Frontend\FrontendLangController::keyWords()  }}">
         <meta name="author" content="aldeira_market">
         {{-- FACEBOOK METAS START --}}
         <meta property="og:url" content="{{ $og_url ?? 'default og url'}}" />
