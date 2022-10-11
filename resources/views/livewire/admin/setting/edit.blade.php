@@ -47,6 +47,12 @@
                 <div class="col-md-12">
                     <x-admin.textarea name="state.description_en" label="{{ __('app.description_en') }}" />
                 </div>
+                <div class="col-md-12">
+                    <x-admin.textarea name="state.home_details_ar" label="{{ __('app.home') .' '.__('app.description_ar') }}" />
+                </div>
+                <div class="col-md-12">
+                    <x-admin.textarea name="state.home_details_en" label="{{ __('app.home') .' '.__('app.description_en') }}" />
+                </div>
 
                 <hr />
                 <div class="col-md-12 mt-4 justify-content-center align-items-center d-flex border-1">
