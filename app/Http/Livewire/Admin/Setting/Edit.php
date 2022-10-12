@@ -25,6 +25,8 @@ class Edit extends Component
             'title_en' => 'required|string|max:170',
             'description_ar' => 'required|string',
             'description_en' => 'required|string',
+            'home_details_ar' => 'string',
+            'home_details_en' => 'string',
             'facebook' => 'required|string|max:170',
             'twitter' => 'required|string|max:170',
             'instagram' => 'required|string|max:170',

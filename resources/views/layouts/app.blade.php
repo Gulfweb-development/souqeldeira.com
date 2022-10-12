@@ -18,6 +18,7 @@
         <meta name="twitter:description" content="{{ $twitter_description ?? 'default twitter description'}}">
         <meta name="twitter:image" content="{{ $twitter_image ?? 'default twitter image'}}">
         <meta name="twitter:card" content="{{ $twitter_card ?? 'default twitter card'}}">
+        <link rel="canonical" href="{{ route('ads.search') }}">
         {{-- FACEBOOK METAS END --}}
         <title>{{ $meta_title ?? 'default meta title' }}</title>
         <!-- FAVICON -->
@@ -259,7 +260,7 @@
                 <div class="row d-flex justify-content-center">
                     <div class="column">
                         <h2>
-                            <img src="{{ asset('images/home.png') }}" style="width:150px;">
+                            <img src="{{ asset('images/home.png') }}" alt="home" style="width:150px;">
 
                         </h2>
                         <p class="text-center"> <button type="button" class="btn btn-info btn-lg" style="color:white"
@@ -267,7 +268,7 @@
                         </p>
                     </div>
                     <div class="column">
-                        <h2> <img src="{{ asset('images/car.png') }}" style="width:150px; margin-left:22px;">
+                        <h2> <img src="{{ asset('images/car.png') }}" alt="car" style="width:150px; margin-left:22px;">
                         </h2>
                         <p class="text-center"> <button type="button" class="btn btn-info btn-lg" style="color:white"
                                 data-toggle="modal" data-target="#myModal0" data-dismiss="modal">Car Market</button>
@@ -302,7 +303,7 @@
                 <div class="row d-flex justify-content-center">
                     <div class="column">
                         <h2>
-                            <img src="{{ asset('images/english.jpg') }}" style="width:150px;">
+                            <img src="{{ asset('images/english.jpg') }}" alt="english" style="width:150px;">
 
                         </h2>
                         <p class="text-center"> <button type="button" class="btn btn-default" style="color:white;"
@@ -310,7 +311,7 @@
                         </p>
                     </div>
                     <div class="column">
-                        <h2> <img src="{{ asset('images/arabic.jpg') }}" style="width:150px;">
+                        <h2> <img src="{{ asset('images/arabic.jpg') }}" alt="arabic" style="width:150px;">
                         </h2>
                         <p class="text-center"> <button type="button" class="btn btn-default" style="color:white;"
                                 data-dismiss="modal">AR</button>
@@ -684,6 +685,12 @@
         $("#myModal2").modal('show');
     });
 </script>
+@if ( isset($schema) )
+<script type="application/ld+json">
+    "@context" : "https://schema.org/",
+    {{ $schema }}
+</script>
+@endif
 <!-- MAIN JS -->
 @stack('js')
 <script src="{{ asset('js/script.js') }}"></script>

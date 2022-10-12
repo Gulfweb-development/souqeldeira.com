@@ -1,19 +1,19 @@
 <div>
- <x-slot name="meta_title">{{ $ad->title }}</x-slot>
+ <x-slot name="meta_title">{{ \App\Http\Controllers\Frontend\FrontendLangController::setting()->translate('title') .' - '.$ad->title }}</x-slot>
     <x-slot name="meta_descrption">{{ Str::limit(strip_tags($ad->text), 155)  }}</x-slot>
-    <x-slot name="og_title">{{ $ad->title }}</x-slot>
+    <x-slot name="og_title">{{  \App\Http\Controllers\Frontend\FrontendLangController::setting()->translate('title') .' - '. $ad->title }}</x-slot>
     <x-slot name="og_description">{{ Str::limit(strip_tags($ad->text), 155)  }}</x-slot>
     <x-slot name="og_url">{{ Request::url() }}</x-slot>
     <x-slot name="og_image">{{ asset('images/logo-red.svg') }}</x-slot>
-    <x-slot name="twitter_title">{{ $ad->title }}</x-slot>
+    <x-slot name="twitter_title">{{  \App\Http\Controllers\Frontend\FrontendLangController::setting()->translate('title') .' - '. $ad->title }}</x-slot>
     <x-slot name="twitter_description">{{ Str::limit(strip_tags($ad->text), 155)  }}</x-slot>
     <x-slot name="twitter_image">{{ asset('images/logo-red.svg') }}</x-slot>
-    <x-slot name="twitter_card">{{ $ad->title }}</x-slot>
+    <x-slot name="twitter_card">{{  \App\Http\Controllers\Frontend\FrontendLangController::setting()->translate('title') .' - '. $ad->title }}</x-slot>
     <!-- Header Container / End -->
     <section class="headings">
         <div class="text-heading text-center">
             <div class="container">
-                <h1>@lang('app.details')</h1>
+                <h1>{{ $ad->title }}</h1>
                 <h2>
                     <a href="{{ url('/') }}">@lang('app.home') </a>&nbsp;/&nbsp;
                     <a href="{{ route('ads.search') }}">@lang('app.ads') </a>

@@ -86,6 +86,13 @@
                             <td>@lang('app.description')</td>
                             <td>{{ $setting->translate('description') }}</td>
                         </tr>
+                        <tr>
+                            <td>
+                                {{ $num++ }}
+                            </td>
+                            <td>@lang('app.home') @lang('app.description')</td>
+                            <td>{{ $setting->translate('home_details') }}</td>
+                        </tr>
 
                         <tr>
                             <td>

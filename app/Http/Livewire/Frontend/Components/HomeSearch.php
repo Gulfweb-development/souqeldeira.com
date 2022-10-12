@@ -39,6 +39,15 @@ class HomeSearch extends Component
         $ads = Ad::with('region', 'images')->frontSearch($this->governorate_id,$this->region_id,$this->building_type_id,$this->type,$this->price_from,$this->price_to)->paginate(12);
         // TO REDIRECT FILTERED DATA
         session()->flash('ads', $ads);
+        $regions = Region::select(toLocale('name'))->find($this->region_id);
+        $buildingTypes = BuildingType::select(toLocale('name'))->find($this->building_type_id);
+        if ( $regions !== null or $buildingTypes !== null ){
+            $name = $buildingTypes ? $buildingTypes['name_'.app()->getLocale()].' ' : '';
+            $name .= $regions ? trans('app.in').' '.$regions['name_'.app()->getLocale()] : '';
+        } else
+            $name = trans('app.ads');
+
+        session()->flash('ads_title', $name);
         return redirect()->route('ads.search');
     }
 

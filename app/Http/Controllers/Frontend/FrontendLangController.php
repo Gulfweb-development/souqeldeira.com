@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 class FrontendLangController extends Controller
 {
+    public static $setting = null ;
     private static $defaultKeywords = [
         'ar' => [
             'عقارات',
@@ -51,6 +53,12 @@ class FrontendLangController extends Controller
         if ( $all )
             return implode(',' , self::$defaultKeywords[ app()->getLocale()] );
         return implode(',' ,self::array_random(self::$defaultKeywords[ app()->getLocale()] , 7 ) );
+    }
+    public static function setting()
+    {
+        if ( self::$setting == null )
+            self::$setting = Setting::latest()->first();
+        return self::$setting;
     }
     public function lang($lang)
     {

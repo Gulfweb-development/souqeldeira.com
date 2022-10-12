@@ -48,6 +48,15 @@ class AdsSearch extends Component
         $ads = Ad::with('region', 'images')->frontSearch($this->governorate_id, $this->region_id, $this->building_type_id, $this->type, $this->rooms_count, $this->bathrooms_count, $this->price_from, $this->price_to, $this->filter)->paginate(12);
         // TO REDIRECT FILTERED DATA
         session()->flash('ads', $ads);
+        $regions = Region::select(toLocale('name'))->find($this->region_id);
+        $buildingTypes = BuildingType::select(toLocale('name'))->find($this->building_type_id);
+        if ( $regions !== null or $buildingTypes !== null ){
+            $name = $buildingTypes ? $buildingTypes['name_'.app()->getLocale()].' ' : '';
+            $name .= $regions ? trans('app.in').' '.$regions['name_'.app()->getLocale()] : '';
+        } else
+            $name = trans('app.ads');
+
+        session()->flash('ads_title', $name);
         return redirect()->route('ads.search');
     }
 
@@ -90,9 +99,11 @@ class AdsSearch extends Component
             $ads = $ads->paginate(12);
         }
         // CHECK TOGGLE FAVORITE ICON BTWEEN DELETE AND ADD
+        $ads_title =  Session::has('ads_title') ? Session::get('ads_title') : trans('app.ads');
 
         return view('livewire.frontend.ads.ads-search', [
             'ads' => $ads,
+            'ads_title' => $ads_title,
         ]);
     }
 }
