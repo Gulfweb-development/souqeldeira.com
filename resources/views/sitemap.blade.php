@@ -3,7 +3,7 @@
     @foreach($staticRoute as $route)
         <url>
             <loc>{{$route['link']}}</loc>
-            <lastmod>{{date('Y-m-d H:i:s')}}</lastmod>
+            <lastmod>{{\Illuminate\Support\Carbon::now()->tz('UTC')->toAtomString()}}</lastmod>
             <changefreq>weekly</changefreq>
             <priority>0.9</priority>
         </url>
