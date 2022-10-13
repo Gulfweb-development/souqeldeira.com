@@ -3,9 +3,9 @@
         <section class="featured portfolio bg-white-3">
             <div class="container">
                 <div class="row">
-                    <div class="section-title col-md-5">
+                    <div class="section-title col-md-51">
                         <!--<h3>@lang('app.apartments')</h3>-->
-                        <h2>@lang('app.for_sale')</h2>
+                        <h1 style="color: #092970;text-transform: uppercase;">@lang('app.for_sale')</h1>
                     </div>
                 </div>
                 <div class="row portfolio-items">
