@@ -48,10 +48,12 @@ html{
     left: 1rem;
     right: auto;
 }
+/*
 .btn.btn-outline-light:after {
     left: auto;
     right: .5rem;
 }
+*/
 .btn.btn-outline-light:hover:after {
     left: auto;
     right: 1rem;
@@ -131,9 +133,11 @@ html{
     right: 0;
     left: initial;
 }
+/*
 .btn.btn-outline-light:after{
     content: "\f0a8";
 }
+*/
 .counterup .countr .fa {
     margin-left: 1.5rem;
     margin-right: initial;

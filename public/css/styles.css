@@ -2744,7 +2744,7 @@ section.portfolio {
   -webkit-transition: all .3s ease;
   transition: all .3s ease;
 }
-
+/*
 .btn.btn-outline-light:after {
   content: '\f0a9';
   font-family: 'FontAwesome';
@@ -2760,6 +2760,7 @@ section.portfolio {
   -webkit-transform: rotateZ(-360deg);
           transform: rotateZ(-360deg);
 }
+*/
 
 /*------------------------------------*/
 /*--- 7. SECTION POPULAR PLACES ---*/
