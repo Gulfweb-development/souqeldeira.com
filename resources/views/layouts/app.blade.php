@@ -303,7 +303,7 @@
                 <div class="row d-flex justify-content-center">
                     <div class="column">
                         <h2>
-                            <img src="{{ asset('images/english.jpg') }}" alt="english" style="width:150px;">
+                            <img src="{{ asset('images/english.jpg') }}" alt="موقع سوق الديرة تغيير اللغة" style="width:150px;">
 
                         </h2>
                         <p class="text-center"> <button type="button" class="btn btn-default" style="color:white;"
@@ -311,7 +311,7 @@
                         </p>
                     </div>
                     <div class="column">
-                        <h2> <img src="{{ asset('images/arabic.jpg') }}" alt="arabic" style="width:150px;">
+                        <h2> <img src="{{ asset('images/arabic.jpg') }}" alt="موقع سوق الديرة تغيير اللغة" style="width:150px;">
                         </h2>
                         <p class="text-center"> <button type="button" class="btn btn-default" style="color:white;"
                                 data-dismiss="modal">AR</button>
