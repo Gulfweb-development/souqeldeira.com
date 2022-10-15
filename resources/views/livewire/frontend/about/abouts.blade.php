@@ -71,6 +71,7 @@
     <!-- END SECTION WHY CHOOSE US -->
 
 </div>
+
 @section('schema2')
     {
     "@context": "http://schema.org/",

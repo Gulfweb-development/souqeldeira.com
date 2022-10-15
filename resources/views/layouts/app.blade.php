@@ -18,7 +18,7 @@
         <meta name="twitter:description" content="{{ $twitter_description ?? 'default twitter description'}}">
         <meta name="twitter:image" content="{{ $twitter_image ?? 'default twitter image'}}">
         <meta name="twitter:card" content="{{ $twitter_card ?? 'default twitter card'}}">
-        <link rel="canonical" href="{{ route('ads.search') }}">
+        <link rel="canonical" href="{{ url()->current() }}">
         {{-- FACEBOOK METAS END --}}
         <title>{{ $meta_title ?? 'default meta title' }}</title>
         <!-- FAVICON -->

@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="section-title col-md-51">
                         <!--<h3>@lang('app.apartments')</h3>-->
-                        <h1 style="color: #092970;text-transform: uppercase;">@lang('app.for_rent')</h1>
+                        <h1 class="text-large" style="color: #092970;text-transform: uppercase;">@lang('app.for_rent_title')</h1>
                     </div>
                 </div>
                 <div class="row portfolio-items">

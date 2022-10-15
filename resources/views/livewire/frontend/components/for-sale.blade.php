@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="section-title col-md-51">
                         <!--<h3>@lang('app.apartments')</h3>-->
-                        <h1 style="color: #092970;text-transform: uppercase;">@lang('app.for_sale')</h1>
+                        <h1 class="text-large" style="color: #092970;text-transform: uppercase;">@lang('app.for_sale_title')</h1>
                     </div>
                 </div>
                 <div class="row portfolio-items">
@@ -33,8 +33,8 @@
                             </div>
                         </div>
                     </div>
-                        @section('schema')@parent{"image":"{{toAdDefaultImage($saleAd->getFile())}}","@context":"https://schema.org","@type":"Product","url":"{{ route('ad.search',[toSlug($saleAd->title),$saleAd->id]) }}","category":"sale-{{ $saleAd->buildingType->name_en }}","name":"{{ $saleAd->title }}","offers":{"priceCurrency":"KWD","price":"{{ $saleAd->price }}","@type":"Offer"},"description":"{{ str_replace('\\' , '\\\\' , strip_tags($saleAd->text)) }}"},@stop
-                    @empty
+                     @section('schema')@parent{"image":"{{toAdDefaultImage($saleAd->getFile())}}","@context":"https://schema.org","@type":"Product","url":"{{ route('ad.search',[toSlug($saleAd->title),$saleAd->id]) }}","category":"sale-{{ $saleAd->buildingType->name_en }}","name":"{{ $saleAd->title }}","offers":{"priceCurrency":"KWD","price":"{{ $saleAd->price }}","@type":"Offer"},"description":"{{ str_replace('\\' , '\\\\' , strip_tags($saleAd->text)) }}"},@stop
+                 @empty
                     {!! noData() !!}
                  @endforelse
 

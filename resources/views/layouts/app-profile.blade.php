@@ -471,14 +471,14 @@
     </div>
     <!-- Wrapper / End -->
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QDD5K0BPGB"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QDD5K0BPGB"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-        gtag('config', 'G-QDD5K0BPGB');
-    </script>
+    gtag('config', 'G-QDD5K0BPGB');
+</script>
 </body>
 
 </html>

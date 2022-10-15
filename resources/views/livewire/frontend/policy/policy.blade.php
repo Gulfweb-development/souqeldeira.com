@@ -477,6 +477,7 @@
         </style>
     @endpush
 </div>
+
 @section('schema2')
     {
     "@context": "http://schema.org/",

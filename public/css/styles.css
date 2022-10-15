@@ -107,6 +107,10 @@ h1 {
   text-transform: uppercase;
 }
 
+h1.text-large {
+    font-size: 2.4rem;
+}
+
 h2 {
   font-family: 'Montserrat', sans-serif;
   color: #222;

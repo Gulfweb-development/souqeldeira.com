@@ -51,9 +51,9 @@ Route::post('/auth/passwords/reset',function(Request $request){
         'activated_code' => 'required',
         'password'  => 'required|confirmed|min:8',
     ]);
-
+    
     $user = \App\Models\User::where(['email'=>$email])->first();
-
+    
     if($user->activated_code != $request->activated_code) {
          return back()
             ->withInput($request->only('email'))
@@ -67,17 +67,17 @@ Route::post('/auth/passwords/reset',function(Request $request){
 })->name('auth.passwords.reset.post');
 
 Route::middleware(['auth'])->group(function () {
-
-
-
+    
+    
+    
     // Start new routes
-
+    
     Route::get('/get_subscript',function(Request $request){
         return view('new.index',[
             'lists' => \App\Models\Subscriptions::all()
             ]);
     });
-
+    
     Route::get('/get_subscript/{subscript}/payment',function(\App\Models\Subscriptions $subscript){
         // dd($subscript);
         $user = \Auth::user();
@@ -114,29 +114,29 @@ Route::middleware(['auth'])->group(function () {
         // return redirect()->url($payment['invoiceURL']);
         header('Location: ' . $payment['invoiceURL']);
     });
-
+    
     Route::get('/payment-redirect/{status}',function(Request $request,$status){
         // dd($request->all(),$status);
         return redirect()->route('home');
     });
-
-
+        
+    
     // https://demo.MyFatoorah.com/KWT/ie/01072114934341
-
-
-
+    
+    
+    
     // End new routes
-
-
-
-
-
-
+    
+    
+    
+    
+    
+    
 
     Route::get('/auth/verified/mail',function(Request $request){
         return view('auth.passwords.verified-mail');
     })->name('auth.passwords.verified.mail');
-
+    
     Route::post('/auth/verified/mail',function(Request $request){
         $request->validate([
             'activated_code' => 'required',
