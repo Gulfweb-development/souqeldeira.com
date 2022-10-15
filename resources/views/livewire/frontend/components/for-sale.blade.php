@@ -33,7 +33,8 @@
                             </div>
                         </div>
                     </div>
-                 @empty
+                        @section('schema')@parent{"image":"{{toAdDefaultImage($saleAd->getFile())}}","@context":"https://schema.org","@type":"Product","url":"{{ route('ad.search',[toSlug($saleAd->title),$saleAd->id]) }}","category":"sale-{{ $saleAd->buildingType->name_en }}","name":"{{ $saleAd->title }}","offers":{"priceCurrency":"KWD","price":"{{ $saleAd->price }}","@type":"Offer"},"description":"{{ str_replace('\\' , '\\\\' , strip_tags($saleAd->text)) }}"},@stop
+                    @empty
                     {!! noData() !!}
                  @endforelse
 

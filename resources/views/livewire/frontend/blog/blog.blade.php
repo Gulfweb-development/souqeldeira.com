@@ -471,3 +471,25 @@
         </style>
     @endpush
 </div>
+
+
+@section('schema2')
+    {
+        "@context": "http://schema.org/",
+        "@type": "BlogPosting",
+        "headline": "{{ $blog->translate('title') }}",
+        "description": "{{ Str::limit(strip_tags($blog->translate('text')), 155)  }}",
+        "datePublished": "{{ $blog->created_at->format('Y-m-d') }}",
+        "dateModified": "{{ $blog->updated_at->format('Y-m-d') }}",
+        "author": {
+            "@type": "organization",
+            "@id": "#organization",
+            "name": "{{ \App\Http\Controllers\Frontend\FrontendLangController::setting()->translate('title') }}"
+        },
+        "image": "{{ $blog->getFile() }}",
+        "publisher": {
+            "@id": "#organization"
+        },
+        "mainEntityOfPage": "{{ route('blog',[toSlug($blog->translate('title')),$blog->id]) }}"
+    }
+@endsection

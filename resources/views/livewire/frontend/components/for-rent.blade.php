@@ -32,6 +32,7 @@
                             </div>
                         </div>
                     </div>
+                        @section('schema')@parent{"image":"{{toAdDefaultImage($rentAd->getFile())}}","@context":"https://schema.org","@type":"Product","url":"{{ route('ad.search',[toSlug($rentAd->title),$rentAd->id]) }}","category":"rent-{{ $rentAd->buildingType->name_en }}","name":"{{ $rentAd->title }}","offers":{"priceCurrency":"KWD","price":"{{ $rentAd->price }}","@type":"Offer"},"description":"{{ str_replace('\\' , '\\\\' , strip_tags($rentAd->text)) }}"},@stop
                   @empty
                       {!! noData() !!}
                   @endforelse

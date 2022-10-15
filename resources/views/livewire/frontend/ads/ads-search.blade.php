@@ -548,6 +548,7 @@
                             </div>
                         </div>
                     </div>
+                    @section('schema')@parent{"image":"{{toAdDefaultImage($ad->getFile())}}","@context":"https://schema.org","@type":"Product","url":"{{ route('ad.search',[toSlug($ad->title),$ad->id]) }}","category":"{{ strtolower($ad->type) }}-{{ $ad->buildingType->name_en }}","name":"{{ $ad->title }}","offers":{"priceCurrency":"KWD","price":"{{ $ad->price }}","@type":"Offer"},"description":"{{ str_replace('\\' , '\\\\' , strip_tags($ad->text)) }}"},@stop
                 @empty
                     {!! noData() !!}
                 @endforelse

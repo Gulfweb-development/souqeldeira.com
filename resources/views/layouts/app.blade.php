@@ -685,10 +685,14 @@
         $("#myModal2").modal('show');
     });
 </script>
-@if ( isset($schema) )
+@hasSection('schema')
 <script type="application/ld+json">
-    "@context" : "https://schema.org/",
-    {{ $schema }}
+    @php echo '['.preg_replace('/##parent-placeholder-([^\#])*##/', '', trim($__env->getSection('schema', null) , ',')).']' .PHP_EOL; @endphp
+</script>
+@endif
+@hasSection('schema2')
+<script type="application/ld+json">
+    @yield('schema2')
 </script>
 @endif
 <!-- MAIN JS -->

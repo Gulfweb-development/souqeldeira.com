@@ -477,3 +477,17 @@
         </style>
     @endpush
 </div>
+@section('schema2')
+    {
+    "@context": "http://schema.org/",
+    "@type": "Organization",
+    "@id": "#organization",
+    "logo": {
+    "@type": "ImageObject",
+    "url": "{{ asset('images/logo-red.svg') }}"
+    },
+    "url": "{{ route('blogs') }}",
+    "name": "@lang('app.blogs') {{ \App\Http\Controllers\Frontend\FrontendLangController::setting()->translate('title') }}",
+    "description": ""
+    }
+@endsection
