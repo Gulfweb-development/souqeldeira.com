@@ -12,7 +12,14 @@
     <x-slot name="twitter_card">{{ $setting->translate('title') }}</x-slot>
     <x-slot name="schema">{{ $setting->translate('title') }}</x-slot>
         @livewire('frontend.components.home-search')
-
+        <div class="bg-white-3 partners pb-0">
+            <div class="container">
+                <div class="pb-0 sec-title">
+{{--                    <h1 class="text-large" style="color: #092970;text-transform: uppercase;">{{ trans('app.title_bellow_search') }}</h1>--}}
+                    <h1 class="mb-0">{{ trans('app.title_bellow_search') }}</h1>
+                </div>
+            </div>
+        </div>
         @livewire('frontend.components.for-sale')
         @livewire('frontend.components.for-rent')
         @livewire('frontend.components.home-clients')

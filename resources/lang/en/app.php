@@ -127,6 +127,7 @@ return [
     'apartments' => 'Apartments',
     'for_sale' => 'FOR SALE',
     'for_sale_title' => 'FOR SALE PROPERTIES IN KUWAIT',
+    'title_bellow_search' => 'DEIRA MARKET , Real Estate Ads in kuwait',
     'currency' => 'KD',
     'area' => 'Area',
     'rooms' => 'Rooms',

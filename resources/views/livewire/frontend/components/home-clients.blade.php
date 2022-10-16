@@ -3,7 +3,7 @@
         <div class="partners bg-white-3">
             <div class="container">
                 <div class="sec-title">
-                    <h1 class="text-large" style="color: #092970;text-transform: uppercase;">@lang('app.out_clients')</h1>
+                    <h2>@lang('app.out_clients')</h2>
                     {{-- <p>Link kw</p> --}}
                 </div>
                 <div class="owl-carousel style2">
