@@ -107,6 +107,10 @@ h1 {
   text-transform: uppercase;
 }
 
+h1.text-large {
+    font-size: 2.4rem;
+}
+
 h2 {
   font-family: 'Montserrat', sans-serif;
   color: #222;
@@ -2744,7 +2748,7 @@ section.portfolio {
   -webkit-transition: all .3s ease;
   transition: all .3s ease;
 }
-
+/*
 .btn.btn-outline-light:after {
   content: '\f0a9';
   font-family: 'FontAwesome';
@@ -2760,6 +2764,7 @@ section.portfolio {
   -webkit-transform: rotateZ(-360deg);
           transform: rotateZ(-360deg);
 }
+*/
 
 /*------------------------------------*/
 /*--- 7. SECTION POPULAR PLACES ---*/

@@ -9,30 +9,6 @@ use Illuminate\Http\Request;
 class FrontendLangController extends Controller
 {
     public static $setting = null ;
-    private static $defaultKeywords = [
-        'ar' => [
-            'عقارات',
-            'شقق',
-            'ايجا',
-            'البيع',
-            'فلل',
-            'للبيد',
-            'الكويت',
-            'الايجار شقق في الكويت',
-            'بيوت للبيع في الكويت',
-        ],
-        'en' => [
-            'عقارات',
-            'شقق',
-            'ايجا',
-            'البيع',
-            'فلل',
-            'للبيد',
-            'الكويت',
-            'الايجار شقق في الكويت',
-            'بيوت للبيع في الكويت',
-        ],
-    ];
 
     private static function array_random($array, $amount = 1)
     {
@@ -51,8 +27,8 @@ class FrontendLangController extends Controller
     }
     public static function keyWords($all =false){
         if ( $all )
-            return implode(',' , self::$defaultKeywords[ app()->getLocale()] );
-        return implode(',' ,self::array_random(self::$defaultKeywords[ app()->getLocale()] , 7 ) );
+            return self::setting()['keywords_'.app()->getLocale()];
+        return implode(',' ,self::array_random(explode(',' , self::setting()['keywords_'.app()->getLocale()]) , 7 ) );
     }
     public static function setting()
     {

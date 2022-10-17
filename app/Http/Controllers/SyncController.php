@@ -18,17 +18,17 @@ class SyncController extends Controller
         if(!empty($url) && !empty($id)){
         $allowedExtensions = ['jpeg', 'png', 'jpg'];
         $path = public_path('uploads');
-
+        
         $fileName  = basename($url);
         $extension = pathinfo($fileName, PATHINFO_EXTENSION);
-
+        
         if(array_search($extension, $allowedExtensions) === false) {
             throw new \Exception($extension .' is not allowed');
         }
         if(file_exists($path . $fileName)) {
-            throw new \Exception('File exists');
+            throw new \Exception('File exists'); 
         }
-
+        
         $ch = curl_init($url);
         $fp = fopen($path .'/'. $fileName, 'wb');
         curl_setopt($ch, CURLOPT_FILE, $fp);
@@ -46,14 +46,15 @@ class SyncController extends Controller
         $image->save();
         }
     }
+    
     //collect data from hook
     public function sync(Request $request){
         Log::info("syn started 00");
      if(
-        !empty($request->title) &&
-        !empty($request->details) &&
-        !empty($request->area) &&
-        !empty($request->type) &&
+        !empty($request->title) && 
+        !empty($request->details) && 
+        !empty($request->area) && 
+        !empty($request->type) && 
         !empty($request->propertytype)
         ){
         Log::info("syn started 11");
@@ -63,7 +64,7 @@ class SyncController extends Controller
         if(!empty($explodearea[$i])){
         $regionDetails = $this->getRegionId($explodearea[$i]);
         $propertyId    = $this->getBuildingTypeId($request->propertytype);
-
+        
         $ad = new Ad;
         $ad->user_id          = 77; //default user
         $ad->governorate_id   = $regionDetails['governorate_id'];
@@ -79,13 +80,12 @@ class SyncController extends Controller
         $ad->archived_at      = Carbon::now('UTC')->addDays(30)->format('Y-m-d H:i:s');;
         $ad->is_featured      = 0;
         $ad->is_approved      = 1;
-        $ad->save();
-
+        $ad->save(); 
         if(!empty($request->url)){
         $this->syncimage($request->url,$ad->id);
         }
-
-        }
+        
+        }   
         }
         }else{
             $regionDetails = $this->getRegionId($request->area);
@@ -106,11 +106,12 @@ class SyncController extends Controller
             $ad->archived_at      = Carbon::now('UTC')->addDays(30)->format('Y-m-d H:i:s');;
             $ad->is_featured      = 0;
             $ad->is_approved      = 1;
-            $ad->save();
+            $ad->save();   
             if(!empty($request->url)){
             $this->syncimage($request->url,$ad->id);
             }
-        }
+        
+        }    
         }
     }
 
@@ -118,17 +119,17 @@ class SyncController extends Controller
     $region = Region::where('name_ar','=',$regionName)->first();
     if(!empty($region->id)){
     Log::info("Region Id = ".$region->id."-".$regionName);
-    return ["region_id"=>$region->id,"governorate_id"=>$region->governorate_id];
+    return ["region_id"=>$region->id,"governorate_id"=>$region->governorate_id];    
     }
-    return ["region_id"=>0,"governorate_id"=>0];
+    return ["region_id"=>0,"governorate_id"=>0]; 
     }
 
     function getBuildingTypeId($propertyname){
     $region = BuildingType::where('name_ar','=',$propertyname)->first();
     if(!empty($region->id)){
-    return $region->id;
+    return $region->id;    
     }
-    return 0;
+    return 0; 
     }
 
     function TypeName($id){

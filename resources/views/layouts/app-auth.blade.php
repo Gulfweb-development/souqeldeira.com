@@ -145,6 +145,15 @@
             message = "{{ session()->get('info') }}";
             toastr.info(message)
         @endif
+        <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QDD5K0BPGB"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-QDD5K0BPGB');
+</script>
     </script>
 </body>
 

@@ -3,9 +3,9 @@
         <section class="featured portfolio bg-white-3">
             <div class="container">
                 <div class="row">
-                    <div class="section-title col-md-5">
+                    <div class="section-title col-md-51">
                         <!--<h3>@lang('app.apartments')</h3>-->
-                        <h2>@lang('app.for_rent')</h2>
+                        <h2>@lang('app.for_rent_title')</h2>
                     </div>
                 </div>
                 <div class="row portfolio-items">
@@ -32,6 +32,7 @@
                             </div>
                         </div>
                     </div>
+                        @section('schema')@parent{"image":"{{toAdDefaultImage($rentAd->getFile())}}","@context":"https://schema.org","@type":"Product","url":"{{ route('ad.search',[toSlug($rentAd->title),$rentAd->id]) }}","category":"rent-{{ $rentAd->buildingType->name_en }}","name":"{{ $rentAd->title }}","offers":{"priceCurrency":"KWD","price":"{{ $rentAd->price }}","@type":"Offer"},"description":"{{ str_replace('\\' , '\\\\' , strip_tags($rentAd->text)) }}"},@stop
                   @empty
                       {!! noData() !!}
                   @endforelse

@@ -18,6 +18,7 @@
         <meta name="twitter:description" content="{{ $twitter_description ?? 'default twitter description'}}">
         <meta name="twitter:image" content="{{ $twitter_image ?? 'default twitter image'}}">
         <meta name="twitter:card" content="{{ $twitter_card ?? 'default twitter card'}}">
+        <link rel="canonical" href="{{ url()->current() }}">
         {{-- FACEBOOK METAS END --}}
         <title>{{ $meta_title ?? 'default meta title' }}</title>
         <!-- FAVICON -->
@@ -246,98 +247,98 @@
 {{ $slot }}
 
 @livewire('frontend.layouts.footer')
-<!-- Modal -->
-<div class="modal show" id="myModal2xxxxxx" data-keyboard="false" data-backdrop="static" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" style="color:#fff;">Please Select Your Categories</h4>
-            </div>
-            <div class="modal-body">
+{{--<!-- Modal -->--}}
+{{--<div class="modal show" id="myModal2xxxxxx" data-keyboard="false" data-backdrop="static" role="dialog">--}}
+{{--    <div class="modal-dialog">--}}
+{{--        <!-- Modal content-->--}}
+{{--        <div class="modal-content">--}}
+{{--            <div class="modal-header">--}}
+{{--                <h4 class="modal-title" style="color:#fff;">Please Select Your Categories</h4>--}}
+{{--            </div>--}}
+{{--            <div class="modal-body">--}}
 
-                <div class="row d-flex justify-content-center">
-                    <div class="column">
-                        <h2>
-                            <img src="{{ asset('images/home.png') }}" style="width:150px;">
+{{--                <div class="row d-flex justify-content-center">--}}
+{{--                    <div class="column">--}}
+{{--                        <h2>--}}
+{{--                            <img src="{{ asset('images/home.png') }}" alt="home" style="width:150px;">--}}
 
-                        </h2>
-                        <p class="text-center"> <button type="button" class="btn btn-info btn-lg" style="color:white"
-                                data-toggle="modal" data-target="#myModal0" data-dismiss="modal">Real Estates</button>
-                        </p>
-                    </div>
-                    <div class="column">
-                        <h2> <img src="{{ asset('images/car.png') }}" style="width:150px; margin-left:22px;">
-                        </h2>
-                        <p class="text-center"> <button type="button" class="btn btn-info btn-lg" style="color:white"
-                                data-toggle="modal" data-target="#myModal0" data-dismiss="modal">Car Market</button>
-                        </p>
-                    </div>
+{{--                        </h2>--}}
+{{--                        <p class="text-center"> <button type="button" class="btn btn-info btn-lg" style="color:white"--}}
+{{--                                data-toggle="modal" data-target="#myModal0" data-dismiss="modal">Real Estates</button>--}}
+{{--                        </p>--}}
+{{--                    </div>--}}
+{{--                    <div class="column">--}}
+{{--                        <h2> <img src="{{ asset('images/car.png') }}" alt="car" style="width:150px; margin-left:22px;">--}}
+{{--                        </h2>--}}
+{{--                        <p class="text-center"> <button type="button" class="btn btn-info btn-lg" style="color:white"--}}
+{{--                                data-toggle="modal" data-target="#myModal0" data-dismiss="modal">Car Market</button>--}}
+{{--                        </p>--}}
+{{--                    </div>--}}
 
 
-                </div>
-                <div class="modal-footer">
+{{--                </div>--}}
+{{--                <div class="modal-footer">--}}
 
-                </div>
-            </div>
+{{--                </div>--}}
+{{--            </div>--}}
 
-        </div>
-    </div>
+{{--        </div>--}}
+{{--    </div>--}}
 
-</div>
-<!-- End real estate --->
+{{--</div>--}}
+{{--<!-- End real estate --->--}}
 
 <!--- other popup للغات --->
-<!-- Modal -->
-<div class="modal show" id="myModal0xx" data-keyboard="false" data-backdrop="static" role="dialog">
-    <div class="modal-dialog">
+{{--<!-- Modal -->--}}
+{{--<div class="modal show" id="myModal0xx" data-keyboard="false" data-backdrop="static" role="dialog">--}}
+{{--    <div class="modal-dialog">--}}
 
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" style="color:#fff;">Please Your Select Language</h4>
-            </div>
-            <div class="modal-body">
+{{--        <!-- Modal content-->--}}
+{{--        <div class="modal-content">--}}
+{{--            <div class="modal-header">--}}
+{{--                <h4 class="modal-title" style="color:#fff;">Please Your Select Language</h4>--}}
+{{--            </div>--}}
+{{--            <div class="modal-body">--}}
 
-                <div class="row d-flex justify-content-center">
-                    <div class="column">
-                        <h2>
-                            <img src="{{ asset('images/english.jpg') }}" style="width:150px;">
+{{--                <div class="row d-flex justify-content-center">--}}
+{{--                    <div class="column">--}}
+{{--                        <h2>--}}
+{{--                            <img src="{{ asset('images/english.jpg') }}" alt="موقع سوق الديرة تغيير اللغة" style="width:150px;">--}}
 
-                        </h2>
-                        <p class="text-center"> <button type="button" class="btn btn-default" style="color:white;"
-                                data-dismiss="modal">En</button>
-                        </p>
-                    </div>
-                    <div class="column">
-                        <h2> <img src="{{ asset('images/arabic.jpg') }}" style="width:150px;">
-                        </h2>
-                        <p class="text-center"> <button type="button" class="btn btn-default" style="color:white;"
-                                data-dismiss="modal">AR</button>
-
-
-                        </p>
-                    </div>
+{{--                        </h2>--}}
+{{--                        <p class="text-center"> <button type="button" class="btn btn-default" style="color:white;"--}}
+{{--                                data-dismiss="modal">En</button>--}}
+{{--                        </p>--}}
+{{--                    </div>--}}
+{{--                    <div class="column">--}}
+{{--                        <h2> <img src="{{ asset('images/arabic.jpg') }}" alt="موقع سوق الديرة تغيير اللغة" style="width:150px;">--}}
+{{--                        </h2>--}}
+{{--                        <p class="text-center"> <button type="button" class="btn btn-default" style="color:white;"--}}
+{{--                                data-dismiss="modal">AR</button>--}}
 
 
+{{--                        </p>--}}
+{{--                    </div>--}}
 
 
 
-                </div>
-                <div class="modal-footer">
 
-                    <button type="button" class="btn btn-default mx-auto" style="color:white;" data-dismiss="modal">Go
-                        to Marketing</button>
-                </div>
-            </div>
 
-        </div>
-    </div>
+{{--                </div>--}}
+{{--                <div class="modal-footer">--}}
 
-    <!--- End --->
+{{--                    <button type="button" class="btn btn-default mx-auto" style="color:white;" data-dismiss="modal">Go--}}
+{{--                        to Marketing</button>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
-</div>
-<!-- Wrapper / End -->
+{{--        </div>--}}
+{{--    </div>--}}
+
+{{--    <!--- End --->--}}
+
+{{--</div>--}}
+{{--<!-- Wrapper / End -->--}}
 
 <!--register form -->
 <div class="login-and-register-form modal">
@@ -684,9 +685,28 @@
         $("#myModal2").modal('show');
     });
 </script>
+@hasSection('schema')
+<script type="application/ld+json">
+    @php echo '['.preg_replace('/##parent-placeholder-([^\#])*##/', '', trim($__env->getSection('schema', null) , ',')).']' .PHP_EOL; @endphp
+</script>
+@endif
+@hasSection('schema2')
+<script type="application/ld+json">
+    @yield('schema2')
+</script>
+@endif
 <!-- MAIN JS -->
 @stack('js')
 <script src="{{ asset('js/script.js') }}"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QDD5K0BPGB"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-QDD5K0BPGB');
+</script>
 </body>
 
 </html>
