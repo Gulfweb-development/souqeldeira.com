@@ -130,6 +130,8 @@ return [
     'title_bellow_search' => 'DEIRA MARKET , Real Estate Ads in kuwait',
     'currency' => 'KD',
     'area' => 'Area',
+    'keywords_ar' => 'seo keywords (AR)',
+    'keywords_en' => 'seo keywords (EN)',
     'rooms' => 'Rooms',
     'baths' => 'Baths',
     'size_meter' => 'sq ft',

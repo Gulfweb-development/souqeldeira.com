@@ -19,6 +19,10 @@ class CreateSettingsTable extends Migration
             $table->string('title_en');
             $table->text('description_ar');
             $table->text('description_en');
+            $table->text('keywords_ar');
+            $table->text('keywords_en');
+            $table->text('home_details_ar');
+            $table->text('home_details_en');
             // $table->boolean('is_payment_available')->default(0)->comment('Payment Available in website ');
             // $table->boolean('publish_all_to_social_media')->default(1)->comment('Publish All Ads OR only featured After payment');
             $table->string('visits')->default(0);

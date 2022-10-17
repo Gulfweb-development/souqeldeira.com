@@ -141,6 +141,8 @@ return [
     'for_rent_title' => 'للايجار عقارات، شقق، فلل وادوار ومنازل في الكويت',
     'title_bellow_search' => 'سوق الديرة ، عقارات في الكويت',
     'car_marketing' => 'سوق السيارات',
+    'keywords_ar' => 'seo keywords (AR)',
+    'keywords_en' => 'seo keywords (EN)',
     'sign_in' => 'دخول',
     'english' => 'الانجليزية',
     'arabic' => 'عربى',

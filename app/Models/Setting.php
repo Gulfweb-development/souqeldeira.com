@@ -16,6 +16,8 @@ class Setting extends Model
         'description_en',
         'home_details_ar',
         'home_details_en',
+        'keywords_ar',
+        'keywords_en',
         // 'is_payment_available',
         // 'publish_all_to_social_media',
         'visits',

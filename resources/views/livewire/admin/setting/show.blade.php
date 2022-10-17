@@ -91,7 +91,14 @@
                                 {{ $num++ }}
                             </td>
                             <td>@lang('app.home') @lang('app.description')</td>
-                            <td>{{ $setting->translate('home_details') }}</td>
+                            <td>{!! $setting->translate('home_details') !!}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                {{ $num++ }}
+                            </td>
+                            <td>@lang('app.keywords_'.app()->getLocale())</td>
+                            <td>{{ $setting->translate('keywords') }}</td>
                         </tr>
 
                         <tr>
