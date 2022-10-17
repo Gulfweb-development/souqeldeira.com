@@ -1,12 +1,13 @@
 <div>
     <x-slot name="meta_title">{{ $ads_title }}</x-slot>
-    <x-slot name="meta_descrption">@lang('app.ads')</x-slot>
+    <x-slot name="meta_descrption">{{ \App\Http\Controllers\Frontend\FrontendLangController::setting()->translate('description') }}</x-slot>
+    <x-slot name="meta_keywords">{{ \App\Http\Controllers\Frontend\FrontendLangController::keyWords(true) }}</x-slot>
     <x-slot name="og_title">{{ $ads_title }}</x-slot>
-    <x-slot name="og_description">@lang('app.ads')</x-slot>
+    <x-slot name="og_description">{{ \App\Http\Controllers\Frontend\FrontendLangController::setting()->translate('description') }}</x-slot>
     <x-slot name="og_url">{{ Request::url() }}</x-slot>
     <x-slot name="og_image">{{ asset('images/logo-red.svg') }}</x-slot>
     <x-slot name="twitter_title">{{ $ads_title }}</x-slot>
-    <x-slot name="twitter_description">@lang('app.ads')</x-slot>
+    <x-slot name="twitter_description">{{ \App\Http\Controllers\Frontend\FrontendLangController::setting()->translate('description') }}</x-slot>
     <x-slot name="twitter_image">{{ asset('images/logo-red.svg') }}</x-slot>
     <x-slot name="twitter_card">{{ $ads_title }}</x-slot>
     <!-- START SECTION HEADINGS -->
@@ -14,7 +15,7 @@
         <div class="text-heading text-center">
             <div class="container">
                 <h1>{{ $ads_title }}</h1>
-                <h2><a href="{{ url('/') }}">@lang('app.home') </a> &nbsp;/&nbsp; @lang('app.ads')</h2>
+                <h2><a href="{{ url('/') }}">@lang('app.home') </a> &nbsp;/&nbsp; {{ $ads_title }}</h2>
             </div>
         </div>
     </section>
@@ -31,7 +32,7 @@
                                     <span>@lang('app.list')</span>
                                 </p>
                             </div>
-                            <h3>@lang('app.ads')</h3>
+                            <h3>{{ $ads_title }}</h3>
                         </div>
                     </div>
                 </div>

@@ -29,10 +29,11 @@ class AdsSearch extends Component
     public $price_from;
     public $price_to;
 
-    public function mount()
+    public function mount($type = null)
     {
         $this->governorates = Governorate::select('id', toLocale('name'))->get();
         $this->buildingTypes = BuildingType::select('id', toLocale('name'))->get();
+        $this->type = in_array(strtoupper($type) , ['EXCHANGE' , 'SALE','RENT'] ) ?  strtoupper($type) : null;
     }
 
     public function updatedGovernorateId($value)
@@ -83,6 +84,8 @@ class AdsSearch extends Component
     public function render()
     {
         $ads = Ad::query();
+        if ( $this->type != null )
+            $ads = $ads->where('type' , $this->type);
         if (Session::has('ads')) {
             $ads = Session::get('ads');
         } else {
