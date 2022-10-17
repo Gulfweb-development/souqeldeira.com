@@ -41,13 +41,14 @@ class HomeSearch extends Component
         session()->flash('ads', $ads);
         $regions = Region::select(toLocale('name'))->find($this->region_id);
         $buildingTypes = BuildingType::select(toLocale('name'))->find($this->building_type_id);
-        if ( $regions !== null or $buildingTypes !== null ){
-            $name = $buildingTypes ? $buildingTypes['name_'.app()->getLocale()].' ' : '';
+        if ( $regions !== null or $buildingTypes !== null or $this->type != null ){
+            $name = $this->type ? trans('app.'.strtolower($this->type)).' ' : '';
+            $name .= $buildingTypes ? $buildingTypes['name_'.app()->getLocale()].' ' : '';
             $name .= $regions ? trans('app.in').' '.$regions['name_'.app()->getLocale()] : '';
         } else
             $name = trans('app.ads');
 
-        session()->flash('ads_title', $name);
+        session()->flash('ads_title', trim($name));
         return redirect()->route('ads.search');
     }
 
