@@ -101,6 +101,8 @@ return [
     'is_featured' => 'هل مميز',
     'code' => 'الكود',
     'archived_at' => 'تاريخ الارشيف',
+    'archived_notify_title' => 'أعلن في أرشفة :day يوم.',
+    'archived_notify_description' => ':advertise مؤرشفة في :day.',
     'settings' => 'الاعدادات',
     'setting' => 'الاعداد',
     'description_ar' => 'الوصف ( عربى )',

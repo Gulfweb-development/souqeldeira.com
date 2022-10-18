@@ -98,6 +98,8 @@ return [
     'is_featured' => 'Is Featured',
     'code' => 'Code',
     'archived_at' => 'Archived At',
+    'archived_notify_title' => 'Advertise Archived At :day day.',
+    'archived_notify_description' => ':advertise Archived At :day.',
     'settings' => 'Settings',
     'setting' => 'Setting',
     'description_ar' => 'Description ( AR )',
