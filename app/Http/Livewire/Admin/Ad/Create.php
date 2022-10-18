@@ -70,7 +70,7 @@ class Create extends Component
             'image' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
         ])->validate();
         $this->state['code'] = Str::random(6);
-        $this->state['archived_at'] = Carbon::now('UTC')->addDays(30)->format('Y-m-d H:i:s');
+        $this->state['archived_at'] = Carbon::now('UTC')->addDays(config('app.ad_expire_day' , 15))->format('Y-m-d H:i:s');
         $ad = Ad::create($this->state);
         if (toExists('image', $this->state)) {
             $ad->uploadFile($this->state['image']);

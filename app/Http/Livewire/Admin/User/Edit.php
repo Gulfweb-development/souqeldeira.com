@@ -37,12 +37,12 @@ class Edit extends Component
             'is_approved' => 'nullable|boolean',
             'description_ar' => 'required|string|min:20|max:300',
             'description_en' => 'required|string|min:20|max:300',
-            'field' => 'required|in:ALL,RENT,SALE',
+            'field' => 'required|in:ALL,RENT,SALE,EXCHANGE',
         ])->validate();
         $this->validate([
             'governorate_ids' => 'required|array',
         ]);
-        
+
         unset($this->state['email']);
         unset($this->state['phone']);
           unset($this->state['activated_code']);

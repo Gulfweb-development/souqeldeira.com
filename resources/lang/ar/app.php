@@ -118,6 +118,7 @@ return [
     'types' => 'الانواع',
     'sale' => 'للبيع',
     'rent' => 'للايجار',
+    'exchange' => 'البدل',
     'clients' => 'العملاء',
     'client' => 'العميل',
     'choose_region' => 'اختر منطقة',

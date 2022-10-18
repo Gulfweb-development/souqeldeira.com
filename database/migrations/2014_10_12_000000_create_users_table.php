@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->boolean('is_approved')->default(1);
             $table->boolean('is_featured')->default(0);
             $table->string('type')->default('USER')->comment('USER | COMPANY');
-            $table->string('field')->default('SALE')->comment('RENT | ALL');
+            $table->string('field')->default('SALE')->comment('RENT | ALL | EXCHANGE');
             $table->float('activated_code')->nullable();
             $table->float('adv_nurmal_count')->default(0);
             $table->float('adv_star_count')->default(0);

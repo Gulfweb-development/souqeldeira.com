@@ -19,7 +19,7 @@ class CreateAdsTable extends Migration
             $table->foreignId('governorate_id')->constrained()->onDelete('cascade');
             $table->foreignId('region_id')->constrained()->onDelete('cascade');
             $table->foreignId('building_type_id')->constrained()->onDelete('cascade');
-            $table->string('type')->comment('SALE  |  RENT');
+            $table->string('type')->comment('SALE  |  RENT | EXCHANGE');
             $table->string('title')->nullable(); // COMPINE TITLE FROM TYPE - GOVERNATE - REGIONS - Building Type NO title inputs
             $table->longText('text')->nullable();
             $table->string('price')->nullable();

@@ -66,7 +66,7 @@ class Create extends Component
             'region_id' => 'required|exists:regions,id',
             'governorate_id' => 'required|exists:governorates,id',
             'building_type_id' => 'required|exists:building_types,id',
-            'type' => 'required|in:SALE,RENT',
+            'type' => 'required|in:SALE,RENT,EXCHANGE',
             'text' => 'required|string',
             'price' => 'nullable|numeric',
             'phone' => 'required|string|regex:' . phoneNumberFormat(),
@@ -81,7 +81,7 @@ class Create extends Component
         $toGovId = Governorate::select('id', toLocale('name'))->where('id', $this->governorate_id)->firstOrFail();
         $toRegId = Region::select('id', toLocale('name'))->where('id', $this->region_id)->firstOrFail();
         $toBuidingTypeId = buildingType::select('id', toLocale('name'))->where('id', $this->building_type_id)->firstOrFail();
-        $toType = $this->type == 'SALE' ? __('app.sale') : __('app.rent');
+        $toType = $this->type == 'SALE' ? __('app.sale') : ( $this->type == 'EXCHANGE' ? __('app.exchange') : __('app.rent'));
         // dd($this->text,'kw_phone');
         $ad = Ad::create([
             'governorate_id' => $this->governorate_id,
@@ -95,7 +95,7 @@ class Create extends Component
             'user_id' => user()->id,
             'is_approved' => 1,
             'code' => Str::random(6),
-            'archived_at' => Carbon::now('UTC')->addDays(30)->format('Y-m-d H:i:s'),
+            'archived_at' => Carbon::now('UTC')->addDays(config('app.ad_expire_day' , 15))->format('Y-m-d H:i:s'),
         ]);
 
         // RESIZE IMAGE TO PLACEC IT IN IMAGE
@@ -195,7 +195,7 @@ class Create extends Component
         $this->reset();
         return redirect()->route('profile.ad.index');
     }
-    
+
     public function render()
     {
         $check = Subscriptions::where('status',1)->get()->count();

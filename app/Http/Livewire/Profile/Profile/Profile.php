@@ -42,7 +42,7 @@ class Profile extends Component
             'phone' => 'required|unique:users,phone,'.user()->id.'|regex:' . phoneNumberFormat(),
             'description' => 'required|string',
             // 'description_ar' => 'required|string',
-            'field' => 'required|in:ALL,RENT,SALE',
+            'field' => 'required|in:ALL,RENT,SALE,EXCHANGE',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
         ]);
         user()->update([

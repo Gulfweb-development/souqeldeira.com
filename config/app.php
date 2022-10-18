@@ -2,6 +2,9 @@
 
 return [
 
+    'ad_expire_day' => 15,
+    'ad_expire_day_notify' => 3,
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

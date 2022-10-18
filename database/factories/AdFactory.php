@@ -43,7 +43,7 @@ class AdFactory extends Factory
             'views' => rand(1000,100000),
             'phone' => $this->faker->phoneNumber,
             'archived_at' => Carbon::now()->addDay(rand(1,30))->format('Y-m-d H:i:s'),
-            'type' => $this->faker->randomElement(['SALE', 'RENT']),
+            'type' => $this->faker->randomElement(['SALE', 'RENT' , 'EXCHANGE']),
             'is_featured' => rand(0,1),
             'is_approved' => 1,
         ];

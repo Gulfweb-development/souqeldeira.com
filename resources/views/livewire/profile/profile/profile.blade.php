@@ -21,7 +21,7 @@
                         class="font-weight-bold">@lang('app.type') :</span> {{ user()->type }}</li>
                 <li><span class="la la-map-marker"><i class="fa fa-map-marker"></i></span><span
                         class="font-weight-bold">@lang('app.field') :</span> {{ user()->field }}</li>
-                        
+
                 <li>
                     <span class="la la-map-marker"><i class="fa fa-map-marker"></i></span>
                     <span class="font-weight-bold">@lang('app.adv_nurmal_count') :</span> {{ user()->adv_nurmal_count }}
@@ -30,9 +30,9 @@
                     <span class="la la-map-marker"><i class="fa fa-map-marker"></i></span>
                     <span class="font-weight-bold">@lang('app.adv_star_count') :</span> {{ user()->adv_star_count }}
                 </li>
-                        
-                        
-                        
+
+
+
                 <li><span class="la la-map-marker"><i class="fa fa-map-marker"></i></span><span
                         class="font-weight-bold">@lang('app.about') :</span> {{ user()->description }}
                 </li>
@@ -54,6 +54,7 @@
                     <option value="ALL">@lang('app.all')</option>
                     <option value="RENT">@lang('app.rent')</option>
                     <option value="SALE">@lang('app.sale')</option>
+                    <option value="EXCHANGE">@lang('app.exchange')</option>
                 </x-frontend.select>
                 <label for="exampleFormControlSelect1">
                     @lang('app.governorates')

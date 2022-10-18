@@ -115,6 +115,7 @@ return [
     'types' => 'Types',
     'sale' => 'Sale',
     'rent' => 'Rent',
+    'exchange' => 'Exchange',
     'clients' => 'clients',
     'client' => 'client',
     'choose_region' => 'Choose Region',

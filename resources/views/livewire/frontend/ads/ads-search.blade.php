@@ -106,6 +106,7 @@
                                                 <option value="">@lang('app.type')</option>
                                                 <option value="SALE">@lang('app.sale')</option>
                                                 <option value="RENT">@lang('app.rent')</option>
+                                                <option value="EXCHANGE">@lang('app.exchange')</option>
                                             </select>
                                         </div>
                                     </div>
@@ -474,7 +475,7 @@
                                         <div class="homes-tag button alt featured">
                                             {{ $ad->buildingType->translate('name') }}</div>
                                         <div class="homes-tag button alt sale">
-                                            {{ $ad->type == 'RENT' ? __('app.rent') : __('app.sale') }}</div>
+                                            {{ $ad->type == 'RENT' ? __('app.rent') : ( $ad->type == "EXCHANGE" ? __('app.exchange') : __('app.sale') ) }}</div>
                                         <div class="homes-price">@lang('app.currency') {{ $ad->price }}</div>
                                         <img src="{{ toAdDefaultImage($ad->getFile()) }}"
                                             class="img-responsive" alt="{{ $ad->title }}">

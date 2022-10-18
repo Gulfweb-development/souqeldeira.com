@@ -35,7 +35,7 @@ class UserFactory extends Factory
             // 'description_ar' => 'وصف الاعلان وصف الاعلان وصف الاعلان وصف الاعلان  رقم',
             'description' => 'user Description user Description user Description user Description  Number ',
             'type' => $this->faker->randomElement(['USER','COMPANY']),
-            'field' => $this->faker->randomElement(['SALE','RENT','ALL']),
+            'field' => $this->faker->randomElement(['SALE','RENT','ALL','EXCHANGE']),
         ];
     }
 
