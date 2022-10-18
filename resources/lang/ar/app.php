@@ -224,7 +224,7 @@ return [
     'bathrooms' => 'الحمامت',
     'from_the_same_city' => 'من نفس المدينة',
     'whatsapp' => 'واتس',
-    'agencies' => 'مكاتب العقارية',
+    'agencies' => 'المكاتب العقارية',
     'featured_companies' => 'الشركات المميزة',
     'recent_companies' => 'احدث الشركات',
     'recent_blogs' => 'احدث التدوينات',
