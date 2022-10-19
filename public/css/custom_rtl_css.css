@@ -1,8 +1,17 @@
 html{
     direction:rtl;
+    text-align: right !important;
     font-family:"Droid Arabic Kufi", "Droid Sans", sans-serif;
     font-size:14px;
 }
+
+body{
+    direction:rtl;
+    text-align: right !important;
+    font-family:"Droid Arabic Kufi", "Droid Sans", sans-serif;
+    font-size:14px;
+}
+.inner-pages .blog .homes-content .homes-list li { float:right !important;}
 /*
 /*
 */

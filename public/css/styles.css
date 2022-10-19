@@ -16616,7 +16616,8 @@ ul.the-agents-details li a {
 }
 
 section.single-proper.details {
-  padding: 6rem 0 !important;
+  /*padding: 6rem 0 !important;*/
+  padding: 15px 0 !important;
 }
 
 .agents.det .portfolio {
