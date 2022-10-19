@@ -82,7 +82,7 @@ return [
     'value' => 'القيمة',
     'company' => 'الشركة',
     'companies' => 'الشركات',
-    'type' => 'بيع او إيجار',
+    'type' => 'نوع العقار',
     'agency' => 'الوكالة',
     'agencies' => 'الوكالات',
     'choose_company' => 'اختر شركة',

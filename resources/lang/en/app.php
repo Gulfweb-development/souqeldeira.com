@@ -79,7 +79,7 @@ return [
     'value' => 'Value',
     'company' => 'Company',
     'companies' => 'Companies',
-    'type' => 'Type',
+    'type' => 'Select Type',
     'agency' => 'Agency',
     'agencies' => 'Agencies',
     'choose_company' => 'Choose Company',
