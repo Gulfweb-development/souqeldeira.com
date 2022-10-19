@@ -7,21 +7,35 @@
         <div class="sidebar-widget author-widget2">
             <div class="agent-contact-form-sidebar">
                 <label for="" class="d-flex">@lang('app.governorates')</label>
-                <select wire:model="governorate_id" class="w-100 form-control mb-3 border-1 border-secondary new-select">
-                    <option value="">@lang('app.choose')</option>
-                    @forelse ($governorates as $governorate)
-                        <option value="{{ $governorate->id }}">{{ $governorate->translate('name') }}</option>
-                    @empty
-                        <option value="">@lang('app.no_data')</option>
-                    @endforelse
-                </select>
-                @error('governorate_id')
-                    <p class="text-danger text-sm">{{ $message }}</p>
-                @enderror
+{{--                <select wire:model="governorate_id" class="w-100 form-control mb-3 border-1 border-secondary new-select">--}}
+{{--                    <option value="">@lang('app.choose')</option>--}}
+{{--                    @forelse ($governorates as $governorate)--}}
+{{--                        <option value="{{ $governorate->id }}">{{ $governorate->translate('name') }}</option>--}}
+{{--                    @empty--}}
+{{--                        <option value="">@lang('app.no_data')</option>--}}
+{{--                    @endforelse--}}
+{{--                </select>--}}
+{{--                @error('governorate_id')--}}
+{{--                    <p class="text-danger text-sm">{{ $message }}</p>--}}
+{{--                @enderror--}}
+{{--                <x-frontend.select name="region_id" label="{{ __('app.regions') }}">--}}
+{{--                    <option value="">@lang('app.choose')</option>--}}
+{{--                    @forelse ($regions as $region)--}}
+{{--                        <option value="{{ $region->id }}">{{ $region->translate('name') }}</option>--}}
+{{--                    @empty--}}
+{{--                        <option value="">@lang('app.no_data')</option>--}}
+{{--                    @endforelse--}}
+{{--                </x-frontend.select>--}}
                 <x-frontend.select name="region_id" label="{{ __('app.regions') }}">
                     <option value="">@lang('app.choose')</option>
-                    @forelse ($regions as $region)
-                        <option value="{{ $region->id }}">{{ $region->translate('name') }}</option>
+                    @forelse ($governorates as $governorate)
+                        <optgroup label="{{ $governorate->translate('name') }}">
+                            @forelse ($regions as $region)
+                                <option value="{{ $region->id }}">{{ $region->translate('name') }}</option>
+                            @empty
+                                <option value="">@lang('app.no_data')</option>
+                            @endforelse
+                        </optgroup>
                     @empty
                         <option value="">@lang('app.no_data')</option>
                     @endforelse

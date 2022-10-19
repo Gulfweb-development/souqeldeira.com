@@ -64,7 +64,7 @@ class Create extends Component
         // app()->setLocale('en');
         $validatedData = $this->validate([
             'region_id' => 'required|exists:regions,id',
-            'governorate_id' => 'required|exists:governorates,id',
+            //'governorate_id' => 'required|exists:governorates,id',
             'building_type_id' => 'required|exists:building_types,id',
             'type' => 'required|in:SALE,RENT,EXCHANGE',
             'text' => 'required|string',
@@ -78,8 +78,8 @@ class Create extends Component
             return session()->flash('success', __('app.data_created'));
         }
         //  TO PARSE COLLECTED DATA TO TITLE
-        $toGovId = Governorate::select('id', toLocale('name'))->where('id', $this->governorate_id)->firstOrFail();
-        $toRegId = Region::select('id', toLocale('name'))->where('id', $this->region_id)->firstOrFail();
+        $toRegId = Region::select('id', 'governorate_id' , toLocale('name'))->where('id', $this->region_id)->firstOrFail();
+        $this->governorate_id = $toGovId = Governorate::select('id', toLocale('name'))->where('id', $toRegId->governorate_id )->firstOrFail();
         $toBuidingTypeId = buildingType::select('id', toLocale('name'))->where('id', $this->building_type_id)->firstOrFail();
         $toType = $this->type == 'SALE' ? __('app.sale') : ( $this->type == 'EXCHANGE' ? __('app.exchange') : __('app.rent'));
         // dd($this->text,'kw_phone');

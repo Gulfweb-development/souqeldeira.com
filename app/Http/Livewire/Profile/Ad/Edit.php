@@ -54,17 +54,22 @@ class Edit extends Component
 
         $validatedData = $this->validate([
             'region_id' => 'required|exists:regions,id',
-            'governorate_id' => 'required|exists:governorates,id',
+            //'governorate_id' => 'required|exists:governorates,id',
             'building_type_id' => 'required|exists:building_types,id',
             'text' => 'required|string',
             'price' => 'nullable|numeric',
             'phone' => 'required|string|regex:' . phoneNumberFormat(),
             'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
         ]);
+        $toRegId = Region::select('id', 'governorate_id' , toLocale('name'))->where('id', $this->region_id)->firstOrFail();
+        $this->governorate_id = $toGovId = Governorate::select('id', toLocale('name'))->where('id', $toRegId->governorate_id )->firstOrFail();
+        $toBuidingTypeId = buildingType::select('id', toLocale('name'))->where('id', $this->building_type_id)->firstOrFail();
+        $toType = $this->type == 'SALE' ? __('app.sale') : ( $this->type == 'EXCHANGE' ? __('app.exchange') : __('app.rent'));
         $this->ad->update([
             'governorate_id' => $this->governorate_id,
             'region_id' => $this->region_id,
             'building_type_id' => $this->building_type_id,
+            'title' => Ad::toTitle($toType, $toGovId->translate('name'), $toRegId->translate('name'), $toBuidingTypeId->translate('name')),
             'type' => $this->type,
             'phone' => $this->phone,
             'price' => $this->price,

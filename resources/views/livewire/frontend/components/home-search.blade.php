@@ -12,7 +12,7 @@
                                 <ul class="nav nav-tabs rld-banner-tab d-flex justify-content-around">
                                     <li class="nav-item">
                                         <a class="nav-link active" data-toggle="tab"
-                                            href="#tabs_1">@lang('app.search')</a>
+                                           href="#tabs_1">@lang('app.search')</a>
                                     </li>
                                 </ul>
                             </div>
@@ -24,46 +24,68 @@
                                         <div class="rld-main-search">
                                             <div class="row d-flex justify-content-center">
 
+{{--                                                <div class="col-xl-2 col-lg-2 col-md-4 pl-0">--}}
+{{--                                                    <div class="rld-single-select ml-22">--}}
+{{--                                                        <select id="governorate_id"--}}
+{{--                                                            class="select single-select mr-0 governorate_id"--}}
+{{--                                                            name="governorate_id"--}}
+{{--                                                            onchange="return onGovernorateChange(event);">--}}
+{{--                                                            <option value="">@lang('app.governorates')</option>--}}
+{{--                                                            @forelse ($governorates as $governorate)--}}
+{{--                                                                <option value="{{ $governorate->id }}">--}}
+{{--                                                                    {{ $governorate->translate('name') }}</option>--}}
+{{--                                                            @empty--}}
+{{--                                                                <option value="">@lang('app.no_data')</option>--}}
+{{--                                                            @endforelse--}}
+{{--                                                        </select>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+
+{{--                                                <div class="col-xl-2 col-lg-2 col-md-4 pl-0">--}}
+{{--                                                    <div class="rld-single-select ml-22">--}}
+{{--                                                        <select class="select single-select mr-0 region_id"--}}
+{{--                                                            id="region_id" onchange="return onRegionChange(event);">--}}
+{{--                                                            <option value="">@lang('app.regions')</option>--}}
+{{--                                                            @forelse ($regions as $region)--}}
+{{--                                                                <option value="{{ $region->id }}">--}}
+{{--                                                                    {{ $region->translate('name') }}</option>--}}
+{{--                                                            @empty--}}
+{{--                                                                <option value="">@lang('app.no_data')</option>--}}
+{{--                                                            @endforelse--}}
+{{--                                                        </select>--}}
+
+
+
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+
                                                 <div class="col-xl-2 col-lg-2 col-md-4 pl-0">
                                                     <div class="rld-single-select ml-22">
-                                                        <select id="governorate_id"
-                                                            class="select single-select mr-0 governorate_id"
-                                                            name="governorate_id"
-                                                            onchange="return onGovernorateChange(event);">
+                                                        <select id="region_id"
+                                                                class="select single-select mr-0 region_id"
+                                                                name="region_id" onchange="return onRegionChange(event);">
                                                             <option value="">@lang('app.governorates')</option>
                                                             @forelse ($governorates as $governorate)
-                                                                <option value="{{ $governorate->id }}">
-                                                                    {{ $governorate->translate('name') }}</option>
+                                                                <optgroup label="{{ $governorate->translate('name') }}">
+                                                                    @forelse ($governorate->regions as $region)
+                                                                        <option value="{{ $region->id }}">
+                                                                            {{ $region->translate('name') }}</option>
+                                                                    @empty
+                                                                        <option value="">@lang('app.no_data')</option>
+                                                                    @endforelse
+                                                                </optgroup>
                                                             @empty
                                                                 <option value="">@lang('app.no_data')</option>
                                                             @endforelse
                                                         </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xl-2 col-lg-2 col-md-4 pl-0">
-                                                    <div class="rld-single-select ml-22">
-                                                        <select class="select single-select mr-0 region_id"
-                                                            id="region_id" onchange="return onRegionChange(event);">
-                                                            <option value="">@lang('app.regions')</option>
-                                                            @forelse ($regions as $region)
-                                                                <option value="{{ $region->id }}">
-                                                                    {{ $region->translate('name') }}</option>
-                                                            @empty
-                                                                <option value="">@lang('app.no_data')</option>
-                                                            @endforelse
-                                                        </select>
-
-
-
                                                     </div>
                                                 </div>
 
                                                 <div class="col-xl-2 col-lg-2 col-md-4 pl-0">
                                                     <div class="rld-single-select ml-22">
                                                         <select class="select single-select building_type_id"
-                                                            onchange=" onBuildingTypeChange(event);"
-                                                            wire:model="building_type_id">
+                                                                onchange=" onBuildingTypeChange(event);"
+                                                                wire:model="building_type_id">
                                                             <option value="" wire:model="building_type_id">
                                                                 @lang('app.building_type')</option>
                                                             @forelse ($buildingTypes as $buildingType)
@@ -79,7 +101,7 @@
                                                 <div class="col-xl-2 col-lg-2 col-md-4 pl-0">
                                                     <div class="rld-single-select ml-22">
                                                         <select class="select single-select type"
-                                                            onchange="onTypeChange(event);" wire:model="type">
+                                                                onchange="onTypeChange(event);" wire:model="type">
                                                             <option value="">@lang('app.type')</option>
                                                             <option value="SALE">@lang('app.sale')</option>
                                                             <option value="RENT">@lang('app.rent')</option>
@@ -95,7 +117,7 @@
                                                 </div>
                                                 <div class="col-xl-2 col-lg-2 col-md-4">
                                                     <a class="btn btn-yellow" href="#"
-                                                        wire:click.prevent="search">@lang('app.search_now')</a>
+                                                       wire:click.prevent="search">@lang('app.search_now')</a>
                                                 </div>
                                                 <div class="explore__form-checkbox-list full-filter">
                                                     <div class="row">
@@ -138,16 +160,16 @@
                                                         <div class="col-xl-6 col-lg-6 col-md-6 pl-0">
                                                             <div class="rld-single-select ml-22">
                                                                 <input type="price_from form-control" name="price_from"
-                                                                    onchange="onPriceFromChange(event);"
-                                                                    placeholder="@lang('app.price_from')">
+                                                                       onchange="onPriceFromChange(event);"
+                                                                       placeholder="@lang('app.price_from')">
                                                             </div>
                                                         </div>
 
                                                         <div class="col-xl-6 col-lg-6 col-md-6 pl-0">
                                                             <div class="rld-single-select ml-22">
                                                                 <input type="price_to form-control" name="price_to"
-                                                                     onchange="onPriceToChange(event);"
-                                                                    placeholder="@lang('app.price_to')">
+                                                                       onchange="onPriceToChange(event);"
+                                                                       placeholder="@lang('app.price_to')">
                                                             </div>
                                                         </div>
 
@@ -173,23 +195,23 @@
                                                         </div>
                                                         <div class="col-lg-3 col-md-6 col-sm-12 py-1 pr-30">
                                                             <!-- Checkboxes -->
-                                                            {{-- <div class="checkboxes one-in-row margin-bottom-10 ch-1">
-                                                                <input id="check-2" type="checkbox" name="check">
-                                                                <label for="check-2">AC</label>
-                                                                <input id="check-3" type="checkbox" name="check">
-                                                                <label for="check-3">Swimming Pool</label>
-                                                                <input id="check-4" type="checkbox" name="check">
-                                                                <label for="check-4">Central Heating</label>
-                                                                <input id="check-5" type="checkbox" name="check">
-                                                                <label for="check-5">Laundry Room</label>
-                                                                <input id="check-6" type="checkbox" name="check">
-                                                                <label for="check-6">Gym</label>
-                                                                <input id="check-7" type="checkbox" name="check">
-                                                                <label for="check-7">Alarm</label>
-                                                                <input id="check-8" type="checkbox" name="check">
-                                                                <label for="check-8">Wifi</label>
-                                                            </div> --}}
-                                                            <!-- Checkboxes / End -->
+                                                        {{-- <div class="checkboxes one-in-row margin-bottom-10 ch-1">
+                                                            <input id="check-2" type="checkbox" name="check">
+                                                            <label for="check-2">AC</label>
+                                                            <input id="check-3" type="checkbox" name="check">
+                                                            <label for="check-3">Swimming Pool</label>
+                                                            <input id="check-4" type="checkbox" name="check">
+                                                            <label for="check-4">Central Heating</label>
+                                                            <input id="check-5" type="checkbox" name="check">
+                                                            <label for="check-5">Laundry Room</label>
+                                                            <input id="check-6" type="checkbox" name="check">
+                                                            <label for="check-6">Gym</label>
+                                                            <input id="check-7" type="checkbox" name="check">
+                                                            <label for="check-7">Alarm</label>
+                                                            <input id="check-8" type="checkbox" name="check">
+                                                            <label for="check-8">Wifi</label>
+                                                        </div> --}}
+                                                        <!-- Checkboxes / End -->
                                                         </div>
                                                     </div>
                                                 </div>
@@ -332,7 +354,7 @@
                                                                 <div class="range-slider">
                                                                     <label>Area Size</label>
                                                                     <div id="area-range" data-min="0" data-max="1300"
-                                                                        data-unit="sq ft"></div>
+                                                                         data-unit="sq ft"></div>
                                                                     <div class="clearfix"></div>
                                                                 </div>
                                                                 <br>
@@ -340,7 +362,7 @@
                                                                 <div class="range-slider">
                                                                     <label>Price Range</label>
                                                                     <div id="price-range" data-min="0" data-max="600000"
-                                                                        data-unit="KD"></div>
+                                                                         data-unit="KD"></div>
                                                                     <div class="clearfix"></div>
                                                                 </div>
                                                             </div>
@@ -386,31 +408,31 @@
     @push('js')
         <script>
             function onGovernorateChange(e) {
-                @this.set('governorate_id', e.target.value);
+            @this.set('governorate_id', e.target.value);
             }
 
             function onRegionChange(e) {
-                @this.set('region_id', e.target.value);
+            @this.set('region_id', e.target.value);
             }
 
             function onBuildingTypeChange(e) {
-                @this.set('building_type_id', e.target.value);
+            @this.set('building_type_id', e.target.value);
             }
 
             function onTypeChange(e) {
-                @this.set('type', e.target.value);
+            @this.set('type', e.target.value);
             }
             function onRoomsChange(e) {
-                @this.set('rooms_count', e.target.value);
+            @this.set('rooms_count', e.target.value);
             }
             function onBathRoomChange(e) {
-                @this.set('bathrooms_count', e.target.value);
+            @this.set('bathrooms_count', e.target.value);
             }
             function onPriceFromChange(e) {
-                @this.set('price_from', e.target.value);
+            @this.set('price_from', e.target.value);
             }
             function onPriceToChange(e) {
-                @this.set('price_to', e.target.value);
+            @this.set('price_to', e.target.value);
             }
 
 
