@@ -529,7 +529,7 @@
                                     </li> --}}
                                 </ul>
                                 <div class="footer">
-                                    <a target="_blank" href="https://api.whatsapp.com/send?phone=+965{{ $ad->phone }}&text={{ route('ad.search', [toSlug($ad->title), $ad->id]) }}">
+                                    <a target="_blank" href="https://api.whatsapp.com/send?phone=+965{{ $ad->phone }}&text={{ __('app.whatsapp_text' , ['url' => route('ad.search', [toSlug($ad->title), $ad->id])]) }}">
                                         <i class="fab fa-whatsapp-square"></i> {{ $ad->user->name }}
                                     </a>
                                     {{-- <a target="_blank" href="http://api.whatsapp.com/send?phone={{ $ad->phone }}&text={{ route('ad.search', [toSlug($ad->title), $ad->id]) }}">

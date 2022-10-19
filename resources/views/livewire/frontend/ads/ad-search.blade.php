@@ -124,6 +124,11 @@
                                 <span class="det">{{ $ad->views }}</span>
                             </li>
 
+                            <li>
+                                <span class="font-weight-bold mr-1">@lang('app.created_at_ads'):</span>
+                                <span class="det" title="{{ $ad->created_at->format('Y/m/d H:i:s') }}">{{ $ad->created_at->diffForHumans() }}</span>
+                            </li>
+
                         </ul>
 
 
@@ -146,7 +151,7 @@
                                     <div class="sidebar-widget author-widget2">
                                         <div class="author-box clearfix">
                                             <a target="_blank"
-                                                href="https://api.whatsapp.com/send?phone=+965{{ $ad->phone }}&text={{ route('ad.search', [toSlug($ad->title), $ad->id]) }}"> <i
+                                                href="https://api.whatsapp.com/send?phone=+965{{ $ad->phone }}&text={{ __('app.whatsapp_text' , ['url' => route('ad.search', [toSlug($ad->title), $ad->id]) ] ) }}"> <i
                                                     class="fab fa-whatsapp-square"></i></a>
                                             <h4 class="author__title">{{ $ad->user->name }}</h4>
                                             <p class="author__meta">@lang('app.agent_of_property')</p>
@@ -371,7 +376,7 @@
                                         <div class="footer">
                                             <div class="footer">
                                                 <a target="_blank"
-                                                    href="http://api.whatsapp.com/send?phone=+965{{ $similarAd->phone }}&text={{ route('ad.search', [toSlug($similarAd->title), $similarAd->id]) }}">
+                                                    href="http://api.whatsapp.com/send?phone=+965{{ $similarAd->phone }}&text={{ __('app.whatsapp_text' , ['url' => route('ad.search', [toSlug($similarAd->title), $similarAd->id]) ] ) }}">
                                                     <i class="fab fa-whatsapp-square"></i>
                                                     {{ $similarAd->user->name }}
                                                 </a>
