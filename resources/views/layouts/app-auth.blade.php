@@ -21,9 +21,9 @@
     <!-- Scripts -->
     {{-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> --}}
     <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-
+    {{--  <script src="{{ asset('js/app.js') }}" defer></script> --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -45,107 +45,108 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
 
     @if (app()->isLocale('ar'))
-        <!-- Custom style for RTL -->
+    <!-- Custom style for RTL -->
         <link rel="stylesheet" href="{{ asset('css/rtl.css') }}">
         <link rel="stylesheet" href="{{ asset('css/custom_rtl_css.css') }}">
     @endif
 </head>
 
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm main-header-bg">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    @lang('app.back_to_website')
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+<div id="app">
+    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm main-header-bg">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url('/') }}">
+                @lang('app.back_to_website')
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Left Side Of Navbar -->
+                <ul class="navbar-nav mr-auto">
 
-                    </ul>
+                </ul>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav {{ chkLocale('mr-auto','ml-auto') }}">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">@lang('app.login')</a>
-                                </li>
-                            @endif
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav {{ chkLocale('mr-auto','ml-auto') }}">
+                    <!-- Authentication Links -->
+                    @guest
+                        @if (Route::has('login'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">@lang('app.login')</a>
+                            </li>
+                        @endif
 
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">@lang('app.register')</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">@lang('app.register')</a>
+                            </li>
+                        @endif
+                    @else
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }}
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                                     document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                        class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                      class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                    @endguest
+                </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
-    <script src="{{ asset('js/toastr.min.js') }}"></script>
-    <script>
-        // TOASTER START
-        var message;
-        toastr.options = {
-            "closeButton": true,
-            "debug": false,
-            "newestOnTop": false,
-            "progressBar": true,
-            "positionClass": "toast-top-center",
-            "preventDuplicates": false,
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        };
-        // SHOW IF SESSION WITH REDIRECT
-        @if (session()->has('success'))
-            message = "{{ session()->get('success') }}";
-            toastr.success(message)
-        @endif
-        // SHOW IF SESSION WITH REDIRECT
-        @if (session()->has('info'))
-            message = "{{ session()->get('info') }}";
-            toastr.info(message)
-        @endif
-        <!-- Google tag (gtag.js) -->
+    <main class="py-4">
+        @yield('content')
+    </main>
+</div>
+<script src="{{ asset('js/toastr.min.js') }}"></script>
+<script>
+    // TOASTER START
+    var message;
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-top-center",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    };
+    // SHOW IF SESSION WITH REDIRECT
+    @if (session()->has('success'))
+        message = "{{ session()->get('success') }}";
+    toastr.success(message)
+    @endif
+    // SHOW IF SESSION WITH REDIRECT
+    @if (session()->has('info'))
+        message = "{{ session()->get('info') }}";
+    toastr.info(message)
+    @endif
+    <!-- Google tag (gtag.js) -->
+</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-QDD5K0BPGB"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
@@ -154,7 +155,7 @@
 
     gtag('config', 'G-QDD5K0BPGB');
 </script>
-    </script>
+</script>
 </body>
 
 </html>

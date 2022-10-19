@@ -22,7 +22,7 @@
 
                             <div class="form-group row">
                                 <label for="type"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('app.account_type') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('app.account_type') }}</label>
 
                                 <div class="col-md-6">
                                     <select name="type" class="form-control @error('type') is-invalid @enderror">
@@ -31,7 +31,7 @@
                                     </select>
 
                                     @error('type')
-                                        <span class="invalid-feedback" role="alert">
+                                    <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
@@ -42,10 +42,10 @@
 
                                 <div class="col-md-6">
                                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                                        name="name" value="{{ old('name') }}" autofocus>
+                                           name="name" value="{{ old('name') }}" autofocus>
 
                                     @error('name')
-                                        <span class="invalid-feedback" role="alert">
+                                    <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
@@ -54,19 +54,19 @@
 
                             <div class="form-group row">
                                 <label for="emailOrPhone"
-                                    class="col-md-4 col-form-label text-md-right">@lang('Email Or Phone')</label>
+                                       class="col-md-4 col-form-label text-md-right">@lang('app.email') / @lang('app.phone')</label>
 
                                 <div class="col-md-6">
                                     <input id="emailOrPhone" type="text" class="form-control @error('phone') is-invalid @enderror  @error('email') is-invalid @enderror"
-                                        name="v" value="{{ old('v') }}">
+                                           name="v" value="{{ old('v') }}">
 
                                     @error('email')
-                                        <span class="invalid-feedback" role="alert">
+                                    <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                     @error('phone')
-                                        <span class="invalid-feedback" role="alert">
+                                    <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
@@ -74,35 +74,35 @@
                             </div>
 
                             <?php
-                                /*
-                            ?>
-                            <div class="form-group row">
-                                <label for="email" class="col-md-4 col-form-label text-md-right">@lang('app.phone')</label>
+                            /*
+                        ?>
+                        <div class="form-group row">
+                            <label for="email" class="col-md-4 col-form-label text-md-right">@lang('app.phone')</label>
 
-                                <div class="col-md-6">
-                                    <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror"
-                                        name="phone" value="{{ old('phone','+965') }}" placeholder="+965xxxxxxxx">
+                            <div class="col-md-6">
+                                <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror"
+                                    name="phone" value="{{ old('phone','+965') }}" placeholder="+965xxxxxxxx">
 
-                                    @error('phone')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
+                                @error('phone')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
-                            <?php
-                                */
+                        </div>
+                        <?php
+                            */
                             ?>
                             <div class="form-group row">
                                 <label for="password"
-                                    class="col-md-4 col-form-label text-md-right">@lang('app.password')</label>
+                                       class="col-md-4 col-form-label text-md-right">@lang('app.password')</label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password"
-                                        class="form-control @error('password') is-invalid @enderror" name="password">
+                                           class="form-control @error('password') is-invalid @enderror" name="password">
 
                                     @error('password')
-                                        <span class="invalid-feedback" role="alert">
+                                    <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
@@ -111,13 +111,13 @@
 
                             <div class="form-group row">
                                 <label for="password-confirm"
-                                    class="col-md-4 col-form-label text-md-right">@lang('app.confirm_password')</label>
+                                       class="col-md-4 col-form-label text-md-right">@lang('app.confirm_password')</label>
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control"
-                                        name="password_confirmation">
+                                           name="password_confirmation">
                                     @error('password_confirmation')
-                                        <span class="invalid-feedback" role="alert">
+                                    <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
@@ -131,23 +131,26 @@
                                     <input id="image" type="file" class="form-control" name="image">
                                 </div>
                                 @error('image')
-                                    <span class="invalid-feedback" role="alert">
+                                <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
-                            @if ( \App\Http\Controllers\Frontend\FrontendLangController::setting()['terms_condition'.app()->getLocale()] )
-                            <div class="form-group row">
-                                <div class="checkbox-group">
-                                    <input class="form-control @error('terms_condition') is-invalid @enderror" type="checkbox" id="terms_condition" value="accept" name="terms_condition">
-                                    <label for="terms_condition" data-toggle="modal" data-target="#myModal">&nbsp;{{ __('terms_condition') }}</label>
+                            @if ( \App\Http\Controllers\Frontend\FrontendLangController::setting()['terms_condition_'.app()->getLocale()] )
+                                <div class="form-group row">
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-6">
+                                        <div class="checkbox-group">
+                                            <input class="form-check-inline @error('terms_condition') is-invalid @enderror" required type="checkbox" id="terms_condition" value="accept" name="terms_condition">
+                                            <label class="form-check-label" for="terms_condition1" data-toggle="modal" data-target="#myModal" onclick="$('#myModal').modal('show');">&nbsp;{{ __('app.terms_condition') }}</label>
+                                        </div>
+                                    </div>
+                                    @error('terms_condition')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
-                                @error('terms_condition')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
                             @endif
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
@@ -155,7 +158,7 @@
                                     <button type="submit" class="btn btn-primary main-header-bg">
                                         @lang('app.register')
                                     </button>
-                                       <a class="btn btn-link" href="{{ route('login') }}">
+                                    <a class="btn btn-link" href="{{ route('login') }}">
                                         @lang('app.login')
                                     </a>
                                 </div>
@@ -166,24 +169,24 @@
             </div>
         </div>
     </div>
-    @if ( \App\Http\Controllers\Frontend\FrontendLangController::setting()['terms_condition'.app()->getLocale()] )
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">{{ __('app.terms_condition_title') }}</h4>
-                </div>
-                <div class="modal-body">
-                    {!! \App\Http\Controllers\Frontend\FrontendLangController::setting()['terms_condition'.app()->getLocale()] !!}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    @if ( \App\Http\Controllers\Frontend\FrontendLangController::setting()['terms_condition_'.app()->getLocale()] )
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">{{ __('app.terms_condition_title') }}</h4>
+                    </div>
+                    <div class="modal-body">
+                        {!! \App\Http\Controllers\Frontend\FrontendLangController::setting()['terms_condition_'.app()->getLocale()] !!}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     @endif
 @endsection

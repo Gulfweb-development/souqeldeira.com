@@ -60,7 +60,7 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:1024',
         ];
-        if ( \App\Http\Controllers\Frontend\FrontendLangController::setting()['terms_condition'.app()->getLocale()] )
+        if ( \App\Http\Controllers\Frontend\FrontendLangController::setting()['terms_condition_'.app()->getLocale()] )
             $m['terms_condition'] = 'required';
 
         if (!filter_var($data['v'], FILTER_VALIDATE_EMAIL)) {
