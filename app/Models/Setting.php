@@ -16,6 +16,8 @@ class Setting extends Model
         'description_en',
         'home_details_ar',
         'home_details_en',
+        'terms_condition_ar',
+        'terms_condition_en',
         'keywords_ar',
         'keywords_en',
         // 'is_payment_available',

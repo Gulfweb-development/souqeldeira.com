@@ -25,6 +25,8 @@ class Edit extends Component
             'title_en' => 'required|string|max:170',
             'description_ar' => 'required|string',
             'description_en' => 'required|string',
+            'terms_condition_ar' => 'required|string',
+            'terms_condition_en' => 'required|string',
             'home_details_ar' => 'string',
             'home_details_en' => 'string',
             'keywords_ar' => 'required|string',
@@ -33,8 +35,8 @@ class Edit extends Component
             'twitter' => 'required|string|max:170',
             'instagram' => 'required|string|max:170',
             'youtube' => 'required|string|max:170',
-            'publish_all_to_social_media' => 'required|boolean',
-            'is_payment_available' => 'required|boolean',
+//            'publish_all_to_social_media' => 'required|boolean',
+//            'is_payment_available' => 'required|boolean',
         ])->validate();
         $this->state['admin_id'] = admin()->id;
         $this->setting->update($this->state);

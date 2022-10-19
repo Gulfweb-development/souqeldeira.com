@@ -72,8 +72,8 @@
                                     @enderror
                                 </div>
                             </div>
-                            
-                            <?php 
+
+                            <?php
                                 /*
                             ?>
                             <div class="form-group row">
@@ -90,7 +90,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <?php 
+                            <?php
                                 */
                             ?>
                             <div class="form-group row">
@@ -136,7 +136,19 @@
                                     </span>
                                 @enderror
                             </div>
-
+                            @if ( \App\Http\Controllers\Frontend\FrontendLangController::setting()['terms_condition'.app()->getLocale()] )
+                            <div class="form-group row">
+                                <div class="checkbox-group">
+                                    <input class="form-control @error('terms_condition') is-invalid @enderror" type="checkbox" id="terms_condition" value="accept" name="terms_condition">
+                                    <label for="terms_condition" data-toggle="modal" data-target="#myModal">&nbsp;{{ __('terms_condition') }}</label>
+                                </div>
+                                @error('terms_condition')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            @endif
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <br>
@@ -154,4 +166,24 @@
             </div>
         </div>
     </div>
+    @if ( \App\Http\Controllers\Frontend\FrontendLangController::setting()['terms_condition'.app()->getLocale()] )
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">{{ __('app.terms_condition_title') }}</h4>
+                </div>
+                <div class="modal-body">
+                    {!! \App\Http\Controllers\Frontend\FrontendLangController::setting()['terms_condition'.app()->getLocale()] !!}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
 @endsection

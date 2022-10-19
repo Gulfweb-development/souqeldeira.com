@@ -15,12 +15,12 @@
                 <div class="col-md-6">
                     <x-admin.input name="state.title_en" label="{{ __('app.title_en') }}" />
                 </div>
-                <div class="col-md-6">
-                    <hr />
-                    <x-admin.checkbox name="state.publish_all_to_social_media"
-                        label="{{ __('app.publish_all_to_social_media') }}" />
-                    <hr />
-                </div>
+{{--                <div class="col-md-6">--}}
+{{--                    <hr />--}}
+{{--                    <x-admin.checkbox name="state.publish_all_to_social_media"--}}
+{{--                        label="{{ __('app.publish_all_to_social_media') }}" />--}}
+{{--                    <hr />--}}
+{{--                </div>--}}
 
                     <div class="col-md-6">
                     <x-admin.input name="state.facebook" label="{{ __('app.facebook') }}" />
@@ -35,23 +35,17 @@
                     <x-admin.input name="state.youtube" label="{{ __('app.youtube') }}" />
                 </div>
 
-                <div class="col-md-6">
-                    <hr />
-                    <x-admin.checkbox name="state.is_payment_available"
-                        label="{{ __('app.is_payment_available') }}" />
-                    <hr />
-                </div>
+{{--                <div class="col-md-6">--}}
+{{--                    <hr />--}}
+{{--                    <x-admin.checkbox name="state.is_payment_available"--}}
+{{--                        label="{{ __('app.is_payment_available') }}" />--}}
+{{--                    <hr />--}}
+{{--                </div>--}}
                 <div class="col-md-12">
                     <x-admin.textarea name="state.description_ar" label="{{ __('app.description_ar') }}" />
                 </div>
                 <div class="col-md-12">
                     <x-admin.textarea name="state.description_en" label="{{ __('app.description_en') }}" />
-                </div>
-                <div class="col-md-12">
-                    <x-admin.tinymce name="state.home_details_ar" label="{{ __('app.home') .' '.__('app.description_ar') }}" />
-                </div>
-                <div class="col-md-12">
-                    <x-admin.tinymce name="state.home_details_en" label="{{ __('app.home') .' '.__('app.description_en') }}" />
                 </div>
                 <div class="col-md-12">
                     <x-admin.input name="state.keywords_ar" label="{{ __('app.keywords_ar') }}" />
@@ -60,6 +54,19 @@
                     <x-admin.input name="state.keywords_en" label="{{ __('app.keywords_en') }}" />
                 </div>
 
+                <hr />
+                <div class="col-md-12">
+                    <x-admin.tinymce name="state.home_details_ar" label="{{ __('app.home') .' '.__('app.description_ar') }}" />
+                </div>
+                <div class="col-md-12">
+                    <x-admin.tinymce name="state.home_details_en" label="{{ __('app.home') .' '.__('app.description_en') }}" />
+                </div>
+                <div class="col-md-12">
+                    <x-admin.tinymce name="state.terms_condition_ar" label="{{ __('app.terms_condition_ar') }}" />
+                </div>
+                <div class="col-md-12">
+                    <x-admin.tinymce name="state.terms_condition_en" label="{{ __('app.terms_condition_en') }}" />
+                </div>
 
                 <hr />
                 <div class="col-md-12 mt-4 justify-content-center align-items-center d-flex border-1">

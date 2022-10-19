@@ -60,6 +60,9 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:1024',
         ];
+        if ( \App\Http\Controllers\Frontend\FrontendLangController::setting()['terms_condition'.app()->getLocale()] )
+            $m['terms_condition'] = 'required';
+
         if (!filter_var($data['v'], FILTER_VALIDATE_EMAIL)) {
           $m['phone'] = ['required', 'unique:users,phone'];
         //   $data['phone'] = $data['v'];
@@ -126,8 +129,8 @@ class RegisterController extends Controller
     {
         return Auth::guard('web');
     }
-    
-    
+
+
     // public function redirectPath()
     // {
     //     if (method_exists($this, 'redirectTo')) {
@@ -136,11 +139,11 @@ class RegisterController extends Controller
     //     if(\Auth::check()) {
     //         if(!is_null(\Auth::user()->phone)) {
     //             return property_exists($this, 'redirectTo') ? $this->redirectTo : '/auth/verified/mail';
-    //         } 
+    //         }
     //     } else {
     //         return property_exists($this, 'redirectTo') ? $this->redirectTo : '/';
     //     }
     // }
-    
-    
+
+
 }
