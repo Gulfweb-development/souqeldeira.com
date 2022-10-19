@@ -23139,4 +23139,18 @@ section.ui-element {
   }
 }
 
+.custom-tooltip .tooltiptext {
+    visibility: hidden;
+    background-color: black;
+    color: #fff;
+    border-radius: 6px;
+    padding: 5px;
+    position: fixed;
+    z-index: 1000;
+}
+
+.custom-tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
 /*# sourceMappingURL=styles.css.map */

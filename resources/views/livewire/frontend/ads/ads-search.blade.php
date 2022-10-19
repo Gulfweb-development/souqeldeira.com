@@ -466,7 +466,8 @@
             <div class="row">
                 @forelse ($ads as $ad)
                     <div class="item col-lg-4 col-md-6 col-xs-12 landscapes sale">
-                        <div class="project-single">
+                        <div class="project-single custom-tooltip" >
+                            <div class="tooltiptext">@lang('app.region'): {{ $ad->region->translate('name') }}<br>@lang('app.type'): {{ $ad->type }}<br>@lang('app.views'): {{ $ad->views }}<br>@lang('app.created_at_ads'): {{ $ad->created_at->diffForHumans() }}</div>
                             <div class="project-inner project-head">
                                 <div class="homes">
                                     <!-- homes img -->
@@ -567,6 +568,16 @@
     @endpush
      @push('js')
         <script>
+            var tooltips = document.querySelectorAll('.custom-tooltip .tooltiptext');
+
+            window.onmousemove = function (e) {
+                var x = (e.clientX + 6) + 'px',
+                    y = (e.clientY + 6) + 'px';
+                for (var i = 0; i < tooltips.length; i++) {
+                    tooltips[i].style.top = y;
+                    tooltips[i].style.left = x;
+                }
+            };
             function onGovernorateChange(e) {
                 @this.set('governorate_id', e.target.value);
             }
