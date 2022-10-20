@@ -436,8 +436,8 @@
                         </div>
                     </div>
                     <div
-                        class="cod-pad single detail-wrapper mr-2 mt-0 d-flex justify-content-md-end align-items-center">
-                        <div class="input-group border rounded input-group-lg w-auto mr-4">
+                        class="cod-pad detail-wrapper mr-2 mt-0 d-flex justify-content-md-end align-items-center">
+                        <div class="input-group border rounded input-group-lg w-auto @if( app()->getLocale() =="en") mr-4 @else ml-4 @endif">
                             <label
                                 class="input-group-text bg-transparent border-0 text-uppercase letter-spacing-093 pr-1 pl-3"
                                 for="inputGroupSelect01"><i
