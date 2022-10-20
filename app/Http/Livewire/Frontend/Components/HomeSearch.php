@@ -36,6 +36,7 @@ class HomeSearch extends Component
 
     public function search()
     {
+        $this->governorate_id = optional(Region::find($this->region_id))->governorate_id ;
         $ads = Ad::with('region', 'images')->frontSearch($this->governorate_id,$this->region_id,$this->building_type_id,$this->type,$this->price_from,$this->price_to)->paginate(12);
         // TO REDIRECT FILTERED DATA
         session()->flash('ads', $ads);

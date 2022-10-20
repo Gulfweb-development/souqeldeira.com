@@ -62,8 +62,8 @@
                                                 <div class="col-xl-2 col-lg-2 col-md-4 pl-0">
                                                     <div class="rld-single-select ml-22">
                                                         <select id="region_id"
-                                                                class="select single-select mr-0 region_id"
-                                                                name="region_id" onchange="return onRegionChange(event);">
+                                                            class="select single-select mr-0 region_id"
+                                                            name="region_id" onchange="return onRegionChange(event);">
                                                             <option value="">@lang('app.governorates')</option>
                                                             @forelse ($governorates as $governorate)
                                                                 <optgroup label="{{ $governorate->translate('name') }}">
