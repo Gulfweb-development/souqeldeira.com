@@ -77,10 +77,13 @@
                                         class="img-fluid img-1">
                                 </div>
                             @endif
-                            <div class="text-center">
-                                <h6>@lang('app.current')</h6>
+                            @if ($old_image)
+                            <div class="text-center currentImage">
+                                <h6>@lang('app.current') <button class="btn btn-danger" onclick="deleteImage()"><i class="far fa-trash-alt"></i></button></h6>
                                 <img src="{{ $old_image }}" width="200" height="200" class="img-fluid img-1">
                             </div>
+                                <input type="hidden" id="oldImage" wire:model="old_image">
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -112,10 +115,12 @@
                                         class="img-fluid img-1">
                                 </div>
                             @endif
-                            <div class="text-center">
-                                <h6>@lang('app.current')</h6>
+                            @if ($old_image)
+                            <div class="text-center currentImage">
+                                <h6>@lang('app.current') <button class="btn btn-danger" onclick="deleteImage()"><i class="far fa-trash-alt"></i></button></h6>
                                 <img src="{{ $old_image }}" width="200" height="200" class="img-fluid img-1">
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -149,6 +154,11 @@
                         }
                     }
                 };
+            }
+
+            function deleteImage(){
+                @this.set('old_image', null);
+                $(".currentImage").hide();
             }
         </script>
     @endpush

@@ -50,7 +50,7 @@
                                 {{ $num++ }}
                             </td>
                             <td>@lang('app.image')</td>
-                            <td><img src="{{ $ad->getFile() }}" alt="image" class="img-thumbnail" width="80"
+                            <td><img src="{{ toAdDefaultImage($ad->getFile()) }}" alt="image" class="img-thumbnail" width="80"
                                     height="80" /></td>
                         </tr>
 

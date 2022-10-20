@@ -74,7 +74,7 @@
                                         @forelse ($ads as $ad)
                                             <tr role="row" class="odd">
                                                 <td class="table-id">{{ $ad->id }}</td>
-                                                <td><img src="{{ $ad->getFile() }}" alt="image" class="img-thumbnail"
+                                                <td><img src="{{ toAdDefaultImage($ad->getFile()) }}" alt="image" class="img-thumbnail"
                                                         width="80" height="80" /></td>
                                                 <td>{{ $ad->title  }}</td>
                                                 <td>{{ number_format((float)$ad->price ?? '0.5', 2) }}</td>

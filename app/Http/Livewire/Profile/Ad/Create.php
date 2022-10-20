@@ -79,7 +79,8 @@ class Create extends Component
         }
         //  TO PARSE COLLECTED DATA TO TITLE
         $toRegId = Region::select('id', 'governorate_id' , toLocale('name'))->where('id', $this->region_id)->firstOrFail();
-        $this->governorate_id = $toGovId = Governorate::select('id', toLocale('name'))->where('id', $toRegId->governorate_id )->firstOrFail();
+        $toGovId = Governorate::select('id', toLocale('name'))->where('id', $toRegId->governorate_id )->firstOrFail();
+        $this->governorate_id = $toGovId->id;
         $toBuidingTypeId = buildingType::select('id', toLocale('name'))->where('id', $this->building_type_id)->firstOrFail();
         $toType = $this->type == 'SALE' ? __('app.sale') : ( $this->type == 'EXCHANGE' ? __('app.exchange') : __('app.rent'));
         // dd($this->text,'kw_phone');

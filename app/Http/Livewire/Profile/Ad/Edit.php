@@ -62,7 +62,8 @@ class Edit extends Component
             'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
         ]);
         $toRegId = Region::select('id', 'governorate_id' , toLocale('name'))->where('id', $this->region_id)->firstOrFail();
-        $this->governorate_id = $toGovId = Governorate::select('id', toLocale('name'))->where('id', $toRegId->governorate_id )->firstOrFail();
+        $toGovId = Governorate::select('id', toLocale('name'))->where('id', $toRegId->governorate_id )->firstOrFail();
+        $this->governorate_id = $toGovId->id;
         $toBuidingTypeId = buildingType::select('id', toLocale('name'))->where('id', $this->building_type_id)->firstOrFail();
         $toType = $this->type == 'SALE' ? __('app.sale') : ( $this->type == 'EXCHANGE' ? __('app.exchange') : __('app.rent'));
         $this->ad->update([
@@ -76,6 +77,10 @@ class Edit extends Component
             'text' => $this->text,
             'is_approved' => 1,
         ]);
+        if ($this->old_image == null ) {
+            $this->ad->deleteFile();
+            $this->old_image = null ;
+        }
         if ($this->image != '') {
             $this->ad->deleteFile();
             $this->ad->uploadFile($this->image);

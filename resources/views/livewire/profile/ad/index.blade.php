@@ -17,7 +17,8 @@
                 @forelse ($ads as $ad)
                     <tr>
                         <td class="image myelist">
-                            <a href="{{ route('profile.ad.show',[$ad->id]) }}"><img alt="my-properties-3" src="{{ $ad->getFile() }}"
+                            <a href="{{ route('profile.ad.show',[$ad->id]) }}">
+                                <img alt="my-properties-3" src="{{ toAdDefaultImage($ad->getFile()) }}"
                                     class="img-fluid"></a>
                         </td>
                         <td>
