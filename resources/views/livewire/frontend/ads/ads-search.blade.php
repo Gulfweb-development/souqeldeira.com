@@ -468,11 +468,10 @@
                     <div class="item col-lg-4 col-md-6 col-xs-12 landscapes sale">
                         <div class="project-single custom-tooltip" >
                             <div class="tooltiptext">@lang('app.region'): {{ $ad->region->translate('name') }}<br>@lang('app.type'): {{ $ad->type }}<br>@lang('app.views'): {{ $ad->views }}<br>@lang('app.created_at_ads'): {{ $ad->created_at->diffForHumans() }}</div>
-                            <div class="project-inner project-head">
-                                <div class="homes">
-                                    <!-- homes img -->
-                                    <a href="{{ route('ad.search', [toSlug($ad->title), $ad->id]) }}"
-                                        class="homes-img">
+                            <a href="{{ route('ad.search', [toSlug($ad->title), $ad->id]) }}">
+                                <div class="project-inner project-head">
+                                    <div class="homes">
+                                        <!-- homes img -->
                                         <div class="homes-tag button alt featured">
                                             {{ $ad->buildingType->translate('name') }}</div>
                                         <div class="homes-tag button alt sale">
@@ -480,26 +479,26 @@
                                         <div class="homes-price">@lang('app.currency') {{ $ad->price }}</div>
                                         <img src="{{ toAdDefaultImage($ad->getFile()) }}"
                                             class="img-responsive" alt="{{ $ad->title }}">
-                                    </a>
-                                </div>
-                                <div class="button-effect">
-                                    @if (authApprovedUser())
-                                        @if ($ad->favorites()->where('user_id', user()->id)->count() > 0)
-                                            <button class="btn favorite-btn bg-light"
-                                                wire:click.prevent="deleteFromFavorite({{ $ad->id }})"><i
-                                                    class="fas fa-heart color-main"></i></button>
-                                        @else
-                                            <button class="btn favorite-btn"
-                                                wire:click.prevent="addToFavorite({{ $ad->id }})"><i
-                                                    class="fas fa-heart"></i></button>
+                                    </div>
+                                    <div class="button-effect">
+                                        @if (authApprovedUser())
+                                            @if ($ad->favorites()->where('user_id', user()->id)->count() > 0)
+                                                <button class="btn favorite-btn bg-light"
+                                                    wire:click.prevent="deleteFromFavorite({{ $ad->id }})"><i
+                                                        class="fas fa-heart color-main"></i></button>
+                                            @else
+                                                <button class="btn favorite-btn"
+                                                    wire:click.prevent="addToFavorite({{ $ad->id }})"><i
+                                                        class="fas fa-heart"></i></button>
+                                            @endif
                                         @endif
-                                    @endif
-                                    {{-- <a href="{{ $ad->video_link }}" class="btn popup-video popup-youtube"><i
-                                            class="fas fa-video"></i></a>
-                                    <a href="single-property-2.html" class="img-poppu btn"><i
-                                            class="far fa-image"></i></a> --}}
+                                        {{-- <a href="{{ $ad->video_link }}" class="btn popup-video popup-youtube"><i
+                                                class="fas fa-video"></i></a>
+                                        <a href="single-property-2.html" class="img-poppu btn"><i
+                                                class="far fa-image"></i></a> --}}
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                             <!-- homes content -->
                             <div class="homes-content">
                                 <!-- homes address -->
