@@ -26,62 +26,65 @@
     <section class="single-proper blog details">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-md-12 blog-pots">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <section class="headings-2 pt-0">
-                                <div class="pro-wrapper">
-                                    <div class="detail-wrapper-body">
-                                        <div class="listing-title-bar">
-                                            <h3>{{ $ad->title }} <span
-                                                    class="mrg-l-5 category-tag">{{ $ad->type }}</span></h3>
-                                            <div class="mt-0">
-                                                <a href="javascript:void(0);" class="listing-address text-secondary">
-                                                    <i
-                                                        class="fa fa-map-marker pr-2 ti-location-pin mrg-r-5"></i>{{ $ad->governorate->translate('name') }}
-                                                    - {{ $ad->region->translate('name') }}
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="single detail-wrapper mr-2">
-                                        <div class="detail-wrapper-body">
-                                            <div class="listing-title-bar">
-                                                <h4>@lang('app.currency') {{ number_format($ad->price, 0) }}</h4>
-                                            </div>
-                                        </div>
+                <div class="col-md-12">
+                    <section class="headings-2 pt-0 pb-4">
+                        <div class="pro-wrapper">
+                            <div class="col-md-8">
+                                <div class="listing-title-bar">
+                                    <h3>{{ $ad->title }}</h3>
+                                    <div class="mt-4">
+                                        <a href="javascript:void(0);" class="listing-address text-secondary">
+                                            <i
+                                                class="fa fa-map-marker pr-2 pl-2 ti-location-pin mrg-r-5"></i>{{ $ad->governorate->translate('name') }}
+                                            - {{ $ad->region->translate('name') }}
+                                        </a>
                                     </div>
                                 </div>
-                            </section>
-
-                            <div class="floor-plan property wprt-image-video w50 pro">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <!--<h5>@lang('app.floor_plans')</h5>-->
-                                    <h5>
-                                        @if (authApprovedUser())
-                                            @if ($ad->favorites()->where('user_id', user()->id)->count() > 0)
-                                                <button title="@lang('app.add_to_favorite')"
-                                                    class="btn favorite-btn bg-main text-light"
-                                                    wire:click.prevent="deleteFromFavorite({{ $ad->id }})"><i
-                                                        class="fas fa-heart"></i></button>
-                                            @else
-                                                <button class="btn favorite-btn"
-                                                    wire:click.prevent="addToFavorite({{ $ad->id }})"><i
-                                                        class="fas fa-heart"></i></button>
-                                            @endif
-                                        @endif
-                                    </h5>
-                                </div>
-                                <img alt="{{ $ad->title }}" src="{{ toAdDefaultImage($ad->getFile()) }}">
                             </div>
-                            <div class="blog-info details mb-30">
-                                <h5 class="mb-4">@lang('app.description')</h5>
-                                {!! $ad->text!!}
+
+                            <div class="col-md-4 @if(app()->getLocale() == 'ar') text-left @else text-right @endif">
+                                <div class="detail-wrapper-body">
+                                    <div class="listing-title-bar">
+                                        <h4>@lang('app.currency') {{ number_format($ad->price, 0) }} <span class="mrg-l-5 category-tag">{{ $ad->type }}</span></h4>
+                                        <div class="mt-4">
+                                            <span class="mr-3 ml-3" title="@lang('app.views')"><i class="fa fa-eye mr-1 ml-1"></i> {{ $ad->views }}</span>
+                                            <span class="mr-3 ml-3" title="@lang('app.created_at_ads') {{ $ad->created_at->format('Y/m/d H:i:s') }}"><i class="fa fa-calendar-alt mr-1 ml-1"></i> {{ $ad->created_at->diffForHumans() }}</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                    </section>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-md-12 blog-pots">
+                    <div class="floor-plan property wprt-image-video w50 pro">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <!--<h5>@lang('app.floor_plans')</h5>-->
+                            <h5>
+                                @if (authApprovedUser())
+                                    @if ($ad->favorites()->where('user_id', user()->id)->count() > 0)
+                                        <button title="@lang('app.add_to_favorite')"
+                                                class="btn favorite-btn bg-main text-light"
+                                                wire:click.prevent="deleteFromFavorite({{ $ad->id }})"><i
+                                                class="fas fa-heart"></i></button>
+                                    @else
+                                        <button class="btn favorite-btn"
+                                                wire:click.prevent="addToFavorite({{ $ad->id }})"><i
+                                                class="fas fa-heart"></i></button>
+                                    @endif
+                                @endif
+                            </h5>
+                        </div>
+                        <img alt="{{ $ad->title }}" src="{{ toAdDefaultImage($ad->getFile()) }}">
                     </div>
-
+                    <div class="blog-info details mb-30">
+                        <h5 class="mb-4">@lang('app.description')</h5>
+                        <div @if(isArabic(strip_tags($ad->text))) class="text-right" dir="rtl" @else class="text-left" dir="ltr" @endif>
+                            {!! $ad->text!!}
+                        </div>
+                    </div>
                     <div class="single homes-content details mb-30">
                         <!-- title -->
                         <h5 class="mb-4">@lang('app.details')</h5>
@@ -143,7 +146,7 @@
                     <div class="single widget">
                         <!-- end author-verified-badge -->
                         <div class="sidebar">
-                            <div class="widget-boxed mt-33 mt-5">
+                            <div class="widget-boxed mt-33">
                                 <div class="widget-boxed-header">
                                     <h4>@lang('app.information')</h4>
                                 </div>
@@ -206,19 +209,23 @@
                                     <div class="widget-boxed-body">
                                         <div class="recent-post">
                                             @forelse ($recentAds as $recentAd)
-                                                <div class="recent-main my-2">
-                                                    <div class="recent-img">
-                                                        <a
-                                                            href="{{ route('ad.search', [toSlug($recentAd->title), $recentAd->id]) }}"><img
-                                                                src="{{ toAdDefaultImage($recentAd->getFile()) }}" alt="{{ $recentAd->title }}" width="90"
-                                                                height="70"></a>
+                                                <div class="recent-main1 my-2 row">
+                                                    <div class="col-4">
+                                                        <div class="recent-img">
+                                                            <a
+                                                                href="{{ route('ad.search', [toSlug($recentAd->title), $recentAd->id]) }}"><img
+                                                                    src="{{ toAdDefaultImage($recentAd->getFile()) }}" alt="{{ $recentAd->title }}" width="90"
+                                                                    height="70"></a>
+                                                        </div>
                                                     </div>
-                                                    <div class="info-img">
-                                                        <a
-                                                            href="{{ route('ad.search', [toSlug($recentAd->title), $recentAd->id]) }}">
-                                                            <h6>{{ $recentAd->title }}</h6>
-                                                        </a>
-                                                        <p>@lang('app.currency') {{ $recentAd->price }}</p>
+                                                    <div class="col-8">
+                                                        <div class="info-img">
+                                                            <a
+                                                                href="{{ route('ad.search', [toSlug($recentAd->title), $recentAd->id]) }}">
+                                                                <h6>{{ $recentAd->title }}</h6>
+                                                            </a>
+                                                            <p>@lang('app.currency') {{ $recentAd->price }}</p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             @empty
@@ -228,52 +235,52 @@
                                     </div>
                                 </div>
                                 {{-- #SLIDER START --}}
-                                <div class="widget-boxed popular mt-5">
-                                    <div class="widget-boxed-header">
-                                        <h4>@lang('app.featured_videos')</h4>
-                                    </div>
-                                    <div class="widget-boxed-body">
-                                        <div class="the-slider" wire:ignore>
-                                            @forelse ($featuredAds as $featuredAd)
-                                                <div>
-                                                    <a href="{{ route('ad.search', [toSlug($featuredAd->title), $featuredAd->id]) }}"
-                                                        class="slider-link">
-                                                        <div
-                                                            class="badge-container d-flex justify-content-between p-3 align-items-center">
-                                                            <span
-                                                                class="badge badge-success d-flex justify-content-center align-items-center">@lang('app.currency')
-                                                                {{ $featuredAd->price }}</span>
-                                                            <span
-                                                                class="badge badge-danger d-flex justify-content-center align-items-center">{{ $featuredAd->type }}</span>
-                                                        </div>
-                                                        <div class="title">
-                                                            <h3>{{ $featuredAd->title }}</h3>
-                                                            <ul class="title-info">
-                                                                {{-- <li>@lang('app.area')
-                                                                    <span>{{ $featuredAd->distance }}
-                                                                        @lang('app.size_meter')</span>
-                                                                </li> --}}
-                                                                {{-- <li>@lang('app.rooms')
-                                                                    <span>{{ $featuredAd->rooms_count }}</span>
-                                                                </li> --}}
-                                                                {{-- <li>Beds <span>2</span></li> --}}
-                                                                <li>@lang('app.phone')
-                                                                    <span>{{ $featuredAd->phone }}</span>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <img src="{{ toAdDefaultImage($featuredAd->getFile()) }}"
-                                                            alt="{{ $featuredAd->title }}">
+{{--                                <div class="widget-boxed popular mt-5">--}}
+{{--                                    <div class="widget-boxed-header">--}}
+{{--                                        <h4>@lang('app.featured_videos')</h4>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="widget-boxed-body">--}}
+{{--                                        <div class="the-slider" wire:ignore>--}}
+{{--                                            @forelse ($featuredAds as $featuredAd)--}}
+{{--                                                <div>--}}
+{{--                                                    <a href="{{ route('ad.search', [toSlug($featuredAd->title), $featuredAd->id]) }}"--}}
+{{--                                                        class="slider-link">--}}
+{{--                                                        <div--}}
+{{--                                                            class="badge-container d-flex justify-content-between p-3 align-items-center">--}}
+{{--                                                            <span--}}
+{{--                                                                class="badge badge-success d-flex justify-content-center align-items-center">@lang('app.currency')--}}
+{{--                                                                {{ $featuredAd->price }}</span>--}}
+{{--                                                            <span--}}
+{{--                                                                class="badge badge-danger d-flex justify-content-center align-items-center">{{ $featuredAd->type }}</span>--}}
+{{--                                                        </div>--}}
+{{--                                                        <div class="title">--}}
+{{--                                                            <h3>{{ $featuredAd->title }}</h3>--}}
+{{--                                                            <ul class="title-info">--}}
+{{--                                                                --}}{{-- <li>@lang('app.area')--}}
+{{--                                                                    <span>{{ $featuredAd->distance }}--}}
+{{--                                                                        @lang('app.size_meter')</span>--}}
+{{--                                                                </li> --}}
+{{--                                                                --}}{{-- <li>@lang('app.rooms')--}}
+{{--                                                                    <span>{{ $featuredAd->rooms_count }}</span>--}}
+{{--                                                                </li> --}}
+{{--                                                                --}}{{-- <li>Beds <span>2</span></li> --}}
+{{--                                                                <li>@lang('app.phone')--}}
+{{--                                                                    <span>{{ $featuredAd->phone }}</span>--}}
+{{--                                                                </li>--}}
+{{--                                                            </ul>--}}
+{{--                                                        </div>--}}
+{{--                                                        <img src="{{ toAdDefaultImage($featuredAd->getFile()) }}"--}}
+{{--                                                            alt="{{ $featuredAd->title }}">--}}
 
-                                                    </a>
-                                                </div>
+{{--                                                    </a>--}}
+{{--                                                </div>--}}
 
-                                            @empty
+{{--                                            @empty--}}
 
-                                            @endforelse
-                                        </div>
-                                    </div>
-                                </div>
+{{--                                            @endforelse--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
                                 {{-- #SLIDER END --}}
 
 

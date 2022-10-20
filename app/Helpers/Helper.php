@@ -147,7 +147,7 @@ if (!function_exists('toExists')) {
 
 
 if(!function_exists('sendSms')) {
-    function sendSms($number,$message) 
+    function sendSms($number,$message)
     {
         // dd($number);
         $number = str_replace('+965','',$number);
@@ -201,5 +201,44 @@ if (!function_exists('chkLocale')) {
     function chkLocale($rtlClass, $ltrClass)
     {
         return App::isLocale('ar') ? $rtlClass : $ltrClass;
+    }
+}
+
+// check text is arabic
+if (!function_exists('isArabic')) {
+    function isArabic($str)
+    {
+        if (mb_detect_encoding($str) !== 'UTF-8') {
+            $str = mb_convert_encoding($str, mb_detect_encoding($str), 'UTF-8');
+        }
+        $persian = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+        $arabic = ['٩', '٨', '٧', '٦', '٥', '٤', '٣', '٢', '١','٠'];
+        $num = range(0, 9);
+        $convertedPersianNums = str_replace($persian, $num, $str);
+        $str = str_replace($arabic, $num, $convertedPersianNums);
+        $str = preg_replace('/[0-9]+/', '', $str);
+        preg_match_all('/.|\n/u', $str, $matches);
+        $chars = $matches[0];
+        $arabic_count = 0;
+        $latin_count = 0;
+        $total_count = 0;
+        foreach ($chars as $char) {
+            //$pos = ord($char); we cant use that, its not binary safe
+            // i just copied this function fron the php.net comments, but it should work fine!
+            $k = mb_convert_encoding($char, 'UCS-2LE', 'UTF-8');
+            $k1 = ord(substr($k, 0, 1));
+            $k2 = ord(substr($k, 1, 1));
+            $pos = $k2 * 256 + $k1;
+            if ($pos >= 1536 && $pos <= 1791) {
+                $arabic_count++;
+            } else if ($pos > 123 && $pos < 123) {
+                $latin_count++;
+            }
+            $total_count++;
+        }
+        if ($total_count > 0 and ($arabic_count / $total_count) > 0.5) {
+            return true;
+        }
+        return false;
     }
 }
