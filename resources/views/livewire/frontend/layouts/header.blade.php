@@ -76,7 +76,7 @@
         inner-pages hd-white about
     @elseif (Route::is('contacts'))
         inner-pages hd-white contact
-    @elseif (Route::is('ads.search'))
+    @elseif (Route::is('ads.search') or Route::is('agency.ads'))
        inner-pages homepage-4 agents hp-6 full hd-white
       @elseif (Route::is('schools'))
        inner-pages homepage-4 agents hp-6 full hd-white

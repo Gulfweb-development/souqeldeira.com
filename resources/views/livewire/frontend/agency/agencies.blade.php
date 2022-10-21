@@ -81,37 +81,41 @@
                 @forelse ($users as $user)
                     <div class="item col-lg-4 col-md-6 col-xs-12 landscapes sale">
                         <div class="project-single">
-                            <div class="project-inner project-head">
-                                <div class="homes">
-                                    <!-- homes img -->
-                                    <a href="#" class="homes-img">
-                                        {{-- <div class="homes-tag button alt featured">
-                                            {{ $user->id }}</div> --}}
-                                        {{-- <div class="homes-tag button alt sale">
-                                            {{ $user->type == 'RENT' ? __('app.rent') : __('app.sale') }}</div> --}}
-                                        {{-- <div class="homes-price">@lang('app.currency') {{ $user->price }}</div> --}}
-                                        <img src="{{ toProfileDefaultImage($user->getFile()) }}"
-                                            class="img-responsive" alt="{{ $user->name }}">
-                                    </a>
+                            <a  href="{{ route('agency.ads',[toSlug($user->name),$user->id]) }}">
+                                <div class="project-inner project-head">
+                                    <div class="homes">
+                                        <!-- homes img -->
+                                        <div class="homes-img">
+                                            {{-- <div class="homes-tag button alt featured">
+                                                {{ $user->id }}</div> --}}
+                                            {{-- <div class="homes-tag button alt sale">
+                                                {{ $user->type == 'RENT' ? __('app.rent') : __('app.sale') }}</div> --}}
+                                            {{-- <div class="homes-price">@lang('app.currency') {{ $user->price }}</div> --}}
+                                            <img src="{{ toProfileDefaultImage($user->getFile()) }}"
+                                                class="img-responsive" alt="{{ $user->name }}">
+                                        </div>
+                                    </div>
+                                    <div class="button-effect">
+                                        {{-- <a href="#" class="btn"><i
+                                                class="fas fa-link"></i></a>
+                                        <a href="{{ $user->video_link }}" class="btn popup-video popup-youtube"><i
+                                                class="fas fa-video"></i></a>
+                                        <a href="single-property-2.html" class="img-poppu btn"><i
+                                                class="far fa-image"></i></a> --}}
+                                    </div>
                                 </div>
-                                <div class="button-effect">
-                                    {{-- <a href="#" class="btn"><i
-                                            class="fas fa-link"></i></a>
-                                    <a href="{{ $user->video_link }}" class="btn popup-video popup-youtube"><i
-                                            class="fas fa-video"></i></a>
-                                    <a href="single-property-2.html" class="img-poppu btn"><i
-                                            class="far fa-image"></i></a> --}}
-                                </div>
-                            </div>
+                            </a>
                             <!-- homes content -->
                             <div class="homes-content">
                                 <!-- homes address -->
-                                <h3><a href="{{ route('agency',[toSlug($user->name),$user->id]) }}">{{ $user->name }}</a></h3>
+                                <h3><a href="{{ route('agency.ads',[toSlug($user->name),$user->id]) }}">{{ $user->name }}</a></h3>
                                 <p class="homes-address mb-3">
-                                    <a href="#">
+                                    @if($user->phone)
+                                    <a href="tel:{{ $user->phone }}">
                                         <i
                                             class="fa fa-mobile"></i><span>{{ $user->phone }}</span>
                                     </a>
+                                    @endif
                                 </p>
                                 <!-- homes List -->
                                 <ul class="homes-list clearfix">

@@ -38,6 +38,15 @@ class SiteMapController extends Controller
             'name' => '$item->title',
             'lastmod' => '$item->updated_at',
         ],
+        'agency.ads' => [
+            'query' => '\App\Models\User::companies()->get()',
+            'variable' => [
+                'toSlug($item->name)',
+                '$item->id',
+            ],
+            'name' => 'trans(\'app.ads\') .\' \' . trans(\'app.created_by\') .\' \' . $item->name',
+            'lastmod' => '$item->updated_at',
+        ],
         'agency' => [
             'query' => '\App\Models\User::companies()->get()',
             'variable' => [

@@ -22,6 +22,7 @@ Route::get('/sitemap.xml', [\App\Http\Controllers\Frontend\SiteMapController::cl
 Route::get('/abouts','App\Http\Livewire\Frontend\About\Abouts')->name('abouts');
 Route::get('/contacts','App\Http\Livewire\Frontend\Contact\Contacts')->name('contacts');
 Route::get('/ads/search/{type?}','App\Http\Livewire\Frontend\Ads\AdsSearch')->name('ads.search');
+Route::get('/agency/{slug}/{agency_id}/ads/search/{type?}','App\Http\Livewire\Frontend\Ads\AdsSearch')->name('agency.ads');
 Route::get('/adasdsasad/{slug}/{id}', 'App\Http\Livewire\Frontend\Ads\AdSearch')->name('ad.search');
 Route::get('/agencies', 'App\Http\Livewire\Frontend\Agency\Agencies')->name('agencies');
 Route::get('/agency/{slug}/{id}', 'App\Http\Livewire\Frontend\Agency\Agency')->name('agency');

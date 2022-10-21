@@ -104,7 +104,7 @@ class Ad extends Model
         return $q;
     }
     // SEARCH FRONTEND HOME SEARCH
-    public function scopeFrontSearch($query, $governorate_id, $region_id, $building_type_id, $type,$price_from, $price_to)
+    public function scopeFrontSearch($query, $governorate_id, $region_id, $building_type_id, $type,$price_from, $price_to , $agency_id = null )
     {
         $q = $query->where('is_approved', 1)->latest();
         if ($governorate_id != null) {
@@ -112,6 +112,9 @@ class Ad extends Model
         }
         if ($region_id != null) {
             $q->where('region_id', $region_id);
+        }
+        if ($agency_id != null) {
+            $q->where('user_id', $agency_id);
         }
         if ($building_type_id != null) {
             $q->where('building_type_id', $building_type_id);

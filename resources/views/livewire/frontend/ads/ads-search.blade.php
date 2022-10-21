@@ -29,6 +29,9 @@
                         <div class="listing-title-bar">
                             <div class="text-heading text-left">
                                 <p><a href="{{ url('/') }}">@lang('app.home') </a> &nbsp;/&nbsp;
+                                    @if( $agency )
+                                        <a href="{{ route('agencies')  }}">@lang('app.agencies') </a> &nbsp;/&nbsp;
+                                    @endif
                                     <span>@lang('app.list')</span>
                                 </p>
                             </div>
