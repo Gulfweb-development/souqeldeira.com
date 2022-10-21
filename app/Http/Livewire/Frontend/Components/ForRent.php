@@ -11,7 +11,7 @@ class ForRent extends Component
 
     public function mount()
     {
-        $this->rentAds = Ad::with('region', 'images','governorate', 'buildingType')->select('id', 'type', 'is_approved', 'is_featured','region_id', 'price', 'title','phone','governorate_id', 'building_type_id')->where('is_approved', 1)->where('is_featured', 1)->where('type', 'RENT')->inRandomOrder()->take(6)->get();
+        $this->rentAds = Ad::with('region', 'images','governorate', 'buildingType')->select('id', 'type', 'is_approved', 'is_featured','region_id', 'price', 'title','phone','governorate_id', 'building_type_id' , 'created_at', 'views')->where('is_approved', 1)->where('is_featured', 1)->where('type', 'RENT')->inRandomOrder()->take(6)->get();
     }
     public function render()
     {

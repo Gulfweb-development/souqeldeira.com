@@ -21,10 +21,10 @@
                                     <div class="listing-img-content">
                                         <span class="listing-compact-title">{{ $rentAd->title }} <i>{{ $rentAd->phone }}</i></span>
                                         <ul class="listing-hidden-content blue">
-                                            <li>@lang('app.governorate') <span>{{ $rentAd->governorate->translate('name') }} </span></li>
                                             <li>@lang('app.region') <span>{{ $rentAd->region->translate('name') }} </span></li>
-
-                                            <li>@lang('app.type') <span>{{ $rentAd->buildingType->translate('name') }}</span></li>
+                                            <li>@lang('app.type') <span>{{ $rentAd->buildingType->translate('name') }} </span></li>
+                                            <li>@lang('app.views') <span>{{ $rentAd->views }} </span></li>
+                                            <li>@lang('app.created_at_ads') <span>{{ $rentAd->created_at->diffForHumans() }}</span></li>
                                         </ul>
                                     </div>
                                     <img src="{{ toAdDefaultImage($rentAd->getFile()) }}" alt="{{ $rentAd->title }}">

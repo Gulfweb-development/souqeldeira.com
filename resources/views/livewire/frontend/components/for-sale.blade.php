@@ -22,10 +22,10 @@
                                     <div class="listing-img-content">
                                         <span class="listing-compact-title">{{ $saleAd->title }}<i>{{ $saleAd->phone }}</i></span>
                                         <ul class="listing-hidden-content blue">
-                                            <li>@lang('app.governorate') <span>{{ $saleAd->governorate->translate('name') }}</span></li>
-                                            <li>@lang('app.region') <span>{{ $saleAd->region->translate('name') }}</span></li>
+                                            <li>@lang('app.region') <span>{{ $saleAd->region->translate('name') }} </span></li>
                                             <li>@lang('app.type') <span>{{ $saleAd->buildingType->translate('name') }} </span></li>
-                                            <li>@lang('app.baths') <span>{{ $saleAd->bathrooms_count }}</span></li>
+                                            <li>@lang('app.views') <span>{{ $saleAd->views }} </span></li>
+                                            <li>@lang('app.created_at_ads') <span>{{ $saleAd->created_at->diffForHumans() }}</span></li>
                                         </ul>
                                     </div>
                                     <img src="{{ toAdDefaultImage($saleAd->getFile()) }}" width="350" height="197" alt="{{ $saleAd->title }}">
