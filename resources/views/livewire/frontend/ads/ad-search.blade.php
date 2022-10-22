@@ -293,7 +293,7 @@
             <section class="similar-property recently portfolio bshd p-0 bg-white-inner">
                 <div class="container">
                     <h5>@lang('app.from_the_same_city')</h5>
-                    <div class="row portfolio-items">
+                    <div class="row portfolio-items1">
                         @forelse ($similarAds as $similarAd)
                             <div class="item col-lg-4 col-md-6 col-xs-12 landscapes">
                                 <div class="project-single">

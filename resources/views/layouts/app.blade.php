@@ -119,8 +119,8 @@
                 <div id="header" class="head-tr bottom">
                     <nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color fixed-top">
                         <a class="navbar-brand" href="{{ url('/') }}"><img
-                                src="{{ asset('images/logo-red.svg') }}"
-                                data-sticky-logo="{{ asset('images/logo-red.svg') }}" alt="@lang('app.app_name')"
+                                src="{{ asset('images/logo-red.png') }}"
+                                data-sticky-logo="{{ asset('images/logo-red.png') }}" alt="@lang('app.app_name')"
                                 class="img-responsive"></a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent-333" aria-controls="navbarSupportedContent-333"
