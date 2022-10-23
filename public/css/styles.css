@@ -9698,7 +9698,7 @@ a.button {
 }
 
 .parallax-searchs.home15.thome-6 .hero-inner {
-  text-align: center;
+  /*text-align: center;*/
   padding: 290px 0;
 }
 
@@ -9724,7 +9724,7 @@ a.button {
 }
 
 .parallax-searchs.home15 .hero-inner {
-  text-align: center;
+  /*text-align: center;*/
   padding: 320px 0;
 }
 
@@ -11352,8 +11352,10 @@ section.visited-cities {
 }
 
 .rld-single-select .single-select .list {
-  margin-top: 0px;
+  margin-top: 0;
   width: 100%;
+  max-height: 500px;
+  overflow-y: auto;
 }
 
 .rld-price-slider-wrap .rld-price-slider,
