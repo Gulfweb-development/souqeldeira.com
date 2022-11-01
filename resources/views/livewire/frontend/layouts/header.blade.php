@@ -76,7 +76,7 @@
         inner-pages hd-white about
     @elseif (Route::is('contacts'))
         inner-pages hd-white contact
-    @elseif (Route::is('ads.search') or Route::is('agency.ads'))
+    @elseif (Route::is('ads.search'))
        inner-pages homepage-4 agents hp-6 full hd-white
       @elseif (Route::is('schools'))
        inner-pages homepage-4 agents hp-6 full hd-white
@@ -112,8 +112,8 @@
                 <div id="header" class="head-tr bottom">
                     <nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color fixed-top">
                         <a class="navbar-brand" href="{{ url('/') }}"><img
-                                src="{{ asset('images/logo-red.svg') }}"
-                                data-sticky-logo="{{ asset('images/logo-red.svg') }}" alt="@lang('app.app_name')"
+                                src="{{ asset('images/logo-red.png') }}"
+                                data-sticky-logo="{{ asset('images/logo-red.png') }}" alt="@lang('app.app_name')"
                                 class="img-responsive"></a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent-333" aria-controls="navbarSupportedContent-333"
@@ -172,8 +172,7 @@
                                         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333"
                                             data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">{{ user()->name }}
-                                            <span><img src="{{ toProfileDefaultImage(user()->getFile()) }}"
-                                                    ></span>
+                                            <span><img src="{{ toProfileDefaultImage(user()->getFile()) }}"></span>
                                         </a>
                                         <div class="dropdown-menu dropdown-default"
                                             aria-labelledby="navbarDropdownMenuLink-333">

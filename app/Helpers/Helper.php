@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\App;
+use Carbon\Carbon;
+use App\Models\Ad;
 
 // ADMIN DASHBOARD LAYOUT
 define('ADMIN_LAYOUT', 'layouts.app-admin');
@@ -10,6 +12,19 @@ define('PROFILE_LAYOUT', 'layouts.app-profile');
 define('APG', 10);
 // DEFAULT FRONTEND PAGINATION
 define('PG', 12);
+
+if (!function_exists('adnotify')) {
+function adnotify(){
+if(!empty(Auth::guard('web')->user()->id)){
+$date = Carbon::now()->addDays(3);
+return  Ad::with('images', 'governorate', 'region')->select('id','title', 'region_id', 'governorate_id', 'views', 'created_at','is_approved')->whereDate('archived_at',$date)->where('user_id', Auth::guard('web')->user()->id)->get();
+}else{
+return [];    
+}
+}
+}
+
+
 // ADMIN AUTH USER DATA
 if (!function_exists('user')) {
     function user()
@@ -160,7 +175,23 @@ if(!function_exists('sendSms')) {
         ];
         $fields     =   http_build_query($fields);
         // dd("http://www.dezsms.com/dezsmsnewapi.php?".$fields);
-        return file_get_contents("http://www.dezsms.com/dezsmsnewapi.php?".$fields);
+        ///return file_get_contents("http://www.dezsms.com/dezsmsnewapi.php?".$fields);
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => 'http://www.dezsms.com/dezsmsnewapi.php?'.$fields,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'GET',
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        return  $response;
     }
 }
 

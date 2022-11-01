@@ -25,17 +25,13 @@
 {{--                </x-frontend.select>--}}
                 <x-frontend.select name="region_id" label="{{ __('app.regions') }}">
                     <option value="">@lang('app.choose')</option>
-                    @forelse ($governorates as $governorate)
-                        <optgroup label="{{ $governorate->translate('name') }}">
-                            @forelse ($regions as $region)
-                                <option value="{{ $region->id }}">{{ $region->translate('name') }}</option>
-                            @empty
-                                <option value="">@lang('app.no_data')</option>
-                            @endforelse
-                        </optgroup>
-                    @empty
-                        <option value="">@lang('app.no_data')</option>
-                    @endforelse
+                       @foreach ($governorates as $governorate)
+                        <option disabled="disabled" style="font-weight:bold;color:#000000;font-size:20px;">--{{ $governorate->translate('name') }}--</option>
+                            @foreach ($governorate->regions as $region)
+                             <option value="{{ $region->id }}">
+                            {{ $region->translate('name') }}</option>
+                               @endforeach
+                       @endforeach
                 </x-frontend.select>
                 <x-frontend.select name="building_type_id" label="{{ __('app.building_types') }}">
                     <option value="">@lang('app.choose')</option>

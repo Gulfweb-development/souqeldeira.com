@@ -118,7 +118,7 @@
                 <!-- Header -->
                 <div id="header" class="head-tr bottom">
                     <nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color fixed-top">
-                        <a class="navbar-brand" href="{{ url('/') }}"><img
+                        <a class="navbar-brand" href="{{ url('/') }}"><img style="max-height:80px !important;max-width:80px !important;"
                                 src="{{ asset('images/logo-red.png') }}"
                                 data-sticky-logo="{{ asset('images/logo-red.png') }}" alt="@lang('app.app_name')"
                                 class="img-responsive"></a>
@@ -586,6 +586,36 @@
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
     };
+    
+    @php
+    $localnotify = adnotify();
+    @endphp
+    @if(!empty($localnotify) && count($localnotify)>0 && !empty(Auth::guard('web')->check()))
+     toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-bottom-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "30000",
+        "hideDuration": "100000",
+        "timeOut": "0",
+        "extendedTimeOut": "0",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    };
+    toastr.error('{{trans('app.addwillexpireafter3days')}}')
+    @foreach($localnotify as $list)
+    @php $adexpire = $list->title; @endphp
+    toastr.info('{{$adexpire}}')
+    @endforeach
+    @endif
+    
+    
     // SHOW IF SESSION WITH REDIRECT
     @if (session()->has('success'))
         message = "{{ session()->get('success') }}";

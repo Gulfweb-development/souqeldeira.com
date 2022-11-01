@@ -1,6 +1,6 @@
 <div>
     <section class="reviews comments">
-        <h3 class="mb-5">{{ $commentsCount }} @lang('app.reviews')</h3>
+        @if(!empty($commentsCount))<h3 class="mb-5">{{ $commentsCount }} @lang('app.reviews')</h3>@endif
         @forelse ($comments as $comment)
             {{-- COMMENT START --}}
             <div class="row mb-5">

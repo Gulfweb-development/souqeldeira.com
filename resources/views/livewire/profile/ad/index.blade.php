@@ -69,9 +69,9 @@
                                         <li class="mb-0"><i class="fa fa-star"></i>
                                         </li>
                                     @endif
-
+                                    {{--
                                     <li class="ml-3">({{ $ad->comments()->count() }} @lang('app.reviews'))
-                                    </li>
+                                    </li>--}}
                                 </ul>
                             </div>
                         </td>

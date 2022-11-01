@@ -84,7 +84,7 @@ return [
     'value' => 'القيمة',
     'company' => 'الشركة',
     'companies' => 'الشركات',
-    'type' => 'نوع العقار',
+    'type' => 'نوع الاعلان',
     'agency' => 'الوكالة',
     'agencies' => 'الوكالات',
     'choose_company' => 'اختر شركة',
@@ -270,6 +270,7 @@ return [
     'ad_already_exists' => 'الاعلان موجود من قبل',
     'data_deleted_favorite' => 'تم حذف الاعلانات من المفضلة',
     'add_to_favorite' => 'اضافة الى المفضلة',
+    'remove_from_favorite'=>'حذف من المفضلة',
     'send_notification' => 'Send Notification',
     'message_ar' => 'الرسالة ( عربى )',
     'message_en' => 'الرسالة ( انجليزى )',
@@ -311,4 +312,5 @@ return [
     'denar' => 'دينار',
     'in' => 'فى',
         'subscriptions' => 'اشتراكات الباقات',
+        'addwillexpireafter3days'=>'ستنتهي صلاحية الإعلان بعد 3 أيام'
 ];

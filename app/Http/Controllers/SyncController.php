@@ -49,7 +49,13 @@ class SyncController extends Controller
 
     //collect data from hook
     public function sync(Request $request){
-        Log::info("syn started 00");
+        /*
+        Log::info("title-".$request->title);
+        Log::info("details-".$request->details);
+        Log::info("area-".$request->area);
+        Log::info("type-".$request->type);
+        Log::info("propertytype-".$request->propertytype);
+        */
      if(
         !empty($request->title) &&
         !empty($request->details) &&
@@ -111,7 +117,7 @@ class SyncController extends Controller
             $this->syncimage($request->url,$ad->id);
             }
 
-        }
+           }
         }
     }
 

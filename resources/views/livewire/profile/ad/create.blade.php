@@ -6,6 +6,8 @@
         </div>
         <div class="sidebar-widget author-widget2">
             <div class="agent-contact-form-sidebar">
+                <div class="row">
+                    <div class="col-lg-8">
                 <label for="" class="d-flex">@lang('app.governorates')</label>
 {{--                <select wire:model="governorate_id" class="w-100 form-control mb-3 border-1 border-secondary new-select">--}}
 {{--                    <option value="">@lang('app.choose')</option>--}}
@@ -28,17 +30,13 @@
 {{--                </x-frontend.select>--}}
                 <x-frontend.select name="region_id" label="{{ __('app.regions') }}">
                     <option value="">@lang('app.choose')</option>
-                    @forelse ($governorates as $governorate)
-                        <optgroup label="{{ $governorate->translate('name') }}">
-                            @forelse ($regions as $region)
-                                <option value="{{ $region->id }}">{{ $region->translate('name') }}</option>
-                            @empty
-                                <option value="">@lang('app.no_data')</option>
-                            @endforelse
-                        </optgroup>
-                    @empty
-                        <option value="">@lang('app.no_data')</option>
-                    @endforelse
+                       @foreach ($governorates as $governorate)
+                        <option disabled="disabled" style="font-weight:bold;color:#000000;font-size:20px;">--{{ $governorate->translate('name') }}--</option>
+                            @foreach ($governorate->regions as $region)
+                             <option value="{{ $region->id }}">
+                            {{ $region->translate('name') }}</option>
+                               @endforeach
+                       @endforeach
                 </x-frontend.select>
                 <x-frontend.select name="building_type_id" label="{{ __('app.building_types') }}">
                     <option value="">@lang('app.choose')</option>
@@ -116,6 +114,8 @@
                     wire:loading.attr="disabled" wire:click.prevent="store" />
 
             </div>
+        </div>
+        </div>
         </div>
     </div>
     @push('css')

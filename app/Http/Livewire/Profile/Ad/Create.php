@@ -104,22 +104,17 @@ class Create extends Component
 
             // IF USER UPLOADED FILES
             $this->uploadedImage =  $ad->uploadFile($this->image);
-            $adImage = Image::make($this->image->path());
-            $adImage->resize(695, 433);
-            $destinationPath = public_path('/socialmedia');
-            $imageName = 'social_media' . '.' . '.png';
+            //$adImage = Image::make($this->image->path());
+           // $adImage->resize(695, 433);
+            //$destinationPath = public_path('/socialmedia');
+           // $imageName = 'social_media' . '.' . '.png';
             //    $socialImgPath =  $adImage->move($destinationPath, $imageName);
-            $outputOnImage = $adImage->save(public_path('socialmedia/outputonimage.png'));
-            // dd($outputOnImage);
+            //$outputOnImage = $adImage->save(public_path('socialmedia/outputonimage.png'));
+    
         } else {
             // DEFAULT IMAGE WITH LOGO
-            // $this->uploadedImage =  $ad->uploadFile($this->image);
-            $adImage = Image::make(public_path('images/default.png'));
-            // $adImage = Image::make($this->image->path());
-            // $adImage->resize(695, 433);
-            // $destinationPath = public_path('/socialmedia');
-            // $imageName = 'social_media' . '.' . '.png';
-            $outputOnImage = $adImage->save(public_path('socialmedia/outputonimage.png'));
+           //$adImage = Image::make('/home/bgnsrfbn/aldeiramarket.com/images/default.png');
+            //$outputOnImage = $adImage->save('/home/bgnsrfbn/aldeiramarket.com/socialmedia/outputonimage.png');
         }
         // PROGRAMMING IMAGES TO PUBLISH IT TO SOCIAL MEDIA
         $img = Image::make(public_path('images/facebook.png'));

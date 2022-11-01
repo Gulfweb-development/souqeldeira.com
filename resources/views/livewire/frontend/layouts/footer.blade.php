@@ -6,7 +6,7 @@
     <div class="second-footer">
         <div class="container">
             <p>@lang('app.copyrights')</p>
-            <span class="footer-custom-css"> DEIRA MARKET</span>
+            <span class="footer-custom-css">SOUQELDEIRA</span>
             <ul class="netsocials">
                 <li><a href="{{ $setting->facebook }}" target="_blank"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
                 <li><a href="{{ $setting->twitter }}" target="_blank"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>

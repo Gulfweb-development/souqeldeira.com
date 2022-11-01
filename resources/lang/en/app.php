@@ -268,6 +268,7 @@ return [
     'ad_already_exists' => 'Ad Already Exists',
     'data_deleted_favorite' => 'Ad Deleted From Favorite',
     'add_to_favorite' => 'Add To Favorite',
+    'remove_from_favorite'=>'Remove from favorite',
     'send_notification' => 'Send Notification',
     'message_ar' => 'Message ( AR )',
     'message_en' => 'Message ( EN )',
@@ -309,5 +310,6 @@ return [
     'denar' => 'دينار',
     'in' => 'In',
         'subscriptions' => 'Subscribe Ads',
+        'addwillexpireafter3days'=>'The ad will be expired after 3 days'
 
 ];

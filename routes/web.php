@@ -160,7 +160,7 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('/logout',[LoginController::class,'logout'])->name('auth.logout');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/sync', [App\Http\Controllers\SyncController::class, 'sync'])->name('sync');
+Route::post('/sync', [App\Http\Controllers\SyncController::class, 'sync'])->name('sync');
 Route::get('/test', function () {
     // Upload Photo
 

@@ -48,7 +48,7 @@
                 @isset($oldImage)
                     <div class="text-center">
                         <h6>@lang('app.current')</h6>
-                        <img src="{{ toAdDefaultImage(asset($oldImage)) }}" width="80" height="80" class="temp-img">
+                        <img src="{{ asset($oldImage) }}" width="80" height="80" class="temp-img">
                     </div>
                 @endisset
             </div>

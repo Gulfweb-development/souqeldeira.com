@@ -62,21 +62,17 @@
                                                 <div class="col-xl-2 col-lg-2 col-md-4 pl-0">
                                                     <div class="rld-single-select ml-22">
                                                         <select id="region_id"
-                                                            class="select single-select mr-0 region_id"
-                                                            name="region_id" onchange="return onRegionChange(event);">
+                                                                class="nice-select single-select scrollme mr-0 region_id"
+                                                                name="region_id" onchange="return onRegionChange(event);">
                                                             <option value="">@lang('app.governorates')</option>
-                                                            @forelse ($governorates as $governorate)
-                                                                <optgroup label="{{ $governorate->translate('name') }}">
-                                                                    @forelse ($governorate->regions as $region)
+                                                            @foreach ($governorates as $governorate)
+                                                                <option disabled="disabled" style="font-weight:bold;color:#000000;font-size:20px;">--{{ $governorate->translate('name') }}--</option>
+                                                                    @foreach ($governorate->regions as $region)
                                                                         <option value="{{ $region->id }}">
                                                                             {{ $region->translate('name') }}</option>
-                                                                    @empty
-                                                                        <option value="">@lang('app.no_data')</option>
-                                                                    @endforelse
-                                                                </optgroup>
-                                                            @empty
-                                                                <option value="">@lang('app.no_data')</option>
-                                                            @endforelse
+                                                                    @endforeach
+                                                                
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                 </div>

@@ -28,30 +28,51 @@
             <div class="row">
                 <div class="col-md-12">
                     <section class="headings-2 pt-0 pb-4">
-                        <div class="pro-wrapper">
-                            <div class="col-md-8">
+                        <div class="pro-wrapper row">
+                            <div class="col-md-8 col-sm-12">
                                 <div class="listing-title-bar">
                                     <h3>{{ $ad->title }}</h3>
-                                    <div class="mt-4">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-sm-12 @if(app()->getLocale() == 'ar') text-left @else text-right @endif">
+                                <div class="detail-wrapper-body">
+                                    <div class="listing-title-bar">
+                                        <h4>@lang('app.currency') {{ number_format($ad->price, 0) }} <span class="mrg-l-5 category-tag">{{ $ad->type }}</span></h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pro-wrapper row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="mt-4">
                                         <a href="javascript:void(0);" class="listing-address text-secondary">
                                             <i
                                                 class="fa fa-map-marker pr-2 pl-2 ti-location-pin mrg-r-5"></i>{{ $ad->governorate->translate('name') }}
                                             - {{ $ad->region->translate('name') }}
                                         </a>
                                     </div>
-                                </div>
                             </div>
 
-                            <div class="col-md-4 @if(app()->getLocale() == 'ar') text-left @else text-right @endif">
-                                <div class="detail-wrapper-body">
-                                    <div class="listing-title-bar">
-                                        <h4>@lang('app.currency') {{ number_format($ad->price, 0) }} <span class="mrg-l-5 category-tag">{{ $ad->type }}</span></h4>
-                                        <div class="mt-4">
+                            <div class="col-md-6 col-sm-12 @if(app()->getLocale() == 'ar') text-left @else text-right @endif">
+                                <div class="mt-4">
+                                            @if (authApprovedUser())
+                                            @if ($ad->favorites()->where('user_id', user()->id)->count() > 0)
+                                            <span title="@lang('app.remove_from_favorite')" style="color:#ff0000;cursor:pointer;" wire:click.prevent="deleteFromFavorite({{ $ad->id }})"><i class="fas fa-heart"></i>@lang('app.remove_from_favorite')</span>
+                                            @else
+                                            <span title="@lang('app.add_to_favorite')" style="cursor:pointer;" wire:click.prevent="addToFavorite({{ $ad->id }})"><i class="fas fa-heart"></i>@lang('app.add_to_favorite')</span>
+                                            @endif
+                                            @endif
+                                            <span class="mr-3 ml-3" title="@lang('app.whatsapp')"><a target="_blank" style="font-size:14px;"
+                                                href="https://api.whatsapp.com/send?phone=+965{{ $ad->phone }}&text={{ __('app.whatsapp_text' , ['url' => route('ad.search', [toSlug($ad->title), $ad->id]) ] ) }}"><i class="fab  fa-whatsapp-square mr-1 ml-1"></i> {{ $ad->phone }}</a></span>
+                                            <span class="mr-3 ml-3" title="@lang('app.phone')"><a target="_blank" style="font-size:14px;"  href="tel:{{$ad->phone}}"><i class="fa fa-phone mr-1 ml-1"></i> {{ $ad->phone }}</a></span>
                                             <span class="mr-3 ml-3" title="@lang('app.views')"><i class="fa fa-eye mr-1 ml-1"></i> {{ $ad->views }}</span>
                                             <span class="mr-3 ml-3" title="@lang('app.created_at_ads') {{ $ad->created_at->format('Y/m/d H:i:s') }}"><i class="fa fa-calendar-alt mr-1 ml-1"></i> {{ $ad->created_at->diffForHumans() }}</span>
+                                            
                                         </div>
-                                    </div>
-                                </div>
+
+
+
                             </div>
                         </div>
                     </section>
@@ -60,6 +81,7 @@
             <div class="row">
                 <div class="col-lg-8 col-md-12 blog-pots">
                     <div class="floor-plan property wprt-image-video w50 pro">
+                        {{--
                         <div class="d-flex justify-content-between align-items-center">
                             <!--<h5>@lang('app.floor_plans')</h5>-->
                             <h5>
@@ -77,6 +99,7 @@
                                 @endif
                             </h5>
                         </div>
+                        --}}
                         <img alt="{{ $ad->title }}" src="{{ toAdDefaultImage($ad->getFile()) }}">
                     </div>
                     <div class="blog-info details mb-30">
@@ -152,6 +175,23 @@
                                 </div>
                                 <div class="widget-boxed-body">
                                     <div class="sidebar-widget author-widget2">
+                                        @php
+     $url = url('adasdsasad/'.toSlug($ad->title).'/'.$ad->id);
+     $whatsapptxt = trans('app.whatsapp_text');
+     $whatsapplink = "https://api.whatsapp.com/send?text=".urlencode($ad->title)."%0a".urlencode($url);
+     @endphp
+     <div class="author-box clearfix">
+         <a style="margin:5;pxfloat:left;color:#3b5998;" target="_blank" href="https://www.facebook.com/sharer.php?u={{$url}}"><i class="fab fa-facebook fa-2x"></i></a>
+         <a style="margin:5;pxfloat:left;color:#00acee;"  target="_blank" href="https://twitter.com/share?url={{$url}}&text={{$ad->title}}&via=website&hashtags=#aldeiramarket"><i class="fab fa-twitter fa-2x"></i></a>
+         <a style="margin:5;pxfloat:left;color:#db4a39;"  target="_blank" href="https://plus.google.com/share?url={{$url}}"><i class="fab fa-google-plus fa-2x"></i></a>
+         <a style="margin:5;pxfloat:left;color:#E60023"  target="_blank"  href="https://pinterest.com/pin/create/bookmarklet/?media={{toAdDefaultImage($ad->getFile())}}&url={{$url}}&is_video=&description={{$ad->title}}"><i class="fab fa-pinterest fa-2x"></i></a>
+         <a style="margin:5;pxfloat:left;color:#0077b5"  target="_blank" href="https://www.linkedin.com/shareArticle?url={{$url}}&title={{$ad->title}}"><i class="fab fa-linkedin fa-2x"></i></a>
+         <a style="margin:5;pxfloat:left;color:#128C7E"  target="_blank"  href="{!!$whatsapplink!!}"><i class="fab fa-whatsapp fa-2x"></i></a>
+        
+
+
+         
+     </div>
                                         <div class="author-box clearfix">
                                             <a target="_blank"
                                                 href="https://api.whatsapp.com/send?phone=+965{{ $ad->phone }}&text={{ __('app.whatsapp_text' , ['url' => route('ad.search', [toSlug($ad->title), $ad->id]) ] ) }}"> <i
@@ -413,6 +453,10 @@
             <!-- END SIMILAR PROPERTIES -->
         </div>
     </section>
+    
+    
+     
+        
     {{-- VIDEO MODAL START --}}
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

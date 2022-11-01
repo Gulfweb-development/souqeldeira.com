@@ -10,6 +10,10 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
+// Mail
+use Illuminate\Support\Facades\Mail;
+use App\Mail\VerifiedMail;
+
 class RegisterController extends Controller
 {
     /*
@@ -119,7 +123,9 @@ class RegisterController extends Controller
             // \Session::put('authEmail', $user->phone);
             $this->redirectTo = "/auth/verified/mail";
         } else {
+
             session()->flash('success',__('app.registered_succefully_please_check_your_mail_to_active_account'));
+            //$this->redirectTo = "/auth/verified/mail";
             // \Session::put('authEmail', $user->email);
         }
         return $user;
