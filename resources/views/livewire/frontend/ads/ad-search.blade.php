@@ -68,7 +68,7 @@
                                             <span class="mr-3 ml-3" title="@lang('app.phone')"><a target="_blank" style="font-size:14px;"  href="tel:{{$ad->phone}}"><i class="fa fa-phone mr-1 ml-1"></i> {{ $ad->phone }}</a></span>
                                             <span class="mr-3 ml-3" title="@lang('app.views')"><i class="fa fa-eye mr-1 ml-1"></i> {{ $ad->views }}</span>
                                             <span class="mr-3 ml-3" title="@lang('app.created_at_ads') {{ $ad->created_at->format('Y/m/d H:i:s') }}"><i class="fa fa-calendar-alt mr-1 ml-1"></i> {{ $ad->created_at->diffForHumans() }}</span>
-                                            
+
                                         </div>
 
 
@@ -187,10 +187,10 @@
          <a style="margin:5;pxfloat:left;color:#E60023"  target="_blank"  href="https://pinterest.com/pin/create/bookmarklet/?media={{toAdDefaultImage($ad->getFile())}}&url={{$url}}&is_video=&description={{$ad->title}}"><i class="fab fa-pinterest fa-2x"></i></a>
          <a style="margin:5;pxfloat:left;color:#0077b5"  target="_blank" href="https://www.linkedin.com/shareArticle?url={{$url}}&title={{$ad->title}}"><i class="fab fa-linkedin fa-2x"></i></a>
          <a style="margin:5;pxfloat:left;color:#128C7E"  target="_blank"  href="{!!$whatsapplink!!}"><i class="fab fa-whatsapp fa-2x"></i></a>
-        
 
 
-         
+
+
      </div>
                                         <div class="author-box clearfix">
                                             <a target="_blank"
@@ -207,6 +207,12 @@
                                                 <a href="tel:{{ $ad->phone }}">{{ $ad->phone }}</a>
                                             </p>
                                         </div>
+
+                                        <div class="author-box clearfix">
+                                            <button class="btn btn-default"  data-toggle="modal" data-target="#reportMessage"><i class="fa fa-exclamation-triangle"></i> @lang('app.reportThisAd')</button>
+                                        </div>
+
+
                                         <!--<div class="author-box clearfix">-->
                                         <!--    <a href="javascript:void(0);"> <i class="fas fa-mobile-alt"></i></a>-->
                                         <!--    <h4 class="author__title">{{ $ad->phone }}</h4>-->
@@ -453,10 +459,10 @@
             <!-- END SIMILAR PROPERTIES -->
         </div>
     </section>
-    
-    
-     
-        
+
+
+
+
     {{-- VIDEO MODAL START --}}
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -475,6 +481,39 @@
                         <iframe class="embed-responsive-item"
                             src="https://www.youtube.com/embed/{{ $ad->video_link }}" id="video" frameborder="0"
                             allowfullscreen></iframe>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    {{-- VIDEO MODAL END --}}
+    <!-- END SECTION PROPERTIES LISTING -->
+
+    {{-- Report Message --}}
+    <!-- Modal -->
+    <div class="modal fade" id="reportMessage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <!-- 16:9 aspect ratio -->
+                    <div class="m-3">
+                        <div class="col-md-12 data">
+                            <form action="#">
+
+                                <div class="col-md-12 form-group">
+                                    <textarea class="form-control" placeholder="@lang('app.description')" name="" rows="8" wire:model.defer="description"></textarea>
+                                </div>
+                                <button type="submit" data-dismiss="modal" aria-label="Close" class="btn btn-primary btn-lg mt-2" wire:loading.attr="disabled"
+                                        wire:click.prevent="sendReport">@lang('app.send') @lang('app.report')</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
 

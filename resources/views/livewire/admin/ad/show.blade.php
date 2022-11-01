@@ -121,7 +121,7 @@
                                 {{ $num++ }}
                             </td>
                             <td>@lang('app.text')</td>
-                            <td>{{ $ad->text }}</td>
+                            <td @if(isArabic(strip_tags($ad->text))) class="text-right" dir="rtl" @else class="text-left" dir="ltr" @endif>{!! $ad->text!!}</td>
                         </tr>
                         <tr>
                             <td>

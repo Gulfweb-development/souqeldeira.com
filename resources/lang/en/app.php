@@ -310,6 +310,11 @@ return [
     'denar' => 'دينار',
     'in' => 'In',
         'subscriptions' => 'Subscribe Ads',
-        'addwillexpireafter3days'=>'The ad will be expired after 3 days'
+        'addwillexpireafter3days'=>'The ad will be expired after 3 days',
+    'reports' => 'Reports',
+    'report' => 'Report',
+    'reportThisAd' => 'Report this advertise',
+    'reportThisAcc' => 'Report this account',
+    'reportSent' => 'Report sent to the administrator successfully, they review your report as soon as possible.',
 
 ];

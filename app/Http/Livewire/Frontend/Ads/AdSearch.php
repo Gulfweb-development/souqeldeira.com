@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Frontend\Ads;
 
 use App\Models\Ad;
+use App\Models\Report;
 use Livewire\Component;
 use App\Models\Favorite;
 use App\Models\ContactUser;
@@ -17,6 +18,7 @@ class AdSearch extends Component
     public $featuredAds;
     public $similarAds;
     public $text;
+    public $description;
 
     public function mount($slug, $id)
     {
@@ -60,6 +62,15 @@ class AdSearch extends Component
             $this->reset('text');
         }
 
+    }
+
+
+    public function sendReport()
+    {
+        Report::insert($this->ad,$this->description);
+        session()->flash('success', __('app.reportSent'));
+        $this->dispatchBrowserEvent('success', ['message' => __('app.reportSent')]);
+        $this->reset('description');
     }
 
     public function addToFavorite(Ad $ad)

@@ -133,6 +133,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // CONTACTS STRAT
         Route::get('/contact', 'App\Http\Livewire\Admin\Contact\Index')->name('contact.index');
         Route::get('/contact/{contact}', 'App\Http\Livewire\Admin\Contact\Show')->name('contact.show');
+        // Reports
+        Route::get('/reports', 'App\Http\Livewire\Admin\Report\Index')->name('reports.index');
         // CONTACTS END
         // CONTACT INFOS STRAT
         Route::get('/info', 'App\Http\Livewire\Admin\Info\Index')->name('info.index');

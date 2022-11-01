@@ -116,6 +116,10 @@
                                             class="fa fa-mobile"></i><span>{{ $user->phone }}</span>
                                     </a>
                                     @endif
+                                    <div class="author-box clearfix">
+                                        <button class="btn btn-default btn-sm text-white" wire:click.prevent="sendReport({{ $user->id }})">@lang('app.reportThisAcc')</button>
+                                    </div>
+
                                 </p>
                                 <!-- homes List -->
                                 <ul class="homes-list clearfix">

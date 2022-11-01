@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Frontend\Agency;
 
 use App\Models\Ad;
+use App\Models\Report;
 use App\Models\User;
 use App\Models\Region;
 use Livewire\Component;
@@ -34,6 +35,16 @@ class Agencies extends Component
         $this->governorates = Governorate::select('id', toLocale('name'))->get();
         $this->buildingTypes = BuildingType::select('id', toLocale('name'))->get();
     }
+
+
+
+    public function sendReport($Id)
+    {
+        Report::insert(User::companies()->findOrFail($Id));
+        session()->flash('success', __('app.reportSent'));
+        $this->dispatchBrowserEvent('success', ['message' => __('app.reportSent')]);
+    }
+
 
 
 
