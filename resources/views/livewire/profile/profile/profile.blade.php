@@ -123,6 +123,26 @@
                 <input type="button" name="sendmessage" class="multiple-send-message"
                     value="@lang('app.update_profile')" wire:loading.attr="disabled" wire:click.prevent="update" />
 
+                <hr>
+                <button class="btn btn-danger mt-5 w-50" data-toggle="modal" data-target="#confirm-delete">
+                    @lang('app.delete') @lang('app.profile')
+                </button>
+                <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                @lang('app.delete') @lang('app.profile')
+                            </div>
+                            <div class="modal-body">
+                                @lang('app.confirm_title')<br>@lang('app.confirm_message')
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">@lang('app.cancle')</button>
+                                <button class="btn btn-danger btn-ok" wire:click.prevent="delete()">@lang('app.delete')</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
