@@ -21,7 +21,7 @@
                             <div class="banner-search-wrap">
                                 <div class="tab-content">
                                     <div class="tab-pane fade show active" id="tabs_1">
-                                        <div class="rld-main-search">
+                                        <div class="rld-main-search mr-0">
                                             <div class="row d-flex justify-content-center">
 
 {{--                                                <div class="col-xl-2 col-lg-2 col-md-4 pl-0">--}}
@@ -60,7 +60,7 @@
 {{--                                                </div>--}}
 
                                                 <div class="col-xl-2 col-lg-2 col-md-4 pl-0">
-                                                    <div class="rld-single-select ml-22">
+                                                    <div class="rld-single-select">
                                                         <select id="region_id"
                                                                 class="nice-select single-select scrollme mr-0 region_id"
                                                                 name="region_id" onchange="return onRegionChange(event);">
@@ -71,14 +71,14 @@
                                                                         <option value="{{ $region->id }}">
                                                                             {{ $region->translate('name') }}</option>
                                                                     @endforeach
-                                                                
+
                                                             @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-xl-2 col-lg-2 col-md-4 pl-0">
-                                                    <div class="rld-single-select ml-22">
+                                                    <div class="rld-single-select">
                                                         <select class="select single-select building_type_id"
                                                                 onchange=" onBuildingTypeChange(event);"
                                                                 wire:model="building_type_id">
@@ -95,7 +95,7 @@
                                                 </div>
 
                                                 <div class="col-xl-2 col-lg-2 col-md-4 pl-0">
-                                                    <div class="rld-single-select ml-22">
+                                                    <div class="rld-single-select">
                                                         <select class="select single-select type"
                                                                 onchange="onTypeChange(event);" wire:model="type">
                                                             <option value="">@lang('app.type')</option>
@@ -107,7 +107,7 @@
                                                 </div>
 
                                                 <div class="col-xl-2 col-lg-2 col-md-4 pl-0">
-                                                    <div class="dropdown-filter rld-single-select ml-22">
+                                                    <div class="dropdown-filter rld-single-select">
                                                         @lang('app.advanced_search')
                                                     </div>
                                                 </div>
@@ -154,7 +154,7 @@
                                                         </div> --}}
 
                                                         <div class="col-xl-6 col-lg-6 col-md-6 pl-0">
-                                                            <div class="rld-single-select ml-22">
+                                                            <div class="rld-single-select">
                                                                 <input type="price_from form-control" name="price_from"
                                                                        onchange="onPriceFromChange(event);"
                                                                        placeholder="@lang('app.price_from')">
@@ -162,7 +162,7 @@
                                                         </div>
 
                                                         <div class="col-xl-6 col-lg-6 col-md-6 pl-0">
-                                                            <div class="rld-single-select ml-22">
+                                                            <div class="rld-single-select">
                                                                 <input type="price_to form-control" name="price_to"
                                                                        onchange="onPriceToChange(event);"
                                                                        placeholder="@lang('app.price_to')">
@@ -218,7 +218,7 @@
                                         <div class="rld-main-search">
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col-xl-2 col-lg-2 col-md-4 pl-0">
-                                                    <div class="rld-single-select ml-22">
+                                                    <div class="rld-single-select">
                                                         <select class="select single-select mr-0">
                                                             <option value="1">Country</option>
                                                             <option value="2">Kuwait City</option>
@@ -231,7 +231,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-2 col-lg-2 col-md-4 pl-0">
-                                                    <div class="rld-single-select ml-22">
+                                                    <div class="rld-single-select">
                                                         <select class="select single-select mr-0">
                                                             <option value="1">City</option>
                                                             <option value="2">Kuwait City</option>
@@ -247,7 +247,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-3 col-lg-3 col-md-4 pl-0">
-                                                    <div class="rld-single-select ml-22">
+                                                    <div class="rld-single-select">
                                                         <select class="select single-select">
                                                             <option value="1">Property Type</option>
                                                             <option value="2">Family House</option>
@@ -257,7 +257,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-3 col-lg-3 col-md-4 pl-0">
-                                                    <div class="dropdown-filter rld-single-select ml-22">Advanced Search
+                                                    <div class="dropdown-filter rld-single-select">Advanced Search
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-2 col-lg-2 col-md-4">

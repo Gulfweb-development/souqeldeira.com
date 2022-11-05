@@ -56,7 +56,7 @@
                 <div class="banner-search-wrap">
                     <div class="tab-content">
                         <div class="tab-pane fade active show" id="tabs_1">
-                            <div class="rld-main-search">
+                            <div class="rld-main-search mr-0">
                                 <div class="row d-flex justify-content-center">
                                  {{--
                                     <div class="col-xl-2 col-lg-2 col-md-4 pl-0">
@@ -75,7 +75,7 @@
                                     </div>
                                     --}}
                                     <div class="col-xl-2 col-lg-2 col-md-4 pl-0">
-                                                    <div class="rld-single-select ml-22">
+                                                    <div class="rld-single-select">
                                                         <select id="region_id"
                                                                 class="nice-select single-select scrollme mr-0 region_id"
                                                                 name="region_id" onchange="return onRegionChange(event);">
@@ -86,14 +86,14 @@
                                                                         <option value="{{ $region->id }}">
                                                                             {{ $region->translate('name') }}</option>
                                                                     @endforeach
-                                                                
+
                                                             @endforeach
                                                         </select>
                                                     </div>
                                     </div>
 
                                     <div class="col-xl-2 col-lg-2 col-md-4 pl-0">
-                                        <div class="rld-single-select ml-22">
+                                        <div class="rld-single-select">
                                             <select class="select single-select building_type_id"
                                                 onchange=" onBuildingTypeChange(event);" wire:model="building_type_id">
                                                 <option value="" wire:model="building_type_id">
@@ -108,7 +108,7 @@
                                         </div>
                                     </div>
                                     <div class="col-xl-2 col-lg-2 col-md-4 pl-0">
-                                        <div class="rld-single-select ml-22">
+                                        <div class="rld-single-select">
                                             <select class="select single-select type" onchange="onTypeChange(event);"
                                                 wire:model="type">
                                                 <option value="">@lang('app.type')</option>
@@ -119,7 +119,7 @@
                                         </div>
                                     </div>
                                     <div class="col-xl-2 col-lg-2 col-md-4 pl-0">
-                                        <div class="dropdown-filter rld-single-select ml-22">
+                                        <div class="dropdown-filter rld-single-select">
                                             @lang('app.advanced_search')
                                         </div>
                                     </div>
@@ -163,14 +163,14 @@
                                             </div> --}}
 
                                             <div class="col-xl-6 col-lg-6 col-md-6 pl-0">
-                                                <div class="rld-single-select ml-22">
+                                                <div class="rld-single-select">
                                                     <input type="price_from form-control" name="price_from"
                                                         onchange="onPriceFromChange(event);"
                                                         placeholder="@lang('app.price_from')">
                                                 </div>
                                             </div>
                                             <div class="col-xl-6 col-lg-6 col-md-6 pl-0">
-                                                <div class="rld-single-select ml-22">
+                                                <div class="rld-single-select">
                                                     <input type="price_to form-control" name="price_to"
                                                         onchange="onPriceToChange(event);"
                                                         placeholder="@lang('app.price_to')">
@@ -565,7 +565,7 @@
 
             </div>
             <nav aria-label="..." class="pt-3">
-                {{ count($ads) > 0 ? $ads->links() : '' }}
+                {{ count($ads) > 0 ? $ads->onEachSide(0)->links() : '' }}
             </nav>
         </div>
     </section>

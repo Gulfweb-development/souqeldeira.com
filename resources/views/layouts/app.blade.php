@@ -37,7 +37,7 @@
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/menu.css') }}">
         <link rel="stylesheet" href="{{ asset('css/slick.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/styles.css') }}?v1">
         <link rel="stylesheet" id="color" href="{{ asset('css/default.css') }}">
         <link rel="stylesheet" id="color" href="{{ asset('css/colors/pink.css') }}">
         <!-- LEAFLET MAP ################################-->
@@ -586,7 +586,7 @@
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
     };
-    
+
     @php
     $localnotify = adnotify();
     @endphp
@@ -614,8 +614,8 @@
     toastr.info('{{$adexpire}}')
     @endforeach
     @endif
-    
-    
+
+
     // SHOW IF SESSION WITH REDIRECT
     @if (session()->has('success'))
         message = "{{ session()->get('success') }}";
