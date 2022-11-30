@@ -301,7 +301,7 @@
                             </a>
                         </li>
                     @endif
-                    @if (permationTo('school_view'))
+                    @if (permationTo('school_view') and false)
                         <li class="nav-item">
                             <a href="{{ route('admin.school.index') }}"
                                 class="nav-link  {{ request()->segment(2) == 'school' ? 'active' : '' }}">
