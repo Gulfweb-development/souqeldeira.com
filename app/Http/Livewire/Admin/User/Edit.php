@@ -35,12 +35,12 @@ class Edit extends Component
             'password' => 'nullable|string|max:100|confirmed',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
             'is_approved' => 'nullable|boolean',
-            'description_ar' => 'required|string|min:20|max:300',
-            'description_en' => 'required|string|min:20|max:300',
-            'field' => 'required|in:ALL,RENT,SALE,EXCHANGE',
+            'description_ar' => 'nullable|string|min:20|max:300',
+            'description_en' => 'nullable|string|min:20|max:300',
+            'field' => 'nullable|in:ALL,RENT,SALE,EXCHANGE',
         ])->validate();
         $this->validate([
-            'governorate_ids' => 'required|array',
+            'governorate_ids' => 'nullable|array',
         ]);
 
         unset($this->state['email']);

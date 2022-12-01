@@ -9,7 +9,7 @@
     <div class="card card-primary card-outline">
         <div class="card-body">
             <div class="row">
-                {{-- <div class="col-md-6">
+                <div class="col-md-6">
                     <label for="exampleInput-n">
                         @lang('app.account_type')
                     </label>
@@ -20,7 +20,7 @@
                     @error('type')
                         <span class="text-danger text-sm col-12">{{ $message }}</span>
                     @enderror
-                </div> --}}
+                </div>
                   <div class="col-md-6">
                     <label for="exampleInput-n">
                         @lang('app.field')
