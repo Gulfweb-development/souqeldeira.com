@@ -515,7 +515,7 @@
                                 </h3>
                                 <p class="homes-address mb-3">
 
-                                        <span>{!! Str::limit($ad->text, 100) !!}</span>
+                                        <span>{!! Str::limit(strip_tags($ad->text), 100) !!}</span>
 
                                 </p>
                                 <!-- homes List -->

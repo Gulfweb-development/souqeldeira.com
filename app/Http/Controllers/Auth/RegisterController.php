@@ -107,7 +107,7 @@ class RegisterController extends Controller
         }
         $activated_code = rand(1000,9999);
         $user = User::create([
-            'type' => $data['type'] == 'COMPNAY' ? 'COMPNAY' : 'USER',
+            'type' => $data['type'] == 'COMPANY' ? 'COMPANY' : 'USER',
             'name' => $data['name'],
             'email' => $data['email'] ?? null,
             'phone' => $data['phone'] ?? null,
