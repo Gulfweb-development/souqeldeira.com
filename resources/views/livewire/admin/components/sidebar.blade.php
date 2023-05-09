@@ -85,7 +85,7 @@
                     @endif
 
 
-
+                    
                     <li class="nav-item">
                         <a href="{{ route('admin.subscriptions.index') }}"
                             class="nav-link  {{ request()->segment(2) == 'subscriptions' ? 'active' : '' }}">
@@ -95,8 +95,8 @@
                             </p>
                         </a>
                     </li>
-
-
+                    
+                    
                     @if (permationTo('region_create'))
                         <li class="nav-item">
                             <a href="{{ route('admin.region.index') }}"

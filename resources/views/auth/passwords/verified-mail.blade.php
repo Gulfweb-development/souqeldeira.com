@@ -1,6 +1,9 @@
 @extends('layouts.app-auth')
 
 @section('content')
+@php
+    $phone = explode('>', explode('<', DB::table('infos')->where('id', 1)->first()->text_en)[1])[1];
+@endphp
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -37,6 +40,16 @@
                                 <button type="submit" class="btn btn-primary main-header-bg text-light">
                                     @lang('Submit')
                                 </button>
+                                <br/>
+                                
+                                <a href="/resend-code" class="btn btn-sm mt-5 btn-outline-info ">
+                                    @lang('app.resend_code')
+                                </a>
+                                
+                                <a href="tel:{{$phone}}" class="btn btn-sm mt-5 btn-outline-secondary ">
+                                    @lang('app.call_us')
+                                </a>
+                                
                             </div>
                         </div>
                     </form>

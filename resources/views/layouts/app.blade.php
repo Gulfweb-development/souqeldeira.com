@@ -586,7 +586,7 @@
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
     };
-
+    
     @php
     $localnotify = adnotify();
     @endphp
@@ -614,8 +614,8 @@
     toastr.info('{{$adexpire}}')
     @endforeach
     @endif
-
-
+    
+    
     // SHOW IF SESSION WITH REDIRECT
     @if (session()->has('success'))
         message = "{{ session()->get('success') }}";
@@ -736,6 +736,15 @@
     gtag('js', new Date());
 
     gtag('config', 'G-QDD5K0BPGB');
+    
+    let bgcolor = $('.headings').first().next().attr('style',"padding-top:70px !important")
+    // let bg =  $('.headings').first().after().css( "background" );
+    
+    $('.headings').first().after(`
+    <div style="position: fixed; right: 0;left:0;" class="container">
+        <a href="{{url()->previous()}}"><i class="fa fa-arrow-left fa-2x p-4"></i> </a><br/><br/>
+        </div>
+    `)
 </script>
 </body>
 

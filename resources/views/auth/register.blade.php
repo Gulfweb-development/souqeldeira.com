@@ -27,7 +27,7 @@
                                 <div class="col-md-6">
                                     <select name="type" class="form-control @error('type') is-invalid @enderror">
                                         <option value="USER">@lang('app.personal')</option>
-                                        <option value="COMPANY">@lang('app.company')</option>
+                                        <option value="COMPANY">@lang('app.real_estate_office')</option>
                                     </select>
 
                                     @error('type')
