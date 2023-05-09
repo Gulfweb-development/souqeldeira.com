@@ -1,4 +1,4 @@
-﻿@charset "UTF-8";
+@charset "UTF-8";
 /*------------------------------------------------------------------
 Author       : Code-Theme
 Template Name: Find Houses - HTML5 Template
@@ -6025,7 +6025,7 @@ a.button,
 
 .play-icon {
   font-size: 22px;
-  color: #092970;
+  color: #1f77ca;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -6106,7 +6106,7 @@ a.button,
 }
 
 .overlay-dark::after {
-  background-color: #092970;
+  background-color: #1f77ca;
   opacity: 0.80;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=85)";
   z-index: -1;
@@ -6122,7 +6122,7 @@ a.button,
 }
 
 .homepage-4 #navigation.style-1 ul li:hover {
-  background: #092970;
+  background: #1f77ca;
 }
 
 .homepage-4 .btn,
@@ -6156,17 +6156,17 @@ a.button,
 .homepage-4 a.button.border, a.button,
 .homepage-4 .header-image .left .btn-white {
   background: #fff;
-  color: #092970 !important;
+  color: #1f77ca !important;
   -webkit-box-shadow: 0px 0px 0px 4px rgba(255, 255, 255, 0.2);
           box-shadow: 0px 0px 0px 4px rgba(255, 255, 255, 0.2);
 }
 
 .homepage-4 .home18 .sec-title h2 {
-  color: #092970;
+  color: #1f77ca;
 }
 
 .homepage-4 .home18 .sec-title h2 span::before {
-  background: #092970;
+  background: #1f77ca;
 }
 
 .homepage-4 .portfolio .homes-tag.sale {
@@ -6174,7 +6174,7 @@ a.button,
 }
 
 .homepage-4 .homes-tag.featured {
-  background: #092970 !important;
+  background: #1f77ca !important;
 }
 
 .homepage-4 .portfolio .homes-price {
@@ -6269,12 +6269,12 @@ a.button,
 
 .homepage-4 .portfolio .homes-content h3 a:hover,
 .homepage-4 .blog-section .news-item h3:hover {
-  color: #092970;
+  color: #1f77ca;
 }
 
 .homepage-4 .btn:hover,
 .homepage-4 .popular-places .listing-badges .featured {
-  background: #092970;
+  background: #1f77ca;
 }
 
 .homepage-4 .popular-places .img-box {
@@ -6309,7 +6309,7 @@ a.button,
 }
 
 .homepage-4 .info-help .info-head .info-text .btn-pro {
-  background: #092970;
+  background: #1f77ca;
 }
 
 .homepage-4 .testimonials .test-1 h3 {
@@ -6317,7 +6317,7 @@ a.button,
 }
 
 .homepage-4 .starts .fa {
-  color: #092970 !important;
+  color: #1f77ca !important;
 }
 
 .homepage-4 .testimonials .test-1 p::before {
@@ -6327,7 +6327,7 @@ a.button,
   left: 236px;
   top: -24px;
   position: relative;
-  color: #092970;
+  color: #1f77ca;
 }
 
 .homepage-4 .owl-dots {
@@ -6360,7 +6360,7 @@ a.button,
 .homepage-4 .blog-section .action-list .fa-comment,
 .homepage-4 .blog-section .action-list .fa-share-alt,
 .homepage-4 .blog-section .news-link {
-  color: #092970;
+  color: #1f77ca;
 }
 
 .homepage-4 .first-footer .top-footer {
@@ -6372,7 +6372,7 @@ a.button,
 .homepage-4 .first-footer .newsletters h3::after,
 .homepage-4 .first-footer .bloq-email .email input[type="submit"],
 .homepage-4 .go-up {
-  background: #092970;
+  background: #1f77ca;
 }
 
 .homepage-4 .welcome-area {
@@ -7008,12 +7008,12 @@ html input[disabled] {
 .hp-6 .btn.sApp-btn:before,
 .hp-6 .bg-overlay::after,
 .hp-6 .benifits-item:after {
-  background: linear-gradient(-47deg, #092970 0%, #092970 100%);
+  background: linear-gradient(-47deg, #1f77ca 0%, #1f77ca 100%);
 }
 
 .hp-6 a.btn.btn-yellow:hover {
   background: #fff !important;
-  color: #092970;
+  color: #1f77ca;
 }
 
 .hp-6 .bg-overlay::after {
@@ -7024,14 +7024,14 @@ html input[disabled] {
 .hp-6 .rld-banner-tab .nav-item a.active,
 .hp-6 .rld-banner-tab .nav-item a:hover,
 .hp-6 .rld-banner-tab .nav-item a.active:before {
-  background: #092970;
+  background: #1f77ca;
 }
 
 .hp-6 .btn.btn-yellow {
   border: 0px;
   border-radius: 8px;
   font-size: 15px;
-  background-color: #092970;
+  background-color: #1f77ca;
   -webkit-box-shadow: 0px 1px 4px 0px rgba(255, 90, 95, 0.3);
           box-shadow: 0px 1px 4px 0px rgba(255, 90, 95, 0.3);
   color: #ffffff;
@@ -7261,7 +7261,7 @@ html input[disabled] {
   font-size: 20px;
   font-weight: 400;
   margin-left: 15px;
-  color: #092970;
+  color: #1f77ca;
 }
 
 .hp-6 .explore__form-checkbox-list.full-filter.filter-block {
@@ -7422,7 +7422,7 @@ html input[disabled] {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  border: 2px solid #092970;
+  border: 2px solid #1f77ca;
   cursor: w-resize;
   background: #fff;
   outline: none;
@@ -7445,7 +7445,7 @@ html input[disabled] {
 }
 
 .hp-6 .range-slider .ui-widget-header {
-  background-color: #092970;
+  background-color: #1f77ca;
 }
 
 .hp-6 .range-slider .ui-slider.ui-state-disabled .ui-slider-handle,
@@ -7577,7 +7577,7 @@ html input[disabled] {
   color: #fff;
   text-align: center;
   line-height: 15px;
-  background-color: #092970;
+  background-color: #1f77ca;
   border: 2px solid transparent;
   -webkit-transition: border-color 0s;
   transition: border-color 0s;
@@ -9680,7 +9680,7 @@ a.button {
 .parallax-searchs.home15.thome-6 {
   background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.5))), url(../images/bg/thome-6.png) no-repeat center top;
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../images/bg/thome-62.png) no-repeat center top;
-  background-size: cover;
+  background-size: cover !important;
   background-attachment: fixed !important;
   width: 100%;
   height: 95vh;
@@ -11355,7 +11355,7 @@ section.visited-cities {
   margin-top: 0;
   width: 100%;
   max-height: 500px;
-  overflow-y: auto;
+  overflow-y: auto !important;
 }
 
 .rld-price-slider-wrap .rld-price-slider,
@@ -11790,7 +11790,7 @@ section.team {
 .th-8 .btn:hover,
 .th-8 .popular-places .listing-badges .featured,
 .th-8 .homes-tag.featured {
-  background: #092970 !important;
+  background: #1f77ca !important;
 }
 
 .th-8 .filter .button {
@@ -12203,7 +12203,7 @@ form label.error {
 .th-8 .parallax-search8 .form-group .btn {
   display: block;
   width: 100%;
-  background: #092970;
+  background: #1f77ca;
   cursor: pointer;
   color: #fff;
   text-transform: uppercase;
@@ -12225,11 +12225,11 @@ form label.error {
 }
 
 .th-8 .parallax-search8 .form-group .nice-select i {
-  color: #092970;
+  color: #1f77ca;
 }
 
 .th-8 .parallax-search8 .form-group .nice-select:hover {
-  color: #092970;
+  color: #1f77ca;
 }
 
 .th-8 .parallax-search8 img {
@@ -12315,7 +12315,7 @@ form label.error {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  border: 2px solid #092970;
+  border: 2px solid #1f77ca;
   cursor: w-resize;
   background: #fff;
   outline: none;
@@ -12338,7 +12338,7 @@ form label.error {
 }
 
 .th-8 .range-slider .ui-widget-header {
-  background-color: #092970;
+  background-color: #1f77ca;
 }
 
 .th-8 .range-slider .ui-slider.ui-state-disabled .ui-slider-handle,
@@ -18265,8 +18265,8 @@ header.payment-card-header .pull-right img {
 }
 
 .inner-pages .headings {
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(18, 27, 34, 0.6)), to(rgba(18, 27, 34, 0.6))), url(../images/bg/bg-details.jpg) no-repeat center center;
-  background: linear-gradient(rgba(18, 27, 34, 0.6), rgba(18, 27, 34, 0.6)), url(../images/bg/bg-details.jpg) no-repeat center center;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(#1f77ca)), to(rgba(18, 27, 34, 0.6))), url(../images/bg/bg-details.jpg) no-repeat center center;
+  background: linear-gradient(#1f77ca, rgba(18, 27, 34, 0.6)), url(../images/bg/bg-details.jpg) no-repeat center center;
   width: 100%;
   height: 30vh;
 }
@@ -18406,7 +18406,7 @@ header.payment-card-header .pull-right img {
 }
 
 .inner-pages.about .starts .fa {
-  color: #092970 !important;
+  color: #1f77ca !important;
 }
 
 @media screen and (max-width: 500px) {
@@ -21634,7 +21634,7 @@ section.ui-element {
   display: inline-block;
   overflow: hidden;
   width: 100%;
-  background: #092970;
+  background: #1f77ca;
   border-radius: 9px;
 }
 
@@ -21653,7 +21653,7 @@ section.ui-element {
   text-align: center;
   border-radius: 9px;
   width: auto;
-  background: #092970;
+  background: #1f77ca;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -23157,5 +23157,6 @@ section.ui-element {
 .blog-info.details {
     overflow-wrap: anywhere;
 }
+
 
 /*# sourceMappingURL=styles.css.map */

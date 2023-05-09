@@ -1,5 +1,5 @@
 .sticky .navbar-brand{
-	content:url("../images/logo-red22.svg");
+	content:url("../images/blue.png");
     width: 75px;
     height: auto;
 }
@@ -18,13 +18,13 @@
     color: #333 !important;
 }*/
 .navbar-nav .nav-link:focus, .navbar-nav .nav-link:hover{
-	background: #092970;
+	background: #1f77ca;
 	transition: all 0.25s;
     border-radius: 3px;
 }
 .sticky .navbar-nav .nav-link:focus, .sticky .navbar-nav .nav-link:hover,
 .sticky .navbar-nav .dropdown-item:focus, .sticky .navbar-nav .dropdown-item:hover  {
-	background: #092970;
+	background: #1f77ca;
 	transition: all 0.25s;
     border-radius: 3px;
     color: #fff !important;
@@ -124,6 +124,8 @@ ul.navbar-nav.ml-auto.nav-flex-icons .nav-item.dropdown img{
 }
 .fab-actions .btn.btn-outline-light:after{
     content: "\f055";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
 }
 #header.cloned {
     padding: 22px 0 80px 0!important;
@@ -160,14 +162,14 @@ ul.navbar-nav.ml-auto.nav-flex-icons .nav-item.dropdown img{
 }
 .inner-pages.about .headings
 {
-    background: linear-gradient(rgba(18, 27, 34, 0.6), rgba(18, 27, 34, 0.6)), url(../images/bg/about.jpg) no-repeat center center;
+     background: linear-gradient(#1f77ca, rgba(18, 27, 34, 0.6)), url(../images/bg/bg-details.jpg) no-repeat center center;
 }
 .inner-pages.contact .headings
 {
-    background: linear-gradient(rgba(18, 27, 34, 0.6), rgba(18, 27, 34, 0.6)), url(../images/bg/contact.jpg) no-repeat center center;
+      background: linear-gradient(#1f77ca, rgba(18, 27, 34, 0.6)), url(../images/bg/bg-details.jpg) no-repeat center center;
 }
 .portfolio .homes-content .homes-address .fa-map-marker{
-    color: #092970;
+    color: #1f77ca;
 }
 .homepage-4 .portfolio .footer span{
     margin-top: 0;
@@ -177,7 +179,7 @@ section.counterup {
 }
 /*
 .hp-6 .rld-banner-tab .nav-item a.active, .hp-6 .rld-banner-tab .nav-item a:hover, .hp-6 .rld-banner-tab .nav-item a.active:before {
-    background: #092970;
+    background: #1f77ca;
 }
 #search{
     background-color: #fff;
@@ -200,7 +202,7 @@ section.portfolio {
 }
 @media screen and (max-width : 991px){
     .fixed-top {
-        background: #092970;
+        background: #1f77ca;
     }
     #header {
         padding: initial;
@@ -249,7 +251,7 @@ section.portfolio {
 }
 .inner-pages.hp-6.full .rld-main-search{
     background: transparent;
-    border: 1px solid #092970;
+    border: 1px solid #1f77ca;
     padding: 20px;
 }
 .inner-pages .hero-inner{
@@ -298,21 +300,21 @@ section.portfolio {
 }
 .second-footer .netsocials a .fa-facebook {
     background: transparent;
-    /*color: #092970;*/
+    /*color: #1f77ca;*/
 }
 .user-profile-box{
     overflow-y: scroll;
 }
 .dashboard_navigationbar .dropbtn {
-    background-color: #092970;
+    background-color: #1f77ca;
     color:#fff;
 }
 .dashboard-bd .second-footer,
 .btn-common,
 .go-up,
 .multiple-send-message {
-    background: #092970!important;
-    background-color: #092970!important;
+    background: #1f77ca!important;
+    background-color: #1f77ca!important;
     color: #fff;
 }
 .dashboard_navigationbar .dropbtn:hover, .dashboard_navigationbar .dropbtn:focus{
@@ -406,20 +408,24 @@ section.portfolio {
 	content:"";
 	width:initial;
     }
-
+    
 #header,
 #header.cloned{
     padding: 22px 0 35px 0!important;
     }
 }
-
-.footer-custom-css {
-    font-weight:bold; color:white;
+ul.listing-hidden-content.blue {
+    height: 70px;
 }
 
-.left-0 {
-    left: 0!important;
+a.listing-img-container {
+    height: 305px;
 }
-.left-100-percent {
-    left: 100%!important;
+
+.item.col-lg-4.col-md-6.col-xs-12.landscapes.sale {
+    /* top: 600px !important; */
+}
+
+.project-single.aos-init.aos-animate {
+     height: 305px;
 }
