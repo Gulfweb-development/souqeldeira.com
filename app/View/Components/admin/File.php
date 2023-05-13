@@ -21,14 +21,14 @@ class File extends Component
      *
      * @return void
      */
-    public function __construct($name, $label, $image, $oldImage, $size)
+    public function __construct($name= '', $label= '', $image= '', $oldImage= '', $size = '')
     {
         //
         $this->name = $name;
         $this->label = $label;
         $this->image = $image;
         $this->oldImage = $oldImage;
-        $this->$size = $size;
+        $this->size = $size;
     }
 
     /**

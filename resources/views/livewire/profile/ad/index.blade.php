@@ -76,7 +76,13 @@
                             </div>
                         </td>
                         <td>{{ $ad->created_at->diffForHumans() }}</td>
-                        <td><span class="badge badge-{{ $ad->approved_badge }}"> {{ $ad->approved }}</span></td>
+                        <td>
+                            <span class="badge badge-{{ $ad->approved_badge }}"> {{ $ad->approved }}</span>
+                            @if ( $ad->is_featured )
+                                <br>
+                                <span class="badge badge-danger text-uppercase p-2"><i class="fa fa-star"></i> {{ __('app.featured') }}</span>
+                            @endif
+                        </td>
                         <td>{{ $ad->views }}</td>
                         <td class="actions">
                             <a href="{{ route('profile.ad.edit',[$ad->id]) }}" class="edit"><i class="lni-pencil"></i>@lang('app.edit')</a>

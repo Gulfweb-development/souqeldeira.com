@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin\Ad;
 
 use App\Models\Ad;
+use App\Models\Setting;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Agency;
@@ -70,7 +71,9 @@ class Create extends Component
             'image' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
         ])->validate();
         $this->state['code'] = Str::random(6);
-        $this->state['archived_at'] = Carbon::now('UTC')->addDays(config('app.ad_expire_day' , 15))->format('Y-m-d H:i:s');
+        $this->state['archived_at'] = Carbon::now('UTC')->addDays(
+            $this->state['is_featured'] == "1" ? Setting::get('expire_time_premium_adv', 15) : Setting::get('expire_time_adv', 15)
+        )->format('Y-m-d H:i:s');
         $ad = Ad::create($this->state);
         if (toExists('image', $this->state)) {
             $ad->uploadFile($this->state['image']);

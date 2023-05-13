@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Profile\Ad;
 
 use App\Models\Ad;
+use App\Models\Setting;
 use Carbon\Carbon;
 use App\Models\Region;
 use Livewire\Component;
@@ -27,6 +28,7 @@ class Create extends Component
     public $regions = [];
     public $buildingTypes = [];
     public $governorate_id;
+    public $is_featured;
     public $region_id;
     public $building_type_id;
     public $image;
@@ -36,6 +38,7 @@ class Create extends Component
     public $text;
     public $photo;
     public $uploadedImage;
+
     public function mount()
     {
         $this->governorates = Governorate::select('id', toLocale('name'))->get();
@@ -64,6 +67,7 @@ class Create extends Component
         // app()->setLocale('en');
         $validatedData = $this->validate([
             'region_id' => 'required|exists:regions,id',
+            'is_featured' => 'required|boolean',
             //'governorate_id' => 'required|exists:governorates,id',
             'building_type_id' => 'required|exists:building_types,id',
             'type' => 'required|in:SALE,RENT,EXCHANGE',
@@ -78,14 +82,15 @@ class Create extends Component
             return session()->flash('success', __('app.data_created'));
         }
         //  TO PARSE COLLECTED DATA TO TITLE
-        $toRegId = Region::select('id', 'governorate_id' , toLocale('name'))->where('id', $this->region_id)->firstOrFail();
-        $toGovId = Governorate::select('id', toLocale('name'))->where('id', $toRegId->governorate_id )->firstOrFail();
+        $toRegId = Region::select('id', 'governorate_id', toLocale('name'))->where('id', $this->region_id)->firstOrFail();
+        $toGovId = Governorate::select('id', toLocale('name'))->where('id', $toRegId->governorate_id)->firstOrFail();
         $this->governorate_id = $toGovId->id;
         $toBuidingTypeId = buildingType::select('id', toLocale('name'))->where('id', $this->building_type_id)->firstOrFail();
-        $toType = $this->type == 'SALE' ? __('app.sale') : ( $this->type == 'EXCHANGE' ? __('app.exchange') : __('app.rent'));
+        $toType = $this->type == 'SALE' ? __('app.sale') : ($this->type == 'EXCHANGE' ? __('app.exchange') : __('app.rent'));
         // dd($this->text,'kw_phone');
         $ad = Ad::create([
             'governorate_id' => $this->governorate_id,
+            'is_featured' => $this->is_featured,
             'region_id' => $this->region_id,
             'building_type_id' => $this->building_type_id,
             'type' => $this->type,
@@ -96,24 +101,26 @@ class Create extends Component
             'user_id' => user()->id,
             'is_approved' => 1,
             'code' => Str::random(6),
-            'archived_at' => Carbon::now('UTC')->addDays(config('app.ad_expire_day' , 15))->format('Y-m-d H:i:s'),
+            'archived_at' => Carbon::now('UTC')->addDays(
+                $this->is_featured == "1" ? Setting::get('expire_time_premium_adv', 15) : Setting::get('expire_time_adv', 15)
+            )->format('Y-m-d H:i:s'),
         ]);
 
         // RESIZE IMAGE TO PLACEC IT IN IMAGE
         if ($this->image != NULL) {
 
             // IF USER UPLOADED FILES
-            $this->uploadedImage =  $ad->uploadFile($this->image);
+            $this->uploadedImage = $ad->uploadFile($this->image);
             //$adImage = Image::make($this->image->path());
-           // $adImage->resize(695, 433);
+            // $adImage->resize(695, 433);
             //$destinationPath = public_path('/socialmedia');
-           // $imageName = 'social_media' . '.' . '.png';
+            // $imageName = 'social_media' . '.' . '.png';
             //    $socialImgPath =  $adImage->move($destinationPath, $imageName);
             //$outputOnImage = $adImage->save(public_path('socialmedia/outputonimage.png'));
-    
+
         } else {
             // DEFAULT IMAGE WITH LOGO
-           //$adImage = Image::make('/home/bgnsrfbn/aldeiramarket.com/images/default.png');
+            //$adImage = Image::make('/home/bgnsrfbn/aldeiramarket.com/images/default.png');
             //$outputOnImage = $adImage->save('/home/bgnsrfbn/aldeiramarket.com/socialmedia/outputonimage.png');
         }
         // PROGRAMMING IMAGES TO PUBLISH IT TO SOCIAL MEDIA
@@ -178,7 +185,7 @@ class Create extends Component
                 SocialMediaJob::dispatch('', $postToSocialMediaImagePath);
                 // PUBLISH TO FACEBOOK
                 SocialFacebookJob::dispatch($forJobPublishment, $postToSocialMediaImagePath);
-            }else {
+            } else {
                 // dd($ad->title, $postToSocialMediaImagePath);
                 SocialMediaJob::dispatch($ad->title, $postToSocialMediaImagePath);
                 // PUBLISH TO FACEBOOK
@@ -194,9 +201,9 @@ class Create extends Component
 
     public function render()
     {
-        $check = Subscriptions::where('status',1)->get()->count();
-        if($check > 0) {
-            if(\Auth::user()->adv_nurmal_count == 0 && \Auth::user()->adv_star_count == 0) {
+        $check = Subscriptions::where('status', 1)->get()->count();
+        if ($check > 0) {
+            if (\Auth::user()->adv_nurmal_count == 0 && \Auth::user()->adv_star_count == 0) {
                 header('Location: ' . url('profile/subscripts'));
             }
         }

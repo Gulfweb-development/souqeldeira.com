@@ -12,9 +12,9 @@ class Ad extends Model
 {
     use HasFactory, SoftDeletes, Translation, Media;
 
-    // protected $casts = [
-    //     'archived_at' => 'datetime',
-    // ];
+     protected $casts = [
+         'is_featured' => 'boolean',
+     ];
 
     protected $fillable = [
         'user_id',
@@ -31,7 +31,6 @@ class Ad extends Model
         'archived_at', // process
         'is_featured',
         'is_approved',
-
     ];
 
     // TOGGLE APPROVED STATUS

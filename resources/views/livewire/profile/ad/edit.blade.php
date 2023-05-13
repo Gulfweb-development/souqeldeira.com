@@ -1,11 +1,22 @@
 <div>
     <x-slot name="meta_title">@lang('app.ads') | @lang('app.edit')</x-slot>
+
     <div class="section-body listing-table">
         <div class="widget-boxed-header">
             <h4>@lang('app.ads') | @lang('app.edit')</h4>
         </div>
+
         <div class="sidebar-widget author-widget2">
             <div class="agent-contact-form-sidebar">
+
+                @if ( ! $is_featured)
+                    <div class="text-center mt-3 font-italic font-weight-bold text-primary">{{ __('do_you_want_to_see_more') }}</div>
+                    <input type="button" class="multiple-send-message mb-3 m2-3 " value="@lang('Upgrade_special_Advertise')"
+                           wire:loading.attr="disabled" wire:click.prevent="upgrade" />
+
+                    <hr>
+                @endif
+
 {{--                <label for="" class="d-flex">@lang('app.governorates')</label>--}}
 {{--                <select wire:model="governorate_id" class="w-100 form-control mb-3 border-1 border-secondary new-select">--}}
 {{--                    <option value="">@lang('app.choose')</option>--}}
@@ -123,7 +134,6 @@
                 <hr>
                 <input type="button" name="sendmessage" class="multiple-send-message mt-5" value="@lang('app.update')"
                     wire:loading.attr="disabled" wire:click.prevent="update" />
-
             </div>
         </div>
     </div>

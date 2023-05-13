@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Profile\Ad;
 
 use App\Models\Ad;
 use App\Models\Region;
+use App\Models\Setting;
+use Carbon\Carbon;
 use Livewire\Component;
 use App\Models\Governorate;
 use App\Models\BuildingType;
@@ -19,6 +21,7 @@ class Edit extends Component
     public $buildingTypes = [];
     public $governorate_id;
     public $region_id;
+    public $is_featured;
     public $building_type_id;
     public $image;
     public $type;
@@ -36,6 +39,7 @@ class Edit extends Component
         $this->building_type_id = $this->ad->building_type_id;
         $this->type = $this->ad->type;
         $this->phone = $this->ad->phone;
+        $this->is_featured = $this->ad->is_featured;
         $this->price = $this->ad->price;
         $this->text = $this->ad->text;
         $this->old_image = $this->ad->getFile();
@@ -47,6 +51,21 @@ class Edit extends Component
     public function updatedGovernorateId($value)
     {
         $this->regions = Region::select('id', 'governorate_id', toLocale('name'))->where('governorate_id', $value)->get();
+    }
+
+    public function upgrade()
+    {
+        if ( !  $this->ad->is_featured ) {
+            $this->ad->update([
+                'is_featured' => 1,
+                'archived_at' => Carbon::now('UTC')->addDays(
+                    $this->is_featured == "1" ? Setting::get('expire_time_premium_adv', 15) : Setting::get('expire_time_adv', 15)
+                )->format('Y-m-d H:i:s')
+            ]);
+            $this->is_featured = 1;
+            session()->flash('success', __('upgraded'));
+            return redirect()->route('profile.ad.index');
+        }
     }
 
     public function update()

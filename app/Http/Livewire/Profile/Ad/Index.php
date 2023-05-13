@@ -25,7 +25,7 @@ class Index extends Component
 
     public function render()
     {
-        $ads = Ad::with('images', 'governorate', 'region')->select('id','title', 'region_id', 'governorate_id', 'views', 'created_at','is_approved')->where('user_id', user()->id)->latest()->paginate(PG);
+        $ads = Ad::with('images', 'governorate', 'region')->select('id','title', 'region_id', 'governorate_id', 'views', 'created_at','is_approved','is_featured')->where('user_id', user()->id)->latest()->paginate(PG);
         return view('livewire.profile.ad.index', [
             'ads' => $ads,
         ])->layout(PROFILE_LAYOUT);

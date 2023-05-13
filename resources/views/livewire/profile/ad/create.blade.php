@@ -8,6 +8,13 @@
             <div class="agent-contact-form-sidebar">
                 <div class="row">
                     <div class="col-lg-8">
+
+                    <x-frontend.select name="is_featured" label="{{ __('Advertisement_type') }}">
+                        <option value="">@lang('app.choose')</option>
+                        <option value="0">@lang('normal')</option>
+                        <option value="1">@lang('featured')</option>
+                    </x-frontend.select>
+
                 <label for="" class="d-flex">@lang('app.governorates')</label>
 {{--                <select wire:model="governorate_id" class="w-100 form-control mb-3 border-1 border-secondary new-select">--}}
 {{--                    <option value="">@lang('app.choose')</option>--}}
