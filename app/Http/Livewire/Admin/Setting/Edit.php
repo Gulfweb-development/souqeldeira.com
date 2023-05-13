@@ -35,6 +35,10 @@ class Edit extends Component
             'twitter' => 'nullable|string|max:170',
             'instagram' => 'nullable|string|max:170',
             'youtube' => 'nullable|string|max:170',
+            'expire_time_adv' => 'required|numeric|min:1',
+            'expire_time_premium_adv' => 'required|numeric|min:1',
+            'price_adv' => 'required|numeric|min:0',
+            'price_premium_adv' => 'required|numeric|min:0',
 //            'publish_all_to_social_media' => 'required|boolean',
 //            'is_payment_available' => 'required|boolean',
         ])->validate();

@@ -1,0 +1,1 @@
+ALTER TABLE `settings` ADD `expire_time_adv` INT NOT NULL DEFAULT '30' AFTER `youtube`, ADD `expire_time_premium_adv` INT NOT NULL DEFAULT '30' AFTER `expire_time_adv`, ADD `price_adv` FLOAT NOT NULL DEFAULT '1' AFTER `expire_time_premium_adv`, ADD `price_premium_adv` FLOAT NOT NULL DEFAULT '2' AFTER `price_adv`;

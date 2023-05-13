@@ -28,6 +28,10 @@ class Setting extends Model
         'instagram',
         'youtube',
         'admin_id',
+        'expire_time_adv',
+        'expire_time_premium_adv',
+        'price_adv',
+        'price_premium_adv',
     ];
     public function scopeSearch($query, $search)
     {
@@ -37,5 +41,10 @@ class Setting extends Model
     public function admin()
     {
         return $this->belongsTo(Admin::class)->withDefault();
+    }
+
+    public static function get($key , $default = null ){
+        $data = self::select($key)->latest()->first();
+        return $data->{$key} ?? $default;
     }
 }

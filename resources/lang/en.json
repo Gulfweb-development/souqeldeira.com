@@ -1,0 +1,6 @@
+{
+    "expire_time_adv": "Ad Expiry (days)",
+    "expire_time_premium_adv": "Premium Ad Expiry (days)",
+    "price_adv": "Advertising fee (0 = free)",
+    "price_premium_adv": "Premium Ad fee (0 = free)"
+}
