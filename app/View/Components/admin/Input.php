@@ -19,7 +19,7 @@ class Input extends Component
      *
      * @return void
      */
-    public function __construct($name , $type = '', $label = '', $placeholder)
+    public function __construct($name , $type = '', $label = '', $placeholder = '')
     {
         $this->name = $name;
         $this->type = $type;
