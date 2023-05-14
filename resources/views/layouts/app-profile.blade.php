@@ -195,72 +195,71 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="{{ request()->segment(2) == 'profile' ? 'active' : '' }}"
-                                            href="{{ route('profile.profile') }}">
-                                            <i class="fa fa-user"></i>@lang('app.profile')
+                                        <a class="{{ (request()->segment(2) == 'ad' and request()->segment(3) == 'create')  ? 'active' : '' }}"
+                                           href="{{ route('profile.ad.create') }}">
+                                            <i class="fa fa-plus-circle" aria-hidden="true"></i>@lang('app.add_ads')
                                         </a>
                                     </li>
                                     <li>
                                         <a class="{{ request()->segment(2) == 'ads' ? 'active' : '' }}"
-                                            href="{{ route('profile.subscriptions.index') }}">
-                                            <i class="fa fa-list" aria-hidden="true"></i>@lang('app.subscriptions')
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="{{ request()->segment(2) == 'ads' ? 'active' : '' }}"
-                                            href="{{ route('profile.ad.index') }}">
+                                           href="{{ route('profile.ad.index') }}">
                                             <i class="fa fa-list" aria-hidden="true"></i>@lang('app.my_ads')
                                         </a>
                                     </li>
-                                    {{-- <li>
-                                        <a href="favorited-listings.html">
-                                            <i class="fa fa-heart" aria-hidden="true"></i>Favorited Properties
-                                        </a>
-                                    </li> --}}
                                     <li>
-                                        <a href="{{ route('profile.ad.create') }}">
-                                            <i class="fa fa-list" aria-hidden="true"></i>@lang('app.add_ads')
+                                        <a class="{{ request()->segment(2) == 'expired-ads' ? 'active' : '' }}"
+                                           href="{{ route('profile.ad.expired') }}">
+                                            <i class="fa fa-list" aria-hidden="true"></i>@lang('expired_ad')
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="{{ request()->segment(2) == 'subscripts' ? 'active' : '' }}"
+                                           href="{{ route('profile.subscriptions.index') }}">
+                                            <i class="fa fa-dollar-sign" aria-hidden="true"></i>@lang('app.subscriptions')
                                         </a>
                                     </li>
                                     @if (authApprovedUserCompany())
                                         <li>
                                             <a class="{{ request()->segment(2) == 'agencies' ? 'active' : '' }}"
-                                                href="{{ route('profile.agency.index') }}">
+                                               href="{{ route('profile.agency.index') }}">
                                                 <i class="fa fa-list"
-                                                    aria-hidden="true"></i>@lang('app.my_agencies')
+                                                   aria-hidden="true"></i>@lang('app.my_agencies')
                                             </a>
                                         </li>
-                                    @endif
-                                    @if (authApprovedUserCompany())
                                         <li>
                                             <a href="{{ route('profile.agency.create') }}">
                                                 <i class="fa fa-list" aria-hidden="true"></i>@lang('app.add_agency')
                                             </a>
                                         </li>
                                     @endif
-
                                     <li>
-                                        <a class="{{ request()->segment(2) == 'change-password' ? 'active' : '' }}"
-                                            href="{{ route('profile.change.password') }}">
-                                            <i class="fa fa-lock"></i>@lang('app.change_password')
+                                        <a class="{{ request()->segment(2) == 'favorites' ? 'active' : '' }}"
+                                           href="{{ route('profile.favorites') }}">
+                                            <i class="fa fa-heart"></i>@lang('app.favorites')
                                         </a>
                                     </li>
                                     <li>
                                         <a class="{{ request()->segment(2) == 'contact-user' ? 'active' : '' }}"
-                                            href="{{ route('profile.contact-user.index') }}">
-                                            <i class="fa fa-lock"></i>@lang('app.contact_messages')
+                                           href="{{ route('profile.contact-user.index') }}">
+                                            <i class="fa fa-envelope-open"></i>@lang('app.contact_messages')
                                         </a>
                                     </li>
                                     <li>
                                         <a class="{{ request()->segment(2) == 'user-message' ? 'active' : '' }}"
-                                            href="{{ route('profile.user-message.index') }}">
-                                            <i class="fa fa-lock"></i>@lang('app.managemant_messages')
+                                           href="{{ route('profile.user-message.index') }}">
+                                            <i class="fa fa-envelope-open"></i>@lang('app.managemant_messages')
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="{{ request()->segment(2) == 'favorite' ? 'active' : '' }}"
-                                            href="{{ route('profile.favorites') }}">
-                                            <i class="fa fa-lock"></i>@lang('app.favorites')
+                                        <a class="{{ request()->segment(2) == 'profile' ? 'active' : '' }}"
+                                            href="{{ route('profile.profile') }}">
+                                            <i class="fa fa-user-edit"></i>@lang('app.profile')
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="{{ request()->segment(2) == 'change-password' ? 'active' : '' }}"
+                                            href="{{ route('profile.change.password') }}">
+                                            <i class="fa fa-lock"></i>@lang('app.change_password')
                                         </a>
                                     </li>
                                     <li>
@@ -289,8 +288,8 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="active" href="{{ route('profile.profile') }}">
-                                                <i class="fa fa-user mr-3"></i>@lang('app.profile')
+                                            <a href="{{ route('profile.ad.create') }}">
+                                                <i class="fa fa-plus-circle mr-3" aria-hidden="true"></i>@lang('app.add_ads')
                                             </a>
                                         </li>
                                         <li>
@@ -299,10 +298,11 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('profile.ad.create') }}">
-                                                <i class="fa fa-heart mr-3" aria-hidden="true"></i>@lang('app.add_ads')
+                                            <a href="{{ route('profile.subscriptions.index') }}">
+                                                <i class="fa fa-dollar-sign mr-3" aria-hidden="true"></i>@lang('app.subscriptions')
                                             </a>
                                         </li>
+                                        @if (authApprovedUserCompany())
                                         <li>
                                             <a href="{{ route('profile.agency.index') }}">
                                                 <i class="fa fa-list mr-3" aria-hidden="true"></i>@lang('app.my_agencies')
@@ -313,24 +313,30 @@
                                                 <i class="fas fa-credit-card mr-3"></i>@lang('app.add_agency')
                                             </a>
                                         </li>
+                                        @endif
                                         <li>
-                                            <a href="{{ route('profile.change.password') }}">
-                                                <i class="fas fa-paste mr-3"></i>@lang('app.change_password')
+                                            <a href="{{ route('profile.favorites') }}">
+                                                <i class="fa fa-heart mr-3"></i>@lang('app.favorites')
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{ route('profile.contact-user.index') }}">
-                                                <i class="fa fa-lock mr-3"></i>@lang('app.contact_messages')
+                                                <i class="fa fa-envelope-open mr-3"></i>@lang('app.contact_messages')
                                             </a>
                                         </li>
                                         <li>
                                             <a href="{{ route('profile.user-message.index') }}">
-                                                <i class="fa fa-lock mr-3"></i>@lang('app.managemant_messages')
+                                                <i class="fa fa-envelope-open mr-3"></i>@lang('app.managemant_messages')
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('profile.favorites') }}">
-                                                <i class="fa fa-lock mr-3"></i>@lang('app.favorites')
+                                            <a class="active" href="{{ route('profile.profile') }}">
+                                                <i class="fa fa-user-edit mr-3"></i>@lang('app.profile')
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('profile.change.password') }}">
+                                                <i class="fas fa-paste mr-3"></i>@lang('app.change_password')
                                             </a>
                                         </li>
                                         <li>

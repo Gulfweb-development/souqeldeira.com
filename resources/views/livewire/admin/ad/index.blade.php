@@ -43,6 +43,16 @@
                                             {!! showFeaturedFilter() !!}
                                         </select>
                                     </label>
+                                    |
+                                    <label>@lang('app.status')
+                                        <select name="example1_length" aria-controls="example1"
+                                                class="custom-select custom-select-sm form-control form-control-md"
+                                                wire:model="filterStatus">
+                                                <option value="all">{{ __('app.all') }}</option>
+                                                <option value="active">{{ __('active_ad') }}</option>
+                                                <option value="expire">{{ __('expired_ad') }}</option>
+                                        </select>
+                                    </label>
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-6">
@@ -76,7 +86,12 @@
                                                 <td class="table-id">{{ $ad->id }}</td>
                                                 <td><img src="{{ toAdDefaultImage($ad->getFile()) }}" alt="image" class="img-thumbnail"
                                                         width="80" height="80" /></td>
-                                                <td>{{ $ad->title  }}</td>
+                                                <td>{{ $ad->title  }}
+                                                    @if( \Illuminate\Support\Carbon::createFromTimeString($ad->archived_at)->isBefore( now()) )
+                                                        <br><span class="badge badge-danger">
+                                                            {{ __('expired_at') .': '.\Illuminate\Support\Carbon::createFromTimeString($ad->archived_at)->diffForHumans() }}</span>
+                                                    @endif
+                                                </td>
                                                 <td>{{ number_format((float)$ad->price ?? '0.5', 2) }}</td>
                                                 <td>{{ $ad->buildingType->translate('name') }}</td>
                                                 {{-- <td>{{ $ad->buildingStatus->translate('name') }}</td> --}}
@@ -87,13 +102,20 @@
                                                             {{ $ad->featured }}</span>
                                                     </a>
                                                 </td>
-                                                <td><span class="badge badge-{{ $ad->approved_badge }}"
-                                                        wire:click.prevent="toggleApprove('{{ $ad->is_approved }}','{{ $ad->id }}')">
-                                                        {{ $ad->approved }}</span></td>
+                                                <td>
+                                                    @if($ad->deleted_at != null )
+                                                        <span class="badge badge-danger">
+                                                            {{ __('deleted_at') .': '. $ad->deleted_at->diffForHumans() }}</span>
+                                                    @else
+                                                        <span class="badge badge-{{ $ad->approved_badge }}"
+                                                              wire:click.prevent="toggleApprove('{{ $ad->is_approved }}','{{ $ad->id }}')">
+                                                        {{ $ad->approved }}</span>
+                                                    @endif
+                                                </td>
 
                                                 <td>
                                                     <div class="actions">
-
+                                                        @if($ad->deleted_at == null )
                                                        @if (permationTo('ad_view'))
                                                             <a href="{{ route('admin.ad.show', [$ad->id]) }}"
                                                                 class="btn bg-gradient-warning btn-sm show-btn"
@@ -115,7 +137,7 @@
                                                                 <i class="fas fa-times"></i>
                                                             </button>
                                                        @endif
-
+                                                        @endif
                                                     </div>
                                                 </td>
                                             </tr>

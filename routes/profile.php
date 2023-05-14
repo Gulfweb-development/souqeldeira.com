@@ -10,6 +10,7 @@ Route::prefix('profile')->name('profile.')->group(function () {
         Route::get('/dashboard', 'App\Http\Livewire\Profile\Profile\Dashboard')->name('dashboard');
         // ADS START
         Route::get('/ads', 'App\Http\Livewire\Profile\Ad\Index')->name('ad.index');
+        Route::get('/expired-ads', 'App\Http\Livewire\Profile\Ad\Expired')->name('ad.expired');
         Route::get('/ad/create', 'App\Http\Livewire\Profile\Ad\Create')->name('ad.create');
         Route::get('/ad/{ad}', 'App\Http\Livewire\Profile\Ad\Show')->name('ad.show');
         Route::get('/ad/{ad}/edit', 'App\Http\Livewire\Profile\Ad\Edit')->name('ad.edit');
@@ -53,9 +54,9 @@ Route::prefix('profile')->name('profile.')->group(function () {
                     ]);
                 // return redirect()->url($payment['invoiceURL']);
                 header('Location: ' . $payment['invoiceURL']);
-                
-                
-                
+
+
+
             })->name('subscripts.store')->where('subscript','[0-9]+');
         // SUB END
         // AGENCIES START
