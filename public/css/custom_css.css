@@ -408,7 +408,7 @@ section.portfolio {
 	content:"";
 	width:initial;
     }
-    
+
 #header,
 #header.cloned{
     padding: 22px 0 35px 0!important;
@@ -428,4 +428,11 @@ a.listing-img-container {
 
 .project-single.aos-init.aos-animate {
      height: 305px;
+}
+
+.featured_advertise {
+    background-color: #f7f7f7 !important;
+}
+.featured_advertise .homes-content {
+    background: linear-gradient(178deg, rgba(201, 234, 252, 0.51) 14.9%, rgba(139, 192, 216, 0.73) 80%) ! important;
 }

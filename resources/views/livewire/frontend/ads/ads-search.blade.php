@@ -473,7 +473,7 @@
             </section>
             <div class="row">
                 @forelse ($ads as $ad)
-                    <div class="item col-lg-4 col-md-6 col-xs-12 landscapes sale">
+                    <div class="item col-lg-4 col-md-6 col-xs-12 landscapes sale @if($ad->is_featured == "1") featured_advertise {{ $ad->is_featured }} @endif">
                         <div class="project-single custom-tooltip" >
                             <div class="tooltiptext">@lang('app.region'): {{ $ad->region->translate('name') }}<br>@lang('app.type'): {{ $ad->buildingType->translate('name') }}<br>@lang('app.views'): {{ $ad->views }}<br>@lang('app.created_at_ads'): {{ $ad->created_at->diffForHumans() }}</div>
                             <a href="{{ route('ad.search', [toSlug($ad->title), $ad->id]) }}">
@@ -565,7 +565,7 @@
 
             </div>
             <nav aria-label="..." class="pt-3">
-                {{ count($ads) > 0 ? $ads->onEachSide(0)->links() : '' }}
+                {{ count($ads) > 0 ? $ads->onEachSide(1)->links() : '' }}
             </nav>
         </div>
     </section>

@@ -102,7 +102,7 @@ class AdsSearch extends Component
         if (Session::has('ads')) {
             $ads = Session::get('ads');
         } else {
-            $ads->with('region', 'governorate', 'images', 'user', 'buildingType')->where('is_approved', 1)->latest();
+            $ads->with('region', 'governorate', 'images', 'user', 'buildingType')->where('is_approved', 1)->orderByDesc('is_featured')->latest();
             if ($this->filter == 'MOST_VIWED') {
                 $ads->orderBy('views','DESC');
             } elseif ($this->filter == 'LOW_TO_HIGH') {

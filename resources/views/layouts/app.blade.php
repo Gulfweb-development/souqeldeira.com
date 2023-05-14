@@ -56,7 +56,7 @@
         <link rel="stylesheet" id="color" href="{{ asset('css/colors/pink.css') }}">
         <!-- CUSTOM CSS -->
         <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/custom_css.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/custom_css.css') }}?v1">
         <link rel="stylesheet" href="{{ asset('css/override.css') }}">
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
         @if (app()->isLocale('ar'))
@@ -586,7 +586,7 @@
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
     };
-    
+
     @php
     $localnotify = adnotify();
     @endphp
@@ -614,8 +614,8 @@
     toastr.info('{{$adexpire}}')
     @endforeach
     @endif
-    
-    
+
+
     // SHOW IF SESSION WITH REDIRECT
     @if (session()->has('success'))
         message = "{{ session()->get('success') }}";
@@ -736,10 +736,10 @@
     gtag('js', new Date());
 
     gtag('config', 'G-QDD5K0BPGB');
-    
+
     let bgcolor = $('.headings').first().next().attr('style',"padding-top:70px !important")
     // let bg =  $('.headings').first().after().css( "background" );
-    
+
     $('.headings').first().after(`
     <div style="position: fixed; right: 0;left:0;" class="container">
         <a href="{{url()->previous()}}"><i class="fa fa-arrow-left fa-2x p-4"></i> </a><br/><br/>

@@ -31,12 +31,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('queue:work')->everyMinute()->withoutOverlapping();
-        $schedule->command('queue:restart')->everyMinute()->withoutOverlapping();
+        $schedule->command('queue:work --stop-when-empty')->everyMinute();
         $schedule->call(function(){
             Ad::where('archived_at' , '<' ,  Carbon::now())->delete();
             Log::info('TASK SCUDLAR IS ORKING');
-        })->everyMinute()->withoutOverlapping();
+        })->everyMinute();
 
         $schedule->call(function(){
             $ads = Ad::whereDate('archived_at' ,  Carbon::now()->addDays(config('app.ad_expire_day_notify' , 3)))->get();
@@ -50,7 +49,7 @@ class Kernel extends ConsoleKernel
                 ]);
                 Notification::send($ad->user, new UserExpireMessageNotification($userMessage));
             }
-        })->daily()->withoutOverlapping();
+        })->daily();
     }
 
     /**

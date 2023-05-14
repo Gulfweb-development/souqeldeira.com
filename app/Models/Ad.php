@@ -105,7 +105,7 @@ class Ad extends Model
     // SEARCH FRONTEND HOME SEARCH
     public function scopeFrontSearch($query, $governorate_id, $region_id, $building_type_id, $type,$price_from, $price_to , $agency_id = null )
     {
-        $q = $query->where('is_approved', 1)->latest();
+        $q = $query->where('is_approved', 1)->orderByDesc('is_featured')->latest();
         if ($governorate_id != null) {
             $q->where('governorate_id', $governorate_id);
         }

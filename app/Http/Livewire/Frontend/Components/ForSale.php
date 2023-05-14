@@ -12,7 +12,7 @@ class ForSale extends Component
 
     public function mount()
     {
-        $this->saleAds = Ad::with('region','images','buildingType','governorate')->select('id','type','is_approved','is_featured','region_id','price','title','building_type_id','phone','governorate_id', 'created_at', 'views')->where('is_approved',1)->where('is_featured',1)->where('type','SALE')->inRandomOrder()->take(6)->get();
+        $this->saleAds = Ad::with('region','images','buildingType','governorate')->select('id','type','is_approved','is_featured','region_id','price','title','building_type_id','phone','governorate_id', 'created_at', 'views')->where('is_approved',1)->where('type','SALE')->orderByDesc('is_featured')->inRandomOrder()->take(6)->get();
     }
     public function render()
     {
