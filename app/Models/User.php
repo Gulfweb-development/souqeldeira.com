@@ -150,6 +150,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Ad::class);
     }
 
+    public function subscriptions()
+    {
+        return $this->hasMany(SubscriptionHistories::class , 'user_id' , 'id');
+    }
+
     public function contactUsers()
     {
         return $this->hasMany(ContactUser::class);

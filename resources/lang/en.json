@@ -10,6 +10,8 @@
     "expired_ad": "Expired Ad",
     "expired_at": "Expired At",
     "deleted_at": "Deleted At",
+    "increase_balance": "Please increase your balance.",
+    "balance": "balance",
     "do_you_want_to_see_more": "Do you want your ad to be seen more? Make the ad special.",
     "Upgrade_special_Advertise": "Upgrade to a special Advertise",
     "upgraded": "Your ad has been promoted as a featured ad"

@@ -11,8 +11,8 @@
 
                     <x-frontend.select name="is_featured" label="{{ __('Advertisement_type') }}">
                         <option value="">@lang('app.choose')</option>
-                        <option value="0">@lang('normal')</option>
-                        <option value="1">@lang('featured')</option>
+                        <option value="0" @if(\App\Models\SubscriptionHistories::getBalance()['normal'] <= 0 ) disabled @endif >@lang('normal') ( @lang('balance'): {{ \App\Models\SubscriptionHistories::getBalance()['normal'] }} )</option>
+                        <option value="1" @if(\App\Models\SubscriptionHistories::getBalance()['featured'] <= 0 ) disabled @endif >@lang('featured') ( @lang('balance'): {{ \App\Models\SubscriptionHistories::getBalance()['featured'] }} )</option>
                     </x-frontend.select>
 
                 <label for="" class="d-flex">@lang('app.governorates')</label>

@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Profile\Ad;
 
 use App\Models\Ad;
 use App\Models\Setting;
+use App\Models\SubscriptionHistories;
 use Carbon\Carbon;
 use App\Models\Region;
 use Livewire\Component;
@@ -77,9 +78,15 @@ class Create extends Component
             'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
         ]);
         // CHECK IF USER GET THE LIMIT OF ADS
-        if (env('ADS_LIMIT') <= user()->ads()->count()) {
+        if (env('ADS_LIMIT') > 0 and env('ADS_LIMIT') <= user()->ads()->count()) {
             $this->dispatchBrowserEvent('info', ['message' => __('app.you_got_ads_limit_please_remove_some_to_can_ad_more')]);
-            return session()->flash('success', __('app.data_created'));
+            session()->flash('info', __('app.you_got_ads_limit_please_remove_some_to_can_ad_more'));
+            return null;
+        }
+        if ( ! SubscriptionHistories::canPostAd( $this->is_featured == "1" , user())) {
+            $this->dispatchBrowserEvent('info', ['message' => __('increase_balance')]);
+            session()->flash('info', __('increase_balance'));
+            return null;
         }
         //  TO PARSE COLLECTED DATA TO TITLE
         $toRegId = Region::select('id', 'governorate_id', toLocale('name'))->where('id', $this->region_id)->firstOrFail();
@@ -105,7 +112,7 @@ class Create extends Component
                 $this->is_featured == "1" ? Setting::get('expire_time_premium_adv', 15) : Setting::get('expire_time_adv', 15)
             )->format('Y-m-d H:i:s'),
         ]);
-
+        SubscriptionHistories::postAd( $this->is_featured == "1" , user());
         // RESIZE IMAGE TO PLACEC IT IN IMAGE
         if ($this->image != NULL) {
 
