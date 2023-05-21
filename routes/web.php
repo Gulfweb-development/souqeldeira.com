@@ -67,64 +67,24 @@ Route::post('/auth/passwords/reset',function(Request $request){
     return redirect()->route('login');
 })->name('auth.passwords.reset.post');
 
+
+
+Route::any('/payment-redirect/{id}/{status?}',function(Request $request,$id , $status = "error"){
+    // dd($request->all(),$status,$id);
+    $order = \App\Models\Order::query()->where('status' , 'pending')->findOrFail($id);
+    if ( $status == "success" ) {
+        $order->status = "success";
+        $order->doSuccess();
+    } else
+        $order->status = "failed";
+    $order->save();
+    return redirect()->route('profile.subscriptions.index')->with('success', __("Welcome back."));;
+})->name('bankCallback');
+
 Route::middleware(['auth'])->group(function () {
 
 
-
-    // Start new routes
-
-    Route::get('/get_subscript',function(Request $request){
-        return view('new.index',[
-            'lists' => \App\Models\Subscriptions::all()
-            ]);
-    });
-
-    Route::get('/get_subscript/{subscript}/payment',function(\App\Models\Subscriptions $subscript){
-        // dd($subscript);
-        $user = \Auth::user();
-        if($subscript->price == 0) {
-            $user->update([
-                    'adv_nurmal_count'  => $user->adv_nurmal_count + $subscript->adv_nurmal_count,
-                    'adv_star_count'    => $user->adv_star_count + $subscript->adv_star_count
-                ]);
-            return redirect()->route('home');
-        }
-        $payment = new App\Payment\Payment;
-        $payment = $payment->setCustomer([
-            'name' => $user->name,
-            'code' => '+965',
-            'mobile' => str_replace('+965','',$user->phone),
-            'email' => $user->email,
-        ])->setAddress([
-            'block' => 'defult',
-            'street' => 'defult',
-            'building' => 'defult',
-            'address' => 'Egypt,mansoura',
-            'instructions' => 'defult',
-        ])->setItems([
-            [
-                "ItemName"   => $subscript->name_ar,
-                "Quantity"   => 1,
-                "UnitPrice"  => $subscript->price,
-            ]
-        ])->setTotal($subscript->price)
-            ->setCallBackUrl("https://test.aldeiramarket.com/payment-redirect/success")
-            ->setErrorUrl("https://test.aldeiramarket.com/payment-redirect/error");
-        // return view('new.index');
-        $payment = $payment->getInvoiceURL(rand(10,100000));
-        // return redirect()->url($payment['invoiceURL']);
-        header('Location: ' . $payment['invoiceURL']);
-    });
-
-    Route::get('/payment-redirect/{status}',function(Request $request,$status){
-        // dd($request->all(),$status);
-        return redirect()->route('home');
-    });
-
-
     // https://demo.MyFatoorah.com/KWT/ie/01072114934341
-
-
 
     // End new routes
 

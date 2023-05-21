@@ -4,6 +4,7 @@ Route::prefix('profile')->name('profile.')->group(function () {
     Route::middleware(['auth.approved', 'prevent.back.history'])->group(function () {
         // PROFILE PAGE
         Route::get('/profile', 'App\Http\Livewire\Profile\Profile\Profile')->name('profile');
+        Route::get('/invoices', 'App\Http\Livewire\Profile\Invoices\Index')->name('invoices');
         // CHANGE PASSWORD
         Route::get('/change-password', 'App\Http\Livewire\Profile\Profile\ChangePassword')->name('change.password');
         // DASHBOARD

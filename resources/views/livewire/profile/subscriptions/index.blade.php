@@ -1,6 +1,16 @@
 
-<div class="row mt-3">
 
+<div class="row mt-3">
+    @if ( $error_message != "" )
+        <div class="col-md-12">
+            <div class="alert alert-danger">{!! $error_message !!}</div>
+        </div>
+    @endif
+    @if ( $success_message != "" )
+        <div class="col-md-12">
+            <div class="alert alert-success">{!! $success_message !!}</div>
+        </div>
+    @endif
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">
@@ -31,7 +41,7 @@
                 <label class="mb-3">
                     {{ __('normal') }} (x {{ \App\Models\Setting::get('price_adv', 15)}} {{ __('app.currency') }})
                 </label>
-                <input class="form-control mb-3" name="countNormalAds" placeholder="@lang('enter_number')">
+                <input class="form-control mb-3" wire:model.defer="countNormalAds" name="" placeholder="@lang('enter_number')">
                 @error('countNormalAds') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
             <div class="card-footer">
@@ -49,7 +59,7 @@
                 <label class="mb-3">
                     {{ __('featured') }} (x {{ \App\Models\Setting::get('price_premium_adv', 15)}} {{ __('app.currency') }})
                 </label>
-                <input class="form-control mb-3" name="countFeaturedAds" placeholder="@lang('enter_number')">
+                <input class="form-control mb-3" wire:model.defer="countFeaturedAds" name="" placeholder="@lang('enter_number')">
                 @error('countFeaturedAds') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
             <div class="card-footer">

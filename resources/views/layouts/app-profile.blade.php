@@ -218,6 +218,12 @@
                                             <i class="fa fa-dollar-sign" aria-hidden="true"></i>@lang('app.subscriptions')
                                         </a>
                                     </li>
+                                    <li>
+                                        <a class="{{ request()->segment(2) == 'invoices' ? 'active' : '' }}"
+                                           href="{{ route('profile.invoices') }}">
+                                            <i class="fa fa-dollar-sign" aria-hidden="true"></i>@lang('invoices')
+                                        </a>
+                                    </li>
                                     @if (authApprovedUserCompany())
                                         <li>
                                             <a class="{{ request()->segment(2) == 'agencies' ? 'active' : '' }}"
@@ -300,6 +306,11 @@
                                         <li>
                                             <a href="{{ route('profile.subscriptions.index') }}">
                                                 <i class="fa fa-dollar-sign mr-3" aria-hidden="true"></i>@lang('app.subscriptions')
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('profile.invoices') }}">
+                                                <i class="fa fa-dollar-sign mr-3" aria-hidden="true"></i>@lang('invoices')
                                             </a>
                                         </li>
                                         @if (authApprovedUserCompany())

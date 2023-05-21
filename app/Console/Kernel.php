@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Models\Ad;
+use App\Models\Order;
 use App\Models\UserMessage;
 use App\Notifications\AdminToUserTypeNotification;
 use App\Notifications\UserExpireMessageNotification;
@@ -50,6 +51,14 @@ class Kernel extends ConsoleKernel
                 Notification::send($ad->user, new UserExpireMessageNotification($userMessage));
             }
         })->daily();
+
+        $schedule->call(function(){
+            Order::where('created_at' , '<=' ,  Carbon::now()->subHours(3))
+                ->where('status' , 'pending')
+                ->update([
+                    'status' => 'failed'
+                ]);
+        })->hourly();
     }
 
     /**

@@ -32,9 +32,9 @@ class Order extends Model
         if($this->status == "success") {
             $return ='<span class="badge badge-success">';
         } elseif($this->status == "failed") {
-            $return ='<span class="badge badge-secondary">';
-        } else {
             $return ='<span class="badge badge-danger">';
+        } else {
+            $return ='<span class="badge badge-secondary">';
         }
         $return .= __($this->status) ;
         $return .='</span>';
@@ -49,9 +49,9 @@ class Order extends Model
 
     public function doSuccess()
     {
-        $class = optional($this->on_success)->class;
-        $method = optional($this->on_success)->method;
-        $params =optional( $this->on_success)->params;
+        $class = optional($this->on_success)['class'] ?? null ;
+        $method = optional($this->on_success)['method'] ?? null ;
+        $params =optional( $this->on_success)['params'] ?? null ;
         if ( class_exists($class) and method_exists($class , $method) ){
             $object = new $class();
             $object->{$method}($params);

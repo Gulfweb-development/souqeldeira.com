@@ -26,5 +26,9 @@
     "failed" : "Failed",
     "success" : "Success",
     "pending" : "Pending",
+    "finish_package_first" : "To buy ads individually, first use your package completely.",
+    "buy_pay_as_go" : "Buy x:count :type as pay as go.",
+    "invoices" : "Invoices",
+    "transaction_code" : "Transaction Code",
     "" : ""
 }

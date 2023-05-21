@@ -2,7 +2,10 @@
 
 namespace App\Http\Livewire\Profile\Subscripts;
 
+use App\Models\Order;
+use App\Models\SubscriptionHistories;
 use App\Models\Subscriptions;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
 
@@ -11,8 +14,12 @@ class Index extends Component
 
     public $countNormalAds;
     public $countFeaturedAds;
+    public $error_message = "";
+    public $success_message = "";
     public function payAsGo($type)
     {
+        $this->error_message = "";
+        $this->success_message = "";
         $field = 'countFeaturedAds';
         if( $type == 'normal' )
             $field = 'countNormalAds';
@@ -20,6 +27,29 @@ class Index extends Component
             $field => 'required|numeric|min:1',
         ]);
 
+        $package = SubscriptionHistories::activePackage(auth()->user());
+        if ( $package and (
+            $package->featured_count - $package->featured_use > 0 or
+            $package->adv_count - $package->adv_use > 0)
+        ){
+            $this->error_message = __('finish_package_first');
+            return ;
+        }
+        $json['class'] = User::class;
+        $json['method'] = 'updatePayAsYouGo';
+        $json['params'] = ['count' => $this->{$field} , 'type' => ($type == 'normal' ? 'adv_nurmal_count' : 'adv_star_count') , 'user_id' => auth()->id() ];
+        $price = $this->{$field} * \App\Models\Setting::get('price_premium_adv', 15);
+        if( $type == 'normal' )
+            $price = $this->{$field} * \App\Models\Setting::get('price_adv', 15);
+
+        $order = Order::query()->create([
+            'user_id' => auth()->id(),
+            'description_en' => trans('buy_pay_as_go' , ['type' => trans($type) , 'count' => $this->{$field} ] , 'en'),
+            'description_ar' => trans('buy_pay_as_go' , ['type' => trans($type) , 'count' => $this->{$field} ] , 'ar'),
+            'transaction_id' => auth()->id(),
+            'price' => $price,
+            'on_success' => $json,
+        ]);
 //        $history = \DB::table('subscription_history')->insertGetId([
 //            'user_id' => \Auth::user()->id,
 //            'subscription_id' => $subscript->id,
@@ -58,7 +88,9 @@ class Index extends Component
 //
 
 
-        session()->flash('success', __('app.data_updated'));
+        $this->countNormalAds = "";
+        $this->countFeaturedAds = "";
+        $this->error_message = "";
         return redirect()->back();
     }
 
