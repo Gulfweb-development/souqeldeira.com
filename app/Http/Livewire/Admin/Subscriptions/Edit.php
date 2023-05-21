@@ -14,6 +14,7 @@ class Edit extends Component
     public function mount(SubscriptionsModel $subscription)
     {
         $this->subscription = $subscription;
+        $this->state = $subscription->toArray();
     }
 
     public function update()
@@ -24,6 +25,7 @@ class Edit extends Component
             'adv_nurmal_count' => 'required',
             'adv_star_count' => 'required',
             'price' => 'required',
+            'expire_time' => 'required|min:1',
         ])->validate();
         $this->subscription->update($this->state);
         session()->flash('success', __('app.data_updated'));

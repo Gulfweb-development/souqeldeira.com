@@ -3,7 +3,7 @@
     <x-slot name="pageTitle">@lang('app.dashboard') | @lang('app.subscriptions') | @lang('app.edit')</x-slot>
     <x-slot name="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">@lang('app.dashboard')</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('admin.subscriptions.index') }}">@lang('app.sliders')</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('admin.subscriptions.index') }}">@lang('subscriptions_package')</a></li>
         <li class="breadcrumb-item active">@lang('app.edit')</li>
     </x-slot>
     <div class="card card-primary card-outline">
@@ -23,6 +23,9 @@
                 </div>
                 <div class="col-md-6">
                     <x-admin.input name="state.price" label="{{ __('app.price') }}" />
+                </div>
+                <div class="col-md-6">
+                    <x-admin.input name="state.expire_time" label="{{ __('expire_time') }}" />
                 </div>
                 <hr />
                 <div class="col-md-12 mt-4 justify-content-center align-items-center d-flex border-1">

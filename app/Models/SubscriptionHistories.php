@@ -21,10 +21,12 @@ class SubscriptionHistories extends Model
         'adv_use',
         'featured_use',
         'expired_at',
+        'is_payed',
     ];
 
     protected $casts = [
-        'expired_at' => 'datetime'
+        'expired_at' => 'datetime',
+        'is_payed' => 'boolean'
     ];
 
     public function user()
@@ -95,7 +97,7 @@ class SubscriptionHistories extends Model
     public static function activePackage($user = null ) {
         if ( $user == null )
             $user = auth()->user();
-        $package = $user->subscriptions()->where('expired_at' , '>=' , now() )->where(function ($query) {
+        $package = $user->subscriptions()->where('is_payed' , true )->where('expired_at' , '>=' , now() )->where(function ($query) {
            $query->whereColumn('adv_use' , '<' , 'adv_count' )
                ->orWhereColumn('featured_use' , '<' , 'featured_count' );
         })->first();

@@ -208,11 +208,8 @@ class Create extends Component
 
     public function render()
     {
-        $check = Subscriptions::where('status', 1)->get()->count();
-        if ($check > 0) {
-            if (\Auth::user()->adv_nurmal_count == 0 && \Auth::user()->adv_star_count == 0) {
-                header('Location: ' . url('profile/subscripts'));
-            }
+        if ( \App\Models\SubscriptionHistories::getBalance()['normal']  == 0 && \App\Models\SubscriptionHistories::getBalance()['featured']) {
+            header('Location: ' . url('profile/subscripts'));
         }
         return view('livewire.profile.ad.create')->layout(PROFILE_LAYOUT);
     }

@@ -7,3 +7,4 @@ ALTER TABLE `subscription_history` ADD FOREIGN KEY (`user_id`) REFERENCES `users
 ALTER TABLE `subscription_history` ADD FOREIGN KEY (`subscription_id`) REFERENCES `subscriptions`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 ALTER TABLE `subscription_history` CHANGE `order_id` `order_id` VARCHAR(255) NULL DEFAULT NULL;
 ALTER TABLE `subscription_history` ADD `adv_count` INT NULL DEFAULT NULL AFTER `order_id`, ADD `featured_count` INT NOT NULL DEFAULT '0' AFTER `adv_count`, ADD `adv_use` INT NULL DEFAULT NULL AFTER `featured_count`, ADD `featured_use` INT NOT NULL DEFAULT '0' AFTER `adv_use`, ADD `expired_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `featured_use`;
+ALTER TABLE `subscription_history` ADD `is_payed` BOOLEAN NOT NULL DEFAULT FALSE AFTER `order_id`;

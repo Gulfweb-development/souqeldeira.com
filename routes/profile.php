@@ -16,7 +16,7 @@ Route::prefix('profile')->name('profile.')->group(function () {
         Route::get('/ad/{ad}/edit', 'App\Http\Livewire\Profile\Ad\Edit')->name('ad.edit');
         // ADS END
         // SUB START
-            Route::get('/subscripts', 'App\Http\Livewire\Profile\Subscripts\Index')->name('subscriptions.index');
+        Route::get('/subscripts', 'App\Http\Livewire\Profile\Subscripts\Index')->name('subscriptions.index');
             Route::get('/subscripts/{subscript}', function(\App\Models\Subscriptions $subscript){
                 // dd($subscript);
                 $history = \DB::table('subscription_history')->insertGetId([

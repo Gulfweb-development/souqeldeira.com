@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 
 class Create extends Component
 {
- 
+
     public $state = [];
 
     public function store()
@@ -20,6 +20,7 @@ class Create extends Component
             'adv_nurmal_count' => 'required',
             'adv_star_count' => 'required',
             'price' => 'required',
+            'expire_time' => 'required|min:1',
         ])->validate();
         SubscriptionsModel::create($this->state);
         session()->flash('success', __('app.data_created'));

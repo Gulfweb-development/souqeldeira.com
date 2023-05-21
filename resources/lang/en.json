@@ -6,6 +6,7 @@
     "Advertisement_type": "Advertisement type",
     "normal": "Normal Ad",
     "featured": "Featured Ad",
+    "subscriptions_package": "Subscriptions package",
     "active_ad": "Active Ad",
     "expired_ad": "Expired Ad",
     "expired_at": "Expired At",
@@ -14,5 +15,13 @@
     "balance": "balance",
     "do_you_want_to_see_more": "Do you want your ad to be seen more? Make the ad special.",
     "Upgrade_special_Advertise": "Upgrade to a special Advertise",
-    "upgraded": "Your ad has been promoted as a featured ad"
+    "upgraded": "Your ad has been promoted as a featured ad",
+    "your_balance" : "Your Balance",
+    "buy" : "Buy",
+    "enter_number" : "Enter the desired number",
+    "what_is_featured" : "Special ads are displayed higher than normal ads, and this has made your ad more visible to users. Also, by changing the color of the advertisement box, it attracts attention and differentiates it from other advertisements",
+    "expire_time" : "Expire Time: (Days)",
+    "expire_days" : "Expire Time:",
+    "days" : "Days",
+    "" : ""
 }
