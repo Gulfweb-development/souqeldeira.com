@@ -23,5 +23,8 @@
     "expire_time" : "Expire Time: (Days)",
     "expire_days" : "Expire Time:",
     "days" : "Days",
+    "failed" : "Failed",
+    "success" : "Success",
+    "pending" : "Pending",
     "" : ""
 }
