@@ -11,7 +11,7 @@
             </div>
         @endif
         <div class="col-md-6">
-            <div class="card">
+            <div class="card  mt-1">
                 <div class="card-header">
                     <h4>{{ trans('your_balance') }}:</h4>
                 </div>
@@ -32,7 +32,7 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card">
+            <div class="card  mt-1">
                 <div class="card-header">
                     <h4>{{ trans('buy') }} {{ trans('normal') }}</h4>
                 </div>
@@ -51,7 +51,7 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card">
+            <div class="card  mt-1">
                 <div class="card-header">
                     <h4>{{ trans('buy') }} {{ trans('featured') }}</h4>
                 </div>
@@ -75,7 +75,7 @@
     <div class="row mt-3">
         @forelse ($lists as $list)
             <div class="col-md-3">
-                <div class="card">
+                <div class="card  mt-1">
                     <div class="card-header">
                         <h4>{{ $list['name_'.app()->getLocale()] }}</h4>
                     </div>

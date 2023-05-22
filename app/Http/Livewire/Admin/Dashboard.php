@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin;
 
 use App\Models\Ad;
 use App\Models\Faq;
+use App\Models\Order;
 use App\Models\User;
 use App\Models\Region;
 use Livewire\Component;
@@ -19,6 +20,10 @@ class Dashboard extends Component
     public $governorates = 0;
     public $regions = 0;
     public $faqs = 0;
+    public $paid_last_month = 0;
+    public $paid_this_month = 0;
+    public $paid_this_week = 0;
+    public $paid_today = 0;
     public function mount()
     {
         $this->approvedAds = Ad::where('is_approved',1)->count();
@@ -29,6 +34,10 @@ class Dashboard extends Component
         $this->governorates = Governorate::count();
         $this->regions = Region::count();
         $this->faqs = Faq::count();
+        $this->paid_today = Order::query()->where('status' , 'success')->whereDate('created_at' , now())->sum('price');
+        $this->paid_this_week = Order::query()->where('status' , 'success')->whereDate('created_at' ,'>=' , now()->startOfWeek())->sum('price');
+        $this->paid_this_month = Order::query()->where('status' , 'success')->whereDate('created_at' , '>=' ,now()->startOfMonth())->sum('price');
+        $this->paid_last_month = Order::query()->where('status' , 'success')->whereDate('created_at' , '<' ,now()->startOfMonth())->whereDate('created_at' , '>=' ,now()->subMonth()->startOfMonth())->sum('price');
     }
 
     public function render()

@@ -66,7 +66,7 @@
         </div>
         <!-- ./col -->
     </div>
-        <div class="row">
+    <div class="row">
         <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-info">
@@ -124,6 +124,54 @@
                     <i class="las la-city"></i>
                 </div>
                 {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
+            </div>
+        </div>
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-gradient-info">
+                <div class="inner">
+                    <h3>{{ $paid_today }} @lang('app.currency')</h3>
+                    <p>@lang('paid_today')</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-dollar-sign"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-gradient-info">
+                <div class="inner">
+                    <h3>{{ $paid_this_week }} @lang('app.currency')</h3>
+                    <p>@lang('paid_this_week')</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-dollar-sign"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-gradient-info">
+                <div class="inner">
+                    <h3>{{ $paid_this_month }} @lang('app.currency')</h3>
+                    <p>@lang('paid_this_month')</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-dollar-sign"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-gradient-info">
+                <div class="inner">
+                    <h3>{{ $paid_last_month }} @lang('app.currency')</h3>
+                    <p>@lang('paid_last_month')</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-dollar-sign"></i>
+                </div>
             </div>
         </div>
         <!-- ./col -->

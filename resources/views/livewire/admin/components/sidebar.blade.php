@@ -85,7 +85,7 @@
                     @endif
 
 
-                    
+
                     <li class="nav-item">
                         <a href="{{ route('admin.subscriptions.index') }}"
                             class="nav-link  {{ request()->segment(2) == 'subscriptions' ? 'active' : '' }}">
@@ -95,8 +95,18 @@
                             </p>
                         </a>
                     </li>
-                    
-                    
+
+                    <li class="nav-item">
+                        <a href="{{ route('admin.invoices.index') }}"
+                            class="nav-link  {{ request()->segment(2) == 'invoices' ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-dollar-sign"></i>
+                            <p>
+                                @lang('invoices')
+                            </p>
+                        </a>
+                    </li>
+
+
                     @if (permationTo('region_create'))
                         <li class="nav-item">
                             <a href="{{ route('admin.region.index') }}"

@@ -12,7 +12,7 @@
     "expired_at": "Expired At",
     "deleted_at": "Deleted At",
     "increase_balance": "Please increase your balance.",
-    "balance": "balance",
+    "balance": "Balance",
     "do_you_want_to_see_more": "Do you want your ad to be seen more? Make the ad special.",
     "Upgrade_special_Advertise": "Upgrade to a special Advertise",
     "upgraded": "Your ad has been promoted as a featured ad",
@@ -33,5 +33,9 @@
     "buy_package" : "Buy :name (Num.: x:normal, x:featured) - :expire Days.",
     "invoices" : "Invoices",
     "transaction_code" : "Transaction Code",
+    "paid_last_month" : "Paid in Last Month",
+    "paid_this_month" : "Paid in This Month",
+    "paid_this_week" : "Paid in This Week",
+    "paid_today" : "Paid Today",
     "" : ""
 }

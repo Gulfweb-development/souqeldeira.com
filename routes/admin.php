@@ -35,6 +35,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/buildingtype/{buildingtype}', 'App\Http\Livewire\Admin\Buildingtype\Show')->name('buildingtype.show');
         // BUILDING TYPE END
         // subscriptions STRAT
+        Route::get('/invoices', 'App\Http\Livewire\Admin\Invoices\Index')->name('invoices.index');
         Route::get('/subscriptions', 'App\Http\Livewire\Admin\Subscriptions\Index')->name('subscriptions.index');
         Route::get('/subscriptions/create', 'App\Http\Livewire\Admin\Subscriptions\Create')->name('subscriptions.create');
         Route::get('/subscriptions/{subscription}/edit', 'App\Http\Livewire\Admin\Subscriptions\Edit')->name('subscriptions.edit');
