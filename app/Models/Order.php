@@ -7,6 +7,7 @@ use App\Traits\Translation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use function Symfony\Component\Translation\t;
 
 class Order extends Model
 {
@@ -54,7 +55,7 @@ class Order extends Model
         $params =optional( $this->on_success)['params'] ?? null ;
         if ( class_exists($class) and method_exists($class , $method) ){
             $object = new $class();
-            $object->{$method}($params);
+            $object->{$method}($params , $this->id);
         }
     }
 

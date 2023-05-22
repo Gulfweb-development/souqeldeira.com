@@ -7,6 +7,7 @@ use App\Traits\Translation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 
 class SubscriptionHistories extends Model
 {
@@ -102,5 +103,12 @@ class SubscriptionHistories extends Model
                ->orWhereColumn('featured_use' , '<' , 'featured_count' );
         })->first();
         return $package;
+    }
+
+    public function buyPackage($data, $orderId) {
+        self::query()->where('id' ,  $data['package_id'])->update([
+            'order_id' => $orderId,
+            'is_payed' => true
+        ]);
     }
 }

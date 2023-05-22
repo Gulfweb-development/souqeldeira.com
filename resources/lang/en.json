@@ -27,7 +27,10 @@
     "success" : "Success",
     "pending" : "Pending",
     "finish_package_first" : "To buy ads individually, first use your package completely.",
+    "finish_payasgo_first" : "To buy advertising package; First, make full use of your ad balance.",
+    "can_not_find_package" : "Can not find package!",
     "buy_pay_as_go" : "Buy x:count :type as pay as go.",
+    "buy_package" : "Buy :name (Num.: x:normal, x:featured) - :expire Days.",
     "invoices" : "Invoices",
     "transaction_code" : "Transaction Code",
     "" : ""

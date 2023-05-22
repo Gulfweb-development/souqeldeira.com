@@ -174,7 +174,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Order::class);
     }
-    public function updatePayAsYouGo($data)
+    public function updatePayAsYouGo($data , $orderId)
     {
         $user = self::query()->where('id' , $data['user_id'] ?? null )->first();
         $user->update([
