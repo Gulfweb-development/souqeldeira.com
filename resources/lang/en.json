@@ -37,5 +37,6 @@
     "paid_this_month" : "Paid in This Month",
     "paid_this_week" : "Paid in This Week",
     "paid_today" : "Paid Today",
+    "buy_admin" : "assign by admin",
     "" : ""
 }

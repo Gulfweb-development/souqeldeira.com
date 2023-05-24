@@ -21,6 +21,17 @@
                     <i class="fas fa-times"></i>
                 </button>
             @endif
+
+                <a href="{{ route('admin.invoices.index', ['user_id' => $user->id]) }}"
+                   class="btn bg-gradient-secondary btn-md show-btn ml-2"
+                   title="@lang('invoices')">
+                    <i class="fas fa-dollar-sign"></i>
+                </a>
+                <a href="{{ route('admin.user.subscription', ['user' => $user->id]) }}"
+                   class="btn bg-gradient-secondary btn-md show-btn ml-2"
+                   title="@lang('app.subscriptions')">
+                    <i class="fas fa-th"></i>
+                </a>
         </div>
         <div class="card-body">
             @php

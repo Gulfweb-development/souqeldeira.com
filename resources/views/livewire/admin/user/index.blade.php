@@ -148,6 +148,11 @@
                                                        title="@lang('invoices')">
                                                         <i class="fas fa-dollar-sign"></i>
                                                     </a>
+                                                    <a href="{{ route('admin.user.subscription', ['user' => $user->id]) }}"
+                                                       class="btn bg-gradient-secondary btn-sm show-btn"
+                                                       title="@lang('app.subscriptions')">
+                                                        <i class="fas fa-th"></i>
+                                                    </a>
                                                 </div>
                                             </td>
                                         </tr>

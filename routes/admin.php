@@ -88,6 +88,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/user/create', 'App\Http\Livewire\Admin\User\Create')->name('user.create');
         Route::get('/user/{user}/edit', 'App\Http\Livewire\Admin\User\Edit')->name('user.edit');
         Route::get('/user/{user}','App\Http\Livewire\Admin\User\Show')->name('user.show');
+        Route::get('/user/subscription/{user}','App\Http\Livewire\Admin\User\Subscription')->name('user.subscription');
         // USERS END
         // COMPANIES STRAT
         Route::get('/company', 'App\Http\Livewire\Admin\Company\Index')->name('company.index');
