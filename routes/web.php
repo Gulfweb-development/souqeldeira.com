@@ -81,6 +81,10 @@ Route::any('/payment-redirect/{id}/{status?}',function(Request $request,$id , $s
     return redirect()->route('profile.subscriptions.index')->with('success', __("Welcome back."));;
 })->name('bankCallback');
 
+Route::any('/payment-sample/{id}',function(Request $request,$id){
+   return '<a href="'.route('bankCallback' , ['id' => $id , 'status' => 'success']).'" >Pay</a><br><a href="'.route('bankCallback' , ['id' => $id , 'status' => 'error']).'">cancel</a>';
+})->name('goSampleBank');
+
 Route::middleware(['auth'])->group(function () {
 
 

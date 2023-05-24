@@ -65,6 +65,7 @@ class Index extends Component
             'price' => $price,
             'on_success' => $json,
         ]);
+        return redirect()->route('goSampleBank' , ['id' => $order->id] );
     }
     public function payAsGo($type)
     {
@@ -141,7 +142,7 @@ class Index extends Component
         $this->countNormalAds = "";
         $this->countFeaturedAds = "";
         $this->error_message = "";
-        return redirect()->back();
+        return redirect()->route('goSampleBank' , ['id' => $order->id] );
     }
 
 
