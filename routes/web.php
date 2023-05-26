@@ -70,15 +70,27 @@ Route::post('/auth/passwords/reset',function(Request $request){
 
 
 Route::any('/payment-redirect/{id}/{status?}',function(Request $request,$id , $status = "error"){
-    // dd($request->all(),$status,$id);
+
     $order = \App\Models\Order::query()->where('status' , 'pending')->findOrFail($id);
+    try {
+        $payment = (new \App\Payment\Payment())->getPaymentStatus($request->paymentId , 'PaymentId');
+        if ( $payment->Data->InvoiceStatus == 'Paid' )
+            $status = "success";
+    } catch (Exception $exception) {
+        $order->description = $exception->getMessage();
+        $status = "error";
+    }
     if ( $status == "success" ) {
         $order->status = "success";
         $order->doSuccess();
     } else
         $order->status = "failed";
     $order->save();
-    return redirect()->route('profile.subscriptions.index')->with('success', __("Welcome back."));;
+
+    if ( $status == "success" )
+        return redirect()->route('profile.invoices')->with('success', $order['description_'.app()->getLocale()] .' '. trans('paid_successfully'));
+    return redirect()->route('profile.invoices')->with('error', __('paid_failed'));
+
 })->name('bankCallback');
 
 Route::any('/payment-sample/{id}',function(Request $request,$id){

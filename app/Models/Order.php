@@ -20,6 +20,7 @@ class Order extends Model
         'transaction_id',
         'price',
         'status',
+        'description',
         'on_success',
     ];
 

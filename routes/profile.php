@@ -16,50 +16,7 @@ Route::prefix('profile')->name('profile.')->group(function () {
         Route::get('/ad/{ad}', 'App\Http\Livewire\Profile\Ad\Show')->name('ad.show');
         Route::get('/ad/{ad}/edit', 'App\Http\Livewire\Profile\Ad\Edit')->name('ad.edit');
         // ADS END
-        // SUB START
-        Route::get('/subscripts', 'App\Http\Livewire\Profile\Subscripts\Index')->name('subscriptions.index');
-            Route::get('/subscripts/{subscript}', function(\App\Models\Subscriptions $subscript){
-                // dd($subscript);
-                $history = \DB::table('subscription_history')->insertGetId([
-                        'user_id' => \Auth::user()->id,
-                        'subscription_id' => $subscript->id,
-                        'order_id' => 0,
-                    ]);
-                $payment = new App\Payment\Payment;
-                $payment = $payment->setCustomer([
-                    'name' => \Auth::user()->name,
-                    'code' => '+965',
-                    'mobile' => str_replace('+965','',\Auth::user()->phone),
-                    'email' => \Auth::user()->email,
-                ])->setAddress([
-                    'block' => 'defult',
-                    'street' => 'defult',
-                    'building' => 'defult',
-                    'address' => 'Egypt,mansoura',
-                    'instructions' => 'defult',
-                ])->setItems([
-                    [
-                        "ItemName"   => $subscript->name_ar,
-                        "Quantity"   => 1,
-                        "UnitPrice"  => $subscript->price,
-                    ]
-                ])->setTotal($subscript->price)
-                    ->setCallBackUrl("https://test.aldeiramarket.com/payment-redirect/success")
-                    ->setErrorUrl("https://test.aldeiramarket.com/payment-redirect/error");
-                $payment = $payment->getInvoiceURL($history);
-                // dd($payment);
-                \DB::table('subscription_history')->where([
-                        'id' => $history,
-                    ])->update([
-                    'order_id' => $payment['invoiceId']
-                    ]);
-                // return redirect()->url($payment['invoiceURL']);
-                header('Location: ' . $payment['invoiceURL']);
 
-
-
-            })->name('subscripts.store')->where('subscript','[0-9]+');
-        // SUB END
         // AGENCIES START
         Route::get('/agencies', 'App\Http\Livewire\Profile\Agency\Index')->name('agency.index');
         Route::get('/agency/create', 'App\Http\Livewire\Profile\Agency\Create')->name('agency.create');

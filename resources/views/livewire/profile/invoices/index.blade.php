@@ -9,6 +9,7 @@
                     <th>@lang('app.price')</th>
                     <th>@lang('transaction_code')</th>
                     <th>@lang('app.status')</th>
+                    <th>@lang('app.description')</th>
                     <th>@lang('app.created_at')</th>
                 </tr>
             </thead>
@@ -20,6 +21,7 @@
                         <td>{{ $invoice->price }}</td>
                         <td>{{ $invoice->transaction_id }}</td>
                         <td>{!! $invoice->getStatus() !!}</td>
+                        <td>{{ $invoice->description }}</td>
                         <td>{{ $invoice->created_at->diffForHumans() }}</td>
                     </tr>
                 @empty

@@ -61,11 +61,35 @@ class Index extends Component
             'user_id' => auth()->id(),
             'description_en' => trans('buy_package' , ['name' => $package->name_en , 'normal' => $package->adv_nurmal_count, 'featured' => $package->adv_star_count , 'expire' => $package->expire_time ] , 'en'),
             'description_ar' => trans('buy_package' , ['name' => $package->name_ar , 'normal' => $package->adv_nurmal_count, 'featured' => $package->adv_star_count , 'expire' => $package->expire_time ] , 'ar'),
-            'transaction_id' => auth()->id(),
             'price' => $price,
             'on_success' => $json,
         ]);
-        return redirect()->route('goSampleBank' , ['id' => $order->id] );
+
+
+        $payment = new \App\Payment\Payment();
+        $payment = $payment->setCustomer([
+            'name' => \Auth::user()->name,
+            'code' => '+965',
+            'mobile' => str_replace('+965','',\Auth::user()->phone),
+            'email' => \Auth::user()->email,
+        ])->setAddress([
+            'block' => 'defult',
+            'street' => 'defult',
+            'building' => 'defult',
+            'address' => 'Egypt,mansoura',
+            'instructions' => 'defult',
+        ])->setItems([
+            [
+                "ItemName"   => trans('buy_package' , ['name' => $package->name_en , 'normal' => $package->adv_nurmal_count, 'featured' => $package->adv_star_count , 'expire' => $package->expire_time ] , 'en'),
+                "Quantity"   => 1,
+                "UnitPrice"  => $price,
+            ]
+        ])->setTotal($price)
+            ->setCallBackUrl(route('bankCallback' , ['id' => $order->id , "status" => "success"] ) )
+            ->setErrorUrl(route('bankCallback' , ['id' => $order->id , "status" => "error"] ));
+        $payment = $payment->getInvoiceURL($order->id);
+        $order->update(['transaction_id' =>  $payment['invoiceId'] ]);
+        return redirect()->to($payment['invoiceURL']);
     }
     public function payAsGo($type)
     {
@@ -89,60 +113,46 @@ class Index extends Component
         $json['class'] = User::class;
         $json['method'] = 'updatePayAsYouGo';
         $json['params'] = ['count' => $this->{$field} , 'type' => ($type == 'normal' ? 'adv_nurmal_count' : 'adv_star_count') , 'user_id' => auth()->id() ];
-        $price = $this->{$field} * \App\Models\Setting::get('price_premium_adv', 15);
+
+
+        $unitPrice = \App\Models\Setting::get('price_premium_adv', 15);
         if( $type == 'normal' )
-            $price = $this->{$field} * \App\Models\Setting::get('price_adv', 15);
+            $unitPrice = \App\Models\Setting::get('price_adv', 15);
+         $price = $this->{$field} * $unitPrice;
 
         $order = Order::query()->create([
             'user_id' => auth()->id(),
             'description_en' => trans('buy_pay_as_go' , ['type' => trans($type) , 'count' => $this->{$field} ] , 'en'),
             'description_ar' => trans('buy_pay_as_go' , ['type' => trans($type) , 'count' => $this->{$field} ] , 'ar'),
-            'transaction_id' => auth()->id(),
+            'transaction_id' => null,
             'price' => $price,
             'on_success' => $json,
         ]);
-//        $history = \DB::table('subscription_history')->insertGetId([
-//            'user_id' => \Auth::user()->id,
-//            'subscription_id' => $subscript->id,
-//            'order_id' => 0,
-//        ]);
-//        $payment = new \App\Payment\Payment();
-//        $payment = $payment->setCustomer([
-//            'name' => \Auth::user()->name,
-//            'code' => '+965',
-//            'mobile' => str_replace('+965','',\Auth::user()->phone),
-//            'email' => \Auth::user()->email,
-//        ])->setAddress([
-//            'block' => 'defult',
-//            'street' => 'defult',
-//            'building' => 'defult',
-//            'address' => 'Egypt,mansoura',
-//            'instructions' => 'defult',
-//        ])->setItems([
-//            [
-//                "ItemName"   => $subscript->name_ar,
-//                "Quantity"   => 1,
-//                "UnitPrice"  => $subscript->price,
-//            ]
-//        ])->setTotal($subscript->price)
-//            ->setCallBackUrl("https://test.aldeiramarket.com/payment-redirect/success")
-//            ->setErrorUrl("https://test.aldeiramarket.com/payment-redirect/error");
-//        $payment = $payment->getInvoiceURL($history);
-//        // dd($payment);
-//        \DB::table('subscription_history')->where([
-//            'id' => $history,
-//        ])->update([
-//            'order_id' => $payment['invoiceId']
-//        ]);
-//        // return redirect()->url($payment['invoiceURL']);
-//        header('Location: ' . $payment['invoiceURL']);
-//
 
-
-        $this->countNormalAds = "";
-        $this->countFeaturedAds = "";
-        $this->error_message = "";
-        return redirect()->route('goSampleBank' , ['id' => $order->id] );
+        $payment = new \App\Payment\Payment();
+        $payment = $payment->setCustomer([
+            'name' => \Auth::user()->name,
+            'code' => '+965',
+            'mobile' => str_replace('+965','',\Auth::user()->phone),
+            'email' => \Auth::user()->email,
+        ])->setAddress([
+            'block' => 'defult',
+            'street' => 'defult',
+            'building' => 'defult',
+            'address' => 'Egypt,mansoura',
+            'instructions' => 'defult',
+        ])->setItems([
+            [
+                "ItemName"   => trans('buy_pay_as_go' , ['type' => trans($type) , 'count' => $this->{$field} ] , 'en'),
+                "Quantity"   => $this->{$field},
+                "UnitPrice"  => $unitPrice,
+            ]
+        ])->setTotal($price)
+            ->setCallBackUrl(route('bankCallback' , ['id' => $order->id , "status" => "success"] ) )
+            ->setErrorUrl(route('bankCallback' , ['id' => $order->id , "status" => "error"] ));
+        $payment = $payment->getInvoiceURL($order->id);
+        $order->update(['transaction_id' =>  $payment['invoiceId'] ]);
+        return redirect()->to($payment['invoiceURL']);
     }
 
 
