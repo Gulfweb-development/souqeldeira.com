@@ -16,7 +16,9 @@ Route::prefix('profile')->name('profile.')->group(function () {
         Route::get('/ad/{ad}', 'App\Http\Livewire\Profile\Ad\Show')->name('ad.show');
         Route::get('/ad/{ad}/edit', 'App\Http\Livewire\Profile\Ad\Edit')->name('ad.edit');
         // ADS END
-
+        // SUB START
+        Route::get('/subscripts', 'App\Http\Livewire\Profile\Subscripts\Index')->name('subscriptions.index');
+        // SUB END
         // AGENCIES START
         Route::get('/agencies', 'App\Http\Livewire\Profile\Agency\Index')->name('agency.index');
         Route::get('/agency/create', 'App\Http\Livewire\Profile\Agency\Create')->name('agency.create');
