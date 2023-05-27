@@ -1,6 +1,6 @@
 {
     "expire_time_adv": "صلاحية الاعلان (يوم)",
-    "expire_time_premium_adv": "Featured Ad Expiry (days)",
+    "expire_time_premium_adv": "Premium Ad Expiry (days)",
     "price_adv": "السعر (0 = مجانا)",
     "price_premium_adv": "سعر اعلان مميز (0 = مجانا)",
     "Advertisement_type": "نو الاعلان",
