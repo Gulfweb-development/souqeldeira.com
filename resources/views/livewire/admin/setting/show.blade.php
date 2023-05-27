@@ -93,6 +93,7 @@
                             <td>@lang('app.home') @lang('app.description')</td>
                             <td>{!! $setting->translate('home_details') !!}</td>
                         </tr>
+
                         <tr>
                             <td>
                                 {{ $num++ }}
@@ -101,6 +102,15 @@
                             <td>{{ $setting->translate('keywords') }}</td>
                         </tr>
 
+                        @for($i = 0 ; $i < $setting['num_special_position'] ; $i++ )
+                            <tr>
+                                <td>
+                                    {{ $num++ }}
+                                </td>
+                                <td>{{ __('price_of_position') . ' ' . ( $i + 1) }}</td>
+                                <td>{{ $setting['special_position'][$i]['price']  }} for {{ $setting['special_position'][$i]['expire']  }} Days</td>
+                            </tr>
+                        @endfor
                         <tr>
                             <td>
                                 {{ $num++ }}
