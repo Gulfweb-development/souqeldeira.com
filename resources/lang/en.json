@@ -40,8 +40,12 @@
     "buy_admin" : "assign by admin",
     "paid_successfully" : "paid successfully.",
     "paid_failed" : "Transaction failed!",
-    "num_special_position" : "Number of special Position:",
+    "num_special_position" : "Number of Premium Position:",
     "price_of_position" : "Price Of Position",
     "expire_of_position" : "Expire Days Of Position",
+    "premium_position" : "Premium Position",
+    "position" : "Position",
+    "paid" : "Paid",
+    "action" : "Action",
     "" : ""
 }

@@ -19,6 +19,10 @@ Route::prefix('profile')->name('profile.')->group(function () {
         // SUB START
         Route::get('/subscripts', 'App\Http\Livewire\Profile\Subscripts\Index')->name('subscriptions.index');
         // SUB END
+        // premium position START
+        Route::get('/positions/list', 'App\Http\Livewire\Profile\Positions\Index')->name('positions.index');
+        Route::get('/positions/{id}/buy', 'App\Http\Livewire\Profile\Positions\Buy')->name('positions.buy');
+        // premium position END
         // AGENCIES START
         Route::get('/agencies', 'App\Http\Livewire\Profile\Agency\Index')->name('agency.index');
         Route::get('/agency/create', 'App\Http\Livewire\Profile\Agency\Create')->name('agency.create');

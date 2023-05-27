@@ -245,6 +245,12 @@
                                         </a>
                                     </li>
                                     <li>
+                                        <a class="{{ request()->segment(2) == 'positions' ? 'active' : '' }}"
+                                           href="{{ route('profile.positions.index') }}">
+                                            <i class="fa fa-star"></i>@lang('premium_position')
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a class="{{ request()->segment(2) == 'contact-user' ? 'active' : '' }}"
                                            href="{{ route('profile.contact-user.index') }}">
                                             <i class="fa fa-envelope-open"></i>@lang('app.contact_messages')
