@@ -32,7 +32,14 @@ class Setting extends Model
         'expire_time_premium_adv',
         'price_adv',
         'price_premium_adv',
+        'num_special_position',
+        'special_position',
     ];
+
+    protected $casts = [
+        'special_position' => 'array'
+    ];
+
     public function scopeSearch($query, $search)
     {
         return $query->where(toLocale('title'), 'LIKE', '%' . $search . '%');

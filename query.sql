@@ -13,3 +13,5 @@ ALTER TABLE `orders` ADD `description` TEXT NULL DEFAULT NULL AFTER `on_success`
 
 
 -- ===============================================================================
+
+ALTER TABLE `settings` ADD `num_special_position` INT NOT NULL DEFAULT '0' AFTER `price_premium_adv`, ADD `special_position` TEXT NULL DEFAULT NULL AFTER `num_special_position`;

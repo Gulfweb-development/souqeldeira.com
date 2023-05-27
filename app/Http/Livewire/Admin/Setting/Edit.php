@@ -39,6 +39,9 @@ class Edit extends Component
             'expire_time_premium_adv' => 'required|numeric|min:1',
             'price_adv' => 'required|numeric|min:0',
             'price_premium_adv' => 'required|numeric|min:0',
+            'num_special_position' => 'required|numeric|min:0',
+            'special_position.*.price' => 'required|numeric|min:0',
+            'special_position.*.expire' => 'required|numeric|min:0',
 //            'publish_all_to_social_media' => 'required|boolean',
 //            'is_payment_available' => 'required|boolean',
         ])->validate();

@@ -25,6 +25,20 @@
             </div>
             <hr>
             <div class="row">
+                <div class="col-md-12">
+                    <x-admin.input name="state.num_special_position" label="{{ __('num_special_position') }}"/>
+                </div>
+                @for($i = 0 ; $i < $state['num_special_position'] ; $i++ )
+                    <div class="col-md-6">
+                        <x-admin.input name="state.special_position.{{$i}}.price" label="{{ __('price_of_position') . ' ' . ( $i + 1) }}"/>
+                    </div>
+                    <div class="col-md-6">
+                        <x-admin.input name="state.special_position.{{$i}}.expire" label="{{ __('expire_of_position') . ' ' . ( $i + 1) }}"/>
+                    </div>
+                @endfor
+            </div>
+            <hr>
+            <div class="row">
                 <div class="col-md-6">
                     <x-admin.input name="state.expire_time_adv" label="{{ __('expire_time_adv') }}"/>
                 </div>

@@ -40,5 +40,8 @@
     "buy_admin" : "assign by admin",
     "paid_successfully" : "paid successfully.",
     "paid_failed" : "Transaction failed!",
+    "num_special_position" : "Number of special Position:",
+    "price_of_position" : "Price Of Position",
+    "expire_of_position" : "Expire Days Of Position",
     "" : ""
 }
