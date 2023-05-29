@@ -15,7 +15,8 @@ class Index extends Component
     public function render()
     {
         $allPositions = collect(Setting::get('special_position'));
-        $positions = $allPositions->diffKeys(Position::getActivePositionForBuy());
-        return view('livewire.profile.positions.index' , compact('positions'))->layout(PROFILE_LAYOUT);
+        $positions = $allPositions->except(Position::getActivePositionForBuy());
+        $myPositions = Position::getMyActivePosition();
+        return view('livewire.profile.positions.index' , compact('positions' , 'myPositions'))->layout(PROFILE_LAYOUT);
     }
 }

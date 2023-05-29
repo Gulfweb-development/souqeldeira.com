@@ -22,6 +22,7 @@ Route::prefix('profile')->name('profile.')->group(function () {
         // premium position START
         Route::get('/positions/list', 'App\Http\Livewire\Profile\Positions\Index')->name('positions.index');
         Route::get('/positions/{id}/buy', 'App\Http\Livewire\Profile\Positions\Buy')->name('positions.buy');
+        Route::get('/positions/{id}/edit', 'App\Http\Livewire\Profile\Positions\Edit')->name('positions.edit');
         // premium position END
         // AGENCIES START
         Route::get('/agencies', 'App\Http\Livewire\Profile\Agency\Index')->name('agency.index');

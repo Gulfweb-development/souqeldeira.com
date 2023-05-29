@@ -68,4 +68,9 @@ class Position extends Model
         })->where('expired_at' , '>' , Carbon::now())->get('position')->pluck('position');
     }
 
+    public static function getMyActivePosition() {
+        return self::query()->where('user_id' , auth()->id())->where('is_payed' , true)
+            ->where('expired_at' , '>' , Carbon::now())->latest()->get();
+    }
+
 }

@@ -47,5 +47,8 @@
     "position" : "Position",
     "paid" : "Paid",
     "action" : "Action",
+    "buy_premium_position" : "Buy position :position for :expire days.",
+    "image" : "Image",
+    "text" : "Text",
     "" : ""
 }
