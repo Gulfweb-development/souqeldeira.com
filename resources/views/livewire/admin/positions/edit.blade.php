@@ -1,14 +1,15 @@
 <div>
-    <x-slot name="meta_title">@lang('premium_position') | @lang('app.edit')</x-slot>
+    <x-slot name="title">@lang('premium_position') | @lang('app.edit')</x-slot>
+    <x-slot name="pageTitle">@lang('app.dashboard') | @lang('premium_position') | @lang('app.edit')</x-slot>
+    <x-slot name="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">@lang('app.dashboard')</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('admin.positions.index') }}">@lang('premium_position')</a></li>
+        <li class="breadcrumb-item active">@lang('app.edit')</li>
+    </x-slot>
 
-    <div class="section-body listing-table">
-        <div class="widget-boxed-header">
-            <h4>@lang('premium_position') | @lang('app.edit')</h4>
-        </div>
 
-        <div class="sidebar-widget author-widget2">
-            <div class="agent-contact-form-sidebar">
-
+    <div class="card card-primary card-outline">
+        <div class="card-body">
 
                 <label for="">
                     @lang('app.type')
@@ -24,10 +25,10 @@
 
 
                 @if ( $type == "text")
-                <x-frontend.input name="title" label="{{ __('app.title') }}" />
+                <x-admin.input name="title" label="{{ __('app.title') }}" />
 
 
-                <x-frontend.textarea name="text" label="{{ __('app.text') }}" />
+                <x-admin.textarea name="text" label="{{ __('app.text') }}" />
                 @elseif( $type == "image" )
                 <div class="row">
                     <div class="col-md-6">
@@ -58,10 +59,9 @@
                 @endif
 
                 @if ( $type == "text" or $type == "image" )
-                <input type="button" name="sendmessage" class="multiple-send-message mt-5" value="@lang('app.update')"
+                <input type="button" name="sendmessage" class="btn bg-gradient-primary btn-flat mt-4" value="@lang('app.update')"
                     wire:loading.attr="disabled" wire:click.prevent="edit" />
                 @endif
-            </div>
         </div>
     </div>
 </div>

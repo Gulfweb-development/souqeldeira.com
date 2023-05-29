@@ -47,6 +47,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
             return redirect()->route('admin.subscriptions.index');
         })->name('subscriptions.status')->where('subscription','[0-9]+');
         // subscriptions END
+
+        // premium position START
+        Route::get('/positions/list', 'App\Http\Livewire\Admin\Positions\Index')->name('positions.index');
+        Route::get('/positions/{id}/edit', 'App\Http\Livewire\Admin\Positions\Edit')->name('positions.edit');
+        // premium position END
         // SLIDERS STRAT
         Route::get('/slider', 'App\Http\Livewire\Admin\Slider\Index')->name('slider.index');
         Route::get('/slider/create', 'App\Http\Livewire\Admin\Slider\Create')->name('slider.create');

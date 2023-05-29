@@ -106,6 +106,16 @@
                         </a>
                     </li>
 
+                    <li class="nav-item">
+                        <a href="{{ route('admin.positions.index') }}"
+                            class="nav-link  {{ request()->segment(2) == 'positions' ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-star"></i>
+                            <p>
+                                @lang('premium_position')
+                            </p>
+                        </a>
+                    </li>
+
 
                     @if (permationTo('region_create'))
                         <li class="nav-item">
