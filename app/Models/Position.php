@@ -68,6 +68,21 @@ class Position extends Model
         })->where('expired_at' , '>' , Carbon::now())->get('position')->pluck('position');
     }
 
+
+    public static function render($num = false , $isHtml = true) {
+        $positions = self::query()->where('is_payed' , true)
+            ->where('expired_at' , '>' , Carbon::now())
+            ->orderBy('position')
+            ->when($num , function ($query) use ($num) {
+                $query->limit($num);
+            })
+            ->get();
+        if ( $isHtml ) {
+            return view('position' , compact('positions') )->render();
+        }
+        return  $positions;
+    }
+
     public static function getMyActivePosition() {
         return self::query()->where('user_id' , auth()->id())->where('is_payed' , true)
             ->where('expired_at' , '>' , Carbon::now())->latest()->get();

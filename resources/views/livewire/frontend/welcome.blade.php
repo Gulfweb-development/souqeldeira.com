@@ -20,6 +20,11 @@
                 </div>
             </div>
         </div>
+        <section class="featured portfolio bg-white-3">
+            <div class="container">
+                {!! \App\Models\Position::render() !!}
+            </div>
+        </section>
         @livewire('frontend.components.for-sale')
         @livewire('frontend.components.for-rent')
         @livewire('frontend.components.home-clients')

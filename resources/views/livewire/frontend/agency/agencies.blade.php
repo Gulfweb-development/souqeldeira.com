@@ -39,7 +39,14 @@
             <!-- Search Form -->
 
             <!--/ End Search Form -->
-            <br><br><br>
+            <br>
+
+            <section class="featured portfolio">
+                <div class="container">
+                    {!! \App\Models\Position::render() !!}
+                </div>
+            </section>
+            <br><br>
             <!-- END SECTION HEADINGS -->
             <section class="headings-2 pt-0">
                 <div class="pro-wrapper">
