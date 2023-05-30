@@ -40,5 +40,15 @@
     "buy_admin" : "assign by admin",
     "paid_successfully" : "دفعت بنجاح.",
     "paid_failed" : "فشل الاجراء!",
+    "num_special_position" : "عدد المناصب المتميزة:",
+    "price_of_position" : "سعر المركز",
+    "expire_of_position" : "أيام انتهاء صلاحية الموضع",
+    "premium_position" : "المركز المتميز",
+    "position" : "موضع",
+    "paid" : "مدفوع",
+    "action" : "فعل",
+    "buy_premium_position" : "Buy position :position for :expire days.",
+    "image" : "صورة",
+    "text" : "نص",
     "" : ""
 }
