@@ -11,10 +11,11 @@ ALTER TABLE `subscription_history` ADD `is_payed` BOOLEAN NOT NULL DEFAULT FALSE
 CREATE TABLE `orders` ( `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT , `user_id` INT NOT NULL , `description_en` VARCHAR(255) NULL DEFAULT NULL , `description_ar` VARCHAR(255) NULL DEFAULT NULL , `transaction_id` VARCHAR(255) NULL DEFAULT NULL , `price` VARCHAR(10) NULL DEFAULT NULL , `status` VARCHAR(100) NOT NULL DEFAULT 'pending' , `on_success` LONGTEXT NULL DEFAULT NULL , `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 ALTER TABLE `orders` ADD `description` TEXT NULL DEFAULT NULL AFTER `on_success`;
 
-
--- ===============================================================================
-
 ALTER TABLE `settings` ADD `num_special_position` INT NOT NULL DEFAULT '0' AFTER `price_premium_adv`, ADD `special_position` TEXT NULL DEFAULT NULL AFTER `num_special_position`;
 CREATE TABLE `premium_positions` ( `id` INT NOT NULL AUTO_INCREMENT , `user_id` BIGINT UNSIGNED NOT NULL , `order_id` BIGINT UNSIGNED NULL DEFAULT NULL , `is_payed` BOOLEAN NOT NULL DEFAULT FALSE , `title` VARCHAR(255) NULL DEFAULT NULL , `description` TEXT NULL DEFAULT NULL , `image` TEXT NULL DEFAULT NULL , `link` TEXT NULL DEFAULT NULL , `expired_at` DATETIME NULL DEFAULT NULL , `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 ALTER TABLE `premium_positions` ADD FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE RESTRICT; ALTER TABLE `premium_positions` ADD FOREIGN KEY (`order_id`) REFERENCES `orders`(`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
 ALTER TABLE `premium_positions` ADD `position` INT NOT NULL AFTER `is_payed`;
+
+-- ===============================================================================
+
+
