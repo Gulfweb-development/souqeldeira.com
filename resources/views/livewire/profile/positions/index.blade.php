@@ -53,7 +53,7 @@
                         <td>@lang('position') {{ $position_num +  1 }} </td>
                         <td>{{ $position['price'] }} @lang('app.currency')</td>
                         <td>{{ $position['expire'] }} @lang('day')</td>
-                        <td><a href="{{ route('profile.positions.buy' , [$loop->index]) }}" class="btn text-white btn-primary text-center">@lang('buy')</a></td>
+                        <td><a href="{{ route('profile.positions.buy' , [$position_num]) }}" class="btn text-white btn-primary text-center">@lang('buy')</a></td>
                     </tr>
                 @empty
                     <tr>
