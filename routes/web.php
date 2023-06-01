@@ -71,20 +71,26 @@ Route::post('/auth/passwords/reset',function(Request $request){
 
 Route::any('/payment-redirect/{id}/{status?}',function(Request $request,$id , $status = "error"){
 
+    $descriptionSet = false;
     $order = \App\Models\Order::query()->where('status' , 'pending')->findOrFail($id);
-    try {
-        $payment = (new \App\Payment\Payment())->getPaymentStatus($request->paymentId , 'PaymentId');
-        if ( $payment->Data->InvoiceStatus == 'Paid' )
-            $status = "success";
-    } catch (Exception $exception) {
-        $order->description = $exception->getMessage();
-        $status = "error";
-    }
+//    try {
+//        $payment = (new \App\Services\BookeeyService())->getPaymentStatus($request->get('txnId' , $order->transaction_id));
+//        if ( $payment->Data->InvoiceStatus == 'Paid' )
+//            $status = "success";
+//    } catch (Exception $exception) {
+//        $order->description = $exception->getMessage();
+//        $descriptionSet = true;
+//        $status = "error";
+//    }
     if ( $status == "success" ) {
         $order->status = "success";
         $order->doSuccess();
-    } else
+    } else {
+        if ( ! $descriptionSet )
+            $order->description = $request->get('errorMessage' );
         $order->status = "failed";
+    }
+    $order->transaction_id = $request->get('txnId' , $order->transaction_id);
     $order->save();
 
     if ( $status == "success" )

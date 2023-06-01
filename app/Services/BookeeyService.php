@@ -678,6 +678,8 @@ class BookeeyService {
         $postParams['Mid'] = $mid;
         $postParams['MerchantTxnRefNo'] = $orderIds;
         $postParams['HashMac'] = $hashed;
+        $postParams['rndnum'] = $rndnum;
+        $postParams['Txn_HDR'] = $rndnum;
 
         $ch = curl_init();
         $headers = array(
