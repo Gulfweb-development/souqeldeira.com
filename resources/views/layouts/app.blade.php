@@ -777,11 +777,13 @@
 
     // Define a function to send the IDs of the visible divs to the server
     function sendDivIdsToServer() {
-        let xhr = new XMLHttpRequest();
-        xhr.open('POST', '/save-visible-divs' , true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(JSON.stringify(visibleDivsInfo));
-        visibleDivsInfo = [];
+        if (visibleDivsInfo.length >= 1) {
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', '/save-visible-divs', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify(visibleDivsInfo));
+            visibleDivsInfo = [];
+        }
     }
 
     // Call the saveVisibleDivId function on scroll and window close events

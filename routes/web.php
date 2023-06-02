@@ -2,6 +2,7 @@
 
 use Facebook\Facebook;
 use App\Services\SocialMediaService;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Abraham\TwitterOAuth\TwitterOAuth;
@@ -14,6 +15,45 @@ Route::get('/test-send-sms/{phone}', function ($phone = "+201025261808") {
     $activated_code = rand(1000,9999);
     $phone = "+201025261808";
     return sendSms($phone,__('Your activated code is :CODE',['CODE'=>$activated_code]));
+});
+
+Route::post('/save-visible-divs' , function (Request $request) {
+    try{
+        if ( is_array($request->all())) {
+            foreach ($request->all() as $view) {
+                $data = json_decode($view);
+                if ( json_last_error() === JSON_ERROR_NONE and filled($data->type)){
+                    $matchThese = [
+                        'belongs_to_type'=>$data->type,
+                        'belongs_to'=>$data->id,
+                        'type'=> 'view' ,
+                        'ip' => $request->ip(),
+                        'time_checker' => now()->format('Y-m-d-H')
+                    ];
+                    \App\Models\Track::query()->updateOrCreate($matchThese,['is_featured'=>$data->is_featured]);
+                }
+            }
+        }
+    }catch ( Exception $exception){}
+});
+Route::get('/track-links' , function (Request $request) {
+    if ( $request->has('link')) {
+        try{
+            $data = json_decode($request->get('data'));
+            if ( json_last_error() === JSON_ERROR_NONE and filled($data->type)){
+                $matchThese = [
+                    'belongs_to_type'=>$data->type,
+                    'belongs_to'=>$data->id,
+                    'type'=> 'click' ,
+                    'ip' => $request->ip(),
+                    'time_checker' => now()->format('Y-m-d-H')
+                ];
+                \App\Models\Track::query()->updateOrCreate($matchThese,['is_featured'=>$data->is_featured]);
+            }
+        }catch ( Exception $exception){}
+        return redirect($request->get('link'));
+    } else
+        abort(404);
 });
 // ADMIN CHANGE LANG
 Route::get('/','App\Http\Livewire\Frontend\Welcome')->name('welcome');

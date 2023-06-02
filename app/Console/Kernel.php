@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Models\Ad;
 use App\Models\Order;
+use App\Models\Track;
 use App\Models\UserMessage;
 use App\Notifications\AdminToUserTypeNotification;
 use App\Notifications\UserExpireMessageNotification;
@@ -37,6 +38,10 @@ class Kernel extends ConsoleKernel
             Ad::where('archived_at' , '<' ,  Carbon::now())->delete();
             Log::info('TASK SCUDLAR IS ORKING');
         })->everyMinute();
+        $schedule->call(function(){
+            Track::where('created_at' , '<' ,  now()->subDays(7))->delete();
+            Log::info('all old track is deleted');
+        })->daily();
 
         $schedule->call(function(){
             $ads = Ad::whereDate('archived_at' ,  Carbon::now()->addDays(config('app.ad_expire_day_notify' , 3)))->get();

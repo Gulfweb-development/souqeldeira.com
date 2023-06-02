@@ -18,4 +18,7 @@ ALTER TABLE `premium_positions` ADD `position` INT NOT NULL AFTER `is_payed`;
 
 -- ===============================================================================
 
-
+CREATE TABLE `tracks` ( `id` VARCHAR(255) NOT NULL , `belongs_to_type` VARCHAR(255) NULL DEFAULT NULL , `belongs_to` BIGINT UNSIGNED NULL DEFAULT NULL , `type` ENUM('view','click') NOT NULL DEFAULT 'view' , `ip` VARCHAR(255) NULL DEFAULT NULL , `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+ALTER TABLE `tracks` ADD `is_featured` BOOLEAN NOT NULL DEFAULT FALSE AFTER `type`;
+ALTER TABLE `tracks` ADD `time_checker` VARCHAR(255) NULL DEFAULT NULL AFTER `ip`;
+ALTER TABLE `tracks` ADD INDEX(`belongs_to_type`, `belongs_to`, `type`, `ip`, `time_checker`);
