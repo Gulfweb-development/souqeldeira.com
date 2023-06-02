@@ -6,7 +6,7 @@ use App\Models\Order;
 use App\Models\SubscriptionHistories;
 use App\Models\Subscriptions;
 use App\Models\User;
-use App\Services\BookeeyService;
+use App\Payment\BookeeyService;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;

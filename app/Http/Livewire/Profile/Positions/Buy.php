@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Profile\Positions;
 use App\Models\Order;
 use App\Models\Position;
 use App\Models\Setting;
-use App\Services\BookeeyService;
+use App\Payment\BookeeyService;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Livewire\Component;
