@@ -479,10 +479,10 @@
             </section>
             <div class="row">
                 @forelse ($ads as $ad)
-                    <div class="item col-lg-4 col-md-6 col-xs-12 landscapes sale @if($ad->is_featured == "1") featured_advertise {{ $ad->is_featured }} @endif">
+                    <div class="item col-lg-4 col-md-6 col-xs-12 landscapes sale @if($ad->is_featured == "1") featured_advertise {{ $ad->is_featured }} @endif trackVisitor" track-data='{!! json_encode(['type' => 'ad' , 'is_featured' =>  $ad->is_featured , 'id' =>  $ad->id]) !!}' track-id="{{$ad->id}}">
                         <div class="project-single custom-tooltip" >
                             <div class="tooltiptext">@lang('app.region'): {{ $ad->region->translate('name') }}<br>@lang('app.type'): {{ $ad->buildingType->translate('name') }}<br>@lang('app.views'): {{ $ad->views }}<br>@lang('app.created_at_ads'): {{ $ad->created_at->diffForHumans() }}</div>
-                            <a href="{{ route('ad.search', [toSlug($ad->title), $ad->id]) }}">
+                            <a href="{{ route('ad.search', [toSlug($ad->title), $ad->id]) }}" class="trackClick" track-data='{!! json_encode(['type' => 'ad' , 'is_featured' =>  $ad->is_featured , 'id' =>  $ad->id]) !!}'>
                                 <div class="project-inner project-head">
                                     <div class="homes">
                                         <!-- homes img -->
@@ -543,13 +543,13 @@
                                     </li> --}}
                                 </ul>
                                 <div class="footer">
-                                    <a target="_blank" href="https://api.whatsapp.com/send?phone=+965{{ $ad->phone }}&text={{ __('app.whatsapp_text' , ['url' => route('ad.search', [toSlug($ad->title), $ad->id])]) }}">
+                                    <a target="_blank" href="https://api.whatsapp.com/send?phone=+965{{ $ad->phone }}&text={{ __('app.whatsapp_text' , ['url' => route('ad.search', [toSlug($ad->title), $ad->id])]) }}" class="trackClick" track-data='{!! json_encode(['type' => 'ad_whatsapp' , 'is_featured' =>  $ad->is_featured , 'id' =>  $ad->id]) !!}'>
                                         <i class="fab fa-whatsapp-square"></i> {{ $ad->user->name }}
                                     </a>
-                                    {{-- <a target="_blank" href="http://api.whatsapp.com/send?phone={{ $ad->phone }}&text={{ route('ad.search', [toSlug($ad->title), $ad->id]) }}">
+                                    {{-- <a target="_blank" href="http://api.whatsapp.com/send?phone={{ $ad->phone }}&text={{ route('ad.search', [toSlug($ad->title), $ad->id]) }}" class="trackClick" track-data='{!! json_encode(['type' => 'ad_whatsapp' , 'is_featured' =>  $ad->is_featured , 'id' =>  $ad->id]) !!}'>
                                         <i class="fab fa-whatsapp-square"></i> {{ $ad->user->name }}
                                     </a> --}}
-                                    <a href="tel:{{ $ad->phone }}">
+                                    <a href="tel:{{ $ad->phone }}" class="trackClick" track-data='{!! json_encode(['type' => 'ad_tel' , 'is_featured' =>  $ad->is_featured , 'id' =>  $ad->id]) !!}'>
                                         <span>
                                             <i class="fas fa-phone-square-alt"></i> Call Now
                                         </span>

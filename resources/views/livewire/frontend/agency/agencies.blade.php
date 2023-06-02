@@ -86,9 +86,9 @@
             </section>
             <div class="row">
                 @forelse ($users as $user)
-                    <div class="item col-lg-4 col-md-6 col-xs-12 landscapes sale">
+                    <div class="item col-lg-4 col-md-6 col-xs-12 landscapes sale trackVisitor" track-data='{!!  json_encode(['type' => 'agency' , 'is_featured' =>0 , 'id' =>  $user->id]) !!}' track-id="{{$user->id}}">
                         <div class="project-single">
-                            <a  href="{{ route('agency.ads',[toSlug($user->name),$user->id]) }}">
+                            <a  href="{{ route('agency.ads',[toSlug($user->name),$user->id]) }}"  class="trackClick" track-data='{!! json_encode(['type' => 'agency_ads' , 'is_featured' => 0 , 'id' =>  $user->id]) !!}'>
                                 <div class="project-inner project-head">
                                     <div class="homes">
                                         <!-- homes img -->
@@ -115,10 +115,10 @@
                             <!-- homes content -->
                             <div class="homes-content">
                                 <!-- homes address -->
-                                <h3><a href="{{ route('agency.ads',[toSlug($user->name),$user->id]) }}">{{ $user->name }}</a></h3>
+                                <h3><a href="{{ route('agency.ads',[toSlug($user->name),$user->id]) }}"  class="trackClick" track-data='{!! json_encode(['type' => 'agency_ads' , 'is_featured' => 0 , 'id' =>  $user->id]) !!}'>{{ $user->name }}</a></h3>
                                 <p class="homes-address mb-3">
                                     @if($user->phone)
-                                    <a href="tel:{{ $user->phone }}">
+                                    <a href="tel:{{ $user->phone }}"  class="trackClick" track-data='{!! json_encode(['type' => 'agency_tel' , 'is_featured' =>  0, 'id' =>  $user->id]) !!}'>
                                         <i
                                             class="fa fa-mobile"></i><span>{{ $user->phone }}</span>
                                     </a>
@@ -145,10 +145,10 @@
                                     </li> --}}
                                 </ul>
                                 <div class="footer">
-                                    <a target="_blank" href="http://api.whatsapp.com/send?phone={{ $user->phone }}">
+                                    <a target="_blank" href="http://api.whatsapp.com/send?phone={{ $user->phone }}"  class="trackClick" track-data='{!! json_encode(['type' => 'agency_whatsapp' , 'is_featured' =>  0 , 'id' =>  $user->id]) !!}'>
                                         <i class="fab fa-whatsapp-square"></i> @lang('app.whatsapp')
                                     </a>
-                                    <a href="tel:{{ $user->phone }}">
+                                    <a href="tel:{{ $user->phone }}"  class="trackClick" track-data='{!! json_encode(['type' => 'agency_tel' , 'is_featured' => 0 , 'id' =>  $user->id]) !!}'>
                                         <span>
                                             <i class="fas fa-phone-square-alt"></i> Call Now
                                         </span>

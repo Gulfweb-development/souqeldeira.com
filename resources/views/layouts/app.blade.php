@@ -745,6 +745,62 @@
         <a href="{{url()->previous()}}"><i class="fa fa-arrow-left fa-2x p-4"></i> </a><br/><br/>
         </div>
     `)
+
+    // Define an array to store the IDs of the visible divs
+    let visibleDivs = [];
+    let visibleDivsInfo = [];
+
+    // Define a function to check if a div is visible
+    function isDivVisible(div) {
+        let rect = div.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+
+    // Define a function to save the ID of a visible div
+    function saveVisibleDivId() {
+        let divs = document.querySelectorAll('.trackVisitor');
+        for (let i = 0; i < divs.length; i++) {
+            if (!visibleDivs.includes(divs[i].getAttribute("track-id")) && isDivVisible(divs[i]) ) {
+                visibleDivs.push(divs[i].getAttribute("track-id"));
+                visibleDivsInfo.push(divs[i].getAttribute("track-data"));
+            }
+        }
+        if (visibleDivsInfo.length >= 10) {
+            sendDivIdsToServer();
+        }
+    }
+
+    // Define a function to send the IDs of the visible divs to the server
+    function sendDivIdsToServer() {
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', '/save-visible-divs' , true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify(visibleDivsInfo));
+        visibleDivsInfo = [];
+    }
+
+    // Call the saveVisibleDivId function on scroll and window close events
+    window.addEventListener('scroll', saveVisibleDivId);
+    window.addEventListener('beforeunload', sendDivIdsToServer);
+    setInterval(function () {
+        if (visibleDivsInfo.length >= 10) {
+            sendDivIdsToServer();
+        }
+    }, 10000);
+    // Get all links on the page
+    const links = document.querySelectorAll('.trackClick');
+    // Loop through each link and change the href
+    links.forEach(link => {
+        // Save the original href in a data attribute
+        link.dataset.originalHref = link.href;
+        // Set the new href for tracking
+        link.href = '/track-links?link=' + encodeURIComponent(link.dataset.originalHref) + '&data='+ link.getAttribute("track-data") ;
+    });
 </script>
 </body>
 

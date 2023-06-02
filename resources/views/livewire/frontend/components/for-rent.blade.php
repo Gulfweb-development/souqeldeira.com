@@ -10,10 +10,10 @@
                 </div>
                 <div class="row portfolio-items">
                   @forelse ($rentAds as $rentAd)
-                        <div class="item col-lg-4 col-md-6 col-xs-12 landscapes sale">
+                        <div class="item col-lg-4 col-md-6 col-xs-12 landscapes sale trackVisitor" track-data='{!! json_encode(['type' => 'ad' , 'is_featured' =>  $rentAd->is_featured , 'id' =>  $rentAd->id]) !!}' track-id="{{$rentAd->id}}">
                         <div class="project-single" data-aos="zoom-in">
                             <div class="listing-item compact">
-                                <a href="{{ route('ad.search',[toSlug($rentAd->title),$rentAd->id]) }}" class="listing-img-container">
+                                <a href="{{ route('ad.search',[toSlug($rentAd->title),$rentAd->id]) }}" class="listing-img-container trackClick" track-data='{!! json_encode(['type' => 'ad' , 'is_featured' =>  $rentAd->is_featured , 'id' =>  $rentAd->id]) !!}'>
                                     <div class="listing-badges">
                                         <span class="featured">@lang('app.currency') {{ $rentAd->price }}</span>
                                         <span class="rent">@lang('app.for_rent')</span>

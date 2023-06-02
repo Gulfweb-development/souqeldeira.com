@@ -64,8 +64,8 @@
                                             @endif
                                             @endif
                                             <span class="mr-3 ml-3" title="@lang('app.whatsapp')"><a target="_blank" style="font-size:14px;"
-                                                href="https://api.whatsapp.com/send?phone=+965{{ $ad->phone }}&text={{ __('app.whatsapp_text' , ['url' => route('ad.search', [toSlug($ad->title), $ad->id]) ] ) }}"><i class="fab  fa-whatsapp-square mr-1 ml-1"></i> {{ $ad->phone }}</a></span>
-                                            <span class="mr-3 ml-3" title="@lang('app.phone')"><a target="_blank" style="font-size:14px;"  href="tel:{{$ad->phone}}"><i class="fa fa-phone mr-1 ml-1"></i> {{ $ad->phone }}</a></span>
+                                                href="https://api.whatsapp.com/send?phone=+965{{ $ad->phone }}&text={{ __('app.whatsapp_text' , ['url' => route('ad.search', [toSlug($ad->title), $ad->id]) ] ) }}" class="trackClick" track-data='{!! json_encode(['type' => 'ad_whatsapp' , 'is_featured' =>  $ad->is_featured , 'id' =>  $ad->id]) !!}'><i class="fab  fa-whatsapp-square mr-1 ml-1"></i> {{ $ad->phone }}</a></span>
+                                            <span class="mr-3 ml-3" title="@lang('app.phone')"><a target="_blank" style="font-size:14px;"  href="tel:{{$ad->phone}}" class="trackClick" track-data='{!! json_encode(['type' => 'ad_tel' , 'is_featured' =>  $ad->is_featured , 'id' =>  $ad->id]) !!}'><i class="fa fa-phone mr-1 ml-1"></i> {{ $ad->phone }}</a></span>
                                             <span class="mr-3 ml-3" title="@lang('app.views')"><i class="fa fa-eye mr-1 ml-1"></i> {{ $ad->views }}</span>
                                             <span class="mr-3 ml-3" title="@lang('app.created_at_ads') {{ $ad->created_at->format('Y/m/d H:i:s') }}"><i class="fa fa-calendar-alt mr-1 ml-1"></i> {{ $ad->created_at->diffForHumans() }}</span>
 
@@ -181,12 +181,12 @@
      $whatsapplink = "https://api.whatsapp.com/send?text=".urlencode($ad->title)."%0a".urlencode($url);
      @endphp
      <div class="author-box clearfix">
-         <a style="margin:5;pxfloat:left;color:#3b5998;" target="_blank" href="https://www.facebook.com/sharer.php?u={{$url}}"><i class="fab fa-facebook fa-2x"></i></a>
-         <a style="margin:5;pxfloat:left;color:#00acee;"  target="_blank" href="https://twitter.com/share?url={{$url}}&text={{$ad->title}}&via=website&hashtags=#aldeiramarket"><i class="fab fa-twitter fa-2x"></i></a>
-         <a style="margin:5;pxfloat:left;color:#db4a39;"  target="_blank" href="https://plus.google.com/share?url={{$url}}"><i class="fab fa-google-plus fa-2x"></i></a>
-         <a style="margin:5;pxfloat:left;color:#E60023"  target="_blank"  href="https://pinterest.com/pin/create/bookmarklet/?media={{toAdDefaultImage($ad->getFile())}}&url={{$url}}&is_video=&description={{$ad->title}}"><i class="fab fa-pinterest fa-2x"></i></a>
-         <a style="margin:5;pxfloat:left;color:#0077b5"  target="_blank" href="https://www.linkedin.com/shareArticle?url={{$url}}&title={{$ad->title}}"><i class="fab fa-linkedin fa-2x"></i></a>
-         <a style="margin:5;pxfloat:left;color:#128C7E"  target="_blank"  href="{!!$whatsapplink!!}"><i class="fab fa-whatsapp fa-2x"></i></a>
+         <a style="margin:5;pxfloat:left;color:#3b5998;" target="_blank" href="https://www.facebook.com/sharer.php?u={{$url}}"  class="trackClick" track-data='{!! json_encode(['type' => 'ad_facebook' , 'is_featured' =>  $ad->is_featured , 'id' =>  $ad->id]) !!}'><i class="fab fa-facebook fa-2x"></i></a>
+         <a style="margin:5;pxfloat:left;color:#00acee;"  target="_blank" href="https://twitter.com/share?url={{$url}}&text={{$ad->title}}&via=website&hashtags=#aldeiramarket"  class="trackClick" track-data='{!! json_encode(['type' => 'ad_twitter' , 'is_featured' =>  $ad->is_featured , 'id' =>  $ad->id]) !!}'><i class="fab fa-twitter fa-2x"></i></a>
+         <a style="margin:5;pxfloat:left;color:#db4a39;"  target="_blank" href="https://plus.google.com/share?url={{$url}}"   class="trackClick" track-data='{!! json_encode(['type' => 'ad_googlePlus' , 'is_featured' =>  $ad->is_featured , 'id' =>  $ad->id]) !!}'><i class="fab fa-google-plus fa-2x"></i></a>
+         <a style="margin:5;pxfloat:left;color:#E60023"  target="_blank"  href="https://pinterest.com/pin/create/bookmarklet/?media={{toAdDefaultImage($ad->getFile())}}&url={{$url}}&is_video=&description={{$ad->title}}"  class="trackClick" track-data='{!! json_encode(['type' => 'ad_pinterest' , 'is_featured' =>  $ad->is_featured , 'id' =>  $ad->id]) !!}'><i class="fab fa-pinterest fa-2x"></i></a>
+         <a style="margin:5;pxfloat:left;color:#0077b5"  target="_blank" href="https://www.linkedin.com/shareArticle?url={{$url}}&title={{$ad->title}}"  class="trackClick" track-data='{!! json_encode(['type' => 'ad_linkdin' , 'is_featured' =>  $ad->is_featured , 'id' =>  $ad->id]) !!}'><i class="fab fa-linkedin fa-2x"></i></a>
+         <a style="margin:5;pxfloat:left;color:#128C7E"  target="_blank"  href="{!!$whatsapplink!!}"  class="trackClick" track-data='{!! json_encode(['type' => 'ad_whatsapp' , 'is_featured' =>  $ad->is_featured , 'id' =>  $ad->id]) !!}'><i class="fab fa-whatsapp fa-2x"></i></a>
 
 
 
@@ -194,17 +194,17 @@
      </div>
                                         <div class="author-box clearfix">
                                             <a target="_blank"
-                                                href="https://api.whatsapp.com/send?phone=+965{{ $ad->phone }}&text={{ __('app.whatsapp_text' , ['url' => route('ad.search', [toSlug($ad->title), $ad->id]) ] ) }}"> <i
+                                                href="https://api.whatsapp.com/send?phone=+965{{ $ad->phone }}&text={{ __('app.whatsapp_text' , ['url' => route('ad.search', [toSlug($ad->title), $ad->id]) ] ) }}"  class="trackClick" track-data='{!! json_encode(['type' => 'ad_whatsapp' , 'is_featured' =>  $ad->is_featured , 'id' =>  $ad->id]) !!}'> <i
                                                     class="fab fa-whatsapp-square"></i></a>
                                             <h4 class="author__title">{{ $ad->user->name }}</h4>
                                             <p class="author__meta">@lang('app.agent_of_property')</p>
                                         </div>
                                         <div class="author-box clearfix">
-                                            <a href="tel:{{ $ad->phone }}"> <i class="fas fa-phone-alt"></i></a>
+                                            <a href="tel:{{ $ad->phone }}"  class="trackClick" track-data='{!! json_encode(['type' => 'ad_tel' , 'is_featured' =>  $ad->is_featured , 'id' =>  $ad->id]) !!}'> <i class="fas fa-phone-alt"></i></a>
                                             <h4 class="author__title">@lang('app.call_now')</h4>
                                             <!--<p class="author__meta">@lang('app.better_from_mobile')</p>-->
                                             <p class="author__meta">
-                                                <a href="tel:{{ $ad->phone }}">{{ $ad->phone }}</a>
+                                                <a href="tel:{{ $ad->phone }}"   class="trackClick" track-data='{!! json_encode(['type' => 'ad_tel' , 'is_featured' =>  $ad->is_featured , 'id' =>  $ad->id]) !!}'>{{ $ad->phone }}</a>
                                             </p>
                                         </div>
 
@@ -255,11 +255,11 @@
                                     <div class="widget-boxed-body">
                                         <div class="recent-post">
                                             @forelse ($recentAds as $recentAd)
-                                                <div class="recent-main1 my-2 row">
+                                                <div class="recent-main1 my-2 row trackVisitor" track-data='{!!  json_encode(['type' => 'ad' , 'is_featured' =>  $recentAd->is_featured , 'id' =>  $recentAd->id]) !!}' track-id="{{$recentAd->id}}">
                                                     <div class="col-4">
                                                         <div class="recent-img">
                                                             <a
-                                                                href="{{ route('ad.search', [toSlug($recentAd->title), $recentAd->id]) }}"><img
+                                                                href="{{ route('ad.search', [toSlug($recentAd->title), $recentAd->id]) }}"   class="trackClick" track-data='{!! json_encode(['type' => 'ad' , 'is_featured' =>  $recentAd->is_featured , 'id' =>  $recentAd->id]) !!}'><img
                                                                     src="{{ toAdDefaultImage($recentAd->getFile()) }}" alt="{{ $recentAd->title }}" width="90"
                                                                     height="70"></a>
                                                         </div>
@@ -267,7 +267,7 @@
                                                     <div class="col-8">
                                                         <div class="info-img">
                                                             <a
-                                                                href="{{ route('ad.search', [toSlug($recentAd->title), $recentAd->id]) }}">
+                                                                href="{{ route('ad.search', [toSlug($recentAd->title), $recentAd->id]) }}"  class="trackClick" track-data='{!! json_encode(['type' => 'ad' , 'is_featured' =>  $recentAd->is_featured , 'id' =>  $recentAd->id]) !!}'>
                                                                 <h6>{{ $recentAd->title }}</h6>
                                                             </a>
                                                             <p>@lang('app.currency') {{ $recentAd->price }}</p>
@@ -341,18 +341,18 @@
                     <h5>@lang('app.from_the_same_city')</h5>
                     <div class="row portfolio-items1">
                         @forelse ($similarAds as $similarAd)
-                            <div class="item col-lg-4 col-md-6 col-xs-12 landscapes">
+                            <div class="item col-lg-4 col-md-6 col-xs-12 landscapes trackVisitor" track-data='{!!  json_encode(['type' => 'ad' , 'is_featured' =>  $similarAd->is_featured , 'id' =>  $similarAd->id]) !!}' track-id="{{$similarAd->id}}">
                                 <div class="project-single">
                                     <div class="project-inner project-head">
                                         <div class="project-bottom">
                                             <h4><a
-                                                    href="{{ route('ad.search', [toSlug($similarAd->title), $similarAd->id]) }}"></a><span
+                                                    href="{{ route('ad.search', [toSlug($similarAd->title), $similarAd->id]) }}"  class="trackClick" track-data='{!! json_encode(['type' => 'ad' , 'is_featured' =>  $similarAd->is_featured , 'id' =>  $similarAd->id]) !!}'></a><span
                                                     class="category">{{ $similarAd->buildingType->translate('name') }}</span>
                                             </h4>
                                         </div>
                                         <div class="homes">
                                             <!-- homes img -->
-                                            <a href="single-property-1.html" class="homes-img">
+                                            <a href="{{ route('ad.search', [toSlug($similarAd->title), $similarAd->id]) }}" class="homes-img trackClick" track-data='{!! json_encode(['type' => 'ad' , 'is_featured' =>  $similarAd->is_featured , 'id' =>  $similarAd->id]) !!}'>
                                                 {{-- <div class="homes-tag button alt featured">New</div> --}}
                                                 <div class="homes-tag button alt sale">{{ $similarAd->type }}</div>
                                                 {{-- <div class="homes-price">Family Home</div> --}}
@@ -383,7 +383,7 @@
                                     <!-- homes content -->
                                     <div class="homes-content">
                                         <!-- homes address -->
-                                        <h3><a href="{{ route('ad.search', [toSlug($similarAd->title), $similarAd->id]) }}">{{ $similarAd->title }}</a></h3>
+                                        <h3><a href="{{ route('ad.search', [toSlug($similarAd->title), $similarAd->id]) }}" class="trackClick" track-data='{!! json_encode(['type' => 'ad' , 'is_featured' =>  $similarAd->is_featured , 'id' =>  $similarAd->id]) !!}'>{{ $similarAd->title }}</a></h3>
                                         <p class="homes-address mb-3">
                                             {!! Str::substr($similarAd->text, 0, 100) !!}</span>
 
@@ -429,11 +429,11 @@
                                         <div class="footer">
                                             <div class="footer">
                                                 <a target="_blank"
-                                                    href="http://api.whatsapp.com/send?phone=+965{{ $similarAd->phone }}&text={{ __('app.whatsapp_text' , ['url' => route('ad.search', [toSlug($similarAd->title), $similarAd->id]) ] ) }}">
+                                                    href="http://api.whatsapp.com/send?phone=+965{{ $similarAd->phone }}&text={{ __('app.whatsapp_text' , ['url' => route('ad.search', [toSlug($similarAd->title), $similarAd->id]) ] ) }}" class="trackClick" track-data='{!! json_encode(['type' => 'ad_whatsapp' , 'is_featured' =>  $similarAd->is_featured , 'id' =>  $similarAd->id]) !!}'>
                                                     <i class="fab fa-whatsapp-square"></i>
                                                     {{ $similarAd->user->name }}
                                                 </a>
-                                                <a href="tel:{{ $similarAd->phone }}">
+                                                <a href="tel:{{ $similarAd->phone }}" class="trackClick" track-data='{!! json_encode(['type' => 'ad_tel' , 'is_featured' =>  $similarAd->is_featured , 'id' =>  $similarAd->id]) !!}'>
                                                     <span>
                                                         <i class="fas fa-phone-square-alt"></i> @lang('app.call_now')
                                                     </span>
