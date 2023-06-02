@@ -678,8 +678,6 @@ class BookeeyService {
         $postParams['Mid'] = $mid;
         $postParams['MerchantTxnRefNo'] = $orderIds;
         $postParams['HashMac'] = $hashed;
-        $postParams['rndnum'] = $rndnum;
-        $postParams['Txn_HDR'] = $rndnum;
 
         $ch = curl_init();
         $headers = array(
@@ -695,6 +693,7 @@ class BookeeyService {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $serverOutput = curl_exec($ch);
         $decodeOutput = json_decode($serverOutput, true);
+        dd($decodeOutput , $postParams);
         curl_close ($ch);
 
         return $decodeOutput;
