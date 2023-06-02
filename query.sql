@@ -16,9 +16,11 @@ CREATE TABLE `premium_positions` ( `id` INT NOT NULL AUTO_INCREMENT , `user_id` 
 ALTER TABLE `premium_positions` ADD FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE RESTRICT; ALTER TABLE `premium_positions` ADD FOREIGN KEY (`order_id`) REFERENCES `orders`(`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
 ALTER TABLE `premium_positions` ADD `position` INT NOT NULL AFTER `is_payed`;
 
--- ===============================================================================
-
 CREATE TABLE `tracks` ( `id` VARCHAR(255) NOT NULL , `belongs_to_type` VARCHAR(255) NULL DEFAULT NULL , `belongs_to` BIGINT UNSIGNED NULL DEFAULT NULL , `type` ENUM('view','click') NOT NULL DEFAULT 'view' , `ip` VARCHAR(255) NULL DEFAULT NULL , `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 ALTER TABLE `tracks` ADD `is_featured` BOOLEAN NOT NULL DEFAULT FALSE AFTER `type`;
 ALTER TABLE `tracks` ADD `time_checker` VARCHAR(255) NULL DEFAULT NULL AFTER `ip`;
 ALTER TABLE `tracks` ADD INDEX(`belongs_to_type`, `belongs_to`, `type`, `ip`, `time_checker`);
+
+-- ===============================================================================
+
+
