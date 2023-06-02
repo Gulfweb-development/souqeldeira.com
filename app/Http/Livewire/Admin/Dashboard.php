@@ -80,7 +80,6 @@ class Dashboard extends Component
                     'type' => 'click',
                 ])->count();
             }
-            cache()->clear();
             return $chart;
         });
     }

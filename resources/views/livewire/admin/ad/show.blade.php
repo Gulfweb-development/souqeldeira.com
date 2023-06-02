@@ -189,7 +189,81 @@
                     </tbody>
                 </table>
             </div>
+
+            <div class="row mt-5">
+                <div class="col-lg-12 col-12">
+                    <div class="small-box bg-with">
+                        <div class="inner">
+                            <canvas class="w-100" id="map_ad"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Define the data to be displayed on the chart
+        const advertise = {
+            labels: [
+                '{!! implode("', '" , $chart['day'] )  !!}'
+            ],
+            datasets: [
+                {
+                    label: 'View box',
+                    data: [ {{ implode(", " , $chart['advertise']['view'] )  }} ],
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Click on box',
+                    data: [{{ implode(", " , $chart['advertise']['click'] )  }}],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Telephone',
+                    data: [{{ implode(", " , $chart['advertise']['telephone'] )  }}],
+                    backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                    borderColor: 'rgba(255, 206, 86, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Whatsapp',
+                    data: [{{ implode(", " , $chart['advertise']['whatsapp'] )  }}],
+                    backgroundColor: 'rgba(92,255,86,0.2)',
+                    borderColor: 'rgb(86,255,94)',
+                    borderWidth: 1
+                }
+            ]
+        };
+        // Define the chart options
+        const options = {
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        };
+
+        // Create the chart
+        const ctx = document.getElementById('map_ad').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'line',
+            data: advertise,
+            options: options
+        });
+    </script>
 
 </div>
