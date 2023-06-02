@@ -28,9 +28,11 @@ Route::post('/save-visible-divs' , function (Request $request) {
                         'belongs_to'=>$data->id,
                         'type'=> 'view' ,
                         'ip' => $request->ip(),
-                        'time_checker' => now()->format('Y-m-d-H')
+                        'time_checker' => now()->format('Y-m-d-H'),
+                        'is_featured'=>$data->is_featured
                     ];
-                    \App\Models\Track::query()->updateOrCreate($matchThese,['is_featured'=>$data->is_featured]);
+                    if ( ! \App\Models\Track::query()->where($matchThese)->exists() )
+                        \App\Models\Track::query()->create($matchThese);
                 }
             }
         }
@@ -46,9 +48,11 @@ Route::get('/track-links' , function (Request $request) {
                     'belongs_to'=>$data->id,
                     'type'=> 'click' ,
                     'ip' => $request->ip(),
-                    'time_checker' => now()->format('Y-m-d-H')
+                    'time_checker' => now()->format('Y-m-d-H'),
+                    'is_featured'=>$data->is_featured
                 ];
-                \App\Models\Track::query()->updateOrCreate($matchThese,['is_featured'=>$data->is_featured]);
+                if ( ! \App\Models\Track::query()->where($matchThese)->exists() )
+                    \App\Models\Track::query()->create($matchThese);
             }
         }catch ( Exception $exception){}
         return redirect($request->get('link'));
