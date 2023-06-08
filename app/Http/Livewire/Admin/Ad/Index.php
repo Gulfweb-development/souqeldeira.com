@@ -20,9 +20,13 @@ class Index extends Component
     public $filterStatus = "active";
     public $filterApproved = '';
     public $filterFeatured = '';
+    public $user_id = null;
     public function mount()
     {
         permation('ad_view');
+        $this->user_id = request()->query('user_id' , false);
+        if ( $this->user_id )
+            $this->filterStatus = "all" ;
     }
     public function delete(Ad $ad)
     {
@@ -50,6 +54,8 @@ class Index extends Component
                 $query->where('archived_at' , '>=' , now());
             })->when($this->filterStatus == "expire" , function ($query) {
                 $query->withTrashed()->where('archived_at' , '<' , now());
+            })->when($this->user_id, function ($query) {
+                $query->where('user_id' ,$this->user_id);
             })
             ->paginate($this->show);
 

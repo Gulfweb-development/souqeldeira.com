@@ -159,6 +159,13 @@
                                                         <i class="fas fa-star"></i>
                                                     </a>
                                                 </div>
+                                                <div class="actions mt-1">
+                                                    <a href="{{ route('admin.ad.index', ['user_id' => $user->id]) }}"
+                                                       class="btn bg-gradient-secondary btn-sm show-btn"
+                                                       title="@lang('app.ads')">
+                                                        <i class="fas fa-home"></i>
+                                                    </a>
+                                                </div>
                                             </td>
                                         </tr>
                                     @empty
