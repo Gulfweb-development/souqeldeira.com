@@ -155,7 +155,7 @@
                                                     </a>
                                                     <a href="{{ route('admin.positions.index', ['user_id' => $user->id]) }}"
                                                        class="btn bg-gradient-secondary btn-sm show-btn"
-                                                       title="@lang('app.premium_position')">
+                                                       title="@lang('premium_position')">
                                                         <i class="fas fa-star"></i>
                                                     </a>
                                                 </div>

@@ -71,6 +71,26 @@ class Subscription extends Component
 
 
     }
+
+    public function deletePackage()
+    {
+        $this->error_message = "";
+        $this->success_message = "";
+        $user = $this->user ;
+        $package = \App\Models\SubscriptionHistories::activePackage($user);
+        $package->update(['expired_at' => Carbon::now()->subSecond()]);
+        $this->success_message = trans('app.data_deleted');
+    }
+    public function deletePayAsGo($type)
+    {
+        $this->error_message = "";
+        $this->success_message = "";
+        $user = $this->user ;
+        $fieldDB = ($type == 'normal') ? 'adv_nurmal_count' : 'adv_star_count';
+        $user->{$fieldDB} = 0 ;
+        $user->save();
+        $this->success_message = trans('app.data_deleted');
+    }
     public function payAsGo($type)
     {
         $this->error_message = "";

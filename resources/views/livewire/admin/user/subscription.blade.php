@@ -27,7 +27,19 @@
                         </div>
                     </div>
                     <hr>
-                    @lang('what_is_featured')
+                    @if ( \App\Models\SubscriptionHistories::activePackage($user) )
+                        <button class="mt-5 btn btn-danger" wire:loading.attr="disabled"
+                                wire:click="deletePackage()">@lang('app.delete') @lang('subscriptions_package')</button>
+                    @else
+                        @if (  \App\Models\SubscriptionHistories::getBalance($user)['normal'] > 0 )
+                        <button class="mt-5 btn btn-danger" wire:loading.attr="disabled"
+                                wire:click="deletePayAsGo('normal')">@lang('app.delete') @lang('normal')</button>
+                        @endif
+                        @if (  \App\Models\SubscriptionHistories::getBalance($user)['featured'] > 0 )
+                        <button class="mt-5 btn btn-danger" wire:loading.attr="disabled"
+                                wire:click="deletePayAsGo('featured')">@lang('app.delete') @lang('featured')</button>
+                        @endif
+                    @endif
                 </div>
             </div>
         </div>
