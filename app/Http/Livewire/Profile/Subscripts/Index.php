@@ -116,8 +116,8 @@ class Index extends Component
 
         $order = Order::query()->create([
             'user_id' => auth()->id(),
-            'description_en' => trans('buy_pay_as_go' , ['type' => trans($type,'en') , 'count' => $this->{$field} ] , 'en'),
-            'description_ar' => trans('buy_pay_as_go' , ['type' => trans($type,'ar') , 'count' => $this->{$field} ] , 'ar'),
+            'description_en' => trans('buy_pay_as_go' , ['type' => trans($type,[] ,'en') , 'count' => $this->{$field} ] , 'en'),
+            'description_ar' => trans('buy_pay_as_go' , ['type' => trans($type,[] ,'ar') , 'count' => $this->{$field} ] , 'ar'),
             'transaction_id' => null,
             'price' => $price,
             'on_success' => $json,
