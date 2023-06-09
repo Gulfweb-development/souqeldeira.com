@@ -118,15 +118,15 @@ Route::any('/payment-redirect/{id}/{status?}',function(Request $request,$id , $s
 
     $descriptionSet = false;
     $order = \App\Models\Order::query()->where('status' , 'pending')->findOrFail($id);
-    // try {
-    //     $payment = (new \App\Payment\BookeeyService())->getPaymentStatus([$request->get('txnId' , $order->transaction_id)]);
-    //     if ( $payment->Data->InvoiceStatus == 'Paid' )
-    //         $status = "success";
-    // } catch (Exception $exception) {
-    //     $order->description = $exception->getMessage();
-    //     $descriptionSet = true;
-    //     $status = "error";
-    // }
+    try {
+        $payment = (new \App\Payment\BookeeyService())->getPaymentStatus([$request->get('txnId' , $order->transaction_id) , $id]);
+        // if ( $payment->Data->InvoiceStatus == 'Paid' )
+        //     $status = "success";
+    } catch (Exception $exception) {
+        // $order->description = $exception->getMessage();
+        // $descriptionSet = true;
+        // $status = "error";
+    }
     if ( $status == "success" ) {
         $order->status = "success";
         $order->doSuccess();

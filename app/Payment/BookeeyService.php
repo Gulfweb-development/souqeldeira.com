@@ -1,6 +1,7 @@
 <?php
 namespace App\Payment;
 
+use Illuminate\Support\Facades\Log;
 use mysql_xdevapi\Exception;
 
 /**
@@ -647,6 +648,9 @@ class BookeeyService {
         $decodeOutput = json_decode($serverOutput, true);
         curl_close ($ch);
 
+        Log::info('initial payment request:' , $postParams );
+        Log::info('initial payment response:' , $decodeOutput );
+
         if (isset($decodeOutput['PayUrl'])) {
             if ($decodeOutput['PayUrl'] == '') {
                 throw new Exception("Error Message: ".$decodeOutput['ErrorMessage']);
@@ -693,7 +697,8 @@ class BookeeyService {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $serverOutput = curl_exec($ch);
         $decodeOutput = json_decode($serverOutput, true);
-        dd($decodeOutput , $postParams);
+        Log::info('verification payment request:' , $postParams );
+        Log::info('verification payment response:' , $decodeOutput );
         curl_close ($ch);
 
         return $decodeOutput;
