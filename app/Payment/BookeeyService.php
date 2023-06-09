@@ -676,7 +676,7 @@ class BookeeyService {
         $rndnum = rand(10000,99999);
         $secretKey = $this->getSecretKey();
 
-        $data = "$mid|$secretKey|$rndnum";
+        $data = "$mid|$secretKey";
         $hashed = hash('sha512', $data);
 
         $postParams['Mid'] = $mid;
@@ -795,4 +795,3 @@ class BookeeyService {
         return $browser;
     }
 }
-?>

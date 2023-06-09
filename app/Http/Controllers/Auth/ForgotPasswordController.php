@@ -24,8 +24,8 @@ class ForgotPasswordController extends Controller
     */
 
     use SendsPasswordResetEmails;
-    
-    
+
+
     // public function __construct(Request $request) {
     //     if($request->isMethod('post')) {
     //       $user = User::where(['email'=>$request->email])->first();
@@ -34,11 +34,11 @@ class ForgotPasswordController extends Controller
     //           $user->update([
     //               'activated_code' => $activated_code
     //               ]);
-    //           sendSms($user->phone,__('Your activated code is :CODE',['CODE'=>$activated_code]));
+    //           sendSms($user->phone,__("Hello\nYour OTP is :CODE\nSouqeldeira.com",['CODE'=>$activated_code]));
     //       }
     //     }
     // }
-    
+
     public function sendResetLinkEmail(Request $request)
     {
         $mees = [];
@@ -77,14 +77,14 @@ class ForgotPasswordController extends Controller
         ]);
         \Session::put('authEmail', $user->email);
         if(!is_null($user->phone)) {
-            sendSms($user->phone,__('Your activated code is :CODE',['CODE'=>$activated_code]));
+            sendSms($user->phone,__("Hello\nYour OTP is :CODE\nSouqeldeira.com",['CODE'=>$activated_code]));
         }
         // Send Mail
         Mail::to($user->email)->send(new Forget($user));
         return redirect()->route('auth.passwords.reset')->with('status', __('Your activated code send to email and phone'));
     }
-    
-    
-    
-    
+
+
+
+
 }

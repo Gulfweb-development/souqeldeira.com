@@ -44,8 +44,8 @@ class VerificationController extends Controller
         $this->middleware('signed')->only('verify');
         $this->middleware('throttle:6,1')->only('verify', 'resend');
     }
-    
-    
+
+
     public function resend(Request $request)
     {
         if ($request->user()->hasVerifiedEmail()) {
@@ -53,20 +53,20 @@ class VerificationController extends Controller
                         ? new JsonResponse([], 204)
                         : route('home');
         }
-        
+
         $user = $request->user();
         $activated_code = rand(1000,9999);
         $user->update([
             'activated_code' => $activated_code
         ]);
-        sendSms($user->phone,__('Your activated code is :CODE',['CODE'=>$activated_code]));
+        sendSms($user->phone,__("Hello\nYour OTP is :CODE\nSouqeldeira.com",['CODE'=>$activated_code]));
         // Send Mail
         Mail::to($user->email)->send(new VerifiedMail($user));
         return $request->wantsJson()
                     ? new JsonResponse([], 202)
                     : redirect()->route('auth.passwords.verified.mail')->with('status', __('Your activated code send to email and phone'));
     }
-    
-    
-    
+
+
+
 }

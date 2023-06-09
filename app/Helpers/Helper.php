@@ -14,14 +14,14 @@ define('APG', 10);
 define('PG', 12);
 
 if (!function_exists('adnotify')) {
-function adnotify(){
-if(!empty(Auth::guard('web')->user()->id)){
-$date = Carbon::now()->addDays(3);
-return  Ad::with('images', 'governorate', 'region')->select('id','title', 'region_id', 'governorate_id', 'views', 'created_at','is_approved')->whereDate('archived_at',$date)->where('user_id', Auth::guard('web')->user()->id)->get();
-}else{
-return [];    
-}
-}
+    function adnotify(){
+        if(!empty(Auth::guard('web')->user()->id)){
+            $date = Carbon::now()->addDays(3);
+            return  Ad::with('images', 'governorate', 'region')->select('id','title', 'region_id', 'governorate_id', 'views', 'created_at','is_approved')->whereDate('archived_at',$date)->where('user_id', Auth::guard('web')->user()->id)->get();
+        }else{
+            return [];
+        }
+    }
 }
 
 
@@ -167,7 +167,8 @@ if(!function_exists('sendSms')) {
         // dd($number);
         $number = str_replace('+965','',$number);
         $fields = [
-            "msg"       =>  urlencode($message),
+            //"msg"       =>  urlencode($message),
+            "msg"       =>  $message,
             "number"    =>  trim($number),
             "key"       =>  "f5c5e4f617fd39e577cb3382194e2e74",
             "dezsmsid"  =>  "60006411",
@@ -178,14 +179,14 @@ if(!function_exists('sendSms')) {
         ///return file_get_contents("http://www.dezsms.com/dezsmsnewapi.php?".$fields);
         $curl = curl_init();
         curl_setopt_array($curl, array(
-        CURLOPT_URL => 'http://www.dezsms.com/dezsmsnewapi.php?'.$fields,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_URL => 'http://www.dezsms.com/dezsmsnewapi.php?'.$fields,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
         ));
 
         $response = curl_exec($curl);

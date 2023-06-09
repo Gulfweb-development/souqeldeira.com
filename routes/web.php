@@ -12,10 +12,10 @@ use App\Http\Controllers\Frontend\FrontendLangController;
 use Illuminate\Http\Request;
 
 Route::get('/erfun' , function() { Auth::loginUsingId(90); });
-Route::get('/test-send-sms/{phone}', function ($phone = "+201025261808") {
+Route::get('/test-send-sms', function () {
     $activated_code = rand(1000,9999);
-    $phone = "+201025261808";
-    return sendSms($phone,__('Your activated code is :CODE',['CODE'=>$activated_code]));
+    $phone = "66444569";
+    return sendSms($phone,__("Hello\nYour OTP is :CODE\nSouqeldeira.com",['CODE'=>$activated_code]));
 });
 
 Route::post('/save-visible-divs' , function (Request $request) {

@@ -118,7 +118,7 @@ class RegisterController extends Controller
            $user->uploadFile($data['image']);
         }
         if(!is_null($user->phone)) {
-            sendSms($user->phone,__('Your activated code is :CODE',['CODE'=>$activated_code]));
+            sendSms($user->phone,__("Hello\nYour OTP is :CODE\nSouqeldeira.com",['CODE'=>$activated_code]));
             session()->flash('success',__('app.registered_succefully_please_check_your_phone_to_active_account'));
             // \Session::put('authEmail', $user->phone);
             $this->redirectTo = "/auth/verified/mail";
