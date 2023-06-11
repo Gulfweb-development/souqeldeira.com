@@ -790,10 +790,10 @@
     window.addEventListener('scroll', saveVisibleDivId);
     window.addEventListener('beforeunload', sendDivIdsToServer);
     setInterval(function () {
-        if (visibleDivsInfo.length >= 10) {
+        if (visibleDivsInfo.length >= 0) {
             sendDivIdsToServer();
         }
-    }, 10000);
+    }, 2000);
     // Get all links on the page
     const links = document.querySelectorAll('.trackClick');
     // Loop through each link and change the href

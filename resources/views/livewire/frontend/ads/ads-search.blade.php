@@ -517,7 +517,7 @@
                             <div class="homes-content">
                                 <!-- homes address -->
                                 <h3><a
-                                        href="{{ route('ad.search', [toSlug($ad->title), $ad->id]) }}">{{ $ad->title }}</a>
+                                        href="{{ route('ad.search', [toSlug($ad->title), $ad->id]) }}" class="trackClick" track-data='{!! json_encode(['type' => 'ad' , 'is_featured' =>  $ad->is_featured , 'id' =>  $ad->id]) !!}'>{{ $ad->title }}</a>
                                 </h3>
                                 <p class="homes-address mb-3">
 

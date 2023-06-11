@@ -20,8 +20,8 @@ CREATE TABLE `tracks` ( `id` VARCHAR(255) NOT NULL , `belongs_to_type` VARCHAR(2
 ALTER TABLE `tracks` ADD `is_featured` BOOLEAN NOT NULL DEFAULT FALSE AFTER `type`;
 ALTER TABLE `tracks` ADD `time_checker` VARCHAR(255) NULL DEFAULT NULL AFTER `ip`;
 ALTER TABLE `tracks` ADD INDEX(`belongs_to_type`, `belongs_to`, `type`, `ip`, `time_checker`);
+ALTER TABLE `ads` ADD `tracks` TEXT NULL DEFAULT NULL AFTER `views`;
+ALTER TABLE `users` ADD `tracks` TEXT NULL DEFAULT NULL AFTER `type`;
 
 -- ===============================================================================
 
-ALTER TABLE `ads` ADD `tracks` TEXT NULL DEFAULT NULL AFTER `views`;
-ALTER TABLE `users` ADD `tracks` TEXT NULL DEFAULT NULL AFTER `type`;
