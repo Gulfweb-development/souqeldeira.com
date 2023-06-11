@@ -176,16 +176,79 @@
         </div>
         <!-- ./col -->
     </div>
+    <div class="row mt-2">
+        <div class="col-lg-12 col-12">
+            <div class="small-box bg-with" style="background-color: white;">
+                <div class="inner">
+                    <table class="table-striped table-responsive table dataTable w-100" style="display: inline-table;">
+                        <thead class="w-100" role="row">
+                            <tr>
+                                <th class="text-center">Date</th>
+                                <th class="text-center">show advertise in list</th>
+                                <th class="text-center">click on advertise in list</th>
+                                <th class="text-center">Impression</th>
+                                <th class="text-center">click on Telephone</th>
+                                <th class="text-center">click on Whatsapp</th>
+                            </tr>
+                        </thead>
+                        <tbody class="w-100">
+                            @foreach( $chart['day'] as $i => $day)
+                                <tr>
+                                    <th>{{ $day }}</th>
+                                    <td class="text-center" title="Num. show advertise in list of Ads">{{ number_format($chart['advertise']['view'][$i]) }}</td>
+                                    <td class="text-center" title="Num. click on advertise in list of Ads">{{ number_format($chart['advertise']['click'][$i]) }}</td>
+                                    <td class="text-center" title="Impression of Click on Ads">{{ $chart['advertise']['impression'][$i]  }}%</td>
+                                    <td class="text-center" title="Num. click on Telephone for All Ads">{{ number_format($chart['advertise']['telephone'][$i]) }}</td>
+                                    <td class="text-center" title="Num. click on Whatsapp for All Ads">{{ number_format($chart['advertise']['whatsapp'][$i]) }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 col-12">
+            <div class="small-box bg-with" style="background-color: white;">
+                <div class="inner">
+                    <table class="table-striped table-responsive table dataTable w-100" style="display: inline-table;">
+                        <thead class="w-100" role="row">
+                        <tr>
+                            <th class="text-center">Date</th>
+                            <th class="text-center">show agency in list</th>
+                            <th class="text-center">click on agency in list</th>
+                            <th class="text-center">Impression</th>
+                            <th class="text-center">click on Telephone</th>
+                            <th class="text-center">click on Whatsapp</th>
+                        </tr>
+                        </thead>
+                        <tbody class="w-100">
+                        @foreach( $chart['day'] as $i => $day)
+                            <tr>
+                                <th>{{ $day }}</th>
+                                <td class="text-center" title="Num. of show agency in list of agencies in site">{{ number_format($chart['agency']['view'][$i]) }}</td>
+                                <td class="text-center" title="Num. of click on agency in list of agencies in site">{{ number_format($chart['agency']['click'][$i]) }}</td>
+                                <td class="text-center" title="Impression of Click on Ads">{{ $chart['agency']['impression'][$i] }}%</td>
+                                <td class="text-center" title="Num. of click on Telephone of agency">{{ number_format($chart['agency']['telephone'][$i]) }}</td>
+                                <td class="text-center" title="Num. of click on Whatsapp of agency">{{ number_format($chart['agency']['whatsapp'][$i]) }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
     <div class="row mt-5">
         <div class="col-lg-6 col-6">
-            <div class="small-box bg-with">
+            <div class="small-box bg-with" style="background-color: white;">
                 <div class="inner">
                     <canvas class="w-100" id="map_ad"></canvas>
                 </div>
             </div>
         </div>
         <div class="col-lg-6 col-6">
-            <div class="small-box bg-with">
+            <div class="small-box bg-with" style="background-color: white;">
                 <div class="inner">
                     <canvas class="w-100" id="map_agency"></canvas>
                 </div>
@@ -203,28 +266,28 @@
             ],
             datasets: [
                 {
-                    label: 'View advertise box',
+                    label: 'Num. of show advertise in list of ads in site',
                     data: [ {{ implode(", " , $chart['advertise']['view'] )  }} ],
                     backgroundColor: 'rgba(255, 99, 132, 0.2)',
                     borderColor: 'rgba(255, 99, 132, 1)',
                     borderWidth: 1
                 },
                 {
-                    label: 'Click on advertise box',
+                    label: 'Num. of click on advertise in list of ads in site',
                     data: [{{ implode(", " , $chart['advertise']['click'] )  }}],
                     backgroundColor: 'rgba(54, 162, 235, 0.2)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 1
                 },
                 {
-                    label: 'Telephone advertise',
+                    label: 'Num. of click on Telephone in advertise details',
                     data: [{{ implode(", " , $chart['advertise']['telephone'] )  }}],
                     backgroundColor: 'rgba(255, 206, 86, 0.2)',
                     borderColor: 'rgba(255, 206, 86, 1)',
                     borderWidth: 1
                 },
                 {
-                    label: 'Whatsapp advertise',
+                    label: 'Num. of click on Whatsapp in advertise details',
                     data: [{{ implode(", " , $chart['advertise']['whatsapp'] )  }}],
                     backgroundColor: 'rgba(92,255,86,0.2)',
                     borderColor: 'rgb(86,255,94)',
@@ -239,28 +302,28 @@
             ],
             datasets: [
                 {
-                    label: 'View agency box',
+                    label: 'Num. of show agency in list of agencies in site',
                     data: [ {{ implode(", " , $chart['agency']['view'] )  }} ],
                     backgroundColor: 'rgba(255, 99, 132, 0.2)',
                     borderColor: 'rgba(255, 99, 132, 1)',
                     borderWidth: 1
                 },
                 {
-                    label: 'Click on agency box',
+                    label: 'Num. of click on agency in list of agencies in site',
                     data: [{{ implode(", " , $chart['agency']['click'] )  }}],
                     backgroundColor: 'rgba(54, 162, 235, 0.2)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 1
                 },
                 {
-                    label: 'Telephone agency',
+                    label: 'Num. of click on Telephone of agency',
                     data: [{{ implode(", " , $chart['agency']['telephone'] )  }}],
                     backgroundColor: 'rgba(255, 206, 86, 0.2)',
                     borderColor: 'rgba(255, 206, 86, 1)',
                     borderWidth: 1
                 },
                 {
-                    label: 'Whatsapp agency',
+                    label: 'Num. of click on Whatsapp of agency',
                     data: [{{ implode(", " , $chart['agency']['whatsapp'] )  }}],
                     backgroundColor: 'rgba(92,255,86,0.2)',
                     borderColor: 'rgb(86,255,94)',

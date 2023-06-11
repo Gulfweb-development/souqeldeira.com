@@ -42,7 +42,7 @@ class Dashboard extends Component
         $this->paid_this_month = Order::query()->where('status' , 'success')->whereDate('created_at' , '>=' ,now()->startOfMonth())->sum('price');
         $this->paid_last_month = Order::query()->where('status' , 'success')->whereDate('created_at' , '<' ,now()->startOfMonth())->whereDate('created_at' , '>=' ,now()->subMonth()->startOfMonth())->sum('price');
 
-        $this->chart = cache()->remember('dashboardChart' ,  5 , function (){
+        $this->chart = cache()->remember('dashboardChart' ,  0 , function (){
             $period = CarbonPeriod::create(now()->subDays(7), now());
             $chart = [] ;
             foreach ($period as $i => $date ){
@@ -63,6 +63,10 @@ class Dashboard extends Component
                     'belongs_to_type' => 'ad_whatsapp',
                     'type' => 'click',
                 ])->count();
+                $chart['advertise']['impression'][$i] = $chart['advertise']['view'][$i] > 0 ? $chart['advertise']['click'][$i] * 100 / $chart['advertise']['view'][$i]  : 0;
+                $chart['advertise']['impression'][$i] = min($chart['advertise']['impression'][$i], 100);
+                $chart['advertise']['impression'][$i] = max($chart['advertise']['impression'][$i], 0);
+                $chart['advertise']['impression'][$i] = round($chart['advertise']['impression'][$i], 3);
                 $chart['agency']['view'][$i] = Track::query()->whereDate('created_at' , $date)->where([
                     'belongs_to_type' => 'agency',
                     'type' => 'view',
@@ -79,6 +83,10 @@ class Dashboard extends Component
                     'belongs_to_type' => 'agency_whatsapp',
                     'type' => 'click',
                 ])->count();
+                $chart['agency']['impression'][$i] = $chart['agency']['view'][$i] > 0 ? $chart['agency']['click'][$i] * 100 / $chart['agency']['view'][$i]  : 0;
+                $chart['agency']['impression'][$i] = min($chart['agency']['impression'][$i], 100);
+                $chart['agency']['impression'][$i] = max($chart['agency']['impression'][$i], 0);
+                $chart['agency']['impression'][$i] = round($chart['agency']['impression'][$i], 3);
             }
             return $chart;
         });
