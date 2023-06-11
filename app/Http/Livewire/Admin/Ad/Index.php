@@ -47,7 +47,7 @@ class Index extends Component
 
     public function render()
     {
-        $ads = Ad::select('id', 'title','price','is_featured','is_approved','archived_at','deleted_at', 'building_type_id','phone')->with('images','buildingType')->search($this->search,$this->filterApproved,$this->filterFeatured)->latest()
+        $ads = Ad::select('id', 'title','price','is_featured','tracks','views','is_approved','archived_at','deleted_at', 'building_type_id','phone')->with('images','buildingType')->search($this->search,$this->filterApproved,$this->filterFeatured)->latest()
             ->when($this->filterStatus == "all" , function ($query) {
                 $query->withTrashed();
             })->when($this->filterStatus == "active" , function ($query) {

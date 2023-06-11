@@ -76,8 +76,8 @@
                                             <th>@lang('app.building_type')</th>
                                             <th>@lang('app.is_featured')</th>
                                             <th>@lang('app.is_approved')</th>
+                                            <th>@lang('app.views')</th>
                                             <th>@lang('app.actions')</th>
-
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -111,6 +111,21 @@
                                                               wire:click.prevent="toggleApprove('{{ $ad->is_approved }}','{{ $ad->id }}')">
                                                         {{ $ad->approved }}</span>
                                                     @endif
+                                                </td>
+
+                                                <td>
+                                                    <div title="Num. view">
+                                                        <small><i class="fa fa-eye"></i></small>
+                                                        <span>{{ number_format($ad->views) }}</span>
+                                                    </div>
+                                                    <div title="Num. call">
+                                                        <small><i class="fa fa-phone"></i></small>
+                                                        <span>{{ number_format(optional($ad->tracks)->click_tel) }}</span>
+                                                    </div>
+                                                    <div title="Num. send whatsapp message">
+                                                        <small><i class="fa fa-envelope-open-text"></i></small>
+                                                        <span>{{ number_format(optional($ad->tracks)->click_whatsapp) }}</span>
+                                                    </div>
                                                 </td>
 
                                                 <td>

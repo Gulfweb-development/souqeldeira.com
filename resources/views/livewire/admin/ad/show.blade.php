@@ -127,16 +127,6 @@
                             <td>
                                 {{ $num++ }}
                             </td>
-                            <td>@lang('app.views')</td>
-                            <td>
-                                {{ $ad->views }}
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                {{ $num++ }}
-                            </td>
                             <td>@lang('app.is_featured')</td>
                             <td>
                                 <span class="badge badge-{{ $ad->featured_badge }}"> {{ $ad->featured }}</span>
@@ -185,6 +175,81 @@
                             <td>@lang('app.archived_at')</td>
                             <td>{{ $ad->archived_at }}</td>
                         </tr>
+                    </tbody>
+                </table>
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <td colspan="3">
+                                <h1>Analytics</h1>
+                            </td>
+                        </tr>
+                        @php
+                            $num = 1;
+                        @endphp
+                        <tr>
+                            <td style="width: 10%;">
+                                {{ $num++ }}
+                            </td>
+                            <td>Total views (view details page)</td>
+                            <td style="width: 30%;">
+                                {{ number_format($ad->views) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 10%;">
+                                {{ $num++ }}
+                            </td>
+                            <td>View in search and list</td>
+                            <td style="width: 30%;">
+                                {{ number_format(optional($ad->tracks)->view_list) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 10%;">
+                                {{ $num++ }}
+                            </td>
+                            <td>click on ads in search and list</td>
+                            <td style="width: 30%;">
+                                {{ number_format(optional($ad->tracks)->click_list) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 10%;">
+                                {{ $num++ }}
+                            </td>
+                            <td>Call telephone</td>
+                            <td style="width: 30%;">
+                                {{ number_format(optional($ad->tracks)->click_tel) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 10%;">
+                                {{ $num++ }}
+                            </td>
+                            <td>Send Whatsapp Message</td>
+                            <td style="width: 30%;">
+                                {{ number_format(optional($ad->tracks)->click_whatsapp) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 10%;">
+                                {{ $num++ }}
+                            </td>
+                            <td>View Impression<br><small>( if more than 100, means user open ad details page without search in site!)</small></td>
+                            <td style="width: 30%;">
+                                {{ round( ( max($ad->views , 0) * 100 ) / (optional($ad->tracks)->view_list > 0 ? optional($ad->tracks)->view_list : 0.000001) , 3 )  }}%
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 10%;">
+                                {{ $num++ }}
+                            </td>
+                            <td>Contact Impression</td>
+                            <td style="width: 30%;">
+                                {{ round( ( max(optional($ad->tracks)->click_whatsapp , optional($ad->tracks)->click_tel , 0) * 100 ) / ($ad->views > 0 ? $ad->views : 0.000001) , 3 )  }}%
+                            </td>
+                        </tr>
 
                     </tbody>
                 </table>
@@ -212,28 +277,28 @@
             ],
             datasets: [
                 {
-                    label: 'View box',
+                    label: 'Num. show this advertise in list of Ads',
                     data: [ {{ implode(", " , $chart['advertise']['view'] )  }} ],
                     backgroundColor: 'rgba(255, 99, 132, 0.2)',
                     borderColor: 'rgba(255, 99, 132, 1)',
                     borderWidth: 1
                 },
                 {
-                    label: 'Click on box',
+                    label: 'Num. click on this advertise in list of Ads',
                     data: [{{ implode(", " , $chart['advertise']['click'] )  }}],
                     backgroundColor: 'rgba(54, 162, 235, 0.2)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 1
                 },
                 {
-                    label: 'Telephone',
+                    label: 'Num. click on Telephone',
                     data: [{{ implode(", " , $chart['advertise']['telephone'] )  }}],
                     backgroundColor: 'rgba(255, 206, 86, 0.2)',
                     borderColor: 'rgba(255, 206, 86, 1)',
                     borderWidth: 1
                 },
                 {
-                    label: 'Whatsapp',
+                    label: 'Num. click on Whatsapp',
                     data: [{{ implode(", " , $chart['advertise']['whatsapp'] )  }}],
                     backgroundColor: 'rgba(92,255,86,0.2)',
                     borderColor: 'rgb(86,255,94)',
