@@ -23,4 +23,5 @@ ALTER TABLE `tracks` ADD INDEX(`belongs_to_type`, `belongs_to`, `type`, `ip`, `t
 
 -- ===============================================================================
 
-
+ALTER TABLE `ads` ADD `tracks` TEXT NULL DEFAULT NULL AFTER `views`;
+ALTER TABLE `users` ADD `tracks` TEXT NULL DEFAULT NULL AFTER `type`;

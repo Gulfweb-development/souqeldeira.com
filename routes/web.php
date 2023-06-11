@@ -19,9 +19,9 @@ Route::get('/test-send-sms', function () {
 });
 
 Route::post('/save-visible-divs' , function (Request $request) {
-    try{
-        if ( is_array($request->all())) {
-            foreach ($request->all() as $view) {
+    if ( is_array($request->all())) {
+        foreach ($request->all() as $view) {
+            try{
                 $data = json_decode($view);
                 if ( json_last_error() === JSON_ERROR_NONE and filled($data->type)){
                     $matchThese = [
@@ -32,12 +32,27 @@ Route::post('/save-visible-divs' , function (Request $request) {
                         'time_checker' => now()->format('Y-m-d-H'),
                         'is_featured'=>$data->is_featured
                     ];
-                    if ( ! \App\Models\Track::query()->where($matchThese)->exists() )
+                    if ( ! \App\Models\Track::query()->where($matchThese)->exists() ) {
                         \App\Models\Track::query()->create($matchThese);
+                        $last = new stdClass();
+                        if ( $data->type == "ad" ) {
+                            $object = \App\Models\Ad::query()->find($data->id);
+                            if ( $object )
+                                $last->view_list = optional($object->tracks)->view_list + 1 ;
+                        } elseif ( $data->type == "agency" ) {
+                            $object = \App\Models\User::query()->find($data->id);
+                            if ( $object )
+                                $last->view_list = optional($object->tracks)->view_list + 1 ;
+                        }
+                        if ( isset($object) ){
+                            $object->tracks = (object) array_merge((array) $object->tracks, (array) $last);
+                            $object->save();
+                        }
+                    }
                 }
-            }
+            }catch ( Exception $exception){}
         }
-    }catch ( Exception $exception){}
+    }
 });
 Route::get('/track-links' , function (Request $request) {
     if ( $request->has('link')) {
@@ -52,8 +67,39 @@ Route::get('/track-links' , function (Request $request) {
                     'time_checker' => now()->format('Y-m-d-H'),
                     'is_featured'=>$data->is_featured
                 ];
-                if ( ! \App\Models\Track::query()->where($matchThese)->exists() )
+                if ( ! \App\Models\Track::query()->where($matchThese)->exists() ){
                     \App\Models\Track::query()->create($matchThese);
+                    $last = new stdClass();
+                    if ( $data->type == "ad" ) {
+                        $object = \App\Models\Ad::query()->find($data->id);
+                        if ( $object )
+                            $last->click_list = optional($object->tracks)->click_list + 1 ;
+                    } elseif ( $data->type == "ad_tel" ) {
+                        $object = \App\Models\Ad::query()->find($data->id);
+                        if ( $object )
+                            $last->click_tel = optional($object->tracks)->click_tel + 1 ;
+                    } elseif ( $data->type == "ad_whatsapp" ) {
+                        $object = \App\Models\Ad::query()->find($data->id);
+                        if ( $object )
+                            $last->click_whatsapp = optional($object->tracks)->click_whatsapp + 1 ;
+                    } elseif ( $data->type == "agency_ads" ) {
+                        $object = \App\Models\User::query()->find($data->id);
+                        if ( $object )
+                            $last->click_list = optional($object->tracks)->click_list + 1 ;
+                    } elseif ( $data->type == "agency_tel" ) {
+                        $object = \App\Models\User::query()->find($data->id);
+                        if ( $object )
+                            $last->click_tel = optional($object->tracks)->click_tel + 1 ;
+                    } elseif ( $data->type == "agency_whatsapp" ) {
+                        $object = \App\Models\User::query()->find($data->id);
+                        if ( $object )
+                            $last->click_whatsapp = optional($object->tracks)->click_whatsapp + 1 ;
+                    }
+                    if ( isset($object) ){
+                        $object->tracks = (object) array_merge((array) $object->tracks, (array) $last);
+                        $object->save();
+                    }
+                }
             }
         }catch ( Exception $exception){}
         return redirect($request->get('link'));

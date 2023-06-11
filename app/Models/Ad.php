@@ -14,6 +14,7 @@ class Ad extends Model
 
      protected $casts = [
          'is_featured' => 'boolean',
+         'tracks' => 'object',
      ];
 
     protected $fillable = [
@@ -31,6 +32,7 @@ class Ad extends Model
         'archived_at', // process
         'is_featured',
         'is_approved',
+        'tracks',
     ];
 
     // TOGGLE APPROVED STATUS

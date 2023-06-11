@@ -33,6 +33,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'activated_code',
         'adv_nurmal_count',
         'adv_star_count',
+        'tracks',
     ];
 
     /**
@@ -52,6 +53,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'tracks' => 'object',
     ];
 
     // TOGGLE APPROVED STATUS
