@@ -299,7 +299,7 @@
               </p>
             </a>
           </li> --}}
-                    @if (permationTo('agency_view'))
+                    @if (permationTo('agency_view') and false)
                         <li class="nav-item">
                             <a href="{{ route('admin.agency.index') }}"
                                 class="nav-link  {{ request()->segment(2) == 'agency' ? 'active' : '' }}">
