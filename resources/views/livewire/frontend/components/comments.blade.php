@@ -1,4 +1,5 @@
 <div>
+    @if ( env('COMMENT_ACTIVE' , true) )
     <section class="reviews comments">
         @if(!empty($commentsCount))<h3 class="mb-5">{{ $commentsCount }} @lang('app.reviews')</h3>@endif
         @forelse ($comments as $comment)
@@ -121,4 +122,5 @@
             @endif
         </div>
     </section>
+    @endif
 </div>

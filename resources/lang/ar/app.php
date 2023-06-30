@@ -259,7 +259,7 @@ return [
     'notifications' => 'الاشعارات',
     'add_new_add' => 'إضافة إعلان جديد',
     'admin_approve_account' => 'لابد من الانتظار حتى يتم تفعيل حسابك من الادارة',
-    'contact_owner' => 'تواصل مع المالك',
+    'contact_owner' => 'تواصل مع صاحب الاعلان',
     'send' => 'ارسال',
     'contact_messages' => 'رسائل التواصل',
     'notification' => 'الاشعار',
