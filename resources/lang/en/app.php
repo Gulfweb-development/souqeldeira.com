@@ -42,7 +42,7 @@ return [
     'id' => 'ID',
     'created_at' => 'Created At',
     'created_at_ads' => 'Posted Date',
-    'whatsapp_text' => 'السلام عليكم اذا ممكن ترسل تفاصيل هذا الإعلان في سوف الديرة وشكرا :url',
+    'whatsapp_text' => "السلام عليكم اذا ممكن ترسل تفاصيل هذا الإعلان في سوق الديرة وشكرا\n :url",
     'updated_at' => 'Updated At',
     'created_by' => 'Created By',
     'terms_condition_ar' => 'terms and condition (Ar)',
