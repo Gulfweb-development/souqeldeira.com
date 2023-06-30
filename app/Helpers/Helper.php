@@ -217,14 +217,14 @@ if (!function_exists('phoneNumberFormat')) {
 if (!function_exists('toAdDefaultImage')) {
     function toAdDefaultImage($imageFile)
     {
-        return $imageFile != null ? $imageFile : asset('images/ad_default.jpg');
+        return $imageFile != null ? $imageFile : asset('images/ad_default.jpg') . '?v1';
     }
 }
 // DEFAULT IMAGE FOR PROFILES AND AGENCIES PAGE
 if (!function_exists('toProfileDefaultImage')) {
-    function toProfileDefaultImage($imageFile)
+    function toProfileDefaultImage($imageFile , $image = 'images/profile_default.jpg')
     {
-        return $imageFile != null ? $imageFile : asset('images/profile_default.jpg');
+        return $imageFile != null ? $imageFile : asset($image);
     }
 }
 

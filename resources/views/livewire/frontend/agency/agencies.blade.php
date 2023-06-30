@@ -1,5 +1,5 @@
 <div>
-     <x-slot name="meta_title">@lang('app.agencies')</x-slot>
+    <x-slot name="meta_title">@lang('app.agencies')</x-slot>
     <x-slot name="meta_descrption">@lang('app.agencies')</x-slot>
     <x-slot name="og_title">@lang('app.agencies')</x-slot>
     <x-slot name="og_description">@lang('app.agencies')</x-slot>
@@ -98,8 +98,8 @@
                                             {{-- <div class="homes-tag button alt sale">
                                                 {{ $user->type == 'RENT' ? __('app.rent') : __('app.sale') }}</div> --}}
                                             {{-- <div class="homes-price">@lang('app.currency') {{ $user->price }}</div> --}}
-                                            <img src="{{ toProfileDefaultImage($user->getFile()) }}"
-                                                class="img-responsive" alt="{{ $user->name }}">
+                                            <img src="{{ toProfileDefaultImage($user->getFile() , 'images/company_default.jpg') }}"
+                                                 class="img-responsive" alt="{{ $user->name }}">
                                         </div>
                                     </div>
                                     <div class="button-effect">
@@ -118,14 +118,16 @@
                                 <h3><a href="{{ route('agency.ads',[toSlug($user->name),$user->id]) }}"  class="trackClick" track-data='{!! json_encode(['type' => 'agency_ads' , 'is_featured' => 0 , 'id' =>  $user->id]) !!}'>{{ $user->name }}</a></h3>
                                 <p class="homes-address mb-3">
                                     @if($user->phone)
-                                    <a href="tel:{{ $user->phone }}"  class="trackClick" track-data='{!! json_encode(['type' => 'agency_tel' , 'is_featured' =>  0, 'id' =>  $user->id]) !!}'>
-                                        <i
-                                            class="fa fa-mobile"></i><span>{{ $user->phone }}</span>
-                                    </a>
-                                    @endif
-                                    <div class="author-box clearfix">
-                                        <button class="btn btn-default btn-sm text-white" wire:click.prevent="sendReport({{ $user->id }})">@lang('app.reportThisAcc')</button>
-                                    </div>
+                                        <a href="tel:{{ $user->phone }}"  class="trackClick" track-data='{!! json_encode(['type' => 'agency_tel' , 'is_featured' =>  0, 'id' =>  $user->id]) !!}'>
+                                            <i
+                                                class="fa fa-mobile"></i><span>{{ $user->phone }}</span>
+                                        </a>
+                                @else
+                                    <div style="height: 30px;"></div>
+                                @endif
+                                <div class="author-box clearfix">
+                                    <button class="btn btn-default btn-sm text-white" wire:click.prevent="sendReport({{ $user->id }})">@lang('app.reportThisAcc')</button>
+                                </div>
 
                                 </p>
                                 <!-- homes List -->
@@ -180,35 +182,35 @@
     @push('js')
         <script>
             function onGovernorateChange(e) {
-                @this.set('governorate_id', e.target.value);
+            @this.set('governorate_id', e.target.value);
             }
 
             function onRegionChange(e) {
-                @this.set('region_id', e.target.value);
+            @this.set('region_id', e.target.value);
             }
 
             function onBuildingTypeChange(e) {
-                @this.set('building_type_id', e.target.value);
+            @this.set('building_type_id', e.target.value);
             }
 
             function onTypeChange(e) {
-                @this.set('type', e.target.value);
+            @this.set('type', e.target.value);
             }
 
             function onRoomsChange(e) {
-                @this.set('rooms_count', e.target.value);
+            @this.set('rooms_count', e.target.value);
             }
 
             function onBathRoomChange(e) {
-                @this.set('bathrooms_count', e.target.value);
+            @this.set('bathrooms_count', e.target.value);
             }
 
             function onPriceFromChange(e) {
-                @this.set('price_from', e.target.value);
+            @this.set('price_from', e.target.value);
             }
 
             function onPriceToChange(e) {
-                @this.set('price_to', e.target.value);
+            @this.set('price_to', e.target.value);
             }
 
 
