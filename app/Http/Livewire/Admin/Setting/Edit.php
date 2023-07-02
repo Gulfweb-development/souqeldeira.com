@@ -35,6 +35,8 @@ class Edit extends Component
             'twitter' => 'nullable|string|max:170',
             'instagram' => 'nullable|string|max:170',
             'youtube' => 'nullable|string|max:170',
+            'gift_normal' => 'required|numeric|min:0',
+            'gift_premium' => 'required|numeric|min:0',
             'expire_time_adv' => 'required|numeric|min:1',
             'expire_time_premium_adv' => 'required|numeric|min:1',
             'price_adv' => 'required|numeric|min:0',

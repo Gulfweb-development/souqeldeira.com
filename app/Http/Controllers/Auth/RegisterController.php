@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Setting;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -113,6 +114,8 @@ class RegisterController extends Controller
             'phone' => $data['phone'] ?? null,
             'password' => $data['password'],
             'activated_code' => $activated_code,
+            'adv_nurmal_count' => Setting::get('gift_normal', 0),
+            'adv_star_count' => Setting::get('gift_premium', 0),
         ]);
         if (request()->has('image')) {
            $user->uploadFile($data['image']);

@@ -23,5 +23,6 @@ ALTER TABLE `tracks` ADD INDEX(`belongs_to_type`, `belongs_to`, `type`, `ip`, `t
 ALTER TABLE `ads` ADD `tracks` TEXT NULL DEFAULT NULL AFTER `views`;
 ALTER TABLE `users` ADD `tracks` TEXT NULL DEFAULT NULL AFTER `type`;
 
+ALTER TABLE `settings` ADD `gift_normal` INT NOT NULL DEFAULT '0' AFTER `expire_time_premium_adv`, ADD `gift_premium` INT NOT NULL DEFAULT '0' AFTER `gift_normal`;
 -- ===============================================================================
 

@@ -34,6 +34,8 @@ class Setting extends Model
         'price_premium_adv',
         'num_special_position',
         'special_position',
+        'gift_normal',
+        'gift_premium',
     ];
 
     protected $casts = [

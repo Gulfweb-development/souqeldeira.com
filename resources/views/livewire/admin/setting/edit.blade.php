@@ -40,6 +40,15 @@
             <hr>
             <div class="row">
                 <div class="col-md-6">
+                    <x-admin.input name="state.gift_normal" label="Num. Normal Gift Ads"/>
+                </div>
+                <div class="col-md-6">
+                    <x-admin.input name="state.gift_premium" label="Num. Premium Gift Ads"/>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-6">
                     <x-admin.input name="state.expire_time_adv" label="{{ __('expire_time_adv') }}"/>
                 </div>
                 <div class="col-md-6">
