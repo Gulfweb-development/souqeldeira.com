@@ -51,4 +51,9 @@ class Subscriptions extends Model
         return $this->hasMany(SubscriptionHistories::class , 'subscription_id' , 'id');
     }
 
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
+    }
+
 }

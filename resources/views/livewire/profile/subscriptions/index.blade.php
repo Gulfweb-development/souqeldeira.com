@@ -77,7 +77,10 @@
             <div class="col-md-3">
                 <div class="card  mt-1">
                     <div class="card-header">
-                        <h4>{{ $list['name_'.app()->getLocale()] }}</h4>
+                        @if($list->getFile())
+                        <img src="{{ toAdDefaultImage($list->getFile()) }}" class="img-thumbnail1 mb-2">
+                        @endif
+                        <h4 class="text-center">{{ $list['name_'.app()->getLocale()] }}</h4>
                     </div>
                     <div class="card-body">
                         <ul>

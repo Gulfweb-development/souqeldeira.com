@@ -5,9 +5,11 @@ namespace App\Http\Livewire\Admin\Subscriptions;
 use App\Models\Subscriptions as SubscriptionsModel;
 use Livewire\Component;
 use Illuminate\Support\Facades\Validator;
+use Livewire\WithFileUploads;
 
 class Create extends Component
 {
+    use WithFileUploads;
 
     public $state = [];
 
@@ -21,8 +23,12 @@ class Create extends Component
             'adv_star_count' => 'required',
             'price' => 'required',
             'expire_time' => 'required|min:1',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
         ])->validate();
-        SubscriptionsModel::create($this->state);
+        $ubscription = SubscriptionsModel::create($this->state);
+        if (toExists('image', $this->state)) {
+            $ubscription->uploadFile($this->state['image']);
+        }
         session()->flash('success', __('app.data_created'));
         $this->reset();
         return redirect()->route('admin.subscriptions.index');

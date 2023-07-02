@@ -27,6 +27,10 @@
                 <div class="col-md-6">
                     <x-admin.input name="state.expire_time" label="{{ __('expire_time') }}" />
                 </div>
+                <div class="col-md-6">
+                    <x-admin.file name="state.image" :image="$state" label="{{ __('app.image') }}"
+                                  size="1920x1080" />
+                </div>
 
 
                 <div class="col-md-12 mt-4 justify-content-center align-items-center d-flex border-1">
