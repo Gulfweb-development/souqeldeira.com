@@ -7,6 +7,7 @@
     <div class="row">
         <div class="col-lg-3 col-6">
             <!-- small box -->
+            <a href="{{ route('admin.ad.index') }}">
             <div class="small-box bg-info">
                 <div class="inner">
                     <h3>{{ $approvedAds }}</h3>
@@ -18,10 +19,12 @@
                 </div>
                 {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
             </div>
+            </a>
         </div>
         <!-- ./col -->
         <div class="col-lg-3 col-6">
             <!-- small box -->
+            <a href="{{ route('admin.ad.index') }}">
             <div class="small-box bg-success">
                 <div class="inner">
                     <h3>{{ $penddingAds }}</h3>
@@ -33,10 +36,12 @@
                 </div>
                 {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
             </div>
+            </a>
         </div>
         <!-- ./col -->
         <div class="col-lg-3 col-6">
             <!-- small box -->
+            <a href="{{ route('admin.user.index') }}">
             <div class="small-box bg-warning">
                 <div class="inner">
                     <h3>{{ $companyUsers }}</h3>
@@ -48,10 +53,12 @@
                 </div>
                 {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
             </div>
+            </a>
         </div>
         <!-- ./col -->
         <div class="col-lg-3 col-6">
             <!-- small box -->
+            <a href="{{ route('admin.user.index') }}">
             <div class="small-box bg-danger">
                 <div class="inner">
                     <h3>{{ $normalUsers }}</h3>
@@ -63,12 +70,14 @@
                 </div>
                 {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
             </div>
+            </a>
         </div>
         <!-- ./col -->
     </div>
     <div class="row">
         <div class="col-lg-3 col-6">
             <!-- small box -->
+            <a href="{{ route('admin.user.index') }}">
             <div class="small-box bg-info">
                 <div class="inner">
                     <h3>{{ $registeredUsers }}</h3>
@@ -80,10 +89,12 @@
                 </div>
                 {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
             </div>
+            </a>
         </div>
         <!-- ./col -->
         <div class="col-lg-3 col-6">
             <!-- small box -->
+            <a href="{{ route('admin.governorate.index') }}">
             <div class="small-box bg-success">
                 <div class="inner">
                     <h3>{{ $governorates }}</h3>
@@ -95,10 +106,12 @@
                 </div>
                 {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
             </div>
+            </a>
         </div>
         <!-- ./col -->
         <div class="col-lg-3 col-6">
             <!-- small box -->
+            <a href="{{ route('admin.region.index') }}">
             <div class="small-box bg-warning">
                 <div class="inner">
                     <h3>{{ $regions }}</h3>
@@ -110,10 +123,12 @@
                 </div>
                 {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
             </div>
+            </a>
         </div>
         <!-- ./col -->
         <div class="col-lg-3 col-6">
             <!-- small box -->
+            <a href="{{ route('admin.faq.index') }}">
             <div class="small-box bg-danger">
                 <div class="inner">
                     <h3>{{ $faqs }}</h3>
@@ -125,9 +140,11 @@
                 </div>
                 {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
             </div>
+            </a>
         </div>
         <div class="col-lg-3 col-6">
             <!-- small box -->
+            <a href="{{ route('admin.invoices.index') }}">
             <div class="small-box bg-gradient-info">
                 <div class="inner">
                     <h3>{{ $paid_today }} @lang('app.currency')</h3>
@@ -137,9 +154,11 @@
                     <i class="fa fa-dollar-sign"></i>
                 </div>
             </div>
+            </a>
         </div>
         <div class="col-lg-3 col-6">
             <!-- small box -->
+            <a href="{{ route('admin.invoices.index') }}">
             <div class="small-box bg-gradient-info">
                 <div class="inner">
                     <h3>{{ $paid_this_week }} @lang('app.currency')</h3>
@@ -149,9 +168,11 @@
                     <i class="fa fa-dollar-sign"></i>
                 </div>
             </div>
+            </a>
         </div>
         <div class="col-lg-3 col-6">
             <!-- small box -->
+            <a href="{{ route('admin.invoices.index') }}">
             <div class="small-box bg-gradient-info">
                 <div class="inner">
                     <h3>{{ $paid_this_month }} @lang('app.currency')</h3>
@@ -161,9 +182,11 @@
                     <i class="fa fa-dollar-sign"></i>
                 </div>
             </div>
+            </a>
         </div>
         <div class="col-lg-3 col-6">
             <!-- small box -->
+            <a href="{{ route('admin.invoices.index') }}">
             <div class="small-box bg-gradient-info">
                 <div class="inner">
                     <h3>{{ $paid_last_month }} @lang('app.currency')</h3>
@@ -173,6 +196,7 @@
                     <i class="fa fa-dollar-sign"></i>
                 </div>
             </div>
+            </a>
         </div>
         <!-- ./col -->
     </div>
