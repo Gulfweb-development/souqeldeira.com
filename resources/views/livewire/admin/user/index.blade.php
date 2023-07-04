@@ -165,6 +165,13 @@
                                                        title="@lang('app.ads')">
                                                         <i class="fas fa-home"></i>
                                                     </a>
+                                                    @if($user->type == "COMPANY")
+                                                    <a href="{{ route('admin.user.analytics', [ $user]) }}"
+                                                       class="btn bg-gradient-secondary btn-sm show-btn"
+                                                       title="Analytics">
+                                                        <i class="fas fa-chart-line"></i>
+                                                    </a>
+                                                    @endif
                                                 </div>
                                             </td>
                                         </tr>
