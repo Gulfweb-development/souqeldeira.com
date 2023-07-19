@@ -60,7 +60,7 @@ const AMEX_TITLE = "AMEX";
  * Type: Constant Variable | String
  * Possible Values: Enter the payment option code or the corresponding constant variable which will be used as default payment option.
  */
-const DEFAULT_PAYMENT_OPTION = BOOKEEY_CODE;
+const DEFAULT_PAYMENT_OPTION = KNET_CODE;
 
 /**
  * Enable/Disable Payment Method
