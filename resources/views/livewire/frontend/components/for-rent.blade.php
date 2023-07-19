@@ -39,7 +39,7 @@
 
                 </div>
                 <div class="bg-all">
-                    <a href="{{ route('ads.search') }}" class="btn btn-outline-light">@lang('app.view_all')</a>
+                    <a href="{{ route('ads.search' , ['type' => 'RENT']) }}" class="btn btn-outline-light">@lang('app.view_all')</a>
                 </div>
             </div>
         </section>
