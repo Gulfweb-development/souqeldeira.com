@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Api\Panel;
 
 use App\Http\Controllers\Controller;
+use App\Mail\Forget;
 use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -53,7 +55,7 @@ class AuthController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:1024',
         ]);
         if ( ! filter_var($request->get('email'), FILTER_VALIDATE_EMAIL) and ! $request->get('phone' , false)  )
-            $this->error(400 , trans('Email address or phone number is required!'));
+            return $this->error(400 , trans('Email address or phone number is required!'));
 
         $request->merge(['phone' => str_replace("+965",'', $request->get('phone' ))]);
 
@@ -94,5 +96,36 @@ class AuthController extends Controller
             'description_en' => $user->description_en ,
             'token' => $token->token
         ] , $message);
+    }
+
+    public function forgetPassword(Request $request){
+        $request->validate( [
+            'email' => ['nullable', 'string', 'email', 'max:50'],
+            'phone' => ['nullable', 'string'],
+        ]);
+        if ( ! filter_var($request->get('email'), FILTER_VALIDATE_EMAIL) and ! $request->get('phone' , false)  )
+            return $this->error(400 , trans('Email address or phone number is required!'));
+
+        if (filter_var($request->email, FILTER_VALIDATE_EMAIL) and $request->email) {
+            $field = 'email';
+            $value = $request->email;
+        } else {
+            $field = 'phone';
+            $value = $request->phone;
+        }
+
+        $user = User::query()->where($field , $value)->first();
+        if ( $user == null )
+            return $this->error(400 ,trans('could not be found.'));
+
+        $activated_code = rand(1000,9999);
+        $user->update([
+            'activated_code' => $activated_code
+        ]);
+        if(!is_null($user->phone)) {
+            sendSms($user->phone,__("Hello\nYour OTP is :CODE\nSouqeldeira.com",['CODE'=>$activated_code]));
+        }
+        Mail::to($user->email)->send(new Forget($user));
+        return $this->success(null ,__('Your activated code send to email and phone'));
     }
 }
