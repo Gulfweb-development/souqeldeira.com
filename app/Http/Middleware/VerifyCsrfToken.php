@@ -12,6 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
+        "/syncdarco",
         "/sync",
         "/save-visible-divs",
         "/track-links"

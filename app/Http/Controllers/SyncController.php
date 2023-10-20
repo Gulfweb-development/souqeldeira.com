@@ -49,13 +49,7 @@ class SyncController extends Controller
 
     //collect data from hook
     public function sync(Request $request){
-        /*
-        Log::info("title-".$request->title);
-        Log::info("details-".$request->details);
-        Log::info("area-".$request->area);
-        Log::info("type-".$request->type);
-        Log::info("propertytype-".$request->propertytype);
-        */
+
      if(
         !empty($request->title) &&
         !empty($request->details) &&
@@ -99,6 +93,74 @@ class SyncController extends Controller
 
             $ad = new Ad;
             $ad->user_id          = 77; //default user
+            $ad->governorate_id   = $regionDetails['governorate_id'];
+            $ad->region_id        = $regionDetails['region_id'];
+            $ad->building_type_id = $propertyId;
+            $ad->type             = $this->TypeName($request->type);
+            $ad->title            = $request->title;
+            $ad->text             = $request->details;
+            $ad->price            = $request->price??0;
+            $ad->views            = 1;
+            $ad->phone            = $request->phone;
+            $ad->code             = Str::random(6);;
+            $ad->archived_at      = Carbon::now('UTC')->addDays(config('app.ad_expire_day' , 15))->format('Y-m-d H:i:s');;
+            $ad->is_featured      = 0;
+            $ad->is_approved      = 1;
+            $ad->save();
+            if(!empty($request->url)){
+            $this->syncimage($request->url,$ad->id);
+            }
+
+           }
+        }
+    }
+    
+    
+    public function syncdarco(Request $request){
+
+     if(
+        !empty($request->title) &&
+        !empty($request->details) &&
+        !empty($request->area) &&
+        !empty($request->type) &&
+        !empty($request->propertytype)
+        ){
+        Log::info("syn started 11");
+        $explodearea = explode(",",$request->area);
+        if(count($explodearea)>1){
+        for($i=0;$i<count($explodearea);$i++){
+        if(!empty($explodearea[$i])){
+        $regionDetails = $this->getRegionId($explodearea[$i]);
+        $propertyId    = $this->getBuildingTypeId($request->propertytype);
+
+        $ad = new Ad;
+        $ad->user_id          = 120; //default user
+        $ad->governorate_id   = $regionDetails['governorate_id'];
+        $ad->region_id        = $regionDetails['region_id'];
+        $ad->building_type_id = $propertyId;
+        $ad->type             = $this->TypeName($request->type);
+        $ad->title            = $request->title;
+        $ad->text             = $request->details;
+        $ad->price            = $request->price??0;
+        $ad->views            = 1;
+        $ad->phone            = $request->phone;
+        $ad->code             = Str::random(6);;
+        $ad->archived_at      = Carbon::now('UTC')->addDays(config('app.ad_expire_day' , 15))->format('Y-m-d H:i:s');;
+        $ad->is_featured      = 0;
+        $ad->is_approved      = 1;
+        $ad->save();
+        if(!empty($request->url)){
+        $this->syncimage($request->url,$ad->id);
+        }
+
+        }
+        }
+        }else{
+            $regionDetails = $this->getRegionId($request->area);
+            $propertyId    = $this->getBuildingTypeId($request->propertytype);
+
+            $ad = new Ad;
+            $ad->user_id          = 120; //default user
             $ad->governorate_id   = $regionDetails['governorate_id'];
             $ad->region_id        = $regionDetails['region_id'];
             $ad->building_type_id = $propertyId;

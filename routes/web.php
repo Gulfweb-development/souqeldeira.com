@@ -234,6 +234,9 @@ Route::get('/resend-code', [App\Http\Controllers\Auth\VerificationController::cl
 Route::get('/logout',[LoginController::class,'logout'])->name('auth.logout');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/sync', [App\Http\Controllers\SyncController::class, 'sync'])->name('sync');
+Route::post('/syncdarco', [App\Http\Controllers\SyncController::class, 'syncdarco'])->name('syncdarco');
+
+
 Route::get('/test', function () {
     // Upload Photo
 
