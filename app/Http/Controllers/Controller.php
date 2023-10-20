@@ -19,14 +19,21 @@ class Controller extends BaseController
      * @return JsonResponse
      */
     protected function success($data = [] , $message ="success"){
-        return response()->json(['status' => true , 'message' => $message , 'data' => $data]);
+        if ( $message == "success")
+            $message = trans('success');
+        return response()->json(['status' => true , 'message' => $message , 'data' => $data , 'errors' => []]);
     }
+
     /**
-     * @param mixed $data
+     * @param int $code
      * @param ?string $message
+     * @param array $errors
+     * @param mixed $data
      * @return JsonResponse
      */
-    protected function error($code = 400, $message ="success" , $data = [] ){
-        return response()->json(['status' => false , 'message' => $message , 'data' => $data] , $code);
+    protected function error($code = 400, $message ="error" , $errors = [], $data = [] ){
+        if ( $message == "error")
+            $message = trans('failed');
+        return response()->json(['status' => false , 'message' => $message , 'data' => $data , 'errors' => $errors] , $code);
     }
 }
