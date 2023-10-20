@@ -24,5 +24,25 @@ ALTER TABLE `ads` ADD `tracks` TEXT NULL DEFAULT NULL AFTER `views`;
 ALTER TABLE `users` ADD `tracks` TEXT NULL DEFAULT NULL AFTER `type`;
 
 ALTER TABLE `settings` ADD `gift_normal` INT NOT NULL DEFAULT '0' AFTER `expire_time_premium_adv`, ADD `gift_premium` INT NOT NULL DEFAULT '0' AFTER `gift_normal`;
--- ===============================================================================
 
+CREATE TABLE `personal_access_tokens` (
+                                          `id` bigint(20) UNSIGNED NOT NULL,
+                                          `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+                                          `tokenable_id` bigint(20) UNSIGNED NOT NULL,
+                                          `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+                                          `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+                                          `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+                                          `last_used_at` timestamp NULL DEFAULT NULL,
+                                          `created_at` timestamp NULL DEFAULT NULL,
+                                          `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE `personal_access_tokens`
+    ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+ALTER TABLE `personal_access_tokens`
+    MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+-- ===============================================================================
