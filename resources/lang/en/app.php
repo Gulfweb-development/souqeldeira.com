@@ -321,5 +321,5 @@ return [
     'reportThisAd' => 'Report this advertise',
     'reportThisAcc' => 'Report this account',
     'reportSent' => 'Report sent to the administrator successfully, they review your report as soon as possible.',
-
+    'registered_succefully_please_check_your_phone_to_active_account' => 'You registered successfully. please check your phone to activation.'
 ];
