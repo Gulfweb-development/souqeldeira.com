@@ -65,6 +65,7 @@ class AuthController extends Controller
             'phone' => $request->phone ?? null,
             'password' => $request->password,
             'activated_code' => $activated_code,
+            'email_verified_at' => \Carbon\Carbon::now(),
             'adv_nurmal_count' => Setting::get('gift_normal', 0),
             'adv_star_count' => Setting::get('gift_premium', 0),
         ]);
