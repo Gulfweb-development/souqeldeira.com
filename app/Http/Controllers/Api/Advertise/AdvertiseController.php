@@ -169,4 +169,11 @@ class AdvertiseController extends Controller
         $ad = array_merge($ad , ['recentAds' => $recentAds , 'featuredAds' => $featuredAds]);
         return $this->success($ad);
     }
+
+    public function viewAdd(Request $request){
+        $id= $request->get('adId');
+        $ad = Ad::where('id', $id)->where('is_approved', 1)->firstOrFail();
+        $ad->increment('views');
+        return $this->success(['views' => $ad->views+1]);
+    }
 }
