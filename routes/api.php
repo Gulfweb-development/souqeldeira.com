@@ -27,5 +27,5 @@ Route::post('search' , [AdvertiseController::class , 'search']);
 Route::post('adDetails' , [AdvertiseController::class , 'adDetails']);
 Route::post('viewAdd' , [AdvertiseController::class , 'viewAdd']);
 Route::middleware('auth:api')->group(function () {
-//    Route::
+    Route::post('addToFavorite' , [AdvertiseController::class , 'addToFavorite']);
 });

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api\Advertise;
 
 use App\Http\Controllers\Controller;
 use App\Models\Ad;
+use App\Models\Favorite;
+use App\Services\FavoritesService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
@@ -175,5 +177,18 @@ class AdvertiseController extends Controller
         $ad = Ad::where('id', $id)->where('is_approved', 1)->firstOrFail();
         $ad->increment('views');
         return $this->success(['views' => $ad->views+1]);
+    }
+
+    public function addToFavorite(Request $request){
+        $id= $request->get('adId');
+        $ad = Ad::where('id', $id)->firstOrFail();
+        $favoriteCount = Favorite::where('ad_id', $ad->id)->where('user_id', $request->user()->id)->count();
+        $service = new FavoritesService($ad);
+        if ($favoriteCount > 0) {
+            $service->deleteFromFavorite();
+            return $this->success(['is_favorite' => false] ,__('app.data_deleted_favorite'));
+        }
+        $service->addToFavorite();
+        return $this->success([ 'is_favorite' => true] ,__('app.data_added_favorite'));
     }
 }
