@@ -26,6 +26,7 @@ Route::post('buildingType' , [AssetsController::class , 'buildingType']);
 Route::post('search' , [AdvertiseController::class , 'search']);
 Route::post('adDetails' , [AdvertiseController::class , 'adDetails']);
 Route::post('viewAdd' , [AdvertiseController::class , 'viewAdd']);
+Route::post('offices' , [AssetsController::class , 'offices']);
 Route::middleware('auth:api')->group(function () {
     Route::post('addToFavorite' , [AdvertiseController::class , 'addToFavorite']);
 });

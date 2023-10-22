@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\BuildingType;
 use App\Models\Governorate;
 use App\Models\Setting;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AssetsController extends Controller
@@ -38,6 +39,7 @@ class AssetsController extends Controller
             ['SaleName' => trans('app.exchange') , 'saleId' => 'EXCHANGE'],
         ]]);
     }
+
     public function buildingType(Request $request){
         return $this->success([ 'buildingType' => BuildingType::query()
             ->select('id', toLocale('name'))
@@ -49,6 +51,24 @@ class AssetsController extends Controller
                 ];
             })
         ]);
+    }
+
+    public function offices(Request $request){
+        $offices = User::companies()
+            ->paginate(max(min($request->get('per_page' , 20) , 50) , 10));
+        $offices->setCollection( $offices->getCollection()->transform(function ($user) {
+            return [
+                'id' => $user->id,
+                'name' => $user->name,
+                'phone' => $user->phone,
+                'avatar' => toProfileDefaultImage($user->getFile() , 'images/company_default.jpg'),
+                'link' => route('agency.ads',[toSlug($user->name),$user->id]) ,
+                'whatsapp' => 'https://api.whatsapp.com/send?phone='.$user->phone
+            ];
+        }));
+        $offices = $offices->toArray();
+        unset($offices['first_page_url'],$offices['last_page_url'],$offices['links'],$offices['next_page_url'],$offices['path'],$offices['prev_page_url']);
+        return $this->success([ 'offices' => $offices ]);
     }
 
 }
