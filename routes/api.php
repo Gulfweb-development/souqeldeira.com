@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Advertise\AdvertiseController;
 use App\Http\Controllers\Api\Advertise\AssetsController;
+use App\Http\Controllers\Api\AssetsController as MainAssetController;
 use App\Http\Controllers\Api\Panel\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,7 @@ Route::post('search' , [AdvertiseController::class , 'search']);
 Route::post('adDetails' , [AdvertiseController::class , 'adDetails']);
 Route::post('viewAdd' , [AdvertiseController::class , 'viewAdd']);
 Route::post('offices' , [AssetsController::class , 'offices']);
+Route::post('contactUs' , [MainAssetController::class , 'contactUs']);
 Route::middleware('auth:api')->group(function () {
     Route::post('addToFavorite' , [AdvertiseController::class , 'addToFavorite']);
 });
