@@ -25,7 +25,7 @@ class AuthController extends Controller
 
         if (Auth::attempt([$field => $value, 'password' => $credentials['password']])) {
             $user = Auth::user();
-            $token = $user->createToken('application')->accessToken;
+            $token = $user->createToken('application');
             return $this->success([
                 'id' => $user->id ,
                 'name' => $user->name ,
@@ -38,7 +38,7 @@ class AuthController extends Controller
                 'adv_star_count' => $user->adv_star_count ,
                 'description_ar' => $user->description_ar ,
                 'description_en' => $user->description_en ,
-                'token' => $token->token
+                'token' => $token->plainTextToken
             ]);
         } else {
             return $this->error(401 ,  trans('Unauthorized') );
@@ -81,7 +81,7 @@ class AuthController extends Controller
         } else {
             $message = __('app.registered_succefully_please_check_your_mail_to_active_account');
         }
-        $token = $user->createToken('application')->accessToken;
+        $token = $user->createToken('application');
         return $this->success([
             'id' => $user->id ,
             'name' => $user->name ,
@@ -94,7 +94,7 @@ class AuthController extends Controller
             'adv_star_count' => $user->adv_star_count ,
             'description_ar' => $user->description_ar ,
             'description_en' => $user->description_en ,
-            'token' => $token->token
+            'token' => $token->plainTextToken
         ] , $message);
     }
 
