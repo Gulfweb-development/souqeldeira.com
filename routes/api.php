@@ -22,6 +22,7 @@ Route::post('forgetPassword' , [AuthController::class , 'forgetPassword']);
 Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('governorates' , [AdvertiseController::class , 'governorates']);
 Route::post('saleType' , [AdvertiseController::class , 'saleType']);
+Route::post('buildingType' , [AdvertiseController::class , 'buildingType']);
 Route::middleware('auth:api')->group(function () {
 //    Route::
 });

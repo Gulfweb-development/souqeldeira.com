@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Mail\Forget;
+use App\Models\BuildingType;
 use App\Models\Governorate;
 use App\Models\Setting;
 use App\Models\User;
@@ -31,14 +32,26 @@ class AdvertiseController extends Controller
                }),
            ] ;
         });
-        return $this->success($Governorate);
+        return $this->success(['governorates' => $Governorate]);
     }
 
     public function saleType(Request $request){
-        return $this->success([
+        return $this->success(['sales' =>[
             ['SaleName' => trans('app.sale') , 'saleId' => 'SALE'],
             ['SaleName' => trans('app.rent') , 'saleId' => 'RENT'],
             ['SaleName' => trans('app.exchange') , 'saleId' => 'EXCHANGE'],
+        ]]);
+    }
+    public function buildingType(Request $request){
+        return $this->success([ 'buildingType' => BuildingType::query()
+            ->select('id', toLocale('name'))
+            ->get()
+            ->transform(function ($value) {
+                return [
+                    'typeId' => $value['id'],
+                    'typeName' => $value[toLocale('name')],
+                ];
+            })
         ]);
     }
 
