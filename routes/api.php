@@ -1,8 +1,7 @@
 <?php
 
-use App\Http\Controllers\Api\AdvertiseController;
+use App\Http\Controllers\Api\Advertise\AssetsController;
 use App\Http\Controllers\Api\Panel\AuthController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,10 +18,11 @@ use Illuminate\Support\Facades\Route;
 Route::post('login' , [AuthController::class , 'login']);
 Route::post('register' , [AuthController::class , 'register']);
 Route::post('forgetPassword' , [AuthController::class , 'forgetPassword']);
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-Route::post('governorates' , [AdvertiseController::class , 'governorates']);
-Route::post('saleType' , [AdvertiseController::class , 'saleType']);
-Route::post('buildingType' , [AdvertiseController::class , 'buildingType']);
+Route::post('home' , [AssetsController::class , 'home']);
+Route::post('governorates' , [AssetsController::class , 'governorates']);
+Route::post('saleType' , [AssetsController::class , 'saleType']);
+Route::post('buildingType' , [AssetsController::class , 'buildingType']);
+Route::post('search' , [AssetsController::class , 'search']);
 Route::middleware('auth:api')->group(function () {
 //    Route::
 });

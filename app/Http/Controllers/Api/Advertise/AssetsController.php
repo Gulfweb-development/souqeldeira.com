@@ -1,18 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Advertise;
 
 use App\Http\Controllers\Controller;
-use App\Mail\Forget;
 use App\Models\BuildingType;
 use App\Models\Governorate;
 use App\Models\Setting;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 
-class AdvertiseController extends Controller
+class AssetsController extends Controller
 {
     public function home(Request $request){
         Setting::latest()->first()->increment('visits');
