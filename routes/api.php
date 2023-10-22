@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Advertise\AdvertiseController;
 use App\Http\Controllers\Api\Advertise\AssetsController;
 use App\Http\Controllers\Api\Panel\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -22,7 +23,7 @@ Route::post('home' , [AssetsController::class , 'home']);
 Route::post('governorates' , [AssetsController::class , 'governorates']);
 Route::post('saleType' , [AssetsController::class , 'saleType']);
 Route::post('buildingType' , [AssetsController::class , 'buildingType']);
-Route::post('search' , [AssetsController::class , 'search']);
+Route::post('search' , [AdvertiseController::class , 'search']);
 Route::middleware('auth:api')->group(function () {
 //    Route::
 });

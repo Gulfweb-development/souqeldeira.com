@@ -1,0 +1,155 @@
+<?php
+
+namespace App\Http\Controllers\Api\Advertise;
+
+use App\Http\Controllers\Controller;
+use App\Models\Ad;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
+
+class AdvertiseController extends Controller
+{
+    private function formatAuthor($user)
+    {
+        $user = optional($user);
+        return [
+            'id' => $user->id,
+            'name' => $user->name,
+            'avatar' => toProfileDefaultImage($user->getFile() , 'images/company_default.jpg'),
+            'is_agency' => $user->is_approved and $user->type == "COMPANY" ,
+            'agency_link' => $user->is_approved and $user->type == "COMPANY" ?  route('agency.ads',[toSlug($user->name),$user->id]) : null ,
+        ];
+    }
+    private function formatAd($ad , $deleteUseless = false)
+    {
+        /** @var Ad $ad */
+        $comments = [
+            'active' => false,
+            'number' => 0,
+            'comments' => [],
+        ];
+        if ( env('COMMENT_ACTIVE' , true) and !$deleteUseless) {
+            $comments = [
+                'active' => true,
+                'number' => $ad->commentsCount(),
+                'comments' => $ad->approvedComments()->latest()->get()->transform(function ($comment) {
+                    return [
+                        'author'=> $this->formatAuthor($comment->user),
+                        'stars'=> $comment->stars,
+                        'text' =>[
+                            'short' => Str::limit(strip_tags($comment->text), 100),
+                            'htmlLess' => strip_tags($comment->text),
+                            'isArabic' => isArabic(strip_tags($comment->text)),
+                            'original' => $comment->text
+                        ],
+                        'created_at'=>[
+                            'human' =>$comment->created_at->diffForHumans(),
+                            'system' =>$comment->created_at,
+                        ],
+                    ];
+                }),
+            ];
+        }
+        $information =  [
+            'id' => $ad->id ,
+            'title' => $ad->title ,
+            'description' =>[
+                'short' => Str::limit(strip_tags($ad->text), 100),
+                'htmlLess' => strip_tags($ad->text),
+                'isArabic' => isArabic(strip_tags($ad->text)),
+                'original' => $ad->text
+            ],
+            'phone'=>$ad->phone,
+            'link' => route('ad.search', [toSlug($ad->title), $ad->id]),
+            'author'=> $this->formatAuthor($ad->user),
+            'is_featured'=>$ad->is_featured == "1",
+            'views'=>$ad->views,
+            'comments'=>$comments,
+            'price'=>$ad->price,
+            'whatsapp' => 'https://api.whatsapp.com/send?phone=+965'.$ad->phone.'&text='. __('app.whatsapp_text' , ['url' => route('ad.search', [toSlug($ad->title), $ad->id])]),
+            'is_favorite'=> request()->user() != null && $ad->favorites()->where('user_id', request()->user()->id)->count() > 0,
+            'images'=> [
+                'main' => toAdDefaultImage($ad->getFile()),
+                'other' => []
+            ],
+            'created_at'=>[
+                'human' =>$ad->created_at->diffForHumans(),
+                'system' =>$ad->created_at,
+            ],
+            'type'=>[
+                'human' => $ad->type == 'RENT' ? trans('app.rent') : ( $ad->type == "EXCHANGE" ? trans('app.exchange') : trans('app.sale') ) ,
+                'system' => $ad->type,
+            ],
+            'buildingType'=>optional($ad->buildingType)->translate('name'),
+            'location' => [
+                'town_id' =>  optional($ad->region)->id,
+                'town_title' =>  optional($ad->region)->translate('name'),
+                'governorate_id' =>  optional($ad->governorate)->id,
+                'governorate_title' =>  optional($ad->governorate)->translate('name'),
+            ],
+            'similarAds' => !$deleteUseless ? Ad::where('is_approved', 1)
+                ->where('region_id', $ad->region_id)
+                ->inRandomOrder()
+                ->take(3)
+                ->get()->transform(function ($item) { return $this->formatAd($item , true) ;} ) : [],
+        ];
+        if ( $deleteUseless ) {
+            unset($information['description']['htmlLess'],
+                $information['description']['original'],
+                $information['author']['id'],
+                $information['author']['avatar'],
+                $information['comments'],
+                $information['whatsapp'],
+                $information['similarAds'],
+                $information['images']['other'],
+            );
+        }
+        return $information;
+    }
+    public function search(Request $request){
+        $ads = Ad::query()
+            ->when(($request->get('saleId') and in_array(strtoupper($request->get('saleId')) , ['EXCHANGE' , 'SALE','RENT'] )) , function ($query) use ($request) {
+                $query->where('type' , strtoupper($request->get('saleId')));
+            })
+            ->when(($request->get('agency_id') and $request->get('agency_id') > 0 ) , function ($query) use ($request) {
+                $query->where('user_id' , $request->get('agency_id'));
+            })
+            ->when($request->get('townId') , function ($query) use ($request) {
+                if ( is_array($request->get('townId')) ){
+                    $towns = collect($request->get('townId'))->filter(function ($item) {
+                        return intval($item) > 0;
+                    })->values();
+                    $query->whereIn('region_id' , $towns);
+                } elseif ( intval($request->get('townId')) > 0 )
+                    $query->where('region_id' , intval($request->get('townId')));
+            })
+            ->when(($request->get('priceFrom') and $request->get('priceFrom') > 0 ) , function ($query) use ($request) {
+                $query->where('price' , '>=', $request->get('priceFrom'));
+            })
+            ->when(($request->get('priceTo') and $request->get('priceTo') > 0 ) , function ($query) use ($request) {
+                $query->where('price' , '<=', $request->get('priceTo'));
+            })
+            ->with('region', 'governorate', 'images', 'user', 'buildingType')
+            ->where('is_approved', 1)
+            ->orderByDesc('is_featured')
+            ->latest()
+            ->when(($request->get('sortBy') and in_array(strtoupper($request->get('sortBy')) , ['MOST_VIEWED' , 'LOW_TO_HIGH','HIGH_TO_LOW'] )) , function ($query) use ($request) {
+                if ( strtoupper($request->get('sortBy')) == "MOST_VIEWED" )
+                    $query->orderBy('views','DESC');
+                elseif ( strtoupper($request->get('sortBy')) == "LOW_TO_HIGH" )
+                    $query->orderBy('price','ASC');
+                else
+                    $query->orderBy('price','DESC');
+            })
+            ->paginate(max(min($request->get('per_page' , 20) , 50) , 10));
+        $ads->setCollection( $ads->getCollection()->transform(function ($ad) {
+            return $this->formatAd($ad , true);
+        }));
+        $ads = $ads->toArray();
+        unset($ads['first_page_url'],$ads['last_page_url'],$ads['links'],$ads['next_page_url'],$ads['path'],$ads['prev_page_url']);
+        return $this->success($ads);
+    }
+
+
+}
