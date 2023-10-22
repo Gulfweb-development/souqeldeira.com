@@ -151,5 +151,22 @@ class AdvertiseController extends Controller
         return $this->success($ads);
     }
 
-
+    public function adDetails(Request $request){
+        $id= $request->get('adId');
+        $ad = Ad::where('id', $id)->where('is_approved', 1)->firstOrFail();
+        $ad->increment('views');
+        $recentAds = Ad::where('is_approved', 1)->latest()->take(3)
+            ->get()->transform(function ($ad) {
+                return $this->formatAd($ad , true);
+            });
+        $featuredAds = Ad::where('is_approved', 1)
+            ->where('is_featured', 1)
+            ->inRandomOrder()->take(5)
+            ->get()->transform(function ($ad) {
+                return $this->formatAd($ad , true);
+            });
+        $ad = $this->formatAd($ad);
+        $ad = array_merge($ad , ['recentAds' => $recentAds , 'featuredAds' => $featuredAds]);
+        return $this->success($ad);
+    }
 }
