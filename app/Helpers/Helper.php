@@ -29,7 +29,7 @@ if (!function_exists('adnotify')) {
 if (!function_exists('user')) {
     function user()
     {
-        return Auth::guard('web')->user();
+        return request()->user();
     }
 }
 // AUTH AND APPROVED USER
