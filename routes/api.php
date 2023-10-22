@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AdvertiseController;
 use App\Http\Controllers\Api\Panel\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,5 +20,7 @@ Route::post('login' , [AuthController::class , 'login']);
 Route::post('register' , [AuthController::class , 'register']);
 Route::post('forgetPassword' , [AuthController::class , 'forgetPassword']);
 Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('governorates' , [AdvertiseController::class , 'governorates']);
+Route::middleware('auth:api')->group(function () {
+//    Route::
 });
