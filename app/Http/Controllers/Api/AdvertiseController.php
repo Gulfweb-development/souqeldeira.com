@@ -17,6 +17,7 @@ class AdvertiseController extends Controller
         Setting::latest()->first()->increment('visits');
         $this->setting = Setting::select('id',toLocale('title'),toLocale('description'))->latest()->first();
     }
+
     public function governorates(Request $request){
         $Governorate = Governorate::query()->select('id', toLocale('name'))->get()->transform(function ($value) {
            return [
@@ -31,6 +32,14 @@ class AdvertiseController extends Controller
            ] ;
         });
         return $this->success($Governorate);
+    }
+
+    public function saleType(Request $request){
+        return $this->success([
+            ['SaleName' => trans('app.sale') , 'saleId' => 'SALE'],
+            ['SaleName' => trans('app.rent') , 'saleId' => 'RENT'],
+            ['SaleName' => trans('app.exchange') , 'saleId' => 'EXCHANGE'],
+        ]);
     }
 
 }
