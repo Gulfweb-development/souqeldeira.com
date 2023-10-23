@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\Advertise\AssetsController;
 use App\Http\Controllers\Api\AssetsController as MainAssetController;
 use App\Http\Controllers\Api\Panel\AuthController;
 use App\Http\Controllers\Api\Panel\NotificationController;
+use App\Http\Controllers\Api\Panel\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,4 +38,5 @@ Route::middleware('auth:api')->group(function () {
     Route::post('notifications' , [NotificationController::class , 'notifications']);
     Route::post('notifications/delete' , [NotificationController::class , 'notificationsDelete']);
     Route::post('notifications/view' , [NotificationController::class , 'notificationsView']);
+    Route::post('updatePassword' , [ProfileController::class , 'updatePassword']);
 });
