@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\Advertise\AdvertiseController;
 use App\Http\Controllers\Api\Advertise\AssetsController;
 use App\Http\Controllers\Api\AssetsController as MainAssetController;
 use App\Http\Controllers\Api\Panel\AuthController;
+use App\Http\Controllers\Api\Panel\NotificationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,4 +34,5 @@ Route::post('settings' , [MainAssetController::class , 'settings']);
 Route::post('terms' , [MainAssetController::class , 'terms']);
 Route::middleware('auth:api')->group(function () {
     Route::post('addToFavorite' , [AdvertiseController::class , 'addToFavorite']);
+    Route::post('notifications' , [NotificationController::class , 'notifications']);
 });
