@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Mail;
 class NotificationController extends Controller
 {
     public function notifications(Request $request){
-        $messages = UserMessage::query()->with('user')->latest()->paginate($request->get('per_page'));
+        $messages = UserMessage::query()->where('user_id', user()->id)->latest()->paginate($request->get('per_page'));
         $messages = $this->paginationFormat($messages , function ($item) {
             return [
                 'id' => $item->id,

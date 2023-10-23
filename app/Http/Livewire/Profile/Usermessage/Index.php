@@ -13,7 +13,7 @@ class Index extends Component
 
     public function delete($userMessageId)
     {
-        $userMessage = UserMessage::where('id', $userMessageId)->firstOrFail();
+        $userMessage = UserMessage::query()->where('user_id', user()->id)->where('id', $userMessageId)->firstOrFail();
         $userMessage->delete();
         $this->dispatchBrowserEvent('success', ['message' => __('app.data_deleted')]);
     }
@@ -22,7 +22,7 @@ class Index extends Component
 
     public function render()
     {
-        $messages = UserMessage::with('user')->latest()->paginate(PG);
+        $messages = UserMessage::query()->where('user_id', user()->id)->latest()->paginate(PG);
         return view('livewire.profile.usermessage.index', [
             'messages' => $messages,
         ])->layout(PROFILE_LAYOUT);

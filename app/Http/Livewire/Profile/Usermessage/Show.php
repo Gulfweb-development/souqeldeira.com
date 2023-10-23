@@ -10,7 +10,7 @@ class Show extends Component
     public $message;
     public function mount($userMessageId)
     {
-        $this->message = UserMessage::where('id', $userMessageId)->firstOrFail();
+        $this->message = UserMessage::query()->where('user_id', user()->id)->where('id', $userMessageId)->firstOrFail();
         // MARK AS READ
         foreach (user()->unReadNotifications as $notification) {
             if ($notification->data['id'] == $userMessageId && $notification->data['type'] == 'FROM_ADMIN') {
