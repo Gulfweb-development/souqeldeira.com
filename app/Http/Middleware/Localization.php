@@ -21,6 +21,9 @@ class Localization
         $localization = in_array($localization, self::ALLOWED_LOCALIZATIONS, true) ? $localization : 'en';
         app()->setLocale($localization);
 
+        $request->merge([
+            'per_page' => max(min(intval($request->get('per_page' , 20)) , 50) , 10),
+        ]);
         return $next($request);
     }
 }

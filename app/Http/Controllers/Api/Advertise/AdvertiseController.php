@@ -144,7 +144,7 @@ class AdvertiseController extends Controller
                 else
                     $query->orderBy('price','DESC');
             })
-            ->paginate(max(min($request->get('per_page' , 20) , 50) , 10));
+            ->paginate($request->get('per_page'));
         $ads->setCollection( $ads->getCollection()->transform(function ($ad) {
             return $this->formatAd($ad , true);
         }));

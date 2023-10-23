@@ -55,7 +55,7 @@ class AssetsController extends Controller
 
     public function offices(Request $request){
         $offices = User::companies()
-            ->paginate(max(min($request->get('per_page' , 20) , 50) , 10));
+            ->paginate($request->get('per_page'));
         $offices->setCollection( $offices->getCollection()->transform(function ($user) {
             return [
                 'id' => $user->id,
