@@ -56,7 +56,7 @@ class AssetsController extends Controller
     public function offices(Request $request){
         $offices = User::companies()
             ->paginate($request->get('per_page'));
-        $offices->setCollection( $offices->getCollection()->transform(function ($user) {
+        $offices = $this->paginationFormat($offices , function ($user) {
             return [
                 'id' => $user->id,
                 'name' => $user->name,
@@ -65,9 +65,7 @@ class AssetsController extends Controller
                 'link' => route('agency.ads',[toSlug($user->name),$user->id]) ,
                 'whatsapp' => 'https://api.whatsapp.com/send?phone='.$user->phone
             ];
-        }));
-        $offices = $offices->toArray();
-        unset($offices['first_page_url'],$offices['last_page_url'],$offices['links'],$offices['next_page_url'],$offices['path'],$offices['prev_page_url']);
+        });
         return $this->success([ 'offices' => $offices ]);
     }
 

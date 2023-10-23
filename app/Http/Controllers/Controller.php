@@ -36,4 +36,13 @@ class Controller extends BaseController
             $message = trans('failed');
         return response()->json(['status' => false , 'message' => $message , 'data' => $data , 'errors' => $errors] , $code);
     }
+
+    protected function paginationFormat($paginateObject , $callback){
+        $paginateObject->setCollection( $paginateObject->getCollection()->transform(function ($item) use($callback) {
+            return $callback($item);
+        }));
+        $paginateObject = $paginateObject->toArray();
+        unset($paginateObject['first_page_url'],$paginateObject['last_page_url'],$paginateObject['links'],$paginateObject['next_page_url'],$paginateObject['path'],$paginateObject['prev_page_url']);
+        return $paginateObject;
+    }
 }

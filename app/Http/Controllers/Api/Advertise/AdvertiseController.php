@@ -145,11 +145,9 @@ class AdvertiseController extends Controller
                     $query->orderBy('price','DESC');
             })
             ->paginate($request->get('per_page'));
-        $ads->setCollection( $ads->getCollection()->transform(function ($ad) {
+        $ads = $this->paginationFormat($ads , function ($ad) {
             return $this->formatAd($ad , true);
-        }));
-        $ads = $ads->toArray();
-        unset($ads['first_page_url'],$ads['last_page_url'],$ads['links'],$ads['next_page_url'],$ads['path'],$ads['prev_page_url']);
+        });
         return $this->success($ads);
     }
 
