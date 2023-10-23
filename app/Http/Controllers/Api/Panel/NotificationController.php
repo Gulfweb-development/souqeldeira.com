@@ -32,4 +32,22 @@ class NotificationController extends Controller
         $userMessage->delete();
         return $this->success([] , __('app.data_deleted'));
     }
+    public function notificationsView(Request $request){
+        $userMessage = UserMessage::query()->where('user_id', user()->id)->where('id', $request->get('id'))->firstOrFail();
+        foreach (user()->unReadNotifications as $notification) {
+            if ($notification->data['id'] == $request->get('id') && $notification->data['type'] == 'FROM_ADMIN') {
+                $notification->markAsRead();
+            }
+        }
+        return $this->success(['messages' =>[
+                'id' => $userMessage->id,
+                'title' => $userMessage->translate('title'),
+                'message' => $userMessage->translate('message'),
+                'created_at' => [
+                    'system' => $userMessage->created_at,
+                    'human' => $userMessage->created_at->diffForHumans(),
+                ]
+            ]
+        ]);
+    }
 }

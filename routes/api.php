@@ -36,4 +36,5 @@ Route::middleware('auth:api')->group(function () {
     Route::post('addToFavorite' , [AdvertiseController::class , 'addToFavorite']);
     Route::post('notifications' , [NotificationController::class , 'notifications']);
     Route::post('notifications/delete' , [NotificationController::class , 'notificationsDelete']);
+    Route::post('notifications/view' , [NotificationController::class , 'notificationsView']);
 });
