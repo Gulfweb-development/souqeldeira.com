@@ -29,6 +29,8 @@ Route::post('adDetails' , [AdvertiseController::class , 'adDetails']);
 Route::post('viewAdd' , [AdvertiseController::class , 'viewAdd']);
 Route::post('offices' , [AssetsController::class , 'offices']);
 Route::post('contactUs' , [MainAssetController::class , 'contactUs']);
+Route::post('settings' , [MainAssetController::class , 'settings']);
+Route::post('terms' , [MainAssetController::class , 'terms']);
 Route::middleware('auth:api')->group(function () {
     Route::post('addToFavorite' , [AdvertiseController::class , 'addToFavorite']);
 });
