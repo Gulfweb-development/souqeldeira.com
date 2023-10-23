@@ -27,4 +27,9 @@ class NotificationController extends Controller
         });
         return $this->success(['messages' => $messages]);
     }
+    public function notificationsDelete(Request $request){
+        $userMessage = UserMessage::query()->where('user_id', user()->id)->where('id', $request->get('id'))->firstOrFail();
+        $userMessage->delete();
+        return $this->success([] , __('app.data_deleted'));
+    }
 }
