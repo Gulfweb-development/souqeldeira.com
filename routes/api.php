@@ -39,4 +39,5 @@ Route::middleware('auth:api')->group(function () {
     Route::post('notifications/delete' , [NotificationController::class , 'notificationsDelete']);
     Route::post('notifications/view' , [NotificationController::class , 'notificationsView']);
     Route::post('updatePassword' , [ProfileController::class , 'updatePassword']);
+    Route::post('profile' , [ProfileController::class , 'profile']);
 });

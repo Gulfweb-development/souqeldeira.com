@@ -34,10 +34,10 @@ class AuthController extends Controller
                 'is_approved' => $user->is_approved ,
                 'is_featured' => $user->is_featured ,
                 'type' => $user->type ,
+                'field' => $user->field ,
                 'adv_normal_count' => $user->adv_nurmal_count ,
                 'adv_star_count' => $user->adv_star_count ,
-                'description_ar' => $user->description_ar ,
-                'description_en' => $user->description_en ,
+                'description' => $user->translate('description') ,
                 'token' => $token->plainTextToken
             ]);
         } else {
@@ -90,10 +90,10 @@ class AuthController extends Controller
             'is_approved' => $user->is_approved ,
             'is_featured' => $user->is_featured ,
             'type' => $user->type ,
+            'field' => $user->field ,
             'adv_normal_count' => $user->adv_nurmal_count ,
             'adv_star_count' => $user->adv_star_count ,
-            'description_ar' => $user->description_ar ,
-            'description_en' => $user->description_en ,
+            'description' => $user->translate('description') ,
             'token' => $token->plainTextToken
         ] , $message);
     }

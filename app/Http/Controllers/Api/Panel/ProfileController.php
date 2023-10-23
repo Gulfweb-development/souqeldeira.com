@@ -23,4 +23,27 @@ class ProfileController extends Controller
         }
     }
 
+    public function profile(Request $request){
+        $user = $request->user();
+        return $this->success([
+            'id' => $user->id ,
+            'name' => $user->name ,
+            'email' => $user->email ,
+            'phone' => $user->phone ,
+            'is_approved' => $user->is_approved ,
+            'is_featured' => $user->is_featured ,
+            'type' => $user->type ,
+            'field' => $user->field ,
+            'adv_normal_count' => $user->adv_nurmal_count ,
+            'adv_star_count' => $user->adv_star_count ,
+            'description' => $user->translate('description') ,
+            'governorates' => optional($user->governorates)->transform(function ($item){
+                return [
+                    'governorateId' => $item['id'],
+                    'governorateName' => $value[toLocale('name')],
+                ];
+            }) ,
+        ]);
+    }
+
 }
