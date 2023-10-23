@@ -62,7 +62,8 @@ class Profile extends Component
             'name' => $this->name,
             'phone' => $this->phone,
             'description' => $this->description,
-            // 'description_ar' => $this->description_ar,
+            'description_ar' => $this->description,
+            'description_en' => $this->description,
             'field' => $this->field,
         ]);
         user()->governorates()->sync($this->governorate_ids);
