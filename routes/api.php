@@ -46,4 +46,5 @@ Route::middleware('auth:api')->group(function () {
     Route::post('updatePassword' , [ProfileController::class , 'updatePassword']);
     Route::post('profile' , [ProfileController::class , 'profile']);
     Route::post('editProfile' , [ProfileController::class , 'editProfile']);
+    Route::post('invoices' , [ProfileController::class , 'invoices']);
 });
