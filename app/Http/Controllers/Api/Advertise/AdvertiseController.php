@@ -189,4 +189,18 @@ class AdvertiseController extends Controller
         $service->addToFavorite();
         return $this->success([ 'is_favorite' => true] ,__('app.data_added_favorite'));
     }
+
+    public function favorites(Request $request){
+        $favoriteAds = Favorite::with('user', 'ad')
+            ->where('user_id', user()->id)
+            ->whereHas('ad', function ($query){
+                $query->where('is_approved', 1);
+            })
+            ->latest()
+            ->paginate($request->get('per_page'));
+        $favoriteAds = $this->paginationFormat($favoriteAds , function ($ad) {
+            return $this->formatAd($ad->ad , true);
+        });
+        return $this->success([$favoriteAds] );
+    }
 }

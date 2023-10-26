@@ -22,7 +22,13 @@ class Favorites extends Component
 
     public function render()
     {
-        $favoriteAds = Favorite::with('user', 'ad')->where('user_id', user()->id)->latest()->paginate(PG);
+        $favoriteAds = Favorite::with('user', 'ad')
+            ->where('user_id', user()->id)
+            ->latest()
+            ->whereHas('ad', function ($query){
+                $query->where('is_approved', 1);
+            })
+            ->paginate(PG);
         return view('livewire.profile.profile.favorites', [
             'favoriteAds' => $favoriteAds,
         ])->layout(PROFILE_LAYOUT);
