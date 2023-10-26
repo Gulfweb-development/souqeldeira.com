@@ -47,8 +47,8 @@ Route::middleware('auth:api')->group(function () {
     Route::post('updatePassword' , [ProfileController::class , 'updatePassword']);
     Route::post('profile' , [ProfileController::class , 'profile']);
     Route::post('editProfile' , [ProfileController::class , 'editProfile']);
-    Route::post('invoices' , [ProfileController::class , 'invoices']);
     Route::post('subscription/list' , [subscriptionController::class , 'list']);
     Route::post('subscription/payAsGo' , [subscriptionController::class , 'payAsGo']);
     Route::post('subscription/package' , [subscriptionController::class , 'package']);
+    Route::post('invoices' , [subscriptionController::class , 'invoices']);
 });

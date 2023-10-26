@@ -145,4 +145,22 @@ class subscriptionController extends Controller
         return $this->success(['redirect_gateway' => $paymentUrl]);
     }
 
+    public function invoices(Request $request){
+        $invoices = auth()->user()->orders()->latest()->paginate($request->get('per_page'));
+        $invoices = $this->paginationFormat($invoices , function ($invoice) {
+            return [
+                'id' => $invoice->id,
+                'description' => $invoice->translate('description'),
+                'price' => $invoice->price,
+                'transaction_id' => $invoice->transaction_id,
+                'status' => __($invoice->status),
+                'created_at'=>[
+                    'human' =>$invoice->created_at->diffForHumans(),
+                    'system' =>$invoice->created_at,
+                ],
+            ];
+        });
+        return $this->success(['invoices' => $invoices]);
+    }
+
 }
