@@ -50,4 +50,5 @@ Route::middleware('auth:api')->group(function () {
     Route::post('invoices' , [ProfileController::class , 'invoices']);
     Route::post('subscription/list' , [subscriptionController::class , 'list']);
     Route::post('subscription/payAsGo' , [subscriptionController::class , 'payAsGo']);
+    Route::post('subscription/package' , [subscriptionController::class , 'package']);
 });
