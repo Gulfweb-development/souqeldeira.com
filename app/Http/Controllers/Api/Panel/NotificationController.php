@@ -52,7 +52,7 @@ class NotificationController extends Controller
         ]);
     }
     public function messages(Request $request){
-        $messages = ContactUser::query()->where('user_id', user()->id)->latest()->paginate($request->get('per_page'));
+        $messages = ContactUser::query()->where('user_to', user()->id)->latest()->paginate($request->get('per_page'));
         $messages = $this->paginationFormat($messages , function ($item) {
             return [
                 'id' => $item->id,
@@ -73,12 +73,12 @@ class NotificationController extends Controller
         return $this->success(['messages' => $messages]);
     }
     public function messagesDelete(Request $request){
-        $userMessage = ContactUser::query()->where('user_id', user()->id)->where('id', $request->get('id'))->firstOrFail();
+        $userMessage = ContactUser::query()->where('user_to', user()->id)->where('id', $request->get('id'))->firstOrFail();
         $userMessage->delete();
         return $this->success([] , __('app.data_deleted'));
     }
     public function messagesView(Request $request){
-        $userMessage = ContactUser::query()->where('user_id', user()->id)->where('id', $request->get('id'))->firstOrFail();
+        $userMessage = ContactUser::query()->where('user_to', user()->id)->where('id', $request->get('id'))->firstOrFail();
         foreach (user()->unReadNotifications as $notification) {
             if ($notification->data['id'] == $request->get('id') && $notification->data['type'] == 'FROM_USER_AD') {
                 $notification->markAsRead();
