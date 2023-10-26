@@ -597,7 +597,7 @@ class BookeeyService {
             "APPTyp" => "",
             "OS" => $systemInfo['os'].' - '.$browser,
             "DevcType" => $systemInfo['device'],
-            "IPAddrs" => $_SERVER['SERVER_ADDR'],
+            "IPAddrs" => $_SERVER['SERVER_ADDR'] ?? '127.0.0.1',
             "Country" => "",
             "AppVer" => APP_VERSION,
             "UsrSessID" => $sessionId,

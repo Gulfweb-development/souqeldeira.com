@@ -160,7 +160,7 @@ Route::post('/auth/passwords/reset',function(Request $request){
 
 
 
-Route::any('/payment-redirect/{id}/{status?}',function(Request $request,$id , $status = "error"){
+Route::any('/payment-redirect/{id}/{status?}/{is_api?}',function(Request $request,$id , $status = "error" , $is_api = "false"){
 
     $descriptionSet = false;
     $order = \App\Models\Order::query()->where('status' , 'pending')->findOrFail($id);
@@ -184,9 +184,12 @@ Route::any('/payment-redirect/{id}/{status?}',function(Request $request,$id , $s
     $order->transaction_id = $request->get('txnId' , $order->transaction_id);
     $order->save();
 
+    $route = 'profile.invoices';
+    if ( $is_api )
+        $route = 'welcome';
     if ( $status == "success" )
-        return redirect()->route('profile.invoices')->with('success', $order['description_'.app()->getLocale()] .' '. trans('paid_successfully'));
-    return redirect()->route('profile.invoices')->with('error', __('paid_failed'));
+        return redirect()->route($route)->with('success', $order['description_'.app()->getLocale()] .' '. trans('paid_successfully'));
+    return redirect()->route($route)->with('error', __('paid_failed'));
 
 })->name('bankCallback');
 
