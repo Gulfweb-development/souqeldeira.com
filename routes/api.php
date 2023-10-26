@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\AssetsController as MainAssetController;
 use App\Http\Controllers\Api\Panel\AuthController;
 use App\Http\Controllers\Api\Panel\NotificationController;
 use App\Http\Controllers\Api\Panel\ProfileController;
+use App\Http\Controllers\Api\Panel\subscriptionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,4 +48,5 @@ Route::middleware('auth:api')->group(function () {
     Route::post('profile' , [ProfileController::class , 'profile']);
     Route::post('editProfile' , [ProfileController::class , 'editProfile']);
     Route::post('invoices' , [ProfileController::class , 'invoices']);
+    Route::post('subscription/list' , [subscriptionController::class , 'list']);
 });
