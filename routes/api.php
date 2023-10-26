@@ -39,8 +39,9 @@ Route::middleware('auth:api')->group(function () {
     Route::post('notifications/delete' , [NotificationController::class , 'notificationsDelete']);
     Route::post('notifications/view' , [NotificationController::class , 'notificationsView']);
     Route::post('messages' , [NotificationController::class , 'messages']);
-    Route::post('messages/delete' , [NotificationController::class , 'notificationsDelete']);
-    Route::post('messages/view' , [NotificationController::class , 'notificationsView']);
+    Route::post('messages/delete' , [NotificationController::class , 'messagesDelete']);
+    Route::post('messages/view' , [NotificationController::class , 'messagesView']);
+    Route::post('adDetails/messages' , [NotificationController::class , 'messagesAdd']);
     Route::post('updatePassword' , [ProfileController::class , 'updatePassword']);
     Route::post('profile' , [ProfileController::class , 'profile']);
     Route::post('editProfile' , [ProfileController::class , 'editProfile']);

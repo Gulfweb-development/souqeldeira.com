@@ -4,13 +4,16 @@ namespace App\Http\Controllers\Api\Panel;
 
 use App\Http\Controllers\Controller;
 use App\Mail\Forget;
+use App\Models\Ad;
 use App\Models\ContactUser;
 use App\Models\Setting;
 use App\Models\User;
 use App\Models\UserMessage;
+use App\Notifications\UserNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 
 class NotificationController extends Controller
 {
@@ -101,5 +104,24 @@ class NotificationController extends Controller
                 ]
             ]
         ]);
+    }
+
+    public function messagesAdd(Request $request) {
+        $request->validate([
+            'text' => 'required|string',
+        ]);
+        $ad = Ad::where('id', $request->get('id'))->where('is_approved', 1)->firstOrFail();
+        if (user()->id == $ad->user_id) {
+            $this->error(400 , __('app.cant_send_to_your_self'));
+        }else {
+            $contactUser = ContactUser::create([
+                'ad_id' => $ad->id,
+                'user_from' => user()->id,
+                'user_to' => $ad->user_id,
+                'text' => $request->text,
+            ]);
+            Notification::send($ad->user, new UserNotification($contactUser->id));
+            $this->success([] , __('app.message_sent'));
+        }
     }
 }
