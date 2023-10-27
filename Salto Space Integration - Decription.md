@@ -50,9 +50,7 @@ for example GPF1 we will then make sure that each user has a valid Apartment ID/
 in the GPF1 field in the user XML returned from Salto Space. See below:
 
 Request to Salto Space API to get all users:
-[http://95.143.205.105:8100?Content-Type=application/vnd.saltosystems.ship.v1+xml&Salto-
-SHIP-Key=Chewer-Fretful3-](http://95.143.205.105:8100?Content-
-Type=application/vnd.saltosystems.ship.v1+xml&Salto-SHIP-Key=123456 "")
+[http://95.143.205.105:8100?Content-Type=application/vnd.saltosystems.ship.v1+xml&Salto-SHIP-Key=Chewer-Fretful3-](http://95.143.205.105:8100?Content-Type=application/vnd.saltosystems.ship.v1+xml&Salto-SHIP-Key=123456 "")
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -146,9 +144,7 @@ When we have the ExtUserID for the user/users that should do the booking we can 
 "booking" in Salto Space by creating a "User access level". This is done in the following way:
 
 Request to Salto Space API to create a "User access level":
-[http://95.143.205.105:8100?Content-Type=application/vnd.saltosystems.ship.v1+xml&Salto-
-SHIP-Key=Chewer-Fretful3-](http://95.143.205.105:8100?Content-
-Type=application/vnd.saltosystems.ship.v1+xml&Salto-SHIP-Key=123456 "")
+[http://95.143.205.105:8100?Content-Type=application/vnd.saltosystems.ship.v1+xml&Salto-SHIP-Key=Chewer-Fretful3-](http://95.143.205.105:8100?Content-Type=application/vnd.saltosystems.ship.v1+xml&Salto-SHIP-Key=123456 "")
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
@@ -205,9 +201,7 @@ booking is done!
 If a user unbook we simply remove the booking by using the ExtGroupID for that booking:
 
 Request to Salto Space API to remove a "User access level"/booking:
-[http://95.143.205.105:8100?Content-Type=application/vnd.saltosystems.ship.v1+xml&Salto-
-SHIP-Key=Chewer-Fretful3-](http://95.143.205.105:8100?Content-
-Type=application/vnd.saltosystems.ship.v1+xml&Salto-SHIP-Key=123456 "")
+[http://95.143.205.105:8100?Content-Type=application/vnd.saltosystems.ship.v1+xml&Salto-SHIP-Key=Chewer-Fretful3-](http://95.143.205.105:8100?Content-Type=application/vnd.saltosystems.ship.v1+xml&Salto-SHIP-Key=123456 "")
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
@@ -285,15 +279,12 @@ booking} for apartment {the alias for the apartment added to this booking}</Desc
 Examples (Booking description syntax: "Booking of [booking objects] for apartment [user 
 alias]"):
 `<Description>Booking of Tv�ttstugan for apartment 1203</Description>`
-`<Description>Booking of Laundryroom #1, Laundryroom #2, Drying room for apartment 
-123</Description>`
+`<Description>Booking of Laundryroom #1, Laundryroom #2, Drying room for apartment 123</Description>`
 
 Examples (Booking description syntax: "This is a booking of [booking objects] done by [user 
 alias]"):
 `<Description>This is a booking of Tv�ttstugan done by 1203</Description>`
-`<Description>This is a booking of Laundryroom #1, Laundryroom #2, Drying room done by 
-123</Description>`
-
+`<Description>This is a booking of Laundryroom #1, Laundryroom #2, Drying room done by 123</Description>`
 ---
 
 I'm sure I have missed some details. Please ask me about anything Hoai!
