@@ -233,4 +233,10 @@ class AdvertiseController extends Controller
         $ad->delete();
         return $this->success([] , __('app.data_deleted') );
     }
+    public function myAdDetails(Request $request)
+    {
+        $ad = Ad::query()->where('id', $request->get('id' , 0))->where('user_id', user()->id)->firstOrFail();
+        $ad = $this->formatAd($ad);
+        return $this->success($ad);
+    }
 }
