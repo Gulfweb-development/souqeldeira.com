@@ -44,6 +44,10 @@ class ProfileController extends Controller
                     'governorateName' => $item[toLocale('name')],
                 ];
             }) ,
+            'dashboard' => [
+                'total_ads' => $user->ads()->count(),
+                'total_reviews' => $user->comments()->count(),
+            ],
         ]);
     }
 

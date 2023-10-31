@@ -39,6 +39,10 @@ class AuthController extends Controller
                 'adv_normal_count' => $user->adv_nurmal_count ,
                 'adv_star_count' => $user->adv_star_count ,
                 'description' => $user->translate('description') ,
+                'dashboard' => [
+                    'total_ads' => $user->ads()->count(),
+                    'total_reviews' => $user->comments()->count(),
+                ],
                 'token' => $token->plainTextToken
             ]);
         } else {
@@ -96,6 +100,10 @@ class AuthController extends Controller
             'adv_normal_count' => $user->adv_nurmal_count ,
             'adv_star_count' => $user->adv_star_count ,
             'description' => $user->translate('description') ,
+            'dashboard' => [
+                'total_ads' => $user->ads()->count(),
+                'total_reviews' => $user->comments()->count(),
+            ],
             'token' => $token->plainTextToken
         ] , $message);
     }
