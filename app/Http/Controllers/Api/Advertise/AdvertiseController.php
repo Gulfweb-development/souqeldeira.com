@@ -203,4 +203,16 @@ class AdvertiseController extends Controller
         });
         return $this->success([$favoriteAds] );
     }
+
+    public function myAds(Request $request) {
+        $myAds = Ad::query()
+            ->with('region', 'governorate', 'images', 'user', 'buildingType')
+            ->where('user_id', user()->id)
+            ->latest()
+            ->paginate($request->get('per_page'));
+        $myAds = $this->paginationFormat($myAds , function ($ad) {
+            return $this->formatAd($ad->ad , true);
+        });
+        return $this->success([$myAds] );
+    }
 }

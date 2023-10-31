@@ -51,4 +51,5 @@ Route::middleware('auth:api')->group(function () {
     Route::post('subscription/payAsGo' , [subscriptionController::class , 'payAsGo']);
     Route::post('subscription/package' , [subscriptionController::class , 'package']);
     Route::post('invoices' , [subscriptionController::class , 'invoices']);
+    Route::post('my-ads/list' , [AdvertiseController::class , 'myAds']);
 });
