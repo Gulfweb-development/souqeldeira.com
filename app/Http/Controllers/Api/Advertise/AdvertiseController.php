@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Api\Advertise;
 
 use App\Http\Controllers\Controller;
 use App\Models\Ad;
+use App\Models\BuildingType;
 use App\Models\Favorite;
+use App\Models\Governorate;
+use App\Models\Region;
 use App\Services\FavoritesService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -238,5 +241,39 @@ class AdvertiseController extends Controller
         $ad = Ad::query()->where('id', $request->get('id' , 0))->where('user_id', user()->id)->firstOrFail();
         $ad = $this->formatAd($ad);
         return $this->success($ad);
+    }
+    public function myAdEdit(Request $request)
+    {
+        $request->validate([
+            'region_id' => 'required|exists:regions,id',
+            'id' => 'required|exists:ads,id',
+            //'governorate_id' => 'required|exists:governorates,id',
+            'building_type_id' => 'required|exists:building_types,id',
+            'text' => 'required|string',
+            'price' => 'nullable|numeric',
+            'type' => 'required|in:SALE,EXCHANGE,RENT',
+            'phone' => 'required|string|regex:' . phoneNumberFormat(),
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
+        ]);
+        $toRegId = Region::select('id', 'governorate_id' , toLocale('name'))->where('id', $request->get('region_id'))->firstOrFail();
+        $toGovId = Governorate::select('id', toLocale('name'))->where('id', $toRegId->governorate_id )->firstOrFail();
+        $toBuidingTypeId = buildingType::select('id', toLocale('name'))->where('id', $request->get('building_type_id'))->firstOrFail();
+        $toType = $request->get('type') == 'SALE' ? __('app.sale') : ( $request->get('type') == 'EXCHANGE' ? __('app.exchange') : __('app.rent'));
+        $ad =  Ad::query()->with('images')->where('user_id', user()->id)->where('id', $request->get('id'))->firstOrFail();
+        $ad->update([
+            'governorate_id' => $toGovId->id,
+            'region_id' => $toRegId->id,
+            'building_type_id' => $toBuidingTypeId->id,
+            'title' => Ad::toTitle($toType, $toGovId->translate('name'), $toRegId->translate('name'), $toBuidingTypeId->translate('name')),
+            'type' => $request->get('type'),
+            'phone' => $request->get('phone'),
+            'price' => $request->get('price'),
+            'text' => $request->get('text'),
+            'is_approved' => 1,
+        ]);
+        if ($request->file('image') != '') {
+            $ad->deleteFile();
+            $ad->uploadFile($request->file('image'));
+        }
     }
 }
