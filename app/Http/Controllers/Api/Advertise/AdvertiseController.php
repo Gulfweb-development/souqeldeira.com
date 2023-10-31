@@ -214,7 +214,7 @@ class AdvertiseController extends Controller
             ->latest()
             ->paginate($request->get('per_page'));
         $myAds = $this->paginationFormat($myAds , function ($ad) {
-            return $this->formatAd($ad->ad , true);
+            return $this->formatAd($ad , true);
         });
         return $this->success([$myAds] );
     }
@@ -227,7 +227,7 @@ class AdvertiseController extends Controller
             ->latest()
             ->paginate($request->get('per_page'));
         $myAds = $this->paginationFormat($myAds , function ($ad) {
-            return $this->formatAd($ad->ad , true);
+            return $this->formatAd($ad , true);
         });
         return $this->success([$myAds] );
     }
