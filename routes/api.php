@@ -53,4 +53,5 @@ Route::middleware('auth:api')->group(function () {
     Route::post('invoices' , [subscriptionController::class , 'invoices']);
     Route::post('my-ads/list' , [AdvertiseController::class , 'myAds']);
     Route::post('my-ads/expired' , [AdvertiseController::class , 'myExpiredAds']);
+    Route::post('my-ads/delete' , [AdvertiseController::class , 'delete']);
 });
