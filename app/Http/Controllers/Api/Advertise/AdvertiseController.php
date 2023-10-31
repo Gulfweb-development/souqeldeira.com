@@ -275,5 +275,12 @@ class AdvertiseController extends Controller
             $ad->deleteFile();
             $ad->uploadFile($request->file('image'));
         }
+        return $this->success([] , __('app.data_updated') );
+    }
+    public function myAdDeleteImage(Request $request)
+    {
+        $ad =  Ad::query()->with('images')->where('user_id', user()->id)->where('id', $request->get('id'))->firstOrFail();
+        $ad->deleteFile();
+        return $this->success([] , __('app.data_updated') );
     }
 }

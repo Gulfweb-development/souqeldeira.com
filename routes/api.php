@@ -56,4 +56,5 @@ Route::middleware('auth:api')->group(function () {
     Route::post('my-ads/delete' , [AdvertiseController::class , 'delete']);
     Route::post('my-ads/detail' , [AdvertiseController::class , 'myAdDetails']);
     Route::post('my-ads/edit' , [AdvertiseController::class , 'myAdEdit']);
+    Route::post('my-ads/delete-image' , [AdvertiseController::class , 'myAdDeleteImage']);
 });
