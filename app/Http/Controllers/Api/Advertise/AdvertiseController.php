@@ -215,4 +215,17 @@ class AdvertiseController extends Controller
         });
         return $this->success([$myAds] );
     }
+    public function myExpiredAds(Request $request) {
+        $myAds = Ad::query()
+            ->withTrashed()
+            ->where('archived_at' , '<' , now())
+            ->with('region', 'governorate', 'images', 'user', 'buildingType')
+            ->where('user_id', user()->id)
+            ->latest()
+            ->paginate($request->get('per_page'));
+        $myAds = $this->paginationFormat($myAds , function ($ad) {
+            return $this->formatAd($ad->ad , true);
+        });
+        return $this->success([$myAds] );
+    }
 }
