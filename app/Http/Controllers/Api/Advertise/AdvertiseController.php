@@ -3,15 +3,21 @@
 namespace App\Http\Controllers\Api\Advertise;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SocialFacebookJob;
+use App\Jobs\SocialMediaJob;
 use App\Models\Ad;
 use App\Models\BuildingType;
 use App\Models\Favorite;
 use App\Models\Governorate;
 use App\Models\Region;
+use App\Models\Setting;
+use App\Models\SubscriptionHistories;
 use App\Services\FavoritesService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class AdvertiseController extends Controller
 {
@@ -282,5 +288,126 @@ class AdvertiseController extends Controller
         $ad =  Ad::query()->with('images')->where('user_id', user()->id)->where('id', $request->get('id'))->firstOrFail();
         $ad->deleteFile();
         return $this->success([] , __('app.data_updated') );
+    }
+
+
+    public function create(Request $request)
+    {
+        $request->validate([
+            'region_id' => 'required|exists:regions,id',
+            'is_featured' => 'required|boolean',
+            //'governorate_id' => 'required|exists:governorates,id',
+            'building_type_id' => 'required|exists:building_types,id',
+            'type' => 'required|in:SALE,RENT,EXCHANGE',
+            'text' => 'required|string',
+            'price' => 'nullable|numeric',
+            'phone' => 'required|string|regex:' . phoneNumberFormat(),
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
+        ]);
+        // CHECK IF USER GET THE LIMIT OF ADS
+        if (env('ADS_LIMIT') > 0 and env('ADS_LIMIT') <= user()->ads()->count()) {
+            return $this->error(400 , __('app.you_got_ads_limit_please_remove_some_to_can_ad_more') );
+        }
+        if ( ! SubscriptionHistories::canPostAd( $request->get('is_featured') == "1" , user())) {
+            return $this->error(400 , __('increase_balance') );
+        }
+        //  TO PARSE COLLECTED DATA TO TITLE
+        $toRegId = Region::select('id', 'governorate_id', toLocale('name'))->where('id', $request->get('region_id'))->firstOrFail();
+        $toGovId = Governorate::select('id', toLocale('name'))->where('id', $toRegId->governorate_id)->firstOrFail();
+        $toBuidingTypeId = buildingType::select('id', toLocale('name'))->where('id', $request->get('building_type_id'))->firstOrFail();
+        $toType = $request->get('type') == 'SALE' ? __('app.sale') : ( $request->get('type') == 'EXCHANGE' ? __('app.exchange') : __('app.rent'));
+        $ad = Ad::query()->create([
+            'governorate_id' => $toGovId->id,
+            'is_featured' => $request->get('is_featured'),
+            'region_id' => $toRegId->id,
+            'building_type_id' => $toBuidingTypeId->id,
+            'type' => $request->get('type') ,
+            'title' => Ad::toTitle($toType, $toGovId->translate('name'), $toRegId->translate('name'), $toBuidingTypeId->translate('name')),
+            'phone' => $request->get('phone'),
+            'price' => $request->get('price'),
+            'text' => $request->get('text'),
+            'user_id' => user()->id,
+            'is_approved' => 1,
+            'code' => Str::random(6),
+            'archived_at' => Carbon::now('UTC')->addDays(
+                $request->get('is_featured') == "1" ? Setting::get('expire_time_premium_adv', 15) : Setting::get('expire_time_adv', 15)
+            )->format('Y-m-d H:i:s'),
+        ]);
+        SubscriptionHistories::postAd( $request->get('is_featured') == "1" , user());
+        // RESIZE IMAGE TO PLACEC IT IN IMAGE
+        if ($request->hasFile('image')) {
+            $ad->uploadFile($request->file('image'));
+        }
+        // PROGRAMMING IMAGES TO PUBLISH IT TO SOCIAL MEDIA
+        $img = Image::make(public_path('images/facebook.png'));
+        $Arabic = new \I18N_Arabic('Glyphs');
+        // LOCALIZE TEXTS ON IMAGES
+        if (app()->isLocale('ar')) {
+            $name = $Arabic->utf8Glyphs($ad->title);
+            $unknown = $Arabic->utf8Glyphs(__('app.unknown'));
+        } else {
+            $name = $ad->title;
+            $unknown = __('app.unknown');
+        }
+
+        $denar = $Arabic->utf8Glyphs(__('app.denar'));
+        $img->text('+965' . $ad->phone, 850, 573, function ($font) {
+            $font->file(public_path('Cairo.ttf'));
+            $font->size(30); // 24 best choose
+            $font->color('#000');
+        });
+        // 620 x 475
+        if (intval($ad->price) > 0) {
+            $img->text($ad->price, 950, 430, function ($font) {
+                $font->file(public_path('Cairo.ttf'));
+                $font->size(50); // 24 best choose
+                $font->color('#fff');
+            });
+        } else {
+            $img->text($unknown, 920, 430, function ($font) {
+                $font->file(public_path('DroidNaskh-Bold.ttf'));
+                $font->size(30); // 24 best choose
+                $font->color('#fff');
+            });
+        }
+        // 320
+        $img->text($name, 100, 100, function ($font) {
+            if (app()->isLocale('ar')) {
+                $font->file(public_path('DroidNaskh-Bold.ttf'));
+            } else {
+                $font->file(public_path('Cairo.ttf'));
+            }
+            $font->size(24); // 24 best choose
+            $font->color('#000');
+        });
+
+        if ($request->hasFile('image')) {
+            $theAdImg = public_path('socialmedia/outputonimage.png');
+            $img->insert($theAdImg, 'bottom-left', 15, 19);
+        } else {
+            $theAdImg = public_path('socialmedia/default.png');
+            $img->insert($theAdImg, 'bottom-left', 15, 19);
+        }
+
+        $img->save(public_path('images/output.png'));
+        // RUN THE JOB
+        if (!env('IS_PAYMANT_AVAILABLE')) {
+            $postToSocialMediaImagePath = public_path('images/output.png');
+            // PUBLISH TO TWITTER
+            $forJobPublishment = $Arabic->utf8Glyphs($ad->title);
+            if (app()->isLocale('ar')) {
+                // dd($ad->title, $postToSocialMediaImagePath);
+                SocialMediaJob::dispatch('', $postToSocialMediaImagePath);
+                // PUBLISH TO FACEBOOK
+                SocialFacebookJob::dispatch($forJobPublishment, $postToSocialMediaImagePath);
+            } else {
+                // dd($ad->title, $postToSocialMediaImagePath);
+                SocialMediaJob::dispatch($ad->title, $postToSocialMediaImagePath);
+                // PUBLISH TO FACEBOOK
+                SocialFacebookJob::dispatch($ad->title, $postToSocialMediaImagePath);
+            }
+
+        }
+        return $this->success([$this->formatAd($ad)] , __('app.data_created') );
     }
 }
