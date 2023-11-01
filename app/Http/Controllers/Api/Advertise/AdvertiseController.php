@@ -291,6 +291,25 @@ class AdvertiseController extends Controller
     }
 
 
+    public function upgrade(Request $request)
+    {
+        $ad =  Ad::query()->where('user_id', user()->id)->where('id', $request->get('id'))->firstOrFail();
+        if ( !  $ad->is_featured ) {
+            if ( ! SubscriptionHistories::canPostAd( true , user())) {
+                return $this->error(400 , __('increase_balance') );
+            }
+            $ad->update([
+                'is_featured' => 1,
+                'archived_at' => Carbon::now('UTC')->addDays(
+                    Setting::get('expire_time_premium_adv', 15)
+                )->format('Y-m-d H:i:s')
+            ]);
+            SubscriptionHistories::postAd( true , user());
+        }
+        return $this->success([] , __('upgraded') );
+    }
+
+
     public function create(Request $request)
     {
         $request->validate([
