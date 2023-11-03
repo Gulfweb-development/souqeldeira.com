@@ -72,4 +72,5 @@ Route::middleware('auth:api')->group(function () {
     Route::post('premium/position' , [PremiumPositionController::class , 'list']);
     Route::post('premium/position/buy' , [PremiumPositionController::class , 'buy']);
     Route::post('premium/position/show' , [PremiumPositionController::class , 'show']);
+    Route::post('premium/position/edit' , [PremiumPositionController::class , 'edit']);
 });

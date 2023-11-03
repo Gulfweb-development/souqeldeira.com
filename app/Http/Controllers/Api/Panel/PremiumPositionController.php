@@ -27,7 +27,7 @@ class PremiumPositionController extends Controller
             'id'=> $item->id,
             'position'=> $item->position,
             'type'=> $item->image ? 'image' : 'text',
-            'image'=> asset($item->image) ,
+            'image'=> $item->image ? asset($item->image) : null,
             'title'=> $item->title ,
             'expired_at'=> $item->expired_at->diffForHumans() ,
         ]);
@@ -116,11 +116,47 @@ class PremiumPositionController extends Controller
             'id'=> $item->id,
             'position'=> $item->position,
             'type'=> $item->image ? 'image' : 'text',
-            'image'=> asset($item->image) ,
+            'image'=> $item->image ? asset($item->image) : null,
             'title'=> $item->title ,
             'text'=> $item->text ,
             'expired_at'=> $item->expired_at->diffForHumans() ,
         ])->firstOrFail();
         return $this->success($myPositions);
+    }
+
+    public function edit(Request $request){
+        $request->validate([
+            'type' => 'required|in:image,text',
+            'id' => 'required',
+        ]);
+        $position = Position::query()->where('user_id' , auth()->id() )->findOrFail($request->id);
+        if ($request->type == "image") {
+            $request->validate([
+                'image' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
+            ]);
+            $request->merge(['text' => null , 'title' => null]);
+        } else {
+            $request->validate([
+                'title' => 'required|string|max:75',
+                'text' => 'required|string|max:255',
+            ]);
+            $request->merge(['image' => null]);
+        }
+
+        $url = null;
+        if ($request->image != NULL) {
+            $dateTime = date('Ymd_His');
+            $fileName = $dateTime . '_' . Str::random(20) . '_' . $request->image->getClientOriginalName();
+            $request->file('image')->storePubliclyAs(
+                'uploads', $fileName,'uploads'
+            );
+            $url = 'uploads/' . $fileName;
+        }
+        $position->update([
+            'title' => $request->title,
+            'description' => $request->text,
+            'image' => $url,
+        ]);
+        return $this->success([] , __('app.data_updated'));
     }
 }
