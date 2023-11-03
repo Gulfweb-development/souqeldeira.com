@@ -34,7 +34,6 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('queue:work --stop-when-empty')->everyMinute();
-        $schedule->command('sanctum:prune-expired --hours=24')->daily();
 
         $schedule->call(function(){
             Ad::where('archived_at' , '<' ,  Carbon::now())->delete();
