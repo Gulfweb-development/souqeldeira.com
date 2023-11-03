@@ -10,6 +10,7 @@ use App\Models\BuildingType;
 use App\Models\Favorite;
 use App\Models\Governorate;
 use App\Models\Region;
+use App\Models\Report;
 use App\Models\Setting;
 use App\Models\SubscriptionHistories;
 use App\Services\FavoritesService;
@@ -184,6 +185,16 @@ class AdvertiseController extends Controller
         $ad = Ad::where('id', $id)->where('is_approved', 1)->firstOrFail();
         $ad->increment('views');
         return $this->success(['views' => $ad->views+1]);
+    }
+
+    public function reportAdd(Request $request){
+        $request->validate([
+            'id' => 'required|exists:ads,id',
+            'description' => 'required|string',
+        ]);
+        $ad = Ad::query()->where('id', $request->id)->firstOrFail();
+        Report::insert($ad,$request->description);
+        return $this->success([] ,  __('app.reportSent'));
     }
 
     public function addToFavorite(Request $request){

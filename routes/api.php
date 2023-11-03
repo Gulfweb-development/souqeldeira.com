@@ -34,8 +34,9 @@ Route::post('offices' , [AssetsController::class , 'offices']);
 Route::post('contactUs' , [MainAssetController::class , 'contactUs']);
 Route::post('settings' , [MainAssetController::class , 'settings']);
 Route::post('terms' , [MainAssetController::class , 'terms']);
+Route::post('office/report' , [AssetsController::class , 'officeReport']);
+Route::post('ad/report' , [AdvertiseController::class , 'reportAdd']);
 Route::middleware('auth:api')->group(function () {
-    Route::post('office/report' , [AssetsController::class , 'officeReport']);
     Route::post('addToFavorite' , [AdvertiseController::class , 'addToFavorite']);
     Route::post('favorites' , [AdvertiseController::class , 'favorites']);
     Route::post('notifications' , [NotificationController::class , 'notifications']);
