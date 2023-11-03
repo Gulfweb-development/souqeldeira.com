@@ -87,4 +87,27 @@ class AssetsController extends Controller
             'blogs' => $blogs
         ]);
     }
+
+    public function blog(Request $request){
+        $blog = Blog::query()->findOrFail($request->id);
+        $recentBlogs = Blog::query()->latest()->take(3)->get()->transform(fn($item) => [
+            'id' => $item->id,
+            'link' => route('blog',[toSlug($item->translate('title')),$item->id]),
+            'title' => $item->translate('title'),
+            'image' => $item->getFile(),
+        ]);
+        return $this->success([
+            'blog' => [
+                'id' => $blog->id,
+                'link' => route('blog',[toSlug($blog->translate('title')),$blog->id]),
+                'title' => $blog->translate('title'),
+                'text' =>  [
+                    'original' => $blog->translate('text'),
+                    'htmlLess' => strip_tags($blog->translate('text')),
+                ],
+                'image' => $blog->getFile(),
+            ],
+            'recentBlogs' => $recentBlogs
+        ]);
+    }
 }
