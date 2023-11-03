@@ -108,4 +108,19 @@ class PremiumPositionController extends Controller
         }
         return $this->success(['redirect_gateway' => $paymentUrl]);
     }
+
+    public function show(Request $request) {
+        $myPositions = Position::getMyActivePosition()
+            ->where('id' , $request->id)
+            ->transform(fn($item) => [
+            'id'=> $item->id,
+            'position'=> $item->position,
+            'type'=> $item->image ? 'image' : 'text',
+            'image'=> asset($item->image) ,
+            'title'=> $item->title ,
+            'text'=> $item->text ,
+            'expired_at'=> $item->expired_at->diffForHumans() ,
+        ])->firstOrFail();
+        return $this->success($myPositions);
+    }
 }

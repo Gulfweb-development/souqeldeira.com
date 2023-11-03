@@ -71,4 +71,5 @@ Route::middleware('auth:api')->group(function () {
     Route::post('my-ads/create' , [AdvertiseController::class , 'create']);
     Route::post('premium/position' , [PremiumPositionController::class , 'list']);
     Route::post('premium/position/buy' , [PremiumPositionController::class , 'buy']);
+    Route::post('premium/position/show' , [PremiumPositionController::class , 'show']);
 });
