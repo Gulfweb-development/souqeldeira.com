@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
 use App\Models\Contact;
 use App\Models\Info;
 use App\Models\Policy as PolicyModel;
@@ -69,6 +70,21 @@ class AssetsController extends Controller
             ]);
         return $this->success([
             'policies' => $policies
+        ]);
+    }
+
+    public function blogs(Request $request){
+        $blogs = Blog::query()->paginate($request->get('per_page'));
+        $blogs = $this->paginationFormat($blogs , function ($blog) {
+            return [
+                'id' => $blog->id,
+                'link' => route('blog',[toSlug($blog->translate('title')),$blog->id]),
+                'title' => $blog->translate('title'),
+                'image' => $blog->getFile(),
+            ];
+        });
+        return $this->success([
+            'blogs' => $blogs
         ]);
     }
 }

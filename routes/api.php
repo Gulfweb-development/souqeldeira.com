@@ -34,6 +34,7 @@ Route::post('offices' , [AssetsController::class , 'offices']);
 Route::post('contactUs' , [MainAssetController::class , 'contactUs']);
 Route::post('settings' , [MainAssetController::class , 'settings']);
 Route::post('terms' , [MainAssetController::class , 'terms']);
+Route::post('blogs' , [MainAssetController::class , 'blogs']);
 Route::post('policies' , [MainAssetController::class , 'policies']);
 Route::post('office/report' , [AssetsController::class , 'officeReport']);
 Route::post('ad/report' , [AdvertiseController::class , 'reportAdd']);
