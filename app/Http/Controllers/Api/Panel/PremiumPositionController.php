@@ -118,7 +118,7 @@ class PremiumPositionController extends Controller
             'type'=> $item->image ? 'image' : 'text',
             'image'=> $item->image ? asset($item->image) : null,
             'title'=> $item->title ,
-            'text'=> $item->text ,
+            'text'=> $item->description ,
             'expired_at'=> $item->expired_at->diffForHumans() ,
         ])->firstOrFail();
         return $this->success($myPositions);
@@ -158,5 +158,14 @@ class PremiumPositionController extends Controller
             'image' => $url,
         ]);
         return $this->success([] , __('app.data_updated'));
+    }
+
+    public function render(){
+        return $this->success(Position::render(false,false)->transform(fn($item) => [
+            'type'=> $item->image ? 'image' : 'text',
+            'image'=> $item->image ? asset($item->image) : null,
+            'title'=> $item->title ,
+            'text'=> $item->description ,
+        ]));
     }
 }
