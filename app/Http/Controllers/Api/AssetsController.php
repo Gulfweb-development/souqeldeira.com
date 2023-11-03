@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use App\Models\Info;
+use App\Models\Policy as PolicyModel;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 
@@ -59,6 +60,15 @@ class AssetsController extends Controller
                 'original' => $setting->translate('terms_condition'),
                 'htmlLess' => strip_tags($setting->translate('terms_condition')),
             ]
+        ]);
+    }
+    public function policies(Request $request){
+        $policies = PolicyModel::all()->transform(fn($item) => [
+            'original' => $item->translate('name'),
+            'htmlLess' => strip_tags($item->translate('name')),
+            ]);
+        return $this->success([
+            'policies' => $policies
         ]);
     }
 }
