@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Panel;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -23,8 +24,9 @@ class ProfileController extends Controller
         }
     }
 
-    public function profile(Request $request){
-        $user = $request->user();
+    public function profile(Request $request , $user = null){
+        if ( $user == null)
+            $user = $request->user();
         return $this->success([
             'id' => $user->id ,
             'name' => $user->name ,
@@ -73,7 +75,8 @@ class ProfileController extends Controller
             user()->deleteFile();
             user()->uploadFile($request->image);
         }
-        return $this->success([$this->profile($request)->getOriginalContent()['data']] , __('app.data_updated'));
+        $user = User::query()->findOrFail(user()->id);
+        return $this->success([$this->profile(request() , $user)->getOriginalContent()['data']] , __('app.data_updated'));
     }
 
 
@@ -86,6 +89,22 @@ class ProfileController extends Controller
         user()->delete();
         return $this->success([] , __('app.data_deleted'));
 
+    }
+
+    public function upgrade(){
+        user()->update([
+            'type' => 'COMPANY',
+        ]);
+        $user = User::query()->findOrFail(user()->id);
+        return $this->success([$this->profile(request() ,$user)->getOriginalContent()['data']] , __('app.data_updated'));
+    }
+
+    public function downgrade(){
+        user()->update([
+            'type' => 'USER',
+        ]);
+        $user = User::query()->findOrFail(user()->id);
+        return $this->success([$this->profile(request() ,$user)->getOriginalContent()['data']] , __('app.data_updated'));
     }
 
 }
