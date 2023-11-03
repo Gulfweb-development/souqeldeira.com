@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Advertise;
 use App\Http\Controllers\Controller;
 use App\Models\BuildingType;
 use App\Models\Governorate;
+use App\Models\Report;
 use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -67,6 +68,11 @@ class AssetsController extends Controller
             ];
         });
         return $this->success([ 'offices' => $offices ]);
+    }
+
+    public function officeReport(Request $request){
+        Report::insert(User::companies()->findOrFail($request->get('id' , 0)));
+        return $this->success([] , __('app.reportSent'));
     }
 
 }
