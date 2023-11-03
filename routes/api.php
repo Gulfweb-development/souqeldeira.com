@@ -32,6 +32,7 @@ Route::post('adDetails' , [AdvertiseController::class , 'adDetails']);
 Route::post('viewAdd' , [AdvertiseController::class , 'viewAdd']);
 Route::post('offices' , [AssetsController::class , 'offices']);
 Route::post('contactUs' , [MainAssetController::class , 'contactUs']);
+Route::post('aboutUs' , [MainAssetController::class , 'aboutUs']);
 Route::post('settings' , [MainAssetController::class , 'settings']);
 Route::post('terms' , [MainAssetController::class , 'terms']);
 Route::post('blog' , [MainAssetController::class , 'blog']);

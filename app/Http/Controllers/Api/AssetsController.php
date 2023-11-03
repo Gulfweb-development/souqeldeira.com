@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\About;
 use App\Models\Blog;
 use App\Models\Contact;
 use App\Models\Info;
 use App\Models\Policy as PolicyModel;
 use App\Models\Setting;
+use App\Models\WhyChooseUs;
 use Illuminate\Http\Request;
 
 class AssetsController extends Controller
@@ -108,6 +110,25 @@ class AssetsController extends Controller
                 'image' => $blog->getFile(),
             ],
             'recentBlogs' => $recentBlogs
+        ]);
+    }
+
+    public function aboutUs(Request $request){
+        $about = About::query()->latest()->first();
+        $whyChooseUs = WhyChooseUs::all()->transform(fn($item) => [
+            'title' => $item->translate('name'),
+            'image' => $item->getFile(),
+            'text' =>  [
+                'original' =>  $item->translate('text'),
+                'htmlLess' => strip_tags($item->translate('text')),
+            ]
+        ]);
+        return $this->success([
+            'aboutUs' => [
+                'original' =>  $about->translate('text'),
+                'htmlLess' => strip_tags($about->translate('text')),
+            ],
+            'whyChooseUs' => $whyChooseUs
         ]);
     }
 }
