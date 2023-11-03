@@ -357,76 +357,80 @@ class AdvertiseController extends Controller
         if ($request->hasFile('image')) {
             $ad->uploadFile($request->file('image'));
         }
-        // PROGRAMMING IMAGES TO PUBLISH IT TO SOCIAL MEDIA
-        $img = Image::make(public_path('images/facebook.png'));
-        $Arabic = new \I18N_Arabic('Glyphs');
-        // LOCALIZE TEXTS ON IMAGES
-        if (app()->isLocale('ar')) {
-            $name = $Arabic->utf8Glyphs($ad->title);
-            $unknown = $Arabic->utf8Glyphs(__('app.unknown'));
-        } else {
-            $name = $ad->title;
-            $unknown = __('app.unknown');
-        }
+        try {
+            if ( class_exists(\I18N_Arabic::class) ) {
+                // PROGRAMMING IMAGES TO PUBLISH IT TO SOCIAL MEDIA
+                $img = Image::make(public_path('images/facebook.png'));
+                $Arabic = new \I18N_Arabic('Glyphs');
+                // LOCALIZE TEXTS ON IMAGES
+                if (app()->isLocale('ar')) {
+                    $name = $Arabic->utf8Glyphs($ad->title);
+                    $unknown = $Arabic->utf8Glyphs(__('app.unknown'));
+                } else {
+                    $name = $ad->title;
+                    $unknown = __('app.unknown');
+                }
 
-        $denar = $Arabic->utf8Glyphs(__('app.denar'));
-        $img->text('+965' . $ad->phone, 850, 573, function ($font) {
-            $font->file(public_path('Cairo.ttf'));
-            $font->size(30); // 24 best choose
-            $font->color('#000');
-        });
-        // 620 x 475
-        if (intval($ad->price) > 0) {
-            $img->text($ad->price, 950, 430, function ($font) {
-                $font->file(public_path('Cairo.ttf'));
-                $font->size(50); // 24 best choose
-                $font->color('#fff');
-            });
-        } else {
-            $img->text($unknown, 920, 430, function ($font) {
-                $font->file(public_path('DroidNaskh-Bold.ttf'));
-                $font->size(30); // 24 best choose
-                $font->color('#fff');
-            });
-        }
-        // 320
-        $img->text($name, 100, 100, function ($font) {
-            if (app()->isLocale('ar')) {
-                $font->file(public_path('DroidNaskh-Bold.ttf'));
-            } else {
-                $font->file(public_path('Cairo.ttf'));
+                $denar = $Arabic->utf8Glyphs(__('app.denar'));
+                $img->text('+965' . $ad->phone, 850, 573, function ($font) {
+                    $font->file(public_path('Cairo.ttf'));
+                    $font->size(30); // 24 best choose
+                    $font->color('#000');
+                });
+                // 620 x 475
+                if (intval($ad->price) > 0) {
+                    $img->text($ad->price, 950, 430, function ($font) {
+                        $font->file(public_path('Cairo.ttf'));
+                        $font->size(50); // 24 best choose
+                        $font->color('#fff');
+                    });
+                } else {
+                    $img->text($unknown, 920, 430, function ($font) {
+                        $font->file(public_path('DroidNaskh-Bold.ttf'));
+                        $font->size(30); // 24 best choose
+                        $font->color('#fff');
+                    });
+                }
+                // 320
+                $img->text($name, 100, 100, function ($font) {
+                    if (app()->isLocale('ar')) {
+                        $font->file(public_path('DroidNaskh-Bold.ttf'));
+                    } else {
+                        $font->file(public_path('Cairo.ttf'));
+                    }
+                    $font->size(24); // 24 best choose
+                    $font->color('#000');
+                });
+
+                if ($request->hasFile('image')) {
+                    $theAdImg = public_path('socialmedia/outputonimage.png');
+                    $img->insert($theAdImg, 'bottom-left', 15, 19);
+                } else {
+                    $theAdImg = public_path('socialmedia/default.png');
+                    $img->insert($theAdImg, 'bottom-left', 15, 19);
+                }
+
+                $img->save(public_path('images/output.png'));
+                // RUN THE JOB
+                if (!env('IS_PAYMANT_AVAILABLE')) {
+                    $postToSocialMediaImagePath = public_path('images/output.png');
+                    // PUBLISH TO TWITTER
+                    $forJobPublishment = $Arabic->utf8Glyphs($ad->title);
+                    if (app()->isLocale('ar')) {
+                        // dd($ad->title, $postToSocialMediaImagePath);
+                        SocialMediaJob::dispatch('', $postToSocialMediaImagePath);
+                        // PUBLISH TO FACEBOOK
+                        SocialFacebookJob::dispatch($forJobPublishment, $postToSocialMediaImagePath);
+                    } else {
+                        // dd($ad->title, $postToSocialMediaImagePath);
+                        SocialMediaJob::dispatch($ad->title, $postToSocialMediaImagePath);
+                        // PUBLISH TO FACEBOOK
+                        SocialFacebookJob::dispatch($ad->title, $postToSocialMediaImagePath);
+                    }
+
+                }
             }
-            $font->size(24); // 24 best choose
-            $font->color('#000');
-        });
-
-        if ($request->hasFile('image')) {
-            $theAdImg = public_path('socialmedia/outputonimage.png');
-            $img->insert($theAdImg, 'bottom-left', 15, 19);
-        } else {
-            $theAdImg = public_path('socialmedia/default.png');
-            $img->insert($theAdImg, 'bottom-left', 15, 19);
-        }
-
-        $img->save(public_path('images/output.png'));
-        // RUN THE JOB
-        if (!env('IS_PAYMANT_AVAILABLE')) {
-            $postToSocialMediaImagePath = public_path('images/output.png');
-            // PUBLISH TO TWITTER
-            $forJobPublishment = $Arabic->utf8Glyphs($ad->title);
-            if (app()->isLocale('ar')) {
-                // dd($ad->title, $postToSocialMediaImagePath);
-                SocialMediaJob::dispatch('', $postToSocialMediaImagePath);
-                // PUBLISH TO FACEBOOK
-                SocialFacebookJob::dispatch($forJobPublishment, $postToSocialMediaImagePath);
-            } else {
-                // dd($ad->title, $postToSocialMediaImagePath);
-                SocialMediaJob::dispatch($ad->title, $postToSocialMediaImagePath);
-                // PUBLISH TO FACEBOOK
-                SocialFacebookJob::dispatch($ad->title, $postToSocialMediaImagePath);
-            }
-
-        }
+        } catch (\Exception $exception){}
         return $this->success([$this->formatAd($ad)] , __('app.data_created') );
     }
 }
