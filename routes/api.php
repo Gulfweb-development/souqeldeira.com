@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('login' , [AuthController::class , 'login']);
 Route::post('register' , [AuthController::class , 'register']);
 Route::post('forgetPassword' , [AuthController::class , 'forgetPassword']);
+Route::post('resetPassword' , [AuthController::class , 'resetPassword']);
 Route::post('home' , [AssetsController::class , 'home']);
 Route::post('governorates' , [AssetsController::class , 'governorates']);
 Route::post('saleType' , [AssetsController::class , 'saleType']);

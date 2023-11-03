@@ -138,4 +138,53 @@ class AuthController extends Controller
         Mail::to($user->email)->send(new Forget($user));
         return $this->success(null ,__('Your activated code send to email and phone'));
     }
+
+    public function resetPassword(Request $request){
+        $request->validate( [
+            'email' => ['nullable', 'string', 'email', 'max:50'],
+            'phone' => ['nullable', 'string'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'code' => ['required'],
+        ]);
+        if ( ! filter_var($request->get('email'), FILTER_VALIDATE_EMAIL) and ! $request->get('phone' , false)  )
+            return $this->error(400 , trans('Email address or phone number is required!'));
+
+        if (filter_var($request->email, FILTER_VALIDATE_EMAIL) and $request->email) {
+            $field = 'email';
+            $value = $request->email;
+        } else {
+            $field = 'phone';
+            $value = $request->phone;
+        }
+
+        $user = User::query()->where($field , $value)->first();
+        if ( $user == null )
+            return $this->error(400 ,trans('could not be found.'));
+        if ( $user->activated_code != $request->code )
+            return $this->error(400 ,trans('OTP Code is incorrect.'));
+
+        $user->update([
+            'password' => $request->password
+        ]);
+        $token = $user->createToken('application');
+        return $this->success([
+            'id' => $user->id ,
+            'name' => $user->name ,
+            'email' => $user->email ,
+            'phone' => $user->phone ,
+            'is_approved' => $user->is_approved ,
+            'is_featured' => $user->is_featured ,
+            'type' => $user->type ,
+            'avatar' => toProfileDefaultImage($user->getFile() , 'images/company_default.jpg'),
+            'field' => $user->field ,
+            'adv_normal_count' => $user->adv_nurmal_count ,
+            'adv_star_count' => $user->adv_star_count ,
+            'description' => $user->translate('description') ,
+            'dashboard' => [
+                'total_ads' => $user->ads()->count(),
+                'total_reviews' => $user->comments()->count(),
+            ],
+            'token' => $token->plainTextToken
+        ]);
+    }
 }
