@@ -76,4 +76,16 @@ class ProfileController extends Controller
         return $this->success([$this->profile($request)->getOriginalContent()['data']] , __('app.data_updated'));
     }
 
+
+    public function delete(){
+        user()->deleteFile();
+        foreach (user()->ads as $ad){
+            $ad->deleteFiles();
+            $ad->delete();
+        }
+        user()->delete();
+        return $this->success([] , __('app.data_deleted'));
+
+    }
+
 }

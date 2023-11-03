@@ -46,6 +46,7 @@ Route::middleware('auth:api')->group(function () {
     Route::post('adDetails/messages' , [NotificationController::class , 'messagesAdd']);
     Route::post('updatePassword' , [ProfileController::class , 'updatePassword']);
     Route::post('profile' , [ProfileController::class , 'profile']);
+    Route::post('profile/delete' , [ProfileController::class , 'delete']);
     Route::post('editProfile' , [ProfileController::class , 'editProfile']);
     Route::post('subscription/list' , [subscriptionController::class , 'list']);
     Route::post('subscription/payAsGo' , [subscriptionController::class , 'payAsGo']);
