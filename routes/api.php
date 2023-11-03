@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\Advertise\AssetsController;
 use App\Http\Controllers\Api\AssetsController as MainAssetController;
 use App\Http\Controllers\Api\Panel\AuthController;
 use App\Http\Controllers\Api\Panel\NotificationController;
+use App\Http\Controllers\Api\Panel\PremiumPositionController;
 use App\Http\Controllers\Api\Panel\ProfileController;
 use App\Http\Controllers\Api\Panel\subscriptionController;
 use Illuminate\Support\Facades\Route;
@@ -68,4 +69,5 @@ Route::middleware('auth:api')->group(function () {
     Route::post('my-ads/delete-image' , [AdvertiseController::class , 'myAdDeleteImage']);
     Route::post('my-ads/upgrade' , [AdvertiseController::class , 'upgrade']);
     Route::post('my-ads/create' , [AdvertiseController::class , 'create']);
+    Route::post('premium/position' , [PremiumPositionController::class , 'list']);
 });
