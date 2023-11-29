@@ -49,6 +49,10 @@ class AuthController extends Controller
             return $this->error(401 ,  trans('Unauthorized') );
         }
     }
+    public function logout(Request $request){
+        $request->user()->currentAccessToken()->delete();
+        return $this->success([] ,  __('Logout'));
+    }
 
     public function register(Request $request){
         $request->validate( [

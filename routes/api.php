@@ -44,6 +44,7 @@ Route::post('office/report' , [AssetsController::class , 'officeReport']);
 Route::post('ad/report' , [AdvertiseController::class , 'reportAdd']);
 Route::post('premium/position/render' , [PremiumPositionController::class , 'render']);
 Route::middleware('auth:api')->group(function () {
+    Route::post('logout' , [AuthController::class , 'logout']);
     Route::post('addToFavorite' , [AdvertiseController::class , 'addToFavorite']);
     Route::post('favorites' , [AdvertiseController::class , 'favorites']);
     Route::post('notifications' , [NotificationController::class , 'notifications']);
