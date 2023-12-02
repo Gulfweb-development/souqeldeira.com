@@ -19,6 +19,7 @@ class subscriptionController extends Controller
             return [
                 'id' => $item->id,
                 'image' =>  toAdDefaultImage($item->getFile()) ,
+                'name' =>  $item->translate('name') ,
                 'price' => $item->price ,
                 'adv_normal_count' => $item->adv_nurmal_count ,
                 'adv_premium_count' => $item->adv_star_count ,
@@ -28,11 +29,11 @@ class subscriptionController extends Controller
         return $this->success([
             'balance'=> [
                 'normal' => \App\Models\SubscriptionHistories::getBalance()['normal'],
-                'premium ' => \App\Models\SubscriptionHistories::getBalance()['featured'],
+                'premium' => \App\Models\SubscriptionHistories::getBalance()['featured'],
             ],
             'pay_as_go_price'=> [
                 'normal' => \App\Models\Setting::get('price_adv', 15),
-                'premium ' => \App\Models\Setting::get('price_premium_adv', 15),
+                'premium' => \App\Models\Setting::get('price_premium_adv', 15),
             ],
             'packages'=>$packages
         ] );
