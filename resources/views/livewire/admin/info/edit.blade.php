@@ -15,6 +15,12 @@
                 <div class="col-md-12">
                     <x-admin.textarea name="state.text_en" label="{{ __('app.text_en') }}" />
                 </div>
+                <div class="col-md-12">
+                    <x-admin.input name="state.email" label="{{ __('app.email') }}" />
+                </div>
+                <div class="col-md-12">
+                    <x-admin.input name="state.phone" label="{{ __('app.phone') }}" />
+                </div>
                 <hr />
                 <div class="col-md-12 mt-4 justify-content-center align-items-center d-flex border-1">
                     <button type="button" class="btn bg-gradient-primary btn-flat mt-4" wire:loading.attr="disabled"

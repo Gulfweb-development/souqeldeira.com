@@ -12,5 +12,7 @@ class Info extends Model
     protected $fillable = [
             'text_ar',
             'text_en',
+            'phone',
+            'email',
     ];
 }

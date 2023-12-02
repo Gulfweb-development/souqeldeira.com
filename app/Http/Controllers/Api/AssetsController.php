@@ -33,6 +33,8 @@ class AssetsController extends Controller
             'contact_us' => [
                 'original' => $info->translate('text'),
                 'htmlLess' => strip_tags($info->translate('text')),
+                'email' => $info->email,
+                'phone' => $info->phone,
             ],
             'title' => $setting->translate('title'),
             'description' => $setting->translate('description'),

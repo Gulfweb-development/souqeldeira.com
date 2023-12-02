@@ -51,6 +51,22 @@
                             <td>{!! nl2br($info->translate('text')) !!}</td>
                         </tr>
 
+                        <tr>
+                            <td>
+                                {{ $num++ }}
+                            </td>
+                            <td>@lang('app.email')</td>
+                            <td>{!! $info->email !!}</td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                {{ $num++ }}
+                            </td>
+                            <td>@lang('app.phone')</td>
+                            <td>{!! $info->phone !!}</td>
+                        </tr>
+
 
 
                         <tr>
