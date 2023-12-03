@@ -33,6 +33,7 @@ Route::post('search' , [AdvertiseController::class , 'search']);
 Route::post('adDetails' , [AdvertiseController::class , 'adDetails']);
 Route::post('viewAdd' , [AdvertiseController::class , 'viewAdd']);
 Route::post('offices' , [AssetsController::class , 'offices']);
+Route::post('office' , [AssetsController::class , 'office']);
 Route::post('contactUs' , [MainAssetController::class , 'contactUs']);
 Route::post('aboutUs' , [MainAssetController::class , 'aboutUs']);
 Route::post('settings' , [MainAssetController::class , 'settings']);

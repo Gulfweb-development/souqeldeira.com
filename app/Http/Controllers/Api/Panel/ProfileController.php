@@ -39,6 +39,7 @@ class ProfileController extends Controller
             'avatar' => toProfileDefaultImage($user->getFile() , 'images/company_default.jpg'),
             'adv_normal_count' => $user->adv_nurmal_count ,
             'adv_star_count' => $user->adv_star_count ,
+            'socials' => $user->socials ,
             'description' => $user->translate('description') ,
             'governorates' => optional($user->governorates)->transform(function ($item){
                 return [
@@ -61,6 +62,13 @@ class ProfileController extends Controller
             'description' => 'required|string',
             'field' => 'required|in:ALL,RENT,SALE,EXCHANGE',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
+            'instagram' => 'nullable',
+            'youtube' => 'nullable',
+            'telegram' => 'nullable',
+            'website' => 'nullable',
+            'linkedin' => 'nullable',
+            'facebook' => 'nullable',
+            'twitter' => 'nullable',
         ]);
         user()->update([
             'name' => $request->name,
@@ -69,6 +77,15 @@ class ProfileController extends Controller
             'description_ar' => $request->description,
             'description_en' => $request->description,
             'field' => $request->field,
+            'socials' => [
+                'instagram' => $request->instagram,
+                'youtube' => $request->youtube,
+                'telegram' => $request->telegram,
+                'website' => $request->website,
+                'linkedin' => $request->linkedin,
+                'facebook' => $request->facebook,
+                'twitter' => $request->twitter,
+            ]
         ]);
         user()->governorates()->sync(collect($request->governorate_ids)->values());
         if ($request->image != '') {

@@ -159,10 +159,41 @@ class AssetsController extends Controller
                 'phone' => $user->phone,
                 'avatar' => toProfileDefaultImage($user->getFile() , 'images/company_default.jpg'),
                 'link' => route('agency.ads',[toSlug($user->name),$user->id]) ,
-                'whatsapp' => 'https://api.whatsapp.com/send?phone='.$user->phone
+                'whatsapp' => 'https://api.whatsapp.com/send?phone='.$user->phone,
+                'socials' => $user->socials ?? [
+                        'instagram' => null,
+                        'youtube' => null,
+                        'telegram' =>  null,
+                        'website' => null,
+                        'linkedin' =>  null,
+                        'facebook' =>  null,
+                        'twitter' => null,
+                    ]
             ];
         });
         return $this->success([ 'offices' => $offices ]);
+    }
+
+    public function office(Request $request){
+        $user = User::companies()
+            ->where('id' , $request->id)->findOrFail();
+        return $this->success([ 'office' => [
+            'id' => $user->id,
+            'name' => $user->name,
+            'phone' => $user->phone,
+            'avatar' => toProfileDefaultImage($user->getFile() , 'images/company_default.jpg'),
+            'link' => route('agency.ads',[toSlug($user->name),$user->id]) ,
+            'whatsapp' => 'https://api.whatsapp.com/send?phone='.$user->phone,
+            'socials' => $user->socials ?? [
+                    'instagram' => null,
+                    'youtube' => null,
+                    'telegram' =>  null,
+                    'website' => null,
+                    'linkedin' =>  null,
+                    'facebook' =>  null,
+                    'twitter' => null,
+                ]
+        ] ]);
     }
 
     public function officeReport(Request $request){
