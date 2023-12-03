@@ -294,6 +294,35 @@ class AdvertiseController extends Controller
         }
         return $this->success([] , __('app.data_updated') );
     }
+
+    public function repost(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|exists:ads,id',
+        ]);
+
+        if (env('ADS_LIMIT') > 0 and env('ADS_LIMIT') <= user()->ads()->count()) {
+            return $this->error(400 , __('app.you_got_ads_limit_please_remove_some_to_can_ad_more') );
+        }
+        $ad =  Ad::query()->with('images')->where('user_id', user()->id)->where('id', $request->get('id'))->firstOrFail();
+        if ( ! SubscriptionHistories::canPostAd( $ad->is_featured , user())) {
+            return $this->error(400 , __('increase_balance') );
+        }
+        SubscriptionHistories::postAd( $ad->is_featured , user());
+        $newAd = clone $ad;
+        $newAd->fill([
+            'is_approved' => 1,
+            'code' => Str::random(6),
+            'created_at' => Carbon::now('UTC'),
+            'updated_at' => Carbon::now('UTC'),
+            'archived_at' => Carbon::now('UTC')->addDays(
+                $ad->is_featured ? Setting::get('expire_time_premium_adv', 15) : Setting::get('expire_time_adv', 15)
+            )->format('Y-m-d H:i:s')
+        ]);
+        $newAd->save();
+        return $this->success([$this->formatAd($newAd)] , __('app.data_created') );
+    }
+
     public function myAdDeleteImage(Request $request)
     {
         $ad =  Ad::query()->with('images')->where('user_id', user()->id)->where('id', $request->get('id'))->firstOrFail();
