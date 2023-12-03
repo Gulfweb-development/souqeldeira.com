@@ -175,8 +175,7 @@ class AssetsController extends Controller
     }
 
     public function office(Request $request){
-        $user = User::companies()
-            ->where('id' , $request->id)->findOrFail();
+        $user = User::companies()->findOrFail($request->id);
         return $this->success([ 'office' => [
             'id' => $user->id,
             'name' => $user->name,
