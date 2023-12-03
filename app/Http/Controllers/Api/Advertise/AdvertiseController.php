@@ -31,6 +31,15 @@ class AdvertiseController extends Controller
             'avatar' => toProfileDefaultImage($user->getFile() , 'images/company_default.jpg'),
             'is_agency' => $user->is_approved and $user->type == "COMPANY" ,
             'agency_link' => $user->is_approved and $user->type == "COMPANY" ?  route('agency.ads',[toSlug($user->name),$user->id]) : null ,
+            'socials' => $user->socials ?? [
+                    'instagram' => null,
+                    'youtube' => null,
+                    'telegram' =>  null,
+                    'website' => null,
+                    'linkedin' =>  null,
+                    'facebook' =>  null,
+                    'twitter' => null,
+                ]
         ];
     }
     private function formatAd($ad , $deleteUseless = false)

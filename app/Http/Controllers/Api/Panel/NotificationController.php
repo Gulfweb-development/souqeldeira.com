@@ -66,6 +66,15 @@ class NotificationController extends Controller
                     'avatar' => toProfileDefaultImage(optional($item->user)->getFile() , 'images/company_default.jpg'),
                     'is_agency' => optional($item->user)->is_approved and optional($item->user)->type == "COMPANY" ,
                     'agency_link' => optional($item->user)->is_approved and optional($item->user)->type == "COMPANY" ?  route('agency.ads',[toSlug(optional($item->user)->name),optional($item->user)->id]) : null ,
+                    'socials' => optional($item->user)->socials ?? [
+                            'instagram' => null,
+                            'youtube' => null,
+                            'telegram' =>  null,
+                            'website' => null,
+                            'linkedin' =>  null,
+                            'facebook' =>  null,
+                            'twitter' => null,
+                        ]
                 ],
                 'created_at' => [
                     'system' => $item->created_at,
@@ -97,6 +106,15 @@ class NotificationController extends Controller
                     'avatar' => toProfileDefaultImage(optional($userMessage->user)->getFile() , 'images/company_default.jpg'),
                     'is_agency' => optional($userMessage->user)->is_approved and optional($userMessage->user)->type == "COMPANY" ,
                     'agency_link' => optional($userMessage->user)->is_approved and optional($userMessage->user)->type == "COMPANY" ?  route('agency.ads',[toSlug(optional($userMessage->user)->name),optional($userMessage->user)->id]) : null ,
+                    'socials' => optional($userMessage->user)->socials ?? [
+                            'instagram' => null,
+                            'youtube' => null,
+                            'telegram' =>  null,
+                            'website' => null,
+                            'linkedin' =>  null,
+                            'facebook' =>  null,
+                            'twitter' => null,
+                        ]
                 ],
                 'created_at' => [
                     'system' => $userMessage->created_at,
