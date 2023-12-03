@@ -39,7 +39,15 @@ class ProfileController extends Controller
             'avatar' => toProfileDefaultImage($user->getFile() , 'images/company_default.jpg'),
             'adv_normal_count' => $user->adv_nurmal_count ,
             'adv_star_count' => $user->adv_star_count ,
-            'socials' => $user->socials ,
+            'socials' => $user->socials ?? [
+                    'instagram' => null,
+                    'youtube' => null,
+                    'telegram' =>  null,
+                    'website' => null,
+                    'linkedin' =>  null,
+                    'facebook' =>  null,
+                    'twitter' => null,
+                ],
             'description' => $user->translate('description') ,
             'governorates' => optional($user->governorates)->transform(function ($item){
                 return [
