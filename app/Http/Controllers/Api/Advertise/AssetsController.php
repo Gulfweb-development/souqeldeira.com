@@ -26,23 +26,7 @@ class AssetsController extends Controller
             ->inRandomOrder()
             ->take(6)
             ->get()->transform(function ($item) {
-                return [
-                    'id' => $item->id,
-                    'type' => $item->type,
-                    'is_featured' => $item->is_featured,
-                    'region_id' => $item->region_id,
-                    'region_name' => optional($item->region)['name_'.app()->getLocale()],
-                    'price' => $item->price,
-                    'title' => $item->title,
-                    'building_type_id' => $item->building_type_id,
-                    'building_type_name' => optional($item->building_type)['name_'.app()->getLocale()],
-                    'phone' => $item->phone,
-                    'governorate_id' => $item->governorate_id,
-                    'governorate_name' => optional($item->governorate)['name_'.app()->getLocale()],
-                    'created_at' => $item->created_at,
-                    'views' => $item->views,
-                    'images' => asset(optional(optional($item->images)[0])->url ?? 'images/ad_default.jpg?v1'),
-                ];
+                return AdvertiseController::formatAd($item , true);
             });
         $saleAds = Ad::with('region','images','buildingType','governorate')
             ->select('id','type','is_approved','is_featured','region_id','price','title','building_type_id','phone','governorate_id', 'created_at', 'views')
@@ -52,23 +36,7 @@ class AssetsController extends Controller
             ->inRandomOrder()
             ->take(6)
             ->get()->transform(function ($item) {
-                return [
-                    'id' => $item->id,
-                    'type' => $item->type,
-                    'is_featured' => $item->is_featured,
-                    'region_id' => $item->region_id,
-                    'region_name' => optional($item->region)['name_'.app()->getLocale()],
-                    'price' => $item->price,
-                    'title' => $item->title,
-                    'building_type_id' => $item->building_type_id,
-                    'building_type_name' => optional($item->building_type)['name_'.app()->getLocale()],
-                    'phone' => $item->phone,
-                    'governorate_id' => $item->governorate_id,
-                    'governorate_name' => optional($item->governorate)['name_'.app()->getLocale()],
-                    'created_at' => $item->created_at,
-                    'views' => $item->views,
-                    'images' => asset(optional(optional($item->images)[0])->url ?? 'images/ad_default.jpg?v1'),
-                ];
+                return AdvertiseController::formatAd($item , true);
             });
         $exchangeAds = Ad::with('region','images','buildingType','governorate')
             ->select('id','type','is_approved','is_featured','region_id','price','title','building_type_id','phone','governorate_id', 'created_at', 'views')
@@ -78,23 +46,7 @@ class AssetsController extends Controller
             ->inRandomOrder()
             ->take(6)
             ->get()->transform(function ($item) {
-                return [
-                    'id' => $item->id,
-                    'type' => $item->type,
-                    'is_featured' => $item->is_featured,
-                    'region_id' => $item->region_id,
-                    'region_name' => optional($item->region)['name_'.app()->getLocale()],
-                    'price' => $item->price,
-                    'title' => $item->title,
-                    'building_type_id' => $item->building_type_id,
-                    'building_type_name' => optional($item->building_type)['name_'.app()->getLocale()],
-                    'phone' => $item->phone,
-                    'governorate_id' => $item->governorate_id,
-                    'governorate_name' => optional($item->governorate)['name_'.app()->getLocale()],
-                    'created_at' => $item->created_at,
-                    'views' => $item->views,
-                    'images' => asset(optional(optional($item->images)[0])->url ?? 'images/ad_default.jpg?v1'),
-                ];
+                return AdvertiseController::formatAd($item , true);
             });
         $clients = Client::with('images')->get()->transform(function ($item) {
             return [

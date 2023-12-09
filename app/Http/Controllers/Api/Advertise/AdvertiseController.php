@@ -22,7 +22,7 @@ use Intervention\Image\Facades\Image;
 
 class AdvertiseController extends Controller
 {
-    private function formatAuthor($user)
+    public static function formatAuthor($user)
     {
         $user = optional($user);
         return [
@@ -42,7 +42,7 @@ class AdvertiseController extends Controller
                 ]
         ];
     }
-    private function formatAd($ad , $deleteUseless = false)
+    public static function formatAd($ad , $deleteUseless = false)
     {
         /** @var Ad $ad */
         $comments = [
@@ -56,7 +56,7 @@ class AdvertiseController extends Controller
                 'number' => $ad->commentsCount(),
                 'comments' => $ad->approvedComments()->latest()->get()->transform(function ($comment) {
                     return [
-                        'author'=> $this->formatAuthor($comment->user),
+                        'author'=> self::formatAuthor($comment->user),
                         'stars'=> $comment->stars,
                         'text' =>[
                             'short' => Str::limit(strip_tags($comment->text), 100),
@@ -83,7 +83,7 @@ class AdvertiseController extends Controller
             ],
             'phone'=>$ad->phone,
             'link' => route('ad.search', [toSlug($ad->title), $ad->id]),
-            'author'=> $this->formatAuthor($ad->user),
+            'author'=> self::formatAuthor($ad->user),
             'is_featured'=>$ad->is_featured == "1",
             'views'=>$ad->views,
             'comments'=>$comments,
