@@ -22,7 +22,7 @@ class Localization
         app()->setLocale($localization);
 
         $request->merge([
-            'per_page' => max(min(intval($request->get('per_page' , 20)) , 50) , 10),
+            'per_page' => max(min(intval($request->get('per_page' , 20)) , 50) , 5),
         ]);
         return $next($request);
     }
