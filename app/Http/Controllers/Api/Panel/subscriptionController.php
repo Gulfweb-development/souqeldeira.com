@@ -42,7 +42,8 @@ class subscriptionController extends Controller
     public function payAsGo(Request  $request){
         $request->validate([
             'count' => 'required|numeric|min:1',
-            'type' => 'required|in:normal,premium'
+            'type' => 'required|in:normal,premium',
+            'redirect_to' => 'required',
         ]);
 
         $package = SubscriptionHistories::activePackage(auth()->user());
@@ -77,8 +78,8 @@ class subscriptionController extends Controller
             $bookeeyPipe->setAmount($price);  // Set amount in KWD
             $bookeeyPipe->setPayerName(\Auth::user()->name);  // Set Payer Name
             $bookeeyPipe->setPayerPhone(\Auth::user()->phone);  // Set Payer Phone Numner
-            $bookeeyPipe->setSuccessUrl(route('bankCallback', ['id' => $order->id, "status" => "success", "is_api" => true]));
-            $bookeeyPipe->setFailureUrl(route('bankCallback', ['id' => $order->id, "status" => "error", "is_api" => true]));
+            $bookeeyPipe->setSuccessUrl(route('bankCallback', ['id' => $order->id, "status" => "success", "is_api" => true , 'redirect_to' => $request->get('redirect_to')]));
+            $bookeeyPipe->setFailureUrl(route('bankCallback', ['id' => $order->id, "status" => "error", "is_api" => true , 'redirect_to' => $request->get('redirect_to')]));
             $paymentUrl = $bookeeyPipe->initiatePayment();
         } catch (\Exception $exception) {
             return $this->error(500 , $exception->getMessage());
@@ -88,7 +89,8 @@ class subscriptionController extends Controller
 
     public function package(Request  $request){
         $request->validate([
-            'id' => 'required|exists:subscriptions,id'
+            'id' => 'required|exists:subscriptions,id',
+            'redirect_to' => 'required',
         ]);
 
         /** @var User $user */
@@ -137,8 +139,8 @@ class subscriptionController extends Controller
             $bookeeyPipe->setAmount($price);  // Set amount in KWD
             $bookeeyPipe->setPayerName(\Auth::user()->name);  // Set Payer Name
             $bookeeyPipe->setPayerPhone(\Auth::user()->phone);  // Set Payer Phone Numner
-            $bookeeyPipe->setSuccessUrl(route('bankCallback', ['id' => $order->id, "status" => "success"]));
-            $bookeeyPipe->setFailureUrl(route('bankCallback', ['id' => $order->id, "status" => "error"]));
+            $bookeeyPipe->setSuccessUrl(route('bankCallback', ['id' => $order->id, "status" => "success", "is_api" => true , 'redirect_to' => $request->get('redirect_to')]));
+            $bookeeyPipe->setFailureUrl(route('bankCallback', ['id' => $order->id, "status" => "error", "is_api" => true , 'redirect_to' => $request->get('redirect_to')]));
             $paymentUrl = $bookeeyPipe->initiatePayment();
         } catch (\Exception $exception) {
             return $this->error(500 , $exception->getMessage());

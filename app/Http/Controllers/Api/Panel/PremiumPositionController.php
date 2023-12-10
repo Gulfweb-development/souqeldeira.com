@@ -40,6 +40,7 @@ class PremiumPositionController extends Controller
         $request->validate([
             'type' => 'required|in:image,text',
             'id' => 'required',
+            'redirect_to' => 'required',
         ]);
         $allPositions = collect(Setting::get('special_position'));
         $positions = $allPositions->except(Position::getActivePositionForBuy());
@@ -100,8 +101,8 @@ class PremiumPositionController extends Controller
             $bookeeyPipe->setAmount($positionObject['price']);  // Set amount in KWD
             $bookeeyPipe->setPayerName(\Auth::user()->name);  // Set Payer Name
             $bookeeyPipe->setPayerPhone(\Auth::user()->phone);  // Set Payer Phone Numner
-            $bookeeyPipe->setSuccessUrl(route('bankCallback', ['id' => $order->id, "status" => "success", "is_api" => true]));
-            $bookeeyPipe->setFailureUrl(route('bankCallback', ['id' => $order->id, "status" => "error", "is_api" => true]));
+            $bookeeyPipe->setSuccessUrl(route('bankCallback', ['id' => $order->id, "status" => "success", "is_api" => true , 'redirect_to' => $request->get('redirect_to')]));
+            $bookeeyPipe->setFailureUrl(route('bankCallback', ['id' => $order->id, "status" => "error", "is_api" => true , 'redirect_to' => $request->get('redirect_to')]));
             $paymentUrl = $bookeeyPipe->initiatePayment();
         } catch (\Exception $exception) {
             return $this->error(500 , $exception->getMessage());

@@ -161,7 +161,38 @@ Route::post('/auth/passwords/reset',function(Request $request){
 
 
 Route::any('/payment-redirect/{id}/{status?}/{is_api?}',function(Request $request,$id , $status = "error" , $is_api = "false"){
+    function appendQueryStringToURL(string $url, $query): string
+    {
+        // the query is empty, return the original url straightaway
+        if (empty($query)) {
+            return $url;
+        }
 
+        $parsedUrl = parse_url($url);
+        if (empty($parsedUrl['path'])) {
+            $url .= '/';
+        }
+
+        // if the query is array convert it to string
+        $queryString = is_array($query) ? http_build_query($query) : $query;
+
+        // check if there is already any query string in the URL
+        if (empty($parsedUrl['query'])) {
+            // remove duplications
+            parse_str($queryString, $queryStringArray);
+            $url .= '?' . http_build_query($queryStringArray);
+        } else {
+            $queryString = $parsedUrl['query'] . '&' . $queryString;
+
+            // remove duplications
+            parse_str($queryString, $queryStringArray);
+
+            // place the updated query in the original query position
+            $url = substr_replace($url, http_build_query($queryStringArray), strpos($url, $parsedUrl['query']), strlen($parsedUrl['query']));
+        }
+
+        return $url;
+    }
     $descriptionSet = false;
     $order = \App\Models\Order::query()->where('status' , 'pending')->findOrFail($id);
     try {
@@ -185,8 +216,13 @@ Route::any('/payment-redirect/{id}/{status?}/{is_api?}',function(Request $reques
     $order->save();
 
     $route = 'profile.invoices';
-    if ( $is_api )
+    if ( $is_api ) {
         $route = 'welcome';
+        if ( $request->has('redirect_to') ){
+            $url = appendQueryStringToURL($request->get('redirect_to') , ['order_id' => $order->id , 'is_success' => ($status == "success" ? 1 : 0) ]);
+            return redirect()->to($url);
+        }
+    }
     if ( $status == "success" )
         return redirect()->route($route)->with('success', $order['description_'.app()->getLocale()] .' '. trans('paid_successfully'));
     return redirect()->route($route)->with('error', __('paid_failed'));
