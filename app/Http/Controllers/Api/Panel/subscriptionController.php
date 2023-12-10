@@ -166,4 +166,20 @@ class subscriptionController extends Controller
         return $this->success(['invoices' => $invoices]);
     }
 
+    public function invoiceDetail(Request  $request){
+        $order = Order::query()->where('user_id' , auth()->user()->id)
+            ->findOrFail($request->get('id'));
+        return $this->success(['invoice' => [
+            'id' => $order->id,
+            'description' => $order->translate('description'),
+            'price' => $order->price,
+            'transaction_id' => $order->transaction_id,
+            'status' => __($order->status),
+            'created_at'=>[
+                'human' =>$order->created_at->diffForHumans(),
+                'system' =>$order->created_at,
+            ],
+        ]]);
+    }
+
 }
