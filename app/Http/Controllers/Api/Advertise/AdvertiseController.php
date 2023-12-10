@@ -113,7 +113,7 @@ class AdvertiseController extends Controller
                 ->where('region_id', $ad->region_id)
                 ->inRandomOrder()
                 ->take(3)
-                ->get()->transform(function ($item) { return $this->formatAd($item , true) ;} ) : [],
+                ->get()->transform(function ($item) { return self::formatAd($item , true) ;} ) : [],
         ];
         if ( $deleteUseless ) {
             unset($information['description']['htmlLess'],
