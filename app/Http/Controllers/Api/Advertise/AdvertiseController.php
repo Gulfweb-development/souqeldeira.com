@@ -145,6 +145,15 @@ class AdvertiseController extends Controller
                 } elseif ( intval($request->get('townId')) > 0 )
                     $query->where('region_id' , intval($request->get('townId')));
             })
+            ->when($request->get('building_type_id') , function ($query) use ($request) {
+                if ( is_array($request->get('building_type_id')) ){
+                    $building_type_id = collect($request->get('building_type_id'))->filter(function ($item) {
+                        return intval($item) > 0;
+                    })->values();
+                    $query->whereIn('building_type_id' , $building_type_id);
+                } elseif ( intval($request->get('building_type_id')) > 0 )
+                    $query->where('building_type_id' , intval($request->get('building_type_id')));
+            })
             ->when(($request->get('priceFrom') and $request->get('priceFrom') > 0 ) , function ($query) use ($request) {
                 $query->where('price' , '>=', $request->get('priceFrom'));
             })
