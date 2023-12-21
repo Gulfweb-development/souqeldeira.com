@@ -15,7 +15,7 @@ class AuthController extends Controller
     public function login(Request $request){
         $credentials = $request->only('email', 'phoneNumber', 'password');
 
-        if (filter_var($credentials['email'], FILTER_VALIDATE_EMAIL) and $credentials['email']) {
+        if (isset($credentials['email']) and filter_var($credentials['email'], FILTER_VALIDATE_EMAIL) and $credentials['email']) {
             $field = 'email';
             $value = $credentials['email'];
         } else {
