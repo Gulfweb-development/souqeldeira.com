@@ -18,8 +18,8 @@ class AssetsController extends Controller
     public function home(Request $request){
         Setting::latest()->first()->increment('visits');
         $this->setting = Setting::select('id',toLocale('title'),toLocale('description'))->latest()->first();
-        $rentAds = Ad::with('region', 'images','governorate', 'buildingType')
-            ->select('id', 'type', 'is_approved', 'is_featured','region_id', 'price', 'title','phone','governorate_id', 'building_type_id' , 'created_at', 'views')
+        $rentAds = Ad::with('region', 'images','governorate', 'buildingType' ,'user')
+            ->select('id', 'type','text', 'is_approved', 'is_featured','region_id','user_id', 'price', 'title','phone','governorate_id', 'building_type_id' , 'created_at', 'views')
             ->where('is_approved', 1)
             ->where('type', 'RENT')
             ->orderByDesc('is_featured')
@@ -28,8 +28,8 @@ class AssetsController extends Controller
             ->get()->transform(function ($item) {
                 return AdvertiseController::formatAd($item , true);
             });
-        $saleAds = Ad::with('region','images','buildingType','governorate')
-            ->select('id','type','is_approved','is_featured','region_id','price','title','building_type_id','phone','governorate_id', 'created_at', 'views')
+        $saleAds = Ad::with('region','images','buildingType','governorate' ,'user')
+            ->select('id','type','text','is_approved','is_featured','region_id','user_id','price','title','building_type_id','phone','governorate_id', 'created_at', 'views')
             ->where('is_approved',1)
             ->where('type','SALE')
             ->orderByDesc('is_featured')
@@ -38,8 +38,8 @@ class AssetsController extends Controller
             ->get()->transform(function ($item) {
                 return AdvertiseController::formatAd($item , true);
             });
-        $exchangeAds = Ad::with('region','images','buildingType','governorate')
-            ->select('id','type','is_approved','is_featured','region_id','price','title','building_type_id','phone','governorate_id', 'created_at', 'views')
+        $exchangeAds = Ad::with('region','images','buildingType','governorate' ,'user')
+            ->select('id','type','text','is_approved','is_featured','region_id','user_id','price','title','building_type_id','phone','governorate_id', 'created_at', 'views')
             ->where('is_approved',1)
             ->where('type','EXCHANGE')
             ->orderByDesc('is_featured')
@@ -48,8 +48,8 @@ class AssetsController extends Controller
             ->get()->transform(function ($item) {
                 return AdvertiseController::formatAd($item , true);
             });
-        $requestAds = Ad::with('region','images','buildingType','governorate')
-            ->select('id','type','is_approved','is_featured','region_id','price','title','building_type_id','phone','governorate_id', 'created_at', 'views')
+        $requestAds = Ad::with('region','images','buildingType','governorate' ,'user')
+            ->select('id','type','text','is_approved','is_featured','region_id','user_id','price','title','building_type_id','phone','governorate_id', 'created_at', 'views')
             ->where('is_approved',1)
             ->where('type','REQUEST')
             ->orderByDesc('is_featured')
