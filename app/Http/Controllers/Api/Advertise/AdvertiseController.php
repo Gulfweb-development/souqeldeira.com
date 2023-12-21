@@ -99,7 +99,7 @@ class AdvertiseController extends Controller
                 'system' =>$ad->created_at,
             ],
             'type'=>[
-                'human' => $ad->type == 'RENT' ? trans('app.rent') : ( $ad->type == "EXCHANGE" ? trans('app.exchange') : trans('app.sale') ) ,
+                'human' => $ad->type == 'RENT' ? trans('app.rent') : ( $ad->type == "EXCHANGE" ? trans('app.exchange') :  ( $ad->type == "REQUEST" ? trans('app.REQUEST') : trans('app.sale') ) ) ,
                 'system' => $ad->type,
             ],
             'buildingType'=>optional($ad->buildingType)->translate('name'),
@@ -130,7 +130,7 @@ class AdvertiseController extends Controller
     }
     public function search(Request $request){
         $ads = Ad::query()
-            ->when(($request->get('saleId') and in_array(strtoupper($request->get('saleId')) , ['EXCHANGE' , 'SALE','RENT'] )) , function ($query) use ($request) {
+            ->when(($request->get('saleId') and in_array(strtoupper($request->get('saleId')) , ['EXCHANGE' , 'SALE','RENT','REQUEST'] )) , function ($query) use ($request) {
                 $query->where('type' , strtoupper($request->get('saleId')));
             })
             ->when(($request->get('agency_id') and $request->get('agency_id') > 0 ) , function ($query) use ($request) {
@@ -286,14 +286,14 @@ class AdvertiseController extends Controller
             'building_type_id' => 'required|exists:building_types,id',
             'text' => 'required|string',
             'price' => 'nullable|numeric',
-            'type' => 'required|in:SALE,EXCHANGE,RENT',
+            'type' => 'required|in:SALE,EXCHANGE,RENT,REQUEST',
             'phone' => 'required|string|regex:' . phoneNumberFormat(),
             'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
         ]);
         $toRegId = Region::select('id', 'governorate_id' , toLocale('name'))->where('id', $request->get('region_id'))->firstOrFail();
         $toGovId = Governorate::select('id', toLocale('name'))->where('id', $toRegId->governorate_id )->firstOrFail();
         $toBuidingTypeId = buildingType::select('id', toLocale('name'))->where('id', $request->get('building_type_id'))->firstOrFail();
-        $toType = $request->get('type') == 'SALE' ? __('app.sale') : ( $request->get('type') == 'EXCHANGE' ? __('app.exchange') : __('app.rent'));
+        $toType = $request->get('type') == 'SALE' ? __('app.sale') : ( $request->get('type') == 'EXCHANGE' ? __('app.exchange') :  ( $request->get('type') == 'REQUEST' ? __('app.REQUEST') : __('app.rent')) );
         $ad =  Ad::query()->with('images')->where('user_id', user()->id)->where('id', $request->get('id'))->firstOrFail();
         $ad->update([
             'governorate_id' => $toGovId->id,
@@ -375,7 +375,7 @@ class AdvertiseController extends Controller
             'is_featured' => 'required|boolean',
             //'governorate_id' => 'required|exists:governorates,id',
             'building_type_id' => 'required|exists:building_types,id',
-            'type' => 'required|in:SALE,RENT,EXCHANGE',
+            'type' => 'required|in:SALE,RENT,EXCHANGE,REQUEST',
             'text' => 'required|string',
             'price' => 'nullable|numeric',
             'phone' => 'required|string|regex:' . phoneNumberFormat(),
@@ -392,7 +392,7 @@ class AdvertiseController extends Controller
         $toRegId = Region::select('id', 'governorate_id', toLocale('name'))->where('id', $request->get('region_id'))->firstOrFail();
         $toGovId = Governorate::select('id', toLocale('name'))->where('id', $toRegId->governorate_id)->firstOrFail();
         $toBuidingTypeId = buildingType::select('id', toLocale('name'))->where('id', $request->get('building_type_id'))->firstOrFail();
-        $toType = $request->get('type') == 'SALE' ? __('app.sale') : ( $request->get('type') == 'EXCHANGE' ? __('app.exchange') : __('app.rent'));
+        $toType = $request->get('type') == 'SALE' ? __('app.sale') : ( $request->get('type') == 'EXCHANGE' ? __('app.exchange') : ( $request->get('type') == 'REQUEST' ? __('app.REQUEST') : __('app.rent')));
         $ad = Ad::query()->create([
             'governorate_id' => $toGovId->id,
             'is_featured' => $request->get('is_featured'),

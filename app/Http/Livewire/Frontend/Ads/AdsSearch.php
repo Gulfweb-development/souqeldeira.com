@@ -37,7 +37,7 @@ class AdsSearch extends Component
     {
         $this->governorates = Governorate::select('id', toLocale('name'))->get();
         $this->buildingTypes = BuildingType::select('id', toLocale('name'))->get();
-        $this->type = in_array(strtoupper($type) , ['EXCHANGE' , 'SALE','RENT'] ) ?  strtoupper($type) : null;
+        $this->type = in_array(strtoupper($type) , ['EXCHANGE' , 'SALE','RENT','REQUEST'] ) ?  strtoupper($type) : null;
         if ( $agency_id != null ){
             $this->agency = User::companies()->findOrFail($agency_id);
             $this->agency_id = $this->agency->id;

@@ -84,7 +84,7 @@ class Edit extends Component
         $toGovId = Governorate::select('id', toLocale('name'))->where('id', $toRegId->governorate_id )->firstOrFail();
         $this->governorate_id = $toGovId->id;
         $toBuidingTypeId = buildingType::select('id', toLocale('name'))->where('id', $this->building_type_id)->firstOrFail();
-        $toType = $this->type == 'SALE' ? __('app.sale') : ( $this->type == 'EXCHANGE' ? __('app.exchange') : __('app.rent'));
+        $toType = $this->type == 'SALE' ? __('app.sale') : ( $this->type == 'EXCHANGE' ? __('app.exchange') : ($this->type == 'REQUEST' ? __('app.REQUEST') : __('app.rent')));
         $this->ad->update([
             'governorate_id' => $this->governorate_id,
             'region_id' => $this->region_id,

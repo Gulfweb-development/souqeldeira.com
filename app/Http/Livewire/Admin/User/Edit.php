@@ -37,7 +37,7 @@ class Edit extends Component
             'is_approved' => 'nullable|boolean',
             'description_ar' => 'nullable|string|min:20|max:300',
             'description_en' => 'nullable|string|min:20|max:300',
-            'field' => 'nullable|in:ALL,RENT,SALE,EXCHANGE',
+            'field' => 'nullable|in:ALL,RENT,SALE,EXCHANGE,REQUEST',
         ])->validate();
         $this->validate([
             'governorate_ids' => 'nullable|array',

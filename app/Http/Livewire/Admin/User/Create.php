@@ -38,7 +38,7 @@ class Create extends Component
             'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
             'is_approved' => 'required|boolean',
             'type' => 'required|in:COMPANY,USER',
-            'field' => 'required|in:ALL,RENT,SALE,EXCHANGE',
+            'field' => 'required|in:ALL,RENT,SALE,EXCHANGE,REQUEST',
             'description_ar' => 'required|string|min:20',
             'description_en' => 'required|string|min:20',
         ])->validate();

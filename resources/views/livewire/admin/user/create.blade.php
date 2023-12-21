@@ -30,6 +30,7 @@
                         <option value="SALE">@lang('app.sale')</option>
                         <option value="RENT">@lang('app.rent')</option>
                         <option value="EXCHANGE">@lang('app.exchange')</option>
+                        <option value="REQUEST">@lang('app.REQUEST')</option>
                     </select>
                     @error('field')
                         <span class="text-danger text-sm col-12">{{ $message }}</span>

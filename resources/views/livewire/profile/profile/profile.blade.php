@@ -55,6 +55,7 @@
                     <option value="RENT">@lang('app.rent')</option>
                     <option value="SALE">@lang('app.sale')</option>
                     <option value="EXCHANGE">@lang('app.exchange')</option>
+                    <option value="REQUEST">@lang('app.REQUEST')</option>
                 </x-frontend.select>
                 <label for="exampleFormControlSelect1">
                     @lang('app.governorates')

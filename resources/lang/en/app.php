@@ -127,6 +127,7 @@ return [
     'sale' => 'Sale',
     'rent' => 'Rent',
     'exchange' => 'Exchange',
+    'REQUEST' => 'Request',
     'clients' => 'clients',
     'client' => 'client',
     'choose_region' => 'Choose Region',

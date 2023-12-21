@@ -55,7 +55,7 @@ class Profile extends Component
             'phone' => 'required|unique:users,phone,'.user()->id.'|regex:' . phoneNumberFormat(),
             'description' => 'required|string',
             // 'description_ar' => 'required|string',
-            'field' => 'required|in:ALL,RENT,SALE,EXCHANGE',
+            'field' => 'required|in:ALL,RENT,SALE,EXCHANGE,REQUEST',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
         ]);
         user()->update([

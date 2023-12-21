@@ -68,7 +68,7 @@ class ProfileController extends Controller
             'email' => 'nullable|email|unique:users,email,'.user()->id,
             'phone' => 'required|unique:users,phone,'.user()->id.'|regex:' . phoneNumberFormat(),
             'description' => 'required|string',
-            'field' => 'required|in:ALL,RENT,SALE,EXCHANGE',
+            'field' => 'required|in:ALL,RENT,SALE,EXCHANGE,REQUEST',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
             'instagram' => 'nullable',
             'youtube' => 'nullable',

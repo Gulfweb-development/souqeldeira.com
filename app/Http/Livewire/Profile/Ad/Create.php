@@ -71,7 +71,7 @@ class Create extends Component
             'is_featured' => 'required|boolean',
             //'governorate_id' => 'required|exists:governorates,id',
             'building_type_id' => 'required|exists:building_types,id',
-            'type' => 'required|in:SALE,RENT,EXCHANGE',
+            'type' => 'required|in:SALE,RENT,EXCHANGE,REQUEST',
             'text' => 'required|string',
             'price' => 'nullable|numeric',
             'phone' => 'required|string|regex:' . phoneNumberFormat(),
@@ -93,7 +93,7 @@ class Create extends Component
         $toGovId = Governorate::select('id', toLocale('name'))->where('id', $toRegId->governorate_id)->firstOrFail();
         $this->governorate_id = $toGovId->id;
         $toBuidingTypeId = buildingType::select('id', toLocale('name'))->where('id', $this->building_type_id)->firstOrFail();
-        $toType = $this->type == 'SALE' ? __('app.sale') : ($this->type == 'EXCHANGE' ? __('app.exchange') : __('app.rent'));
+        $toType = $this->type == 'SALE' ? __('app.sale') : ($this->type == 'EXCHANGE' ? __('app.exchange') : ($this->type == 'REQUEST' ? __('app.REQUEST') : __('app.rent')));
         // dd($this->text,'kw_phone');
         $ad = Ad::create([
             'governorate_id' => $this->governorate_id,
