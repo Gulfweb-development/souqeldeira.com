@@ -89,7 +89,9 @@ class AdvertiseController extends Controller
             'comments'=>$comments,
             'price'=>$ad->price,
             'whatsapp' => 'https://api.whatsapp.com/send?phone=+965'.$ad->phone.'&text='. __('app.whatsapp_text' , ['url' => route('ad.search', [toSlug($ad->title), $ad->id])]),
-            'is_favorite'=> request()->user() != null && $ad->favorites()->where('user_id', request()->user()->id)->count() > 0,
+            'is_favorite'=>
+                (request()->user() != null && $ad->favorites()->where('user_id', request()->user()->id)->count() > 0) or
+                (auth('api')->user() != null && $ad->favorites()->where('user_id', auth('api')->user()->id)->count() > 0) ,
             'images'=> [
                 'main' => toAdDefaultImage($ad->getFile()),
                 'other' => []
