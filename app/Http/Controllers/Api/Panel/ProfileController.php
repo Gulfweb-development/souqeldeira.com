@@ -59,6 +59,7 @@ class ProfileController extends Controller
                 'total_ads' => $user->ads()->count(),
                 'total_reviews' => $user->comments()->count(),
             ],
+            'NumbersOfNotification' => $user->unReadNotifications()->count()
         ]);
     }
 
