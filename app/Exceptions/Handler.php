@@ -47,6 +47,29 @@ class Handler extends ExceptionHandler
                     'errors' => $exception->errors(),
                 ], $exception->status);
             });
+            $this->renderable(function (\Illuminate\Database\Eloquent\ModelNotFoundException $e, $request) {
+                return response()->json([
+                    'error' => 'Erreur de modèle non trouvée lors du rendu.',
+                    'details' => $e->getMessage(),
+                    'url' => $request->url()
+                ], $e->getStatusCode() ?: 400);
+            });
+            $this->renderable(function (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+                return response()->json([
+                    'status' => false,
+                    'message' => app()->getLocale() == 'en' ? 'No results found!' : 'لم يتم العثور على نتائج!',
+                    'data' => [],
+                    'errors' => [],
+                ], $exception->status);
+            });
+            $this->renderable(function (\Symfony\Component\HttpKernel\Exception\NotFoundHttpException $exception) {
+                return response()->json([
+                    'status' => false,
+                    'message' => app()->getLocale() == 'en' ? 'No results found!' : 'لم يتم العثور على نتائج!',
+                    'data' => [],
+                    'errors' => [],
+                ], 404);
+            });
         }
     }
 }
