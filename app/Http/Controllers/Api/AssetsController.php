@@ -59,6 +59,17 @@ class AssetsController extends Controller
             ],
         ]);
     }
+
+    public function footerSetting(Request $request){
+        $info = Info::query()->latest()->first();
+        $setting = Setting::query()->latest()->first();
+        return $this->success([
+            'email' => $info->email,
+            'phone' => $info->phone,
+            'apple' => $setting->apple,
+            'android' => $setting->android,
+        ]);
+    }
     public function terms(Request $request){
         $setting = Setting::query()->latest()->first();
         return $this->success([

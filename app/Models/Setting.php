@@ -27,6 +27,8 @@ class Setting extends Model
         'twitter',
         'instagram',
         'youtube',
+        'apple',
+        'android',
         'admin_id',
         'expire_time_adv',
         'expire_time_premium_adv',

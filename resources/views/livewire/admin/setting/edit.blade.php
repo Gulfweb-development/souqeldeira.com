@@ -75,6 +75,12 @@
                 <div class="col-md-6">
                     <x-admin.input name="state.youtube" label="{{ __('app.youtube') }}"/>
                 </div>
+                <div class="col-md-6">
+                    <x-admin.input name="state.apple" label="Apple store Link"/>
+                </div>
+                <div class="col-md-6">
+                    <x-admin.input name="state.android" label="Google Play Link"/>
+                </div>
 
                 {{--                <div class="col-md-6">--}}
                 {{--                    <hr />--}}

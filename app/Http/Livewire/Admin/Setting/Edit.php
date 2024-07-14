@@ -34,6 +34,8 @@ class Edit extends Component
             'facebook' => 'nullable|string|max:170',
             'twitter' => 'nullable|string|max:170',
             'instagram' => 'nullable|string|max:170',
+            'apple' => 'nullable|string|max:170',
+            'android' => 'nullable|string|max:170',
             'youtube' => 'nullable|string|max:170',
             'gift_normal' => 'required|numeric|min:0',
             'gift_premium' => 'required|numeric|min:0',
