@@ -48,6 +48,9 @@
                                     </thead>
                                     <tbody>
                                         @forelse ($reports as $report)
+                                            @if($report->item == null)
+                                                @continue
+                                            @endif
                                             <tr role="row" class="odd">
                                                 <td class="table-id">{{ $report->id }}</td>
 {{--                                                <td>{{ optional($report->user)->first_name }} {{ optional($report->user)->last_name }}</td>--}}
