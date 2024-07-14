@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\About;
 use App\Models\Blog;
 use App\Models\Contact;
+use App\Models\Faq;
 use App\Models\Info;
 use App\Models\Policy as PolicyModel;
 use App\Models\Setting;
@@ -74,6 +75,15 @@ class AssetsController extends Controller
             ]);
         return $this->success([
             'policies' => $policies
+        ]);
+    }
+    public function faq(Request $request){
+        $policies = Faq::all()->transform(fn($item) => [
+            'question' => $item->translate('question'),
+            'answer' => $item->translate('answer'),
+            ]);
+        return $this->success([
+            'faqs' => $policies
         ]);
     }
 

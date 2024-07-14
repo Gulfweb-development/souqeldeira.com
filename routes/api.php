@@ -38,6 +38,7 @@ Route::post('contactUs' , [MainAssetController::class , 'contactUs']);
 Route::post('aboutUs' , [MainAssetController::class , 'aboutUs']);
 Route::post('settings' , [MainAssetController::class , 'settings']);
 Route::post('terms' , [MainAssetController::class , 'terms']);
+Route::any('faq' , [MainAssetController::class , 'faq']);
 Route::post('blog' , [MainAssetController::class , 'blog']);
 Route::post('blogs' , [MainAssetController::class , 'blogs']);
 Route::post('policies' , [MainAssetController::class , 'policies']);
