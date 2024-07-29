@@ -68,6 +68,12 @@ class AssetsController extends Controller
             'phone' => $info->phone,
             'apple' => $setting->apple,
             'android' => $setting->android,
+            'social_media' => [
+                'facebook' => $setting->facebook,
+                'twitter' => $setting->twitter,
+                'instagram' => $setting->instagram,
+                'youtube' => $setting->youtube,
+            ],
         ]);
     }
     public function terms(Request $request){
